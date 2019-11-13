@@ -8,12 +8,14 @@
     <div class="button" @click="onClick(mail,index)">替换</div>
   </div>
   <div class="new" v-if="mails.length<3" @click="addEmail">+New</div>
+  <div class="button" v-clipboard="jrebelData">jrebel</div>
   </div>
 </template>
 
 <script>
 import Swal from 'sweetalert2'
 import { getMails } from '../api/mail'
+import uuidv1 from 'uuid/v1'
 
 export default {
   name: 'edu',
@@ -24,13 +26,17 @@ export default {
     return {
       time: '11/02 12:25',
       mails: [],
-      mailsStyles: []
+      mailsStyles: [],
+      jrebelData: ''
     }
   },
   mounted () {
     getMails().then((res) => {
       this.mails = res.data
     })
+    const uuid = uuidv1()
+    this.jrebelData =
+     'Team URL：http://jrebel.taojingling.cn/' + uuid + '， Email：' + uuid.substring(0, 3) + '@taojingling.cn'
   },
   methods: {
     onClick: function (oldMail, index) {
