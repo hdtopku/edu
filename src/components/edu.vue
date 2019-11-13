@@ -60,7 +60,8 @@ export default {
     },
     getJrebel: function () {
       const uuid = uuidv1()
-      return 'http://jrebel.taojingling.cn/' + uuid
+      const jrebel = '0、Jrebel安装与激活教程：https://www.notion.so/jrebel-0aef5da8e9254903b1130f4ac08837c3 \n1、激活邮箱填入：active@jrebel.cn，\n2、激活码填入：http://jrebel.taojingling.cn/' + uuid
+      return jrebel
     },
     doCopy: function () {
       this.$copyText(this.getJrebel()).then((e) => {
