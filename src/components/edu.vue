@@ -118,6 +118,6 @@ export default {
 }
 .jrebel {
   width:80%;
-  margin: 0 auto;
+  margin: 30px auto;
 }
 </style>
