@@ -3,9 +3,17 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import VueClipboards from 'vue-clipboards'
+import VueClipboards from 'vue-clipboard2'
 import axios from 'axios'
+import 'vue2-toast/lib/toast.css'
+import Toast from 'vue2-toast'
 
+Vue.use(Toast, {
+  type: 'center',
+  duration: 800,
+  wordWrap: true,
+  width: '150px'
+})
 Vue.use(VueClipboards)
 
 Vue.config.productionTip = false

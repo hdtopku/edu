@@ -2,13 +2,14 @@
 <div>
   <div class="container" v-for="(mail,index) of mails" :key=index>
     <div class="email-box">
-      <div class="email" v-clipboard="mail+'@pku.edu.cn'" :style='mailsStyles[mail] || ""'>{{mail}}</div>
+      <div class="email" v-clipboard="mail+'@pku.edu.cn'" v-clipboard:success="openCenter">{{mail}}</div>
       <div class="time">{{time}}<span> 已复制</span></div>
     </div>
     <div class="button" @click="onClick(mail,index)">替换</div>
   </div>
   <div class="new" v-if="mails.length<3" @click="addEmail">+New</div>
-  <div class="button" v-clipboard="jrebelData">jrebel</div>
+  <hr>
+  <div type="button" class="button jrebel" @click="doCopy">Jrebel</div>
   </div>
 </template>
 
@@ -25,18 +26,13 @@ export default {
   data () {
     return {
       time: '11/02 12:25',
-      mails: [],
-      mailsStyles: [],
-      jrebelData: ''
+      mails: []
     }
   },
   mounted () {
     getMails().then((res) => {
       this.mails = res.data
     })
-    const uuid = uuidv1()
-    this.jrebelData =
-     'Team URL：http://jrebel.taojingling.cn/' + uuid + '， Email：' + uuid.substring(0, 3) + '@taojingling.cn'
   },
   methods: {
     onClick: function (oldMail, index) {
@@ -51,7 +47,6 @@ export default {
         cancelButtonText: '确定'
       }).then((result) => {
         if (!result.value) {
-          console.log(oldMail)
           getMails({'old': oldMail, 'new': 'RANDOM'}).then((res) => {
             this.mails = res.data
           })
@@ -62,6 +57,21 @@ export default {
       getMails({'new': 'RANDOM'}).then((res) => {
         this.mails = res.data
       })
+    },
+    getJrebel: function () {
+      const uuid = uuidv1()
+      return 'http://jrebel.taojingling.cn/' + uuid
+    },
+    doCopy: function () {
+      this.$copyText(this.getJrebel()).then((e) => {
+      // success
+        this.openCenter()
+      }, (e) => {
+      // fail
+      })
+    },
+    openCenter: function () {
+      this.$toast.top('copied!')
     }
   }
 }
@@ -105,5 +115,9 @@ export default {
   border: 1px solid black;
   border-radius: 5px;
   padding: 3px 15px;
+}
+.jrebel {
+  width:80%;
+  margin: 0 auto;
 }
 </style>
