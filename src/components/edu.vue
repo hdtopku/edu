@@ -1,37 +1,48 @@
 <template>
 <div>
-  <div class="container" v-for="(mail,index) of mails" :key=index>
-    <div class="email-box">
-      <div class="email" v-clipboard="mail+'@pku.edu.cn'" v-clipboard:success="openCenter">{{mail}}</div>
-      <div class="time">{{time}}<span> 已复制</span></div>
-    </div>
-    <div class="button" @click="onClick(mail,index)">替换</div>
-  </div>
+  <ul class="cards">
+    <li class="item" v-for="(item,idx) in mails"
+     :key="idx">
+      <card :mail="item" :idx="idx" :isEdit="isEdits[idx]"
+       @changeEdit="changeEdit" @changeMail="changeMail" :isLoading="isLoading"></card>
+    </li>
+  </ul>
   <div class="new" v-if="mails.length<3" @click="addEmail">+New</div>
   <hr>
-  <div type="button" class="button jrebel" @click="doCopy">Jrebel</div>
+  <i type="button" class="iconfont icon-rocket button jrebel" @click="doCopy">Jrebel</i>
+  <i type="button" class="iconfont icon-icon- button jrebel" @click="getQR">
+    QR
+  </i>
+  <hr>
+  <img :src="qr.qr_code"/>
   </div>
 </template>
 
 <script>
+import Card from './card.vue'
 import Swal from 'sweetalert2'
-import { getMails } from '../api/mail'
+import { getMails, getQr } from '../api/mail'
 import uuidv1 from 'uuid/v1'
 
 export default {
   name: 'edu',
   components: {
-    Swal
+    Swal,
+    Card
   },
   data () {
     return {
       time: '11/02 12:25',
-      mails: []
+      qr: {},
+      copyData: 'copy data',
+      mails: ['fsadfafsassq1234', 'b', ''],
+      isEdits: [false, false, false],
+      isLoading: false
     }
   },
   mounted () {
     getMails().then((res) => {
-      this.mails = res.data
+      this.setMails(res.data)
     })
   },
   methods: {
@@ -53,6 +64,10 @@ export default {
         }
       })
     },
+    changeEdit (idx, isEdit) {
+      this.isEdits = [false, false, false]
+      this.isEdits[idx] = isEdit
+    },
     addEmail: function () {
       getMails({'new': 'RANDOM'}).then((res) => {
         this.mails = res.data
@@ -73,8 +88,27 @@ export default {
       // fail
       })
     },
+    changeMail: function (oldMail, newMail) {
+      this.isLoading = true
+      const that = this
+      getMails({'old': oldMail, 'new': newMail}).then((res) => {
+        this.setMails(res.data)
+        that.isLoading = false
+      })
+    },
+    setMails: function (mails) {
+      this.mails = mails
+      while (this.mails.length < 3) {
+        this.mails.push('')
+      }
+    },
     openCenter: function () {
       this.$toast.top('copied!')
+    },
+    getQR: function () {
+      getQr().then((res) => {
+        this.qr = res.data
+      })
     }
   }
 }
@@ -90,34 +124,35 @@ export default {
   padding: 10px 15px;
 
 }
-.container{
-  width: 100%;
-  height: 100px;
+.cards {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
+  flex-flow: row wrap;
   justify-content: space-around;
-  align-items:center;
 }
-.email-box{
-  width: 70%;
-  margin-left: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+
+.item {
+  padding: 5px;
+  width: 100px;
+  height: 150px;
+  margin-top: 10px;
+  color: white;
+  text-align: center;
 }
-.email{
-  padding: 5px 0;
-  font-size: 20px;
-}
-.time{
-  font-size: 12px;
-  color: gray;
-}
+
 .button{
   width: 30%;
   margin-right: 20px;
   border: 1px solid black;
   border-radius: 5px;
   padding: 3px 15px;
+  cursor: pointer;
 }
 .jrebel {
   width:80%;

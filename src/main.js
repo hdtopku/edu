@@ -7,6 +7,7 @@ import VueClipboards from 'vue-clipboard2'
 import axios from 'axios'
 import 'vue2-toast/lib/toast.css'
 import Toast from 'vue2-toast'
+import './assets/iconfont.css'
 
 Vue.use(Toast, {
   type: 'center',
