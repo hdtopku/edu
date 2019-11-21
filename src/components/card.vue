@@ -38,7 +38,6 @@ export default {
   data () {
     return {
       inputMail: '',
-      isFocus: true,
       isClicked: false
     }
   },
@@ -145,7 +144,7 @@ export default {
   z-index: 1;
 }
 textarea {
-  width: 90%;
+  width: 80%;
   resize:none;
 }
 .not-found {
