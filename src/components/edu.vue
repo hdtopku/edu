@@ -1,18 +1,6 @@
 <template>
 <div>
-  <ul class="cards">
-    <li class="item" v-for="(item,idx) in mails"
-     :key="idx">
-      <card :mail="item" :idx="idx" :isEdit="isEdits[idx]"
-       @changeEdit="changeEdit" @changeMail="changeMail" :isLoading="isLoading"></card>
-    </li>
-  </ul>
-  <div class="new" v-if="mails.length<3" @click="addEmail">+New</div>
-  <hr>
   <div class="jrebels">
-    <div class="jrebel" @click="doCopy">
-      <i class="iconfont icon-rocket">Jrebel</i>
-    </div>
     <div class="jrebel" @click="getQR">
       <i v-if="!qr.qr_code" type="button" class="iconfont icon-icon-">
         QR
@@ -21,7 +9,19 @@
         <img class="qr-code" @click="getQR" :src="qr.qr_code"/>
       </a>
     </div>
+    <div class="jrebel" @click="doCopy">
+      <i class="iconfont icon-rocket">Jrebel</i>
+    </div>
   </div>
+  <hr>
+  <ul class="cards">
+    <li class="item" v-for="(item,idx) in mails"
+     :key="idx">
+      <card :mail="item" :idx="idx" :isEdit="isEdits[idx]"
+       @changeEdit="changeEdit" @changeMail="changeMail" :isLoading="isLoading"></card>
+    </li>
+  </ul>
+  <div class="new" v-if="mails.length<3" @click="addEmail">+New</div>
   </div>
 </template>
 
