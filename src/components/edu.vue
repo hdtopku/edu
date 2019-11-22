@@ -9,12 +9,19 @@
   </ul>
   <div class="new" v-if="mails.length<3" @click="addEmail">+New</div>
   <hr>
-  <i type="button" class="iconfont icon-rocket button jrebel" @click="doCopy">Jrebel</i>
-  <i type="button" class="iconfont icon-icon- button jrebel" @click="getQR">
-    QR
-  </i>
-  <hr>
-  <img :src="qr.qr_code"/>
+  <div class="jrebels">
+    <div class="jrebel" @click="doCopy">
+      <i class="iconfont icon-rocket">Jrebel</i>
+    </div>
+    <div class="jrebel" @click="getQR">
+      <i v-if="!qr.qr_code" type="button" class="iconfont icon-icon-">
+        QR
+      </i>
+      <a v-if="qr.qr_code">
+        <img class="qr-code" @click="getQR" :src="qr.qr_code"/>
+      </a>
+    </div>
+  </div>
   </div>
 </template>
 
@@ -108,6 +115,7 @@ export default {
     getQR: function () {
       getQr().then((res) => {
         this.qr = res.data
+        this.$toast.top('updated!')
       })
     }
   }
@@ -145,17 +153,16 @@ export default {
   color: white;
   text-align: center;
 }
-
-.button{
-  width: 30%;
-  margin-right: 20px;
-  border: 1px solid black;
-  border-radius: 5px;
-  padding: 3px 15px;
-  cursor: pointer;
+.jrebels {
+  display: flex;
+  justify-content:space-between
 }
 .jrebel {
-  width:80%;
-  margin: 30px auto;
+  width: 100px;
+  height: 100px;
+  line-height: 100px;
+  border: 1px solid black;
+  margin: 50px auto;
+  cursor: pointer;
 }
 </style>
