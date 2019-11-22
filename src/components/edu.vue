@@ -5,9 +5,7 @@
       <i v-if="!qr.qr_code" type="button" class="iconfont icon-icon-">
         QR
       </i>
-      <a v-if="qr.qr_code">
-        <img class="qr-code" @click="getQR" :src="qr.qr_code"/>
-      </a>
+      <img v-else class="qr-code" @click="getQR" :src="qr.qr_code"/>
     </div>
     <div class="jrebel" @click="doCopy">
       <i class="iconfont icon-rocket">Jrebel</i>
@@ -164,5 +162,9 @@ export default {
   border: 1px solid black;
   margin: 50px auto;
   cursor: pointer;
+}
+.qr-code {
+  width: 100%;
+  height: 100%;
 }
 </style>
