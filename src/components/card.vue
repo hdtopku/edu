@@ -97,7 +97,6 @@ export default {
         if (!result.value) {
           this.isClicked = true
           if (!this.isLoading) {
-            console.log(isEdit)
             if (isEdit) {
               this.$emit('changeMail', this.mail, this.inputMail)
             } else {

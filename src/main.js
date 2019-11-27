@@ -9,6 +9,9 @@ import 'vue2-toast/lib/toast.css'
 import Toast from 'vue2-toast'
 import './assets/iconfont.css'
 import ToggleButton from 'vue-js-toggle-button'
+import Element from 'element-ui'
+
+Vue.use(Element, { size: 'small', zIndex: 3000 })
 
 Vue.use(ToggleButton)
 Vue.use(Toast, {
@@ -17,6 +20,7 @@ Vue.use(Toast, {
   wordWrap: true,
   width: '150px'
 })
+
 Vue.use(VueClipboards)
 
 Vue.config.productionTip = false

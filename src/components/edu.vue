@@ -1,189 +1,29 @@
 <template>
-<div>
-  <div class="jrebels">
-    <div>
-      <toggle-button
-          :width="65"
-          class="toggle"
-          :labels="{checked: '已开启', unchecked: '已关闭'}"
-          @change="changeToggle"
-        ></toggle-button>
-    </div>
-    <div class="jrebel" @click="getQR">
-      <i v-if="!qr.qr_code" type="button" class="iconfont icon-icon-">
-        QR
-      </i>
-      <img v-else class="qr-code" @click="getQR" :src="qr.qr_code"/>
-    </div>
-    <div class="jrebel" @click="doCopy">
-      <i class="iconfont icon-rocket">Jrebel</i>
-    </div>
-    <div class="jrebel" @click="openMusic">
-      <img class="qr-code" src="http://music.taojingling.cn/favicon.ico" />
-    </div>
-  </div>
-  <hr>
-  <ul class="cards">
-    <li class="item" v-for="(item,idx) in mails"
-     :key="idx">
-      <card :mail="item" :idx="idx" :isEdit="isEdits[idx]"
-       @changeEdit="changeEdit" @changeMail="changeMail" :isLoading="isLoading"></card>
-    </li>
-  </ul>
-  <div class="new" v-if="mails.length<3" @click="addEmail">+New</div>
-  </div>
+  <el-tabs v-model="activeName" @tab-click="handleClick">
+    <el-tab-pane label="Apple Music" name="first"><apple-music></apple-music></el-tab-pane>
+    <el-tab-pane label="Jrebel" name="second"><jrebel></jrebel></el-tab-pane>
+    <el-tab-pane label="备用" name="third"><itchat></itchat></el-tab-pane>
+  </el-tabs>
 </template>
-
 <script>
-import Card from './card.vue'
-import Swal from 'sweetalert2'
-import { getMails, getQr } from '../api/mail'
-import uuidv1 from 'uuid/v1'
+import AppleMusic from './appleMusic.vue'
+import Jrebel from './jrebel.vue'
+import Itchat from './itchat.vue'
 
 export default {
-  name: 'edu',
   components: {
-    Swal,
-    Card
+    AppleMusic,
+    Jrebel,
+    Itchat
   },
   data () {
     return {
-      time: '11/02 12:25',
-      qr: {},
-      copyData: 'copy data',
-      mails: ['fsadfafsassq1234', 'b', ''],
-      isEdits: [false, false, false],
-      isLoading: false
+      activeName: 'first'
     }
   },
-  mounted () {
-    getMails().then((res) => {
-      this.setMails(res.data)
-    })
-  },
   methods: {
-    onClick: function (oldMail, index) {
-      const title = `<div style="color:red">${oldMail}</div>`
-      Swal.fire({
-        title,
-        text: '确认替换？',
-        showCancelButton: true,
-        confirmButtonColor: 'pink',
-        cancelButtonColor: '#00CCFF',
-        confirmButtonText: '取消',
-        cancelButtonText: '确定'
-      }).then((result) => {
-        if (!result.value) {
-          getMails({'old': oldMail, 'new': 'RANDOM'}).then((res) => {
-            this.mails = res.data
-          })
-        }
-      })
-    },
-    changeEdit (idx, isEdit) {
-      this.isEdits = [false, false, false]
-      this.isEdits[idx] = isEdit
-    },
-    addEmail: function () {
-      getMails({'new': 'RANDOM'}).then((res) => {
-        this.mails = res.data
-      })
-    },
-    getJrebel: function () {
-      const uuid = uuidv1()
-      const jrebel = '0、Jrebel安装与激活教程：https://www.notion.so/jrebel-0aef5da8e9254903b1130f4ac08837c3 \n' +
-       '1、激活邮箱填入：active@jrebel.cn，\n2、激活码填入：http://jrebel.taojingling.cn/' + uuid +
-       '\n\n:) 遇到问题，可随时咨询客服'
-      return jrebel
-    },
-    doCopy: function () {
-      this.$copyText(this.getJrebel()).then((e) => {
-      // success
-        this.openCenter()
-      }, (e) => {
-      // fail
-      })
-    },
-    openMusic: function () {
-      this.$copyText('http://music.taojingling.cn/am').then((e) => {
-        this.openCenter('link copied!')
-      })
-    },
-    changeMail: function (oldMail, newMail) {
-      this.isLoading = true
-      const that = this
-      getMails({'old': oldMail, 'new': newMail}).then((res) => {
-        this.setMails(res.data)
-        that.isLoading = false
-      })
-    },
-    changeToggle: function () {
-
-    },
-    setMails: function (mails) {
-      this.mails = mails
-      while (this.mails.length < 3) {
-        this.mails.push('')
-      }
-    },
-    openCenter: function (Text = 'copied!') {
-      this.$toast.top(Text)
-    },
-    getQR: function () {
-      getQr().then((res) => {
-        this.qr = res.data
-        this.openCenter('updated!')
-      })
+    handleClick (tab, event) {
     }
   }
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-.new{
-  width: 30%;
-  margin: 15px auto;
-  border: 1px solid black;
-  border-radius: 5px;
-  padding: 10px 15px;
-
-}
-.cards {
-  padding: 0;
-  margin: 0;
-  list-style: none;
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-around;
-}
-
-.item {
-  padding: 5px;
-  width: 100px;
-  height: 150px;
-  margin-top: 10px;
-  color: white;
-  text-align: center;
-}
-.jrebels {
-  display: flex;
-  justify-content:space-between
-}
-.jrebel {
-  width: 100px;
-  height: 100px;
-  line-height: 100px;
-  border: 1px solid black;
-  margin: 50px auto;
-  cursor: pointer;
-}
-.qr-code {
-  width: 100%;
-  height: 100%;
-}
-</style>
