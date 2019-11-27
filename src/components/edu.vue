@@ -1,6 +1,14 @@
 <template>
 <div>
   <div class="jrebels">
+    <div>
+      <toggle-button
+          :width="65"
+          class="toggle"
+          :labels="{checked: '已开启', unchecked: '已关闭'}"
+          @change="changeToggle"
+        ></toggle-button>
+    </div>
     <div class="jrebel" @click="getQR">
       <i v-if="!qr.qr_code" type="button" class="iconfont icon-icon-">
         QR
@@ -9,6 +17,9 @@
     </div>
     <div class="jrebel" @click="doCopy">
       <i class="iconfont icon-rocket">Jrebel</i>
+    </div>
+    <div class="jrebel" @click="openMusic">
+      <img class="qr-code" src="http://music.taojingling.cn/favicon.ico" />
     </div>
   </div>
   <hr>
@@ -93,6 +104,11 @@ export default {
       // fail
       })
     },
+    openMusic: function () {
+      this.$copyText('http://music.taojingling.cn/am').then((e) => {
+        this.openCenter('link copied!')
+      })
+    },
     changeMail: function (oldMail, newMail) {
       this.isLoading = true
       const that = this
@@ -101,19 +117,22 @@ export default {
         that.isLoading = false
       })
     },
+    changeToggle: function () {
+
+    },
     setMails: function (mails) {
       this.mails = mails
       while (this.mails.length < 3) {
         this.mails.push('')
       }
     },
-    openCenter: function () {
-      this.$toast.top('copied!')
+    openCenter: function (Text = 'copied!') {
+      this.$toast.top(Text)
     },
     getQR: function () {
       getQr().then((res) => {
         this.qr = res.data
-        this.$toast.top('updated!')
+        this.openCenter('updated!')
       })
     }
   }

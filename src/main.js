@@ -8,7 +8,9 @@ import axios from 'axios'
 import 'vue2-toast/lib/toast.css'
 import Toast from 'vue2-toast'
 import './assets/iconfont.css'
+import ToggleButton from 'vue-js-toggle-button'
 
+Vue.use(ToggleButton)
 Vue.use(Toast, {
   type: 'center',
   duration: 800,
