@@ -25,7 +25,7 @@ export default {
       const uuid = uuidv1()
       const jrebel =
        '1、激活邮箱填入：active@jrebel.cn，\n2、激活码填入：http://jrebel.taojingling.cn/' + uuid +
-       '\n\n:) 遇到问题，可随时咨询客服'
+       '\n\n:) 遇到问题，随时联系我'
       return jrebel
     }
   }
