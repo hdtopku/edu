@@ -55,7 +55,7 @@ export default {
         ['步骤二', '1、前两项填这个邮箱', '2、第三、四项是密码，由您设定', '3、Male(男)、Female(女)，任选一个', '4、点击 Join Now', '完成后，截图给我'],
         ['步骤三', '1、前两项姓名（可以自己定）', '2、第三项填写pku，并选择列表第一项PKU', '3、第四项 左边 Year 1，右边 4 Years', '4、点击 Continue', '完成后，截图给我'],
         ['步骤四', '1、前两项邮箱，填我给您的邮箱', '2、点击 Send Email', '3、耐心等我接收邮件', '完成后，截图给我'],
-        ['步骤五', '1、复制到wx或浏览器打开', '2、点击 黑人头像', '3、点击 Get now', '4、点击 Join Now', '完成后，截图给我']
+        ['步骤五', '1、复制长链接到浏览器打开（页面加载很慢，请耐心等待）', '2、点击 Continue（随后自动跳转至Apple Music）', '具体步骤，可参考教程步骤五：http://music.taojingling.cn/am', ':)遇到问题，随时截图给我哈。']
       ],
       activitiesText: [
         `https://www.myunidays.com/CN/zh-CN`,
@@ -85,7 +85,8 @@ export default {
         `步骤五：1、复制长链接到浏览器打开（页面加载很慢，请耐心等待）
 2、点击 Continue（随后自动跳转至Apple Music）
 
-具体步骤，可参考教程步骤五：http://music.taojingling.cn/am`
+具体步骤，可参考教程步骤五：http://music.taojingling.cn/am
+:)遇到问题，随时截图给我哈。`
       ],
       others: [
         ['您使用这个邮箱，', '教程：http://music.taojingling.cn/am', ':) 遇到问题，随时截图给我'],
