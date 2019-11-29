@@ -24,8 +24,11 @@ export default {
     getJrebel: function () {
       const uuid = uuidv1()
       const jrebel =
-       '1、激活邮箱填入：active@jrebel.cn，\n2、激活码填入：http://jrebel.taojingling.cn/' + uuid +
-       '\n\n:) 遇到问题，随时联系我'
+       `1、激活邮箱填入：active@jrebel.cn
+2、激活码填入：http://jrebel.taojingling.cn/${uuid}
+3、参考宝贝详情三步激活
+
+:) 遇到问题，随时联系我`
       return jrebel
     }
   }
