@@ -89,7 +89,7 @@ export default {
 :)遇到问题，随时截图给我哈。`
       ],
       others: [
-        ['您使用这个邮箱，', '教程：http://music.taojingling.cn/am', ':) 遇到问题，随时截图给我'],
+        ['所有邮箱都填这个，', '教程：http://music.taojingling.cn/am', ':) 遇到问题，随时截图给我'],
         [':) 之后遇到任何问题，随时联系哈。满意的话给小店一个好评哦~'],
         ['丢件？', '1、点击 Verify on campus', '2、在新的页面，点击 Verify using email', '3、前两项输入刚刚的邮箱', '4、Send Email，并等我收取邮件', '完成后，截图给我'],
         ['用多久？', '1到4年，苹果官方会抽取部分用户再次验证。如果被抽中了，需要换个邮箱重新验证；如果没被抽中，就可以接着用哈。'],
@@ -97,7 +97,7 @@ export default {
         ['Logout', '1、点击页面左上角的等于号', '2、点击Log out']
       ],
       othersText: [
-        `您使用这个邮箱，
+        `所有邮箱都填这个，
 教程：http://music.taojingling.cn/am
 
 :) 遇到问题，随时截图给我`,
