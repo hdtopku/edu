@@ -98,7 +98,8 @@ export default {
         ['Logout', '1、点击页面左上角的等于号', '2、点击 Log out'],
         ['需换邮件？', '1、第一项输入刚刚的邮箱', '2、第二项输入pku，并选择列表第一项PKU', '3、点击 Continue 继续', '完成后，截图给我'],
         ['丢件？', '1、点击 Verify on campus', '2、点击 Verify using email', '3、前两项输入刚刚的邮箱', '4、Send Email，并等我收取邮件', '完成后，截图给我'],
-        ['丢件？（没有Verify on campus按钮）', '打开链接（较慢）：https://www.myunidays.com/CN/zh-CN/account/register-wayf', '1、点击 Verify on campus', '2、点击 Verify using email', '3、前两项输入刚刚的邮箱', '4、Send Email，并等我收取邮件', '完成后，截图给我']
+        ['丢件？（没有Verify on campus按钮）', '打开链接（较慢）：https://www.myunidays.com/CN/zh-CN/account/register-wayf', '1、点击 Verify on campus', '2、点击 Verify using email', '3、前两项输入刚刚的邮箱', '4、Send Email，并等我收取邮件', '完成后，截图给我'],
+        ['换区？', '换区教程：https://zh.wikihow.com/在iTunes或App-Store中切换国家']
       ],
       othersText: [
         `所有邮箱都填这个，
@@ -129,7 +130,8 @@ export default {
 3、前两项输入刚刚的邮箱
 4、Send Email，并等我收取邮件
 
-完成后，截图给我`
+完成后，截图给我`,
+        `换区教程：https://zh.wikihow.com/在iTunes或App-Store中切换国家`
       ],
       qr: {},
       mails: ['fsadfafsassq1234', 'b', ''],
