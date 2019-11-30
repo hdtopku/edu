@@ -118,7 +118,8 @@ export default {
 3、点击 Continue 继续
 
 完成后，截图给我`,
-        `1、点击 Verify on campus
+        `补充步骤：
+1、点击 Verify on campus
 2、点击 Verify using email
 3、前两项输入刚刚的邮箱
 4、Send Email，并等我收取邮件
