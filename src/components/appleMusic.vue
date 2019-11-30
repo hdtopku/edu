@@ -8,8 +8,14 @@
     </li>
   </ul>
   <el-divider></el-divider>
-  <el-link href="https://mail.pku.edu.cn/" style="float:right;z-index:5000;"
+  <div style="display:flex; float:right">
+  <el-link href="https://www.myunidays.com/CN/zh-CN" style="z-index:5000;margin-right:20px;"
+   type="primary" target="_blank">unidays</el-link>
+  <el-link href="http://music.taojingling.cn/am" style="z-index:5000;margin-right:20px;"
+   type="primary" target="_blank">教程</el-link>
+  <el-link href="https://mail.pku.edu.cn/" style="z-index:5000;"
    type="primary" target="_blank">打开邮箱</el-link>
+  </div>
   <el-tabs v-model="activeName">
     <el-tab-pane label="快速" name="first">
       <el-timeline>
@@ -50,34 +56,31 @@ export default {
     return {
       activeName: 'first',
       activities: [
-        ['https://www.myunidays.com/CN/zh-CN'],
         ['步骤一', '1、打开链接：https://www.myunidays.com/CN/zh-CN', '2、点击 黑人头像', '3、点击 Get now', '4、点击 Join Now', '完成后，截图给我'],
-        ['步骤二', '1、前两项填这个邮箱', '2、第三、四项是密码，由您设定', '3、Male(男)、Female(女)，任选一个', '4、点击 Join Now', '完成后，截图给我'],
-        ['步骤三', '1、前两项姓名（可以自己定）', '2、第三项填写pku，并选择列表第一项PKU', '3、第四项 左边 Year 1，右边 4 Years', '4、点击 Continue', '完成后，截图给我'],
-        ['步骤四', '1、前两项邮箱，填我给您的邮箱', '2、点击 Send Email', '3、耐心等我接收邮件', '完成后，截图给我'],
+        ['步骤二', '1、填教育邮箱（一、二项）', '2、设密码（三、四项）', '3、性别：Male 男、Female 女', '4、点击 Join Now', '完成后，截图给我'],
+        ['步骤三', '1、名：First Name，姓：Last Name', '2、第三项填pku，并选择列表第一项PKU', '3、左边 Year 1，右边 4 Years', '4、点击 Continue', '完成后，截图给我'],
+        ['步骤四', '1、填教育邮箱（一、二项）', '2、点击 Send Email，截图通知我收邮件'],
         ['步骤五', '1、复制长链接到浏览器打开（页面加载很慢，请耐心等待）', '2、点击 Continue（随后自动跳转至Apple Music）', '具体步骤，可参考教程步骤五：http://music.taojingling.cn/am', ':)遇到问题，随时截图给我哈。']
       ],
       activitiesText: [
-        `https://www.myunidays.com/CN/zh-CN`,
         `步骤一：1、打开链接：https://www.myunidays.com/CN/zh-CN
 2、点击 黑人头像
 3、点击 Get now
 4、点击 Join Now
 
 完成后，截图给我`,
-        `步骤二：1、前两项填这个邮箱
-2、第三、四项是密码，由您设定
-3、Male(男)、Female(女)，任选一个
+        `步骤二：1、填教育邮箱（一、二项）
+2、设密码（三、四项）
+3、性别：Male 男、Female 女
 4、点击 Join Now
 
 完成后，截图给我`,
         `步骤三：1、前两项姓名（可以自己定）
-2、第三项填写pku，并选择列表第一项PKU
-3、第四项 左边 Year 1，右边 4 Years
+2、第三项填pku，并选择列表第一项PKU
+3、左边 Year 1，右边 4 Years
 4、点击 Continue
-
-完成后，截图给我`,
-        `步骤四：1、前两项邮箱，填我给您的邮箱
+`,
+        `步骤四：1、填教育邮箱（一、二项）
 2、点击Send Email
 3、耐心等我接收邮件
 
@@ -91,29 +94,43 @@ export default {
       others: [
         ['所有邮箱都填这个，', '教程：http://music.taojingling.cn/am', ':) 遇到问题，随时截图给我'],
         [':) 之后遇到任何问题，随时联系哈。满意的话给小店一个好评哦~'],
-        ['丢件？', '1、点击 Verify on campus', '2、在新的页面，点击 Verify using email', '3、前两项输入刚刚的邮箱', '4、Send Email，并等我收取邮件', '完成后，截图给我'],
         ['用多久？', '1到4年，苹果官方会抽取部分用户再次验证。如果被抽中了，需要换个邮箱重新验证；如果没被抽中，就可以接着用哈。'],
         ['查看订阅？', '1、打开 设置->', '2、点击 Apple ID、iCloud、iTunes与Apple Store->', '3、点击 订阅'],
-        ['Logout', '1、点击页面左上角的等于号', '2、点击Log out']
+        ['Logout', '1、点击页面左上角的等于号', '2、点击 Log out'],
+        ['需换邮件？', '1、第一项输入刚刚的邮箱', '2、第二项输入pku，并从列表中选择第一项PKU', '3、点击 Continue 继续', '完成后，截图给我'],
+        ['丢件？', '1、点击 Verify on campus', '2、点击 Verify using email', '3、前两项输入刚刚的邮箱', '4、Send Email，并等我收取邮件', '完成后，截图给我'],
+        ['丢件？（没有Verify on campus按钮）', '打开链接（较慢）：https://www.myunidays.com/CN/zh-CN/account/register-wayf', '1、点击 Verify on campus', '2、点击 Verify using email', '3、前两项输入刚刚的邮箱', '4、Send Email，并等我收取邮件', '完成后，截图给我']
       ],
       othersText: [
         `所有邮箱都填这个，
 教程：http://music.taojingling.cn/am
 
 :) 遇到问题，随时截图给我`,
-        `:) 之后遇到任何问题，随时联系哈，满意的话给小店一个好评哦~`,
-        `1、点击 Verify on campus
-2、在新的页面，点击 Verify using email
-3、前两项输入刚刚的邮箱
-4、Send Email，并等我收取邮件
-
-完成后，截图给我`,
+        `:) 之后遇到任何问题，随时联系哈。满意的话给小店一个好评哦~`,
         `1到4年，苹果官方会抽取部分用户再次验证。如果被抽中了，需要换个邮箱重新验证；如果没被抽中，就可以接着用哈。`,
         `1、打开 设置->
 2、点击 Apple ID、iCloud、iTunes与Apple Store->
 3、点击 订阅`,
         `1、点击页面左上角的等于号
-2、点击Log out`
+2、点击 Log out`,
+        `1、第一项输入刚刚的邮箱
+2、第二项输入pku，并从列表中选择第一项PKU
+3、点击 Continue 继续
+
+完成后，截图给我`,
+        `1、点击 Verify on campus
+2、点击 Verify using email
+3、前两项输入刚刚的邮箱
+4、Send Email，并等我收取邮件
+
+完成后，截图给我`,
+        `打开链接（较慢）：https://www.myunidays.com/CN/zh-CN/account/register-wayf
+1、点击 Verify on campus
+2、点击 Verify using email
+3、前两项输入刚刚的邮箱
+4、Send Email，并等我收取邮件
+
+完成后，截图给我`
       ],
       qr: {},
       mails: ['fsadfafsassq1234', 'b', ''],
@@ -155,11 +172,14 @@ export default {
       })
     },
     doCopy: function (i, isOther = false) {
-      var copyText = this.activitiesText[i]
-      var toastText = this.activities[i][0] + ' copied!'
+      var copyText = ''
+      var toastText = ''
       if (isOther) {
         copyText = this.othersText[i]
         toastText = '<div style="color:red;">' + this.others[i][0] + '</div>copyied!'
+      } else {
+        copyText = this.activitiesText[i]
+        toastText = this.activities[i][0] + ' copied!'
       }
       this.$copyText(copyText).then((e) => {
       // success
