@@ -65,7 +65,7 @@ export default {
       activeName: 'first',
 
       fast: [
-        ['一、开始', '0、所有邮箱都填这个（不用填个人邮箱、苹果id等）', '1、打开验证链接：https://www.myunidays.com/CN/zh-CN', '2、打开教程：http://music.taojingling.cn/am', ':) 遇到问题，截图给我'],
+        ['一、开始', '0、所有邮箱都填这个（不要填个人邮箱、苹果id等）', '1、打开验证链接：https://www.myunidays.com/CN/zh-CN', '2、打开教程：http://music.taojingling.cn/am', ':) 遇到问题，截图给我'],
         ['二、丢件？', '补充步骤（苹果邮件延迟或丢失）：', '1、点击 Verify on campus', '2、点击 Verify using email', '3、前两项输入刚刚的邮箱', '4、Send Email，并等我收取邮件', '完成后，截图给我'],
         ['三、长链接无效？', '情况一（体验或订阅过 Apple Music）：', '1、打开 设置', '2、点击 Apple ID、iCloud、iTunes 与 Apple Store', '3、点击 订阅', '4、点击 Apple Music 会员资格', '5、选择 学生（1个月）',
           '情况二（从未用过 Apple Music）：', '1、打开 Apple Music', '2、点击 为你推荐', '3、点击 立即体验', '4、选择 大学生', '5、点击 开始试用', '6、点击 验证资格',
@@ -77,7 +77,7 @@ export default {
         // ['丢件？（没有Verify on campus按钮）', '打开链接（较慢）：https://www.myunidays.com/CN/zh-CN/account/register-wayf', '1、点击 Verify on campus', '2、点击 Verify using email', '3、前两项输入刚刚的邮箱', '4、Send Email，并等我收取邮件', '完成后，截图给我'],
       ],
       fastText: [
-        `0、所有邮箱都填这个（不用填个人邮箱、苹果id等）
+        `0、所有邮箱都填这个（不要填个人邮箱、苹果id等）
 1、打开验证链接：https://www.myunidays.com/CN/zh-CN
 2、打开教程：http://music.taojingling.cn/am
 
