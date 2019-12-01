@@ -93,14 +93,14 @@ export default {
       ],
       others: [
         ['一、开始', '所有邮箱都填这个，', '点击验证：http://music.taojingling.cn/am', ':) 遇到问题，截图给我'],
-        ['二、用多久？', '1到4年，苹果官方会抽取部分用户再次验证。', '如果被抽中了，需要换个邮箱重新验证；', '如果没被抽中，就可以接着用哈。'],
-        ['三、丢件？', '补充步骤：', '1、点击 Verify on campus', '2、点击 Verify using email', '3、前两项输入刚刚的邮箱', '4、Send Email，并等我收取邮件', '完成后，截图给我'],
-        ['四、换新邮件？', '1、第一项，填刚刚的邮箱', '2、第二项，填pku，并选择列表第一项PKU', '3、点击 Continue 继续', '完成后，截图给我'],
+        ['二、丢件？', '补充步骤：', '1、点击 Verify on campus', '2、点击 Verify using email', '3、前两项输入刚刚的邮箱', '4、Send Email，并等我收取邮件', '完成后，截图给我'],
+        ['三、换新邮件？', '1、第一项，填刚刚的邮箱', '2、第二项，填pku，并选择列表第一项PKU', '3、点击 Continue 继续', '完成后，截图给我'],
         // ['丢件？（没有Verify on campus按钮）', '打开链接（较慢）：https://www.myunidays.com/CN/zh-CN/account/register-wayf', '1、点击 Verify on campus', '2、点击 Verify using email', '3、前两项输入刚刚的邮箱', '4、Send Email，并等我收取邮件', '完成后，截图给我'],
-        ['五、长链接无效？', '情况一（体验或订阅过 Apple Music）：', '1、打开 设置', '2、点击 Apple ID、iCloud、iTunes 与 Apple Store', '3、点击 订阅', '4、点击 Apple Music 会员资格', '5、选择 学生（1个月）',
+        ['四、长链接无效？', '情况一（体验或订阅过 Apple Music）：', '1、打开 设置', '2、点击 Apple ID、iCloud、iTunes 与 Apple Store', '3、点击 订阅', '4、点击 Apple Music 会员资格', '5、选择 学生（1个月）',
           '情况二（从未用过 Apple Music）：', '1、打开 Apple Music', '2、点击 为你推荐', '3、点击 立即体验', '4、选择 大学生', '5、点击 开始试用', '6、点击 验证资格',
           '跳转到Safari后，截图给我。'
         ],
+        ['五、用多久？', '1到4年，苹果官方会抽取部分用户再次验证。', '如果被抽中了，需要换个邮箱重新验证；', '如果没被抽中，就可以接着用哈。'],
         ['六、查看订阅？', '1、打开 设置', '2、点击 Apple ID、iCloud、iTunes 与 Apple Store', '3、点击 订阅'],
         ['七、Logout？', '1、点击页面左上角的等于号', '2、点击 Log out'],
         ['八、换区？', '换区教程：https://zh.wikihow.com/在iTunes或App-Store中切换国家'],
@@ -111,9 +111,6 @@ export default {
 点击验证：http://music.taojingling.cn/am
 
 :) 遇到问题，截图给我`,
-        `1到4年，苹果官方会抽取部分用户再次验证。
-如果被抽中了，需要换个邮箱重新验证；
-如果没被抽中，就可以接着用哈。`,
         `补充步骤：
 1、点击 Verify on campus
 2、点击 Verify using email
@@ -150,6 +147,9 @@ export default {
 6、点击 验证资格
 
 跳转到Safari后，截图给我。`,
+        `1到4年，苹果官方会抽取部分用户再次验证。
+如果被抽中了，需要换个邮箱重新验证；
+如果没被抽中，就可以接着用哈。`,
         `1、打开 设置
 2、点击 Apple ID、iCloud、iTunes 与 Apple Store
 3、点击 订阅`,
