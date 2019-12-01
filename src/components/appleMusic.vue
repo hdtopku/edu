@@ -9,7 +9,7 @@
   </ul>
   <el-divider></el-divider>
   <div style="display:flex; float:right;">
-    <el-link href="http://music.taojingling.cn/am" style="margin-right:20px; z-index:1;"
+    <el-link href="http://music.taojingling.cn/ts" style="margin-right:20px; z-index:1;"
     type="primary" target="_blank">教程</el-link>
     <el-link href="https://mail.pku.edu.cn/" type="primary" style="z-index:1;" target="_blank">打开邮箱</el-link>
   </div>
@@ -65,7 +65,7 @@ export default {
       activeName: 'first',
 
       fast: [
-        ['一、开始', '所有邮箱都填这个，', '点击验证：http://music.taojingling.cn/am', ':) 遇到问题，截图给我'],
+        ['一、开始', '所有邮箱都填这个，', '点击验证：http://music.taojingling.cn/ts', ':) 遇到问题，截图给我'],
         ['二、丢件？', '补充步骤（苹果邮件延迟或丢失）：', '1、点击 Verify on campus', '2、点击 Verify using email', '3、前两项输入刚刚的邮箱', '4、Send Email，并等我收取邮件', '完成后，截图给我'],
         ['三、长链接无效？', '情况一（体验或订阅过 Apple Music）：', '1、打开 设置', '2、点击 Apple ID、iCloud、iTunes 与 Apple Store', '3、点击 订阅', '4、点击 Apple Music 会员资格', '5、选择 学生（1个月）',
           '情况二（从未用过 Apple Music）：', '1、打开 Apple Music', '2、点击 为你推荐', '3、点击 立即体验', '4、选择 大学生', '5、点击 开始试用', '6、点击 验证资格',
@@ -78,7 +78,7 @@ export default {
       ],
       fastText: [
         `所有邮箱都填这个，
-点击验证：http://music.taojingling.cn/am
+点击验证：http://music.taojingling.cn/ts
 
 :) 遇到问题，截图给我`,
         `补充步骤（苹果邮件延迟或丢失）：
@@ -149,7 +149,7 @@ export default {
         ['步骤三', '1、名：First Name，姓：Last Name', '2、第三项，填pku，并选择列表第一项PKU', '3、左边 Year 1，右边 4 Years', '4、点击 Continue', '完成后，截图给我'],
         ['步骤四', '1、填教育邮箱（一、二项）', '2、点击 Send Email，并等我收邮件', '完成后，截图给我'],
         ['步骤五', '1、复制长链接到浏览器打开（页面加载很慢，请耐心等待）', '2、点击 Continue（随后自动跳转至Apple Music）',
-          '可参考步骤五：http://music.taojingling.cn/am', ':)遇到问题，随时截图给我哈。']
+          '可参考步骤五：http://music.taojingling.cn/ts', ':)遇到问题，随时截图给我哈。']
       ],
       stepsText: [
         'https://www.myunidays.com/CN/zh-CN',
@@ -178,7 +178,7 @@ export default {
         `步骤五：1、复制长链接到浏览器打开（页面加载很慢，请耐心等待）
 2、点击 Continue（随后自动跳转至Apple Music）
 
-可参考步骤五：http://music.taojingling.cn/am
+可参考步骤五：http://music.taojingling.cn/ts
 :)遇到问题，随时截图给我哈。`
       ],
       qr: {},
