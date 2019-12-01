@@ -55,7 +55,7 @@ export default {
       activities: [
         ['https://www.myunidays.com/CN/zh-CN'],
         ['步骤一', '1、打开链接：https://www.myunidays.com/CN/zh-CN', '2、点击 黑人头像', '3、点击 Get now', '4、点击 Join Now', '完成后，截图给我'],
-        ['步骤二', '1、填教育邮箱（一、二项）', '2、设密码（三、四项）', '3、性别：Male 男、Female 女', '4、点击 Join Now', '完成后，截图给我'],
+        ['步骤二', '1、填教育邮箱（一、二项）', '2、您设定密码（三、四项）', '3、性别：Male 男、Female 女', '4、点击 Join Now', '完成后，截图给我'],
         ['步骤三', '1、名：First Name，姓：Last Name', '2、第三项，填pku，并选择列表第一项PKU', '3、左边 Year 1，右边 4 Years', '4、点击 Continue', '完成后，截图给我'],
         ['步骤四', '1、填教育邮箱（一、二项）', '2、点击 Send Email，并等我收邮件', '完成后，截图给我'],
         ['步骤五', '1、复制长链接到浏览器打开（页面加载很慢，请耐心等待）', '2、点击 Continue（随后自动跳转至Apple Music）',
@@ -70,7 +70,7 @@ export default {
 
 完成后，截图给我`,
         `步骤二：1、填教育邮箱（一、二项）
-2、设密码（三、四项）
+2、您设定密码（三、四项）
 3、性别：Male 男、Female 女
 4、点击 Join Now
 
