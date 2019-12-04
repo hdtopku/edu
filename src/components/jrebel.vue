@@ -26,7 +26,7 @@ export default {
       const jrebel =
        `1、激活邮箱填入：active@jrebel.cn
 2、激活码填入：http://jrebel.taojingling.cn/${uuid}
-3、务必参考宝贝详情第三步，进行离线激活：https://m.tb.cn/h.eDj0BTe?sm=119f40`
+3、务必参考宝贝详情第三步，完成激活：https://m.tb.cn/h.eDj0BTe?sm=119f40`
       return jrebel
     }
   }
