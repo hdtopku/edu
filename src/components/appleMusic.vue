@@ -14,7 +14,7 @@
     <el-link href="https://mail.pku.edu.cn/" type="primary" style="z-index:1;" target="_blank">打开邮箱</el-link>
   </div>
   <el-tabs v-model="activeName">
-    <el-tab-pane label="快速" name="first">
+    <el-tab-pane label="常用" name="first">
       <el-timeline>
         <el-timeline-item placement="top" v-for="(i, index) in fast" :key="index">
           <el-card style="text-align:left;cursor:pointer;" @click.native="doCopy(index, 'fast')">
@@ -65,30 +65,29 @@ export default {
       activeName: 'first',
 
       fast: [
+        ['用多久？', '1到4年，苹果官方会抽取部分用户再次验证。', '如果被抽中了，需要换个邮箱重新验证；', '如果没被抽中，就可以接着用哈。'],
         ['一、开始', '0、所有邮箱都填这个（不要填个人邮箱、苹果id等）', '1、打开验证链接：https://www.myunidays.com/CN/zh-CN', '2、打开教程：http://music.taojingling.cn/am', ':) 遇到问题，截图给我'],
-        ['二、丢件？', '补充步骤（苹果邮件延迟或丢失）：', '1、点击 Verify on campus', '2、点击 Verify using email', '3、前两项输入刚刚的邮箱', '4、Send Email，并等我收取邮件', '完成后，截图给我'],
+        ['五、未出现pku？', '若未出现PKU列表，需换浏览器打开：https://www.myunidays.com/CN/zh-CN'],
+        ['六、Logout？', '1、点击页面左上角的等于号', '2、点击 Log out'],
         ['三、长链接无效？', '情况一（体验或订阅过 Apple Music）：', '1、打开 设置', '2、点击 Apple ID、iCloud、iTunes 与 Apple Store', '3、点击 订阅', '4、点击 Apple Music 会员资格', '5、选择 学生（1个月）',
           '情况二（从未用过 Apple Music）：', '1、打开 Apple Music', '2、点击 为你推荐', '3、点击 立即体验', '4、选择 大学生', '5、点击 开始试用', '6、点击 验证资格',
           '跳转到Safari后，截图给我。'
-        ],
-        ['四、补充验证？', '补充验证（苹果丢件）：', '1、第一项，填刚刚的邮箱', '2、第二项，填pku，并选择列表第一项PKU', '3、点击 Continue 继续', '完成后，截图给我'],
-        ['五、未出现pku？', '若未出现PKU列表，需换浏览器打开：https://www.myunidays.com/CN/zh-CN'],
-        ['六、Logout？', '1、点击页面左上角的等于号', '2、点击 Log out']
+        ]
         // ['丢件？（没有Verify on campus按钮）', '打开链接（较慢）：https://www.myunidays.com/CN/zh-CN/account/register-wayf', '1、点击 Verify on campus', '2、点击 Verify using email', '3、前两项输入刚刚的邮箱', '4、Send Email，并等我收取邮件', '完成后，截图给我'],
       ],
       fastText: [
+        `1到4年，苹果官方会抽取部分用户再次验证。
+如果被抽中了，需要换个邮箱重新验证；
+如果没被抽中，就可以接着用哈。`,
         `0、所有邮箱都填这个（不要填个人邮箱、苹果id等）
 1、打开验证链接：https://www.myunidays.com/CN/zh-CN
 2、打开教程：http://music.taojingling.cn/am
 
 :) 遇到问题，截图给我`,
-        `补充步骤（苹果邮件延迟或丢失）：
-1、点击 Verify on campus
-2、点击 Verify using email
-3、前两项填刚刚的邮箱
-4、Send Email，并等我收邮件
-
-完成后，截图给我`,
+        `若未出现PKU列表，
+需换浏览器打开：https://www.myunidays.com/CN/zh-CN`,
+        `1、点击页面左上角的等于号
+2、点击 Log out`,
         `情况一（体验或订阅过 Apple Music）：
 1、打开 设置
 2、点击 Apple ID、iCloud、iTunes 与 Apple Store
@@ -105,17 +104,7 @@ export default {
 5、点击 开始试用
 6、点击 验证资格
 
-跳转到Safari后，截图给我。`,
-        `补充验证（苹果丢件）：
-1、第一项，填刚刚的邮箱
-2、第二项，填pku，并选择列表第一项PKU
-3、点击 Continue 继续
-
-完成后，截图给我`,
-        `若未出现PKU列表，
-需换浏览器打开：https://www.myunidays.com/CN/zh-CN`,
-        `1、点击页面左上角的等于号
-2、点击 Log out`
+跳转到Safari后，截图给我。`
         //         `打开链接（较慢）：https://www.myunidays.com/CN/zh-CN/account/register-wayf
         // 1、点击 Verify on campus
         // 2、点击 Verify using email
@@ -126,20 +115,31 @@ export default {
       ],
 
       standby: [
-        ['用多久？', '1到4年，苹果官方会抽取部分用户再次验证。', '如果被抽中了，需要换个邮箱重新验证；', '如果没被抽中，就可以接着用哈。'],
         ['查看订阅？', '1、打开 设置', '2、点击 Apple ID、iCloud、iTunes 与 Apple Store', '3、点击 订阅'],
         [':) 之后遇到任何问题，随时联系哈。满意的话给小店一个好评哦~'],
+        ['二、补发？', '补充步骤（苹果邮件延迟或丢失）：', '1、点击 Verify on campus', '2、点击 Verify using email', '3、前两项输入刚刚的邮箱', '4、Send Email，并等我收取邮件', '完成后，截图给我'],
+        ['四、补充验证？', '补充验证（苹果丢件）：', '1、第一项，填刚刚的邮箱', '2、第二项，填pku，并选择列表第一项PKU', '3、点击 Continue 继续', '完成后，截图给我'],
         ['换区？', '换区教程：https://zh.wikihow.com/在iTunes或App-Store中切换国家']
       ],
       standbyText: [
-        `1到4年，苹果官方会抽取部分用户再次验证。
-如果被抽中了，需要换个邮箱重新验证；
-如果没被抽中，就可以接着用哈。`,
         `查看订阅：
 1、打开 设置
 2、点击 Apple ID、iCloud、iTunes 与 Apple Store
 3、点击 订阅`,
         `:) 之后遇到任何问题，随时联系哈。满意的话给小店一个好评哦~`,
+        `补充步骤（苹果邮件延迟或丢失）：
+1、点击 Verify on campus
+2、点击 Verify using email
+3、前两项填刚刚的邮箱
+4、Send Email，并等我收邮件
+
+完成后，截图给我`,
+        `补充验证（苹果丢件）：
+1、第一项，填刚刚的邮箱
+2、第二项，填pku，并选择列表第一项PKU
+3、点击 Continue 继续
+
+完成后，截图给我`,
         `换区教程：https://zh.wikihow.com/在iTunes或App-Store中切换国家`
       ],
 
