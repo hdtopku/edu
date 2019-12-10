@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import edu from '@/components/Edu'
-import test from '@/components/Test'
-import itchat from '@/components/itchat/Itchat'
+import Edu from '@/components/Edu'
+import Test from '@/components/Test'
+import Itchat from '@/components/itchat/Itchat'
 
 Vue.use(Router)
 
@@ -12,17 +12,17 @@ export default new Router({
     {
       path: '/',
       name: 'edu',
-      component: edu
+      component: Edu
     },
     {
       path: '/test',
       name: 'test',
-      component: test
+      component: Test
     },
     {
       path: '/itchat',
       name: 'itchat',
-      component: itchat
+      component: Itchat
     }
   ]
 })
