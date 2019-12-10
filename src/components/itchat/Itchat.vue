@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { toggleItChat, getQr } from '../api/mail'
+import { toggleItChat, getQr } from '../../api/mail'
 export default {
   name: 'itchat',
   data () {

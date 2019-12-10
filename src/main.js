@@ -10,6 +10,7 @@ import Toast from 'vue2-toast'
 import './assets/iconfont.css'
 import ToggleButton from 'vue-js-toggle-button'
 import Element from 'element-ui'
+import VueTippy, { TippyComponent } from 'vue-tippy'
 
 Vue.use(Element, { size: 'small', zIndex: 3000 })
 
@@ -20,6 +21,23 @@ Vue.use(Toast, {
   wordWrap: true,
   width: '150px'
 })
+
+Vue.use(VueTippy, {
+  directive: 'tippy', // => v-tippy
+  flipDuration: 0,
+  popperOptions: {
+    modifiers: {
+      // preventOverflow: {
+      //   enabled: false
+      // },
+      // hide: { // 去除console.log警告
+      //   enabled: false
+      // }
+    }
+  }
+})
+
+Vue.component('tippy', TippyComponent)
 
 Vue.use(VueClipboards)
 

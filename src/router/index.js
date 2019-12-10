@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import edu from '@/components/edu'
-import test from '@/components/test'
-import itchat from '@/components/itchat'
+import edu from '@/components/Edu'
+import test from '@/components/Test'
+import itchat from '@/components/itchat/Itchat'
 
 Vue.use(Router)
 
