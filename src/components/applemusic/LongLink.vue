@@ -77,7 +77,9 @@ export default {
         params['operator_id'] = this.select
       }
       getAMs(params).then((res) => {
-        this.unUsed = res.data.unUsed
+        if (res.data.unUsed.length > 0) {
+          this.unUsed = res.data.unUsed
+        }
         this.using = res.data.using
         this.used = res.data.used
         this.recycle = res.data.recycle

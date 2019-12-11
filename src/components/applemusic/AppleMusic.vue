@@ -39,7 +39,6 @@
 </template>
 
 <script>
-import Card from './Card'
 import Swal from 'sweetalert2'
 import LongLink from './LongLink'
 import { getQr } from '../../api/mail'
@@ -48,7 +47,6 @@ export default {
   name: 'edu',
   components: {
     Swal,
-    Card,
     'long-link': LongLink
   },
   data () {

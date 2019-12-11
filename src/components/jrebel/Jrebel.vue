@@ -17,7 +17,7 @@
 
 <script>
 import uuidv1 from 'uuid/v1'
-import Card from '../applemusic/Card'
+import Card from './Card'
 import { getMails } from '../../api/mail'
 import Swal from 'sweetalert2'
 export default {
