@@ -6,8 +6,8 @@
           <el-select v-model="select" slot="prepend" placeholder="请选择">
             <el-option v-for="(opVal, opIdx) in operator" :key="opIdx" :label="opVal.chinese_name" :value="opVal.oid"></el-option>
           </el-select>
-          <el-button v-if="select" slot="prepend" @click="use">
-            <span class="iconfont icon-weishiyong" style="color:red;">{{unUsed.length}}</span>
+          <el-button slot="prepend" @click="use" :disabled="disabledStyle">
+            <span class="iconfont icon-weishiyong1 weishiyong" :style="disabledStyle ? '': 'color:red;'">{{unUsed.length}}</span>
           </el-button>
           <el-button slot="append" @click="search">新增/查询</el-button>
         </el-input>
@@ -44,6 +44,7 @@ export default {
       hasItem: false,
       tabs: [{ label: '使用中', name: 'first' },
         { label: '已使用', name: 'second' }],
+      disabledStyle: true,
       activeName: 'first',
       select: '',
       item: {},
@@ -77,9 +78,7 @@ export default {
         params['operator_id'] = this.select
       }
       getAMs(params).then((res) => {
-        if (res.data.unUsed.length > 0) {
-          this.unUsed = res.data.unUsed
-        }
+        this.unUsed = res.data.unUsed
         this.using = res.data.using
         this.used = res.data.used
         this.recycle = res.data.recycle
@@ -120,6 +119,12 @@ export default {
   watch: {
     select: function () {
       this.updateAM()
+      if (this.select !== '' && this.select !== 0) {
+        this.disabledStyle = false
+      } else {
+        this.disabledStyle = true
+      }
+      console.log(this.disabledStyle)
     }
   }
 }
@@ -146,5 +151,15 @@ export default {
   position: absolute;
   left: 0;
   top: 0;
+}
+.weishiyong {
+  color:#9fa7c2;
+  font-size: 25px;
+  top: 2px;
+  right: 0;
+  position: absolute;
+}
+.enabled {
+  color:red;
 }
 </style>
