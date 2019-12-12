@@ -1,14 +1,19 @@
 <template>
   <div>
-  <ul class="cards">
-    <li class="item" v-for="(item, idx) in mails"
-     :key="idx">
-      <card :mail="item" :idx="idx" :isEdit="isEdits[idx]"
-       @changeEdit="changeEdit" @changeMail="changeMail"
-        :isLoading="isLoading"></card>
-    </li>
-  </ul>
-  <el-divider></el-divider>
+    <long-link></long-link>
+    <ul class="cards">
+      <li class="item" v-for="(item, idx) in mails" :key="idx">
+        <card
+          :mail="item"
+          :idx="idx+10000"
+          :isEdit="isEdits[idx]"
+          @changeEdit="changeEdit"
+          @changeMail="changeMail"
+          :isLoading="isLoading"
+        ></card>
+      </li>
+    </ul>
+    <el-divider></el-divider>
     <div class="jrebel" @click="copyJrebel">
       <i class="iconfont icon-rocket">Jrebel</i>
     </div>
@@ -20,7 +25,9 @@ import uuidv1 from 'uuid/v1'
 import Card from './Card'
 import { getMails } from '../../api/mail'
 import Swal from 'sweetalert2'
+import LongLink from '../applemusic/LongLink'
 export default {
+  components: { LongLink, Card },
   data () {
     return {
       isLoading: false,
@@ -28,7 +35,6 @@ export default {
       mails: ['fsadfafsassq1234', 'b', '']
     }
   },
-  components: {Card},
   mounted () {
     getMails().then((res) => {
       if (res.data) {
@@ -51,7 +57,7 @@ export default {
         cancelButtonText: '确定'
       }).then((result) => {
         if (!result.value) {
-          getMails({'old': oldMail, 'new': 'RANDOM'}).then((res) => {
+          getMails({ 'old': oldMail, 'new': 'RANDOM' }).then((res) => {
             this.mails = res.data
           })
         }
@@ -70,17 +76,17 @@ export default {
     changeMail: function (oldMail, newMail) {
       this.isLoading = true
       const that = this
-      getMails({'old': oldMail, 'new': newMail}).then((res) => {
+      getMails({ 'old': oldMail, 'new': newMail }).then((res) => {
         this.setMails(res.data)
         that.isLoading = false
       })
     },
     copyJrebel: function () {
       this.$copyText(this.getJrebel()).then((e) => {
-      // success
+        // success
         this.openCenter()
       }, (e) => {
-      // fail
+        // fail
       })
     },
     openCenter: function (Text = 'copied!') {
@@ -89,7 +95,7 @@ export default {
     getJrebel: function () {
       const uuid = uuidv1()
       const jrebel =
-       `1、激活邮箱填入：active@jrebel.cn
+        `1、激活邮箱填入：active@jrebel.cn
 2、激活码填入：http://jrebel.taojingling.cn/${uuid}
 3、务必参考宝贝详情第三步，完成激活：https://m.tb.cn/h.eDj0BTe?sm=119f40`
       return jrebel
@@ -121,7 +127,7 @@ export default {
 }
 .jrebels {
   display: flex;
-  justify-content:space-between
+  justify-content: space-between;
 }
 .jrebel {
   width: 100px;
