@@ -37,6 +37,7 @@
 <script>
 import Tooltip from './Tooltip'
 import { getAMs } from '../../api/mail'
+import { setStore, getStore } from '../../api/storage'
 export default {
   components: { Tooltip },
   data () {
@@ -114,6 +115,7 @@ export default {
     }
   },
   mounted () {
+    this.select = getStore('roleSelect') || ''
     this.updateAM()
   },
   watch: {
@@ -124,7 +126,7 @@ export default {
       } else {
         this.disabledStyle = true
       }
-      console.log(this.disabledStyle)
+      setStore('roleSelect', this.select)
     }
   }
 }
