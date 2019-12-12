@@ -1,17 +1,6 @@
 <template>
 <div>
-  <div style="display:flex; float:right;">
-    <el-link href="http://music.taojingling.cn/ap" style="margin-right:20px; z-index:1;"
-    type="primary" target="_blank">教程</el-link>
-    <el-link href="https://www.myunidays.com/CN/zh-CN" style="margin-right:20px; z-index:1;"
-    type="primary" target="_blank">UNIDAYS</el-link>
-    <el-link href="https://mail.pku.edu.cn/" type="primary" style="z-index:1;" target="_blank">打开邮箱</el-link>
-  </div>
   <el-tabs v-model="activeName">
-
-    <el-tab-pane label="长链接" name="one">
-      <long-link></long-link>
-    </el-tab-pane>
 
     <el-tab-pane label="常用" name="first">
       <el-timeline>
@@ -51,7 +40,7 @@ export default {
   },
   data () {
     return {
-      activeName: 'one',
+      activeName: 'first',
 
       fast: [
         ['开始', '复制长链接到浏览器进行验证，具体参考：http://music.taojingling.cn/ap'],

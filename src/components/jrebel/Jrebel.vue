@@ -4,7 +4,7 @@
       <li class="item" v-for="(item, idx) in mails" :key="idx">
         <card
           :mail="item"
-          :idx="idx+10000"
+          :idx="idx"
           :isEdit="isEdits[idx]"
           @changeEdit="changeEdit"
           @changeMail="changeMail"
@@ -12,11 +12,29 @@
         ></card>
       </li>
     </ul>
+    <div style="display:flex; float:right;">
+      <el-link
+        href="http://music.taojingling.cn/ap"
+        style="margin-right:20px; z-index:1;"
+        type="primary"
+        target="_blank"
+      >教程</el-link>
+      <el-link
+        href="https://www.myunidays.com/CN/zh-CN"
+        style="margin-right:20px; z-index:1;"
+        type="primary"
+        target="_blank"
+      >UNIDAYS</el-link>
+      <el-link
+        href="https://mail.pku.edu.cn/"
+        type="primary"
+        style="z-index:1;"
+        target="_blank"
+      >打开邮箱</el-link>
+    </div>
+    <div class="jrebel" @click="copyJrebel">Jrebel</div>
     <long-link></long-link>
     <el-divider></el-divider>
-    <div class="jrebel" @click="copyJrebel">
-      <i class="iconfont icon-rocket">Jrebel</i>
-    </div>
   </div>
 </template>
 
@@ -26,8 +44,9 @@ import Card from './Card'
 import { getMails } from '../../api/mail'
 import Swal from 'sweetalert2'
 import LongLink from '../applemusic/LongLink'
+import AppleMusic from '../applemusic/AppleMusic'
 export default {
-  components: { LongLink, Card },
+  components: { LongLink, Card, AppleMusic },
   data () {
     return {
       isLoading: false,
@@ -94,6 +113,7 @@ export default {
     },
     getJrebel: function () {
       const uuid = uuidv1()
+      console.log(uuid)
       const jrebel =
         `1、激活邮箱填入：active@jrebel.cn
 2、激活码填入：http://jrebel.taojingling.cn/${uuid}
@@ -118,27 +138,19 @@ export default {
   justify-content: space-around;
 }
 .item {
-  padding: 5px;
   width: 100px;
   height: 150px;
-  margin-top: 10px;
   color: white;
   text-align: center;
 }
-.jrebels {
-  display: flex;
-  justify-content: space-between;
-}
 .jrebel {
-  width: 100px;
-  height: 100px;
-  line-height: 100px;
+  width: 70px;
+  height: 30px;
+  line-height: 30px;
+  margin-top: -25px;
   border: 1px solid black;
-  margin: 50px auto;
   cursor: pointer;
-}
-.qr-code {
-  width: 100%;
-  height: 100%;
+  z-index: 10;
+  position: absolute;
 }
 </style>

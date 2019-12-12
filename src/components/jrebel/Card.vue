@@ -119,14 +119,14 @@ export default {
 .card {
   position: relative;
   width: 100%;
-  height: 100%;
+  height: 90%;
   color: black;
 }
 .top, .bottom {
   width: 100%;
-  height: 70%;
+  height: 60%;
   border: 1px solid black;
-  margin-top: 5%;
+  margin-top: 3%;
   display: flex;
   word-break:break-all;
   cursor: pointer;
@@ -157,9 +157,6 @@ textarea {
 }
 .button {
   margin: 2% auto;
-}
-.show-mail {
-  padding: 15% 0;
 }
 .loading {
   position: absolute;
