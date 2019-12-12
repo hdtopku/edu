@@ -32,7 +32,7 @@
         target="_blank"
       >打开邮箱</el-link>
     </div>
-    <div class="jrebel" @click="copyJrebel">Jrebel</div>
+    <el-button type="primary" class="iconfont icon-rocket jrebel" @click="copyJrebel">Jrebel</el-button>
     <long-link></long-link>
     <el-divider></el-divider>
   </div>
@@ -144,13 +144,9 @@ export default {
   text-align: center;
 }
 .jrebel {
-  width: 70px;
-  height: 30px;
-  line-height: 30px;
-  margin-top: -25px;
-  border: 1px solid black;
-  cursor: pointer;
+  margin-top: -30px;
   z-index: 10;
+  left: 0;
   position: absolute;
 }
 </style>
