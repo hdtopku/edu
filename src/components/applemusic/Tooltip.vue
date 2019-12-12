@@ -5,7 +5,7 @@
       @hidden="onHidden"
       @show="onShow"
       interactive="true"
-      :to="'tippy'+idx"
+      :to="'tippy'+uuid + idx"
       trigger="click"
     >
       <div>
@@ -26,7 +26,7 @@
         ></span>
       </div>
     </tippy>
-    <button class="tippy01" :name="'tippy'+idx" ref="btn">
+    <button class="tippy01" :name="'tippy'+uuid + idx" ref="btn">
       <span class="iconfont icon-shiyongzhong1 shiyong" v-if="status===1"></span>
       <span class="iconfont icon-yishiyong2 used" v-if="status===2"></span>
       <span class="iconfont icon-recycle recycle" v-if="status===3"></span>
@@ -37,7 +37,7 @@
 </template>
 
 <script>
-
+import uuidv1 from 'uuid/v1'
 export default {
   props: {
     idx: {
@@ -52,7 +52,8 @@ export default {
   },
   data () {
     return {
-      activeName: 'first'
+      activeName: 'first',
+      uuid: ''
     }
   },
   methods: {
@@ -78,6 +79,10 @@ export default {
       this.$refs.btn._tippy.hide() // 如果不独立出这个组件
       this.$emit('clickUsed', this.id)
     }
+  },
+  mounted () {
+    const uuid = uuidv1()
+    this.uuid = uuid.substring(0, 8)
   }
 }
 </script>

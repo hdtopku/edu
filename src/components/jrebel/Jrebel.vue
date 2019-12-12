@@ -1,6 +1,5 @@
 <template>
   <div>
-    <long-link></long-link>
     <ul class="cards">
       <li class="item" v-for="(item, idx) in mails" :key="idx">
         <card
@@ -13,6 +12,7 @@
         ></card>
       </li>
     </ul>
+    <long-link></long-link>
     <el-divider></el-divider>
     <div class="jrebel" @click="copyJrebel">
       <i class="iconfont icon-rocket">Jrebel</i>
