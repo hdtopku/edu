@@ -11,27 +11,27 @@
       <div>
         <span
           @click="clickRecycle"
-          v-if="status===1 || status===2"
+          v-if="status===1 || status===2 || status === 0"
           class="iconfont icon-recycle recycle"
         ></span>
         <span
           @click="clickShiyong"
-          v-if="status===2 || status===3"
+          v-if="status===2 || status===3 || status === 0"
           class="iconfont icon-shiyongzhong1 shiyong"
         ></span>
         <span
           @click="clickUsed"
-          v-if="status===1 || status===3"
+          v-if="status===1 || status===3 || status === 0"
           class="iconfont icon-yishiyong2 used"
         ></span>
       </div>
     </tippy>
     <button class="tippy01" :name="'tippy'+uuid + idx" ref="btn">
+      <span class="iconfont icon-weishiyong used" v-if="status===0"></span>
       <span class="iconfont icon-shiyongzhong1 shiyong" v-if="status===1"></span>
       <span class="iconfont icon-yishiyong2 used" v-if="status===2"></span>
       <span class="iconfont icon-recycle recycle" v-if="status===3"></span>
     </button>
-    <span class="iconfont icon-weishiyong used" v-if="status===0"></span>
     <slot class="toto" name="toto"></slot>
   </span>
 </template>
