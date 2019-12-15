@@ -86,7 +86,7 @@ export default {
         this.recycle = res.data.recycle
         this.allUse = this.using.concat(this.recycle)
         this.item = res.data.item
-        this.tabs[1].label = '已使用(' + this.used.length + ')'
+        this.tabs[1].label = '已使用(' + res.data.usedLength + ')'
         if (this.item.id && this.item.id > 0) {
           this.allUse = this.allUse.filter((item, index, arr) => { return item.id !== this.item.id })
           this.allUse = [res.data.item].concat(this.allUse)
