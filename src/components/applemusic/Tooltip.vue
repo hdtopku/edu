@@ -24,6 +24,7 @@
           v-if="status===1 || status===3 || status === 0"
           class="iconfont icon-yishiyong2 used"
         ></span>
+        <span style="color:gray;">{{createTime}} 创建</span>
       </div>
     </tippy>
     <button class="tippy01" :name="'tippy'+uuid + idx" ref="btn">
@@ -48,6 +49,9 @@ export default {
     },
     id: {
       default: 0
+    },
+    createTime: {
+      default: ''
     }
   },
   data () {

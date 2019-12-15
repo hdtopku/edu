@@ -22,6 +22,7 @@
             :idx="tab.name+idx"
             :id="item.id"
             :status="item.status"
+            :createTime="item.create_time"
             class="tooltip"
           ></tooltip>
           <div
