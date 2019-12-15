@@ -2,7 +2,7 @@
   <el-tabs v-model="activeName" @tab-click="handleClick">
     <el-tab-pane v-for="(tab, i) in tabs" :key="i" :label="tab.label" :name="tab.name">
       <div v-if="i === 0">
-        <el-input v-model="input" class="input-with-select" clearable>
+        <el-input v-model="input" @keyup.enter.native="search" class="input-with-select" clearable>
           <el-select v-model="select" slot="prepend" placeholder="请选择">
             <el-option v-for="(opVal, opIdx) in operator" :key="opIdx" :label="opVal.chinese_name" :value="opVal.oid"></el-option>
           </el-select>
