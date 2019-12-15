@@ -13,6 +13,7 @@
         </el-input>
       </div>
       <el-card v-for="(item, idx) in all[i]" :key="idx" shadow="always">
+        <i class="iconfont icon-copy1 copy" @click="copy(item.short_link)"></i>
         <el-row :gutter="20">
           <tooltip
             @clickRecycle="clickRecycle"
@@ -113,6 +114,14 @@ export default {
     },
     use () {
       this.updateAM({ status: 1 })
+    },
+    copy (shortLink) {
+      this.$copyText(shortLink).then((e) => {
+        // success
+        this.openCenter(`<div style='color:#9fa7c2;font-size:30px;'>${shortLink}</div>copied!`)
+      }, (e) => {
+        // fail
+      })
     }
   },
   mounted () {
@@ -134,6 +143,14 @@ export default {
 </script>
 
 <style scoped>
+.copy {
+  font-size: 20px;
+  position: absolute;
+  left: 6px;
+  margin-top: 30px;
+  padding: 2px;
+  z-index: 10;
+}
 .mail {
   color: #fb3159;
   font-size: 40px;
@@ -152,6 +169,7 @@ export default {
 }
 .tooltip {
   position: absolute;
+  margin-left: 2%;
   left: 0;
   top: 0;
 }
