@@ -1,7 +1,8 @@
 <template>
-  <el-tabs v-model="activeName" @tab-click="handleClick">
-    <el-tab-pane v-for="(tab, i) in tabs" :key="i" :label="tab.label" :name="tab.name">
-      <div v-if="i === 0">
+  <!-- <el-tabs v-model="activeName" @tab-click="handleClick">
+    <el-tab-pane v-for="(tab, i) in tabs" :key="i" :label="tab.label" :name="tab.name"> -->
+      <div>
+      <div>
         <el-input v-model="input" @keyup.enter.native="search" class="input-with-select" clearable>
           <el-select v-model="select" slot="prepend" placeholder="请选择">
             <el-option v-for="(opVal, opIdx) in operator" :key="opIdx" :label="opVal.chinese_name" :value="opVal.oid"></el-option>
@@ -12,14 +13,14 @@
           <el-button slot="append" @click="search">新增/查询</el-button>
         </el-input>
       </div>
-      <el-card v-for="(item, idx) in all[i]" :key="idx" shadow="always">
+      <el-card v-for="(item, idx) in all" :key="idx" shadow="always">
         <i class="iconfont icon-copy1 copy" @click="copy(item.short_link)"></i>
         <el-row :gutter="20">
           <tooltip
             @clickRecycle="clickRecycle"
             @clickShiyong="clickShiyong"
             @clickUsed="clickUsed"
-            :idx="tab.name+idx"
+            :idx="idx"
             :id="item.id"
             :status="item.status"
             :createTime="item.create_time"
@@ -32,8 +33,9 @@
           <div class="time">{{item.update_time}} {{item.chinese_name}}</div>
         </el-row>
       </el-card>
-    </el-tab-pane>
-  </el-tabs>
+      </div>
+    <!-- </el-tab-pane>
+  </el-tabs> -->
 </template>
 
 <script>
@@ -85,15 +87,14 @@ export default {
         this.using = res.data.using
         this.used = res.data.used
         this.recycle = res.data.recycle
-        this.allUse = this.using.concat(this.recycle)
+        this.allUse = this.recycle.concat(this.using)
         this.item = res.data.item
-        this.tabs[1].label = '已使用(' + res.data.usedLength + ')'
+        // this.tabs[0].label = '已使用(' + res.data.usedLength + ')'
+        this.all = this.allUse.concat(this.used)
         if (this.item.id && this.item.id > 0) {
-          this.allUse = this.allUse.filter((item, index, arr) => { return item.id !== this.item.id })
-          this.allUse = [res.data.item].concat(this.allUse)
+          this.all = this.all.filter((item, index, arr) => { return item.id !== this.item.id })
+          this.all = [res.data.item].concat(this.all)
         }
-        this.all = [this.allUse].concat([this.used])
-        this.all = this.all.concat([this.item])
         this.operator = res.data.operator
       })
     },
@@ -114,7 +115,7 @@ export default {
       }
     },
     use () {
-      this.updateAM({ status: 1 })
+      this.updateAM({ status: 2 })
     },
     copy (shortLink) {
       this.$copyText(shortLink).then((e) => {

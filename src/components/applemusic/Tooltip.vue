@@ -14,11 +14,11 @@
           v-if="status===1 || status===2 || status === 0"
           class="iconfont icon-recycle recycle"
         ></span>
-        <span
+        <!-- <span
           @click="clickShiyong"
           v-if="status===2 || status===3 || status === 0"
           class="iconfont icon-shiyongzhong1 shiyong"
-        ></span>
+        ></span> -->
         <span
           @click="clickUsed"
           v-if="status===1 || status===3 || status === 0"
@@ -109,7 +109,7 @@ export default {
 }
 .used {
   font-size: 50px;
-  color: #9fa7c2;
+  color: red;
 }
 .recycle {
   font-size: 50px;
