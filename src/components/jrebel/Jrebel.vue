@@ -14,7 +14,7 @@
     </ul>
     <div style="display:flex; float:right;">
       <el-link
-        href="http://music.taojingling.cn/ap"
+        href="http://music.taojingling.cn"
         style="margin-right:20px; z-index:1;"
         type="primary"
         target="_blank"
