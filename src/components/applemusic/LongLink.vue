@@ -13,17 +13,14 @@
           <el-button slot="append" @click="search">新增/查询</el-button>
         </el-input>
       </div>
-      <el-card v-for="(item, idx) in all" :key="idx" shadow="always">
+      <el-card v-for="(item, idx) in all" :key="idx" shadow="always" :class="item.isItem ? 'highlight': ''">
         <i class="iconfont icon-copy1 copy" @click="copy(item.short_link)"></i>
         <el-row :gutter="20">
           <tooltip
             @clickRecycle="clickRecycle"
             @clickShiyong="clickShiyong"
             @clickUsed="clickUsed"
-            :idx="idx"
-            :id="item.id"
-            :status="item.status"
-            :createTime="item.create_time"
+            :item="item"
             class="tooltip"
           ></tooltip>
           <div
@@ -93,9 +90,12 @@ export default {
         this.all = this.allUse.concat(this.used)
         if (this.item.id && this.item.id > 0) {
           this.all = this.all.filter((item, index, arr) => { return item.id !== this.item.id })
-          this.all = [res.data.item].concat(this.all)
+          this.item.isItem = true
+          this.all = [this.item].concat(this.all)
+          this.doCopy(this.item.short_link, this.item.link)
         }
         this.operator = res.data.operator
+        this.input = ''
       })
     },
     clickRecycle (id) {
@@ -184,5 +184,12 @@ export default {
 }
 .enabled {
   color:red;
+}
+.highlight {
+  border: 3px solid cornflowerblue;
+}
+.highlight div {
+  color: darkmagenta;
+  font-weight: bolder;
 }
 </style>

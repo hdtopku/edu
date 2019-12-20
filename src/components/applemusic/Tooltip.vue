@@ -5,13 +5,13 @@
       @hidden="onHidden"
       @show="onShow"
       interactive="true"
-      :to="'tippy'+uuid + idx"
+      :to="item.link"
       trigger="click"
     >
       <div>
         <span
           @click="clickRecycle"
-          v-if="status===1 || status===2 || status === 0"
+          v-if="item.status===1 || item.status===2 || item.status === 0"
           class="iconfont icon-recycle recycle"
         ></span>
         <!-- <span
@@ -21,43 +21,30 @@
         ></span> -->
         <span
           @click="clickUsed"
-          v-if="status===1 || status===3 || status === 0"
+          v-if="item.status===1 || item.status===3 || item.status === 0"
           class="iconfont icon-yishiyong2 used"
         ></span>
-        <span style="color:gray;">{{createTime}} 创建</span>
+        <span style="color:gray;">{{item.create_time}} 创建</span>
       </div>
     </tippy>
-    <button class="tippy01" :name="'tippy'+uuid + idx" ref="btn">
-      <span class="iconfont icon-weishiyong used" v-if="status===0"></span>
-      <span class="iconfont icon-shiyongzhong1 shiyong" v-if="status===1"></span>
-      <span class="iconfont icon-yishiyong2 used" v-if="status===2"></span>
-      <span class="iconfont icon-recycle recycle" v-if="status===3"></span>
+    <button class="tippy01" :name="item.link" ref="btn">
+      <span class="iconfont icon-weishiyong used" v-if="item.status===0"></span>
+      <span class="iconfont icon-shiyongzhong1 shiyong" v-if="item.status===1"></span>
+      <span class="iconfont icon-yishiyong2 used" v-if="item.status===2"></span>
+      <span class="iconfont icon-recycle recycle" v-if="item.status===3"></span>
     </button>
     <slot class="toto" name="toto"></slot>
   </span>
 </template>
 
 <script>
-import uuidv1 from 'uuid/v1'
 export default {
   props: {
-    idx: {
-      default: 0
-    },
-    status: {
-      default: 0
-    },
-    id: {
-      default: 0
-    },
-    createTime: {
-      default: ''
-    }
+    item: Object
   },
   data () {
     return {
-      activeName: 'first',
-      uuid: ''
+      activeName: 'first'
     }
   },
   methods: {
@@ -73,20 +60,16 @@ export default {
     // },
     clickRecycle () {
       this.$refs.btn._tippy.hide() // 如果不独立出这个组件
-      this.$emit('clickRecycle', this.id)
+      this.$emit('clickRecycle', this.item.id)
     },
     clickShiyong () {
       this.$refs.btn._tippy.hide() // 如果不独立出这个组件
-      this.$emit('clickShiyong', this.id)
+      this.$emit('clickShiyong', this.item.id)
     },
     clickUsed () {
       this.$refs.btn._tippy.hide() // 如果不独立出这个组件
-      this.$emit('clickUsed', this.id)
+      this.$emit('clickUsed', this.item.id)
     }
-  },
-  mounted () {
-    const uuid = uuidv1()
-    this.uuid = uuid.substring(0, 8)
   }
 }
 </script>
