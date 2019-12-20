@@ -3,7 +3,7 @@
     <el-tab-pane v-for="(tab, i) in tabs" :key="i" :label="tab.label" :name="tab.name"> -->
       <div>
       <div>
-        <el-input v-model="input" @keyup.enter.native="search" class="input-with-select" clearable>
+        <el-input v-model="input" :placeholder="placeholder" @keyup.enter.native="search" class="input-with-select" clearable>
           <el-select v-model="select" slot="prepend" placeholder="请选择">
             <el-option v-for="(opVal, opIdx) in operator" :key="opIdx" :label="opVal.chinese_name" :value="opVal.oid"></el-option>
           </el-select>
@@ -57,6 +57,7 @@ export default {
       used: [],
       recycle: [],
       operator: [],
+      placeholder: '',
       input: ''
     }
   },
@@ -99,6 +100,7 @@ export default {
         }
         this.operator = res.data.operator
         this.input = ''
+        this.placeholder = `今：${res.data.usedLength}；昨：${res.data.yesterdayUsedLength}，总：${res.data.allUsedLength}（已用）`
       })
     },
     clickRecycle (id) {
