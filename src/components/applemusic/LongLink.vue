@@ -68,12 +68,15 @@ export default {
       this.$toast.top(text)
     },
     doCopy (shortLink, link) {
-      this.$copyText(link).then((e) => {
+      setTimeout(() => {
+        this.$copyText(link).then((e) => {
         // success
-        this.openCenter(`<div style='color:red;font-size:30px;'>${shortLink}</div>copied!`)
-      }, (e) => {
+          this.openCenter(`<div style='color:red;font-size:30px;'>${shortLink}</div>copied!`)
+        }, (e) => {
         // fail
-      })
+          this.openCenter(e)
+        })
+      }, 100)
     },
     updateAM (params = {}) {
       if (this.select !== '' && this.select !== 0) {
