@@ -8,13 +8,14 @@
           :isEdit="isEdits[idx]"
           @changeEdit="changeEdit"
           @changeMail="changeMail"
+          @initMail="initMail"
           :isLoading="isLoading"
         ></card>
       </li>
     </ul>
     <div style="display:flex; float:right;">
       <el-link
-        href="http://music.taojingling.cn"
+        href="http://music.taojingling.cn/1.html"
         style="margin-right:20px; z-index:1;"
         type="primary"
         target="_blank"
@@ -55,15 +56,19 @@ export default {
     }
   },
   mounted () {
-    getMails().then((res) => {
-      if (res.data) {
-        this.setMails(res.data)
-      }
-    }).catch((err) => {
-      console.log(err)
-    })
+    this.initMail()
   },
   methods: {
+    initMail () {
+      console.log('ok')
+      getMails().then((res) => {
+        if (res.data) {
+          this.setMails(res.data)
+        }
+      }).catch((err) => {
+        console.log(err)
+      })
+    },
     onClick: function (oldMail, index) {
       const title = `<div style="color:red">${oldMail}</div>`
       Swal.fire({

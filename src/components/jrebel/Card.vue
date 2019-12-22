@@ -72,40 +72,43 @@ export default {
       }
     },
     randomMail () {
+      this.$emit('initMail')
       this.$emit('changeEdit', this.idx, false)
-      const title = `<div style="color:red">${this.mail}</div>`
-      let text = '随机替换？'
-      if (this.isEdit && this.inputMail === '') {
-        text = '确认删除？'
-      }
-      if (this.isEdit && this.inputMail.length > 0) {
-        text = '替换为' + this.inputMail + '？'
-      }
-      if (!this.isEdit && this.mail === '' && this.inputMail === '') {
-        text = '确认新增？'
-      }
-      const isEdit = this.isEdit
-      Swal.fire({
-        title,
-        text,
-        showCancelButton: true,
-        confirmButtonColor: 'pink',
-        cancelButtonColor: '#00CCFF',
-        confirmButtonText: '取消',
-        cancelButtonText: '确定'
-      }).then((result) => {
-        if (!result.value) {
-          this.isClicked = true
-          if (!this.isLoading) {
-            if (isEdit) {
-              this.$emit('changeMail', this.mail, this.inputMail)
-            } else {
-              this.$emit('changeMail', this.mail, 'RANDOM')
-            }
-            this.inputMail = ''
-          }
+      setTimeout(() => {
+        const title = `<div style="color:red">${this.mail}</div>`
+        let text = '随机替换？'
+        if (this.isEdit && this.inputMail === '') {
+          text = '确认删除？'
         }
-      })
+        if (this.isEdit && this.inputMail.length > 0) {
+          text = '替换为' + this.inputMail + '？'
+        }
+        if (!this.isEdit && this.mail === '' && this.inputMail === '') {
+          text = '确认新增？'
+        }
+        const isEdit = this.isEdit
+        Swal.fire({
+          title,
+          text,
+          showCancelButton: true,
+          confirmButtonColor: 'pink',
+          cancelButtonColor: '#00CCFF',
+          confirmButtonText: '取消',
+          cancelButtonText: '确定'
+        }).then((result) => {
+          if (!result.value) {
+            this.isClicked = true
+            if (!this.isLoading) {
+              if (isEdit) {
+                this.$emit('changeMail', this.mail, this.inputMail)
+              } else {
+                this.$emit('changeMail', this.mail, 'RANDOM')
+              }
+              this.inputMail = ''
+            }
+          }
+        })
+      }, 180)
     }
   },
   watch: {

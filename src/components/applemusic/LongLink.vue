@@ -75,7 +75,7 @@ export default {
           this.openCenter(`<div style='color:red;font-size:30px;'>${shortLink}</div>copied!`)
         }, (e) => {
         // fail
-          this.openCenter(e)
+          this.doCopy(shortLink, link)
         })
       }, 100)
     },
