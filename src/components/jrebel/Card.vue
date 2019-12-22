@@ -108,7 +108,7 @@ export default {
             }
           }
         })
-      }, 110)
+      }, 90)
     }
   },
   watch: {
