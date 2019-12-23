@@ -1,21 +1,33 @@
 <template id="t">
-  <button v-clipboard="copyData">Copy</button>
+  <div>
+    <!-- <button v-clipboard="copyData">Copy</button> -->
+    <nums></nums>
+    <!-- <cube></cube> -->
+  </div>
 </template>
 
 <script>
-export default{
+import Nums from './nums/Nums'
+import Cube from './nums/Cube'
+export default {
+  components: {
+    nums: Nums,
+    cube: Cube
+  },
   data () {
     return {
       copyData: 'copy data'
     }
   },
   methods: {
-    handleSuccess (e) {
-      console.log(e)
-    },
-    handleError (e) {
-      console.log(e)
-    }
+    // handleSuccess (e) {
+    //   console.log(e)
+    // },
+    // handleError (e) {
+    //   console.log(e)
+    // }
   }
 }
 </script>
+<style scoped>
+</style>
