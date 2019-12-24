@@ -7,7 +7,8 @@
       :key="index"
       @click="clicked(index)"
     >
-      <div class="one">{{index+1}}</div>
+      <div class="one" v-if="item.status !== -1">{{index+1}}</div>
+      <div class="one-disabled" v-else>{{index+1}}</div>
       <div class="two" v-if="item.status !== -1">{{item.num}}</div>
       <div class="two disabled" v-else></div>
       <div class="three" v-if="isShow">{{mynum-item.num}}</div>
@@ -74,12 +75,19 @@ export default {
   height: 30px;
 }
 
+.one-disabled {
+  height: 30px;
+  color: #bbbbbb;
+}
+
 .two {
   height: 35px;
-  background-color: #fbdedb;
+  background-color: #fbd735;
 }
+
 .disabled {
-  background-color: gray;
+  color:#e1e1e1;
+  background-color: #e1e1e1;
 }
 
 .three {
