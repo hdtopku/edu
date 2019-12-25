@@ -3,16 +3,19 @@
     <!-- <button v-clipboard="copyData">Copy</button> -->
     <nums></nums>
     <!-- <cube></cube> -->
+    <!-- <all-cube ></all-cube> -->
   </div>
 </template>
 
 <script>
 import Nums from './nums/Nums'
 import Cube from './nums/Cube'
+import AllCube from './nums/AllCube'
 export default {
   components: {
     nums: Nums,
-    cube: Cube
+    cube: Cube,
+    allCube: AllCube
   },
   data () {
     return {

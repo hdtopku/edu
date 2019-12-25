@@ -20,44 +20,60 @@
       </el-tab-pane>-->
       <el-tab-pane label="全部">
         <el-row :gutter="20">
-          <el-col :span="12">
+          <el-col :span="14">
             <div>
-              <el-input type="number" placeholder="请输入" v-model="input1">
+              <el-input type="number" placeholder="请输入" v-model="params.total">
                 <template slot="prepend">49总和:</template>
               </el-input>
             </div>
             <div>
-              <el-input type="number" placeholder="请输入" v-model="input2">
+              <el-input type="number" placeholder="请输入" v-model="params.avg">
                 <template slot="prepend">单元和:</template>
               </el-input>
             </div>
             <div>
-              <el-input type="number" placeholder="请输入" v-model="input3">
-                <template slot="prepend">最大值:</template>
-              </el-input>
-            </div>
-            <div>
-              <el-input type="number" placeholder="请输入" v-model="input4">
+              <el-input type="number" placeholder="请输入" v-model="params.min">
                 <template slot="prepend">最小值:</template>
               </el-input>
             </div>
+            <div>
+              <el-input type="number" placeholder="请输入" v-model="params.max">
+                <template slot="prepend">最大值:</template>
+              </el-input>
+            </div>
+            <!-- <el-popconfirm title="确定生成数据吗？" hideIcon>
+              <el-button class="button" slot="reference" @click="generate">生成</el-button>
+            </el-popconfirm>-->
+            <el-popover placement="top" width="160" v-model="visible" hideIcon>
+              <p>确定生成数据吗？</p>
+              <div style="text-align: right; margin: 0">
+                <el-button size="mini" type="text" @click="cancle">取消</el-button>
+                <el-button type="primary" size="mini" @click="generate">确定</el-button>
+              </div>
+              <el-button slot="reference" class="button">生成</el-button>
+            </el-popover>
           </el-col>
-          <el-col :span="12">
-            <div>2</div>
+          <el-col :span="10">
+            <div class="text">
+              <div class="bg49">49: {{numbers.total49}}</div>
+              <div class="bg33">33: {{numbers.total33}}</div>
+              <div class="bg16">16: {{numbers.total16}}</div>
+              <div>总计：{{numbers.total49+numbers.total33+numbers.total16}}</div>
+            </div>
+            <div class="time">{{numbers.time}}</div>
           </el-col>
         </el-row>
+        <!-- 首页cube -->
+        <all-cube :numbers="numbers"></all-cube>
       </el-tab-pane>
       <el-tab-pane label="49">
-        <p>总：{{numbers.total49}}</p>
-        <cube :itemStatus="numbers['num49']"></cube>
+        <cube :itemStatus="numbers['num49']" :total="numbers.total49"></cube>
       </el-tab-pane>
       <el-tab-pane label="33">
-        <p>总：{{numbers.total33}}</p>
-        <cube :itemStatus="numbers['num33']"></cube>
+        <cube :itemStatus="numbers['num33']" :total="numbers.total33"></cube>
       </el-tab-pane>
       <el-tab-pane label="16">
-        <p>总：{{numbers.total16}}</p>
-        <cube :itemStatus="numbers['num16']"></cube>
+        <cube :itemStatus="numbers['num16']" :total="numbers.total16"></cube>
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -66,42 +82,50 @@
 <script>
 import { setStore, getStore } from '../../api/storage'
 import Cube from './Cube'
+import AllCube from './AllCube'
 import { getRData } from '../../api/mail'
 export default {
   components: {
-    cube: Cube
+    cube: Cube,
+    allCube: AllCube
   },
   data () {
     return {
+      visible: false,
       isTrue: true,
       num: 450,
-      time: '当前版本生成时间：2019/12/20 13:45',
       numbers: {
         num49: [],
         total49: 0,
         num33: [],
         total33: 0,
         num16: [],
-        total16: 0
+        total16: 0,
+        time: ''
       },
-      total: 22050,
-      input1: '',
-      input2: '',
-      input3: '',
-      input4: ''
+      params: {
+        total: 0,
+        avg: 0,
+        min: 0,
+        max: 0
+      }
     }
   },
   methods: {
-    init () {
-      var numbers = getStore('numbers') || ''
-      if (numbers === '') {
-        this.fetchData()
-        numbers = getStore('numbers') || ''
-      }
-      this.numbers = numbers
+    init (force = false) {
+      this.dealParams()
+      this.fetchData(force)
     },
-    fetchData () {
-      getRData().then(res => {
+    fetchData (force = false) {
+      var numbers = getStore('numbers') || ''
+      if (force || numbers === '') {
+        this.getNumData()
+      } else {
+        this.numbers = numbers
+      }
+    },
+    getNumData () {
+      getRData(this.params).then(res => {
         var numbers = {}
         numbers.num49 = []
         numbers.total49 = 0
@@ -130,8 +154,35 @@ export default {
             status: element > 0 ? 0 : -1
           })
         })
+        numbers.time = res.data.time
+        // let oldNumbers = getStore('numbers')
         setStore('numbers', numbers)
+        this.numbers = numbers
       })
+    },
+    dealParams () {
+      if (this.params.total > 0 && this.params.avg > 0 && this.params.min > 0 && this.params.max > 0) {
+        this.params.total = parseInt(this.params.total) > 0 ? parseInt(this.params.total) : 10050
+        this.params.avg = parseInt(this.params.avg) > 0 ? parseInt(this.params.avg) : 450
+        this.params.min = parseInt(this.params.min) > 0 ? parseInt(this.params.min) : 50
+        this.params.max = parseInt(this.params.max) > 0 ? parseInt(this.params.max) : 400
+        setStore('numParams', this.params)
+      } else {
+        var params = getStore('numParams') || {}
+        params.total = parseInt(params.total) > 0 ? parseInt(params.total) : 10050
+        params.avg = parseInt(params.avg) > 0 ? parseInt(params.avg) : 450
+        params.min = parseInt(params.min) > 0 ? parseInt(params.min) : 50
+        params.max = parseInt(params.max) > 0 ? parseInt(params.max) : 400
+        this.params = params
+        setStore('numParams', params)
+      }
+    },
+    generate () {
+      this.visible = false
+      this.init(true)
+    },
+    cancle () {
+      this.visible = false
     }
   },
   mounted () {
@@ -140,6 +191,10 @@ export default {
   watch: {
     numbers: {
       handler () {
+        this.numbers.total = parseInt(this.numbers.total)
+        this.numbers.avg = parseInt(this.numbers.avg)
+        this.numbers.min = parseInt(this.numbers.min)
+        this.numbers.max = parseInt(this.numbers.max)
         setStore('numbers', this.numbers)
       },
       deep: true
@@ -149,7 +204,6 @@ export default {
 </script>
 
 <style scoped>
-
 .handlebox {
   display: flex;
   justify-content: space-around;
@@ -166,7 +220,7 @@ span {
 }
 
 .right {
-  width: 50%;
+  width: 40%;
 }
 
 .handle {
@@ -183,16 +237,14 @@ span {
 }
 
 .button {
-  padding: 5px 15px;
-  border: 1px solid #bbbbbb;
-  border-radius: 5px;
+  color: #6e7073;
+  margin-top: 10px;
 }
 
 .time {
-  padding: 10px 0;
   color: #929292;
   text-align: left;
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .total {
@@ -216,6 +268,31 @@ span {
 }
 
 .num16 {
+  background-color: #c1d8ac;
+}
+
+.text {
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  line-height: 32px;
+}
+
+.bg49 {
+  padding-left: 10px;
+  background-color: #fbdedb;
+  margin-bottom: 5px;
+}
+
+.bg33 {
+  padding-left: 10px;
+  background-color: #ccdfe5;
+  margin-bottom: 5px;
+}
+
+.bg16 {
+  padding-left: 10px;
   background-color: #c1d8ac;
 }
 </style>
