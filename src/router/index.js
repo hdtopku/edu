@@ -21,7 +21,7 @@ export default new Router({
       component: Test
     },
     {
-      path: '/num',
+      path: '/',
       name: 'num',
       component: Num
     },
