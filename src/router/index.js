@@ -11,7 +11,7 @@ export default new Router({
   mode: 'history',
   routes: [
     {
-      path: '/',
+      path: '/edu',
       name: 'edu',
       component: Edu
     },
