@@ -15,6 +15,12 @@
     </ul>
     <div style="display:flex; float:right;">
       <el-link
+        href="http://a.taojingling.cn"
+        style="margin-right:20px; z-index:1;"
+        type="primary"
+        target="_blank"
+      >取号</el-link>
+      <el-link
         href="http://music.taojingling.cn/1.html"
         style="margin-right:20px; z-index:1;"
         type="primary"
