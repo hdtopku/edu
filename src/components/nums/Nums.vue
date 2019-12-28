@@ -41,6 +41,11 @@
                 <template slot="prepend">最大值:</template>
               </el-input>
             </div>
+            <div>
+              <el-input type="number" placeholder="请输入" v-model="params.minTimes">
+                <template slot="prepend">最小个数:</template>
+              </el-input>
+            </div>
             <!-- <el-popconfirm title="确定生成数据吗？" hideIcon>
               <el-button class="button" slot="reference" @click="generate">生成</el-button>
             </el-popconfirm>-->
@@ -56,8 +61,8 @@
           <el-col :span="10">
             <div class="text">
               <div class="bg49">49: {{numbers.total49}}</div>
-              <div class="bg33">33: {{numbers.total33}}</div>
-              <div class="bg16">16: {{numbers.total16}}</div>
+              <div class="bg33">{{49-params.minTimes}}: {{numbers.total33}}</div>
+              <div class="bg16">{{params.minTimes}}: {{numbers.total16}}</div>
               <div>总计：{{numbers.total49+numbers.total33+numbers.total16}}</div>
             </div>
             <div class="time">{{numbers.time}}</div>
@@ -69,10 +74,10 @@
       <el-tab-pane label="49">
         <cube :itemStatus="numbers['num49']" :total="numbers.total49"></cube>
       </el-tab-pane>
-      <el-tab-pane label="33">
+      <el-tab-pane :label="49-params.minTimes">
         <cube :itemStatus="numbers['num33']" :total="numbers.total33"></cube>
       </el-tab-pane>
-      <el-tab-pane label="16">
+      <el-tab-pane :label="params.minTimes">
         <cube :itemStatus="numbers['num16']" :total="numbers.total16"></cube>
       </el-tab-pane>
     </el-tabs>
@@ -107,7 +112,8 @@ export default {
         total: 0,
         avg: 0,
         min: 0,
-        max: 0
+        max: 0,
+        minTimes: 0
       }
     }
   },
@@ -166,6 +172,7 @@ export default {
         this.params.avg = parseInt(this.params.avg) > 0 ? parseInt(this.params.avg) : 450
         this.params.min = parseInt(this.params.min) > 0 ? parseInt(this.params.min) : 50
         this.params.max = parseInt(this.params.max) > 0 ? parseInt(this.params.max) : 400
+        this.params.minTimes = parseInt(this.params.minTimes) > 0 ? parseInt(this.params.minTimes) : 16
         setStore('numParams', this.params)
       } else {
         var params = getStore('numParams') || {}
@@ -173,6 +180,7 @@ export default {
         params.avg = parseInt(params.avg) > 0 ? parseInt(params.avg) : 450
         params.min = parseInt(params.min) > 0 ? parseInt(params.min) : 50
         params.max = parseInt(params.max) > 0 ? parseInt(params.max) : 400
+        params.minTimes = parseInt(params.minTimes) > 0 ? parseInt(params.minTimes) : 16
         this.params = params
         setStore('numParams', params)
       }
