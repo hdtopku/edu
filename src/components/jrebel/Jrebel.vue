@@ -129,7 +129,7 @@ export default {
 3、务必参考宝贝详情第三步，完成激活：https://m.tb.cn/h.eDj0BTe?sm=119f40`
       setTimeout(() => {
         location.reload()
-      }, 5000)
+      }, 1000)
       return jrebel
     }
   }
