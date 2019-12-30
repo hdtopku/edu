@@ -66,7 +66,6 @@ export default {
   },
   methods: {
     initMail () {
-      console.log('ok')
       getMails().then((res) => {
         if (res.data) {
           this.setMails(res.data)
@@ -124,11 +123,13 @@ export default {
     },
     getJrebel: function () {
       const uuid = uuidv1()
-      console.log(uuid)
       const jrebel =
         `1、激活邮箱填入：active@jrebel.cn
 2、激活码填入：http://jrebel.taojingling.cn/${uuid}
 3、务必参考宝贝详情第三步，完成激活：https://m.tb.cn/h.eDj0BTe?sm=119f40`
+      setTimeout(() => {
+        location.reload()
+      }, 5000)
       return jrebel
     }
   }
