@@ -1,56 +1,118 @@
 <template>
-  <div class="card">
-    <div v-if="mail" class="edit">
-      <i v-if="!isEdit" class="iconfont icon-edit" @click="edit"></i>
-      <i v-else class="iconfont icon-rollback" @click="edit"></i>
-    </div>
-    <div class="top" @click="doCopy">
-      <div v-if="mail">
-        <div class="mail">
-          <textarea v-if="isEdit" type="text"
-            @input="handleInput" :placeholder="mail"/>
-          <div v-else class="show-mail" :class="isClicked ? 'change-mail': ''">{{mail}}</div>
+  <div>
+    <ul class="cards">
+      <li class="item" v-for="(mail, idx) in mails" :key="idx">
+        <div class="card">
+          <div v-if="mail" class="edit">
+            <i v-if="!isEdits[idx]" class="iconfont icon-edit" @click="edit(idx)"></i>
+            <i v-else class="iconfont icon-rollback" @click="edit(idx)"></i>
+          </div>
+          <div class="top" @click="doCopy(idx)">
+            <div v-if="mail">
+              <div class="mail">
+                <textarea v-if="isEdits[idx]" type="text" @input="handleInput" :placeholder="mail" />
+                <div v-else class="show-mail" :class="isLoading ? 'change-mail': ''">{{mail}}</div>
+              </div>
+            </div>
+            <i v-else class="iconfont icon-icon-test not-found"></i>
+          </div>
+          <div class="bottom" :class="isLoading ? 'disabled' : ''" @click="randomMail(idx)">
+            <i v-if="isLoading" class="iconfont icon-loading loading"></i>
+            <div v-if="!isEdits[idx] && mail" class="button">random</div>
+            <div v-if="!isEdits[idx] && !mail && !inputMail" class="button">add</div>
+            <div v-if="isEdits[idx] && inputMail == ''" class="button">delete</div>
+            <div v-if="isEdits[idx] && mail && inputMail" class="button">replace</div>
+          </div>
         </div>
-      </div>
-      <i v-else class="iconfont icon-icon-test not-found"></i>
-    </div>
-    <div class="bottom" :class="isLoading ? 'disabled' : ''" @click="randomMail">
-      <i v-if="isLoading" class="iconfont icon-loading loading"></i>
-      <div v-if="!isEdit && mail" class="button">random</div>
-      <div v-if="!isEdit && !mail && !inputMail" class="button">add</div>
-      <div v-if="isEdit && inputMail == ''" class="button">delete</div>
-      <div v-if="isEdit && mail && inputMail" class="button">replace</div>
-    </div>
+      </li>
+    </ul>
   </div>
 </template>
 <script>
 import Swal from 'sweetalert2'
+import { getMails } from '../../api/mail'
 export default {
-  props: {
-    mail: {default: ''},
-    isEdit: {default: false},
-    idx: {default: 0},
-    isLoading: {default: false}
-  },
   components: {
     Swal
   },
   data () {
     return {
+      isEdits: [false, false, false],
       inputMail: '',
-      isClicked: false
+      isLoading: false,
+      mails: ['fsadfafsassq1234', 'b', '']
     }
   },
+  mounted () {
+    this.initMail()
+  },
   methods: {
-    edit () {
-      this.$emit('changeEdit', this.idx, !this.isEdit)
-      if (!this.isEdit) {
+    changeMail: function (oldMail, newMail) {
+      this.isLoading = true
+      getMails({ 'old': oldMail, 'new': newMail }).then((res) => {
+        this.setMails(res.data)
+        this.isEdits = [false, false, false]
+      })
+    },
+    initMail (idx = -1) {
+      getMails().then((res) => {
+        if (res.data) {
+          this.setMails(res.data)
+        }
+        if (idx >= 0) { // 弹窗
+          const title = `<div style="color:red">${this.mails[idx]}</div>`
+          let text = '随机替换？'
+          if (this.isEdits[idx] && this.inputMail === '') {
+            text = '确认删除？'
+          }
+          if (this.isEdits[idx] && this.inputMail.length > 0) {
+            text = '替换为' + this.inputMail + '？'
+          }
+          if (!this.isEdits[idx] && this.mail === '' && this.inputMail === '') {
+            text = '确认新增？'
+          }
+          const isEdit = this.isEdits[idx]
+          Swal.fire({
+            title,
+            text,
+            showCancelButton: true,
+            confirmButtonColor: 'pink',
+            cancelButtonColor: '#00CCFF',
+            confirmButtonText: '取消',
+            cancelButtonText: '确定'
+          }).then((result) => {
+            if (!result.value) {
+              if (isEdit) {
+                this.changeMail(this.mails[idx], this.inputMail)
+              } else {
+                this.changeMail(this.mails[idx], 'RANDOM')
+              }
+              this.inputMail = ''
+            }
+          })
+        }
+      }).catch((err) => {
+        console.log(err)
+      })
+    },
+    setMails: function (mails) {
+      this.mails = mails
+      while (this.mails.length < 3) {
+        this.mails.push('')
+      }
+      this.isLoading = false
+    },
+    edit (idx) {
+      const isEdit = !this.isEdits[idx]
+      if (!isEdit) {
         this.inputMail = ''
       }
+      this.isEdits = [false, false, false]
+      this.isEdits[idx] = isEdit
     },
-    openCenter: function () {
+    openCenter: function (idx) {
       this.$toast.top('copied!')
-      this.$emit('changeEdit', this.idx, false)
+      this.$emit('changeEdit', idx, false)
     },
     handleInput (e) { // 校验关联交易号
       let val = event.target.value
@@ -61,9 +123,9 @@ export default {
         event.target.value = this.inputMail
       }
     },
-    doCopy () {
-      if (this.mail && !this.isEdit) {
-        this.$copyText(this.mail + '@pku.edu.cn').then((e) => {
+    doCopy (idx) {
+      if (this.mails[idx] && !this.isEdits[idx]) {
+        this.$copyText(this.mails[idx] + '@pku.edu.cn').then((e) => {
           // success
           this.openCenter()
         }, (e) => {
@@ -71,67 +133,48 @@ export default {
         })
       }
     },
-    randomMail () {
-      this.$emit('initMail')
-      this.$emit('changeEdit', this.idx, false)
-      setTimeout(() => {
-        const title = `<div style="color:red">${this.mail}</div>`
-        let text = '随机替换？'
-        if (this.isEdit && this.inputMail === '') {
-          text = '确认删除？'
-        }
-        if (this.isEdit && this.inputMail.length > 0) {
-          text = '替换为' + this.inputMail + '？'
-        }
-        if (!this.isEdit && this.mail === '' && this.inputMail === '') {
-          text = '确认新增？'
-        }
-        const isEdit = this.isEdit
-        Swal.fire({
-          title,
-          text,
-          showCancelButton: true,
-          confirmButtonColor: 'pink',
-          cancelButtonColor: '#00CCFF',
-          confirmButtonText: '取消',
-          cancelButtonText: '确定'
-        }).then((result) => {
-          if (!result.value) {
-            this.isClicked = true
-            if (!this.isLoading) {
-              if (isEdit) {
-                this.$emit('changeMail', this.mail, this.inputMail)
-              } else {
-                this.$emit('changeMail', this.mail, 'RANDOM')
-              }
-              this.inputMail = ''
-            }
-          }
-        })
-      }, 90)
-    }
-  },
-  watch: {
-    mail () {
-      this.isClicked = false
+    randomMail (idx) {
+      if (this.isLoading) {
+        return
+      }
+      this.initMail(idx)
     }
   }
 }
 </script>
 <style scoped>
+.cards {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+}
+.item {
+  width: 100px;
+  height: 150px;
+  color: white;
+  text-align: center;
+}
 .card {
   position: relative;
   width: 100%;
   height: 90%;
   color: black;
 }
-.top, .bottom {
+.top,
+.bottom {
   width: 100%;
   height: 60%;
   border: 1px solid black;
   margin-top: 3%;
   display: flex;
-  word-break:break-all;
+  word-break: break-all;
   cursor: pointer;
 }
 .mail {
@@ -147,7 +190,7 @@ export default {
 }
 textarea {
   width: 80%;
-  resize:none;
+  resize: none;
 }
 .not-found {
   position: absolute;
