@@ -100,7 +100,7 @@ export default {
         }
         this.operator = res.data.operator
         this.input = ''
-        this.placeholder = `今已用：${res.data.usedLength}；昨：${res.data.yesterdayUsedLength}`
+        this.placeholder = `今：${res.data.usedLength}；昨：${res.data.yesterdayUsedLength}`
       })
     },
     clickRecycle (id) {
