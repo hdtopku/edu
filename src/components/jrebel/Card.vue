@@ -54,42 +54,54 @@ export default {
         this.isEdits = [false, false, false]
       })
     },
-    initMail (idx = -1) {
+    initMail (idx = -1, isCopy = false) {
       getMails().then((res) => {
         if (res.data) {
           this.setMails(res.data)
         }
-        if (idx >= 0) { // 弹窗
-          const title = `<div style="color:red">${this.mails[idx]}</div>`
-          let text = '随机替换？'
-          if (this.isEdits[idx] && this.inputMail === '') {
-            text = '确认删除？'
-          }
-          if (this.isEdits[idx] && this.inputMail.length > 0) {
-            text = '替换为' + this.inputMail + '？'
-          }
-          if (!this.isEdits[idx] && this.mail === '' && this.inputMail === '') {
-            text = '确认新增？'
-          }
-          const isEdit = this.isEdits[idx]
-          Swal.fire({
-            title,
-            text,
-            showCancelButton: true,
-            confirmButtonColor: 'pink',
-            cancelButtonColor: '#00CCFF',
-            confirmButtonText: '取消',
-            cancelButtonText: '确定'
-          }).then((result) => {
-            if (!result.value) {
-              if (isEdit) {
-                this.changeMail(this.mails[idx], this.inputMail)
-              } else {
-                this.changeMail(this.mails[idx], 'RANDOM')
-              }
-              this.inputMail = ''
+        if (idx >= 0) {
+          if (isCopy) { // 拷贝
+            console.log(this.mails[idx] + '@pku.edu.cn')
+            setTimeout(() => {
+              this.$copyText(this.mails[idx] + '@pku.edu.cn').then((e) => {
+              // success
+                this.openCenter()
+              }, (e) => {
+              // fail
+              })
+            }, 20)
+          } else { // 弹窗
+            const title = `<div style="color:red">${this.mails[idx]}</div>`
+            let text = '随机替换？'
+            if (this.isEdits[idx] && this.inputMail === '') {
+              text = '确认删除？'
             }
-          })
+            if (this.isEdits[idx] && this.inputMail.length > 0) {
+              text = '替换为' + this.inputMail + '？'
+            }
+            if (!this.isEdits[idx] && this.mail === '' && this.inputMail === '') {
+              text = '确认新增？'
+            }
+            const isEdit = this.isEdits[idx]
+            Swal.fire({
+              title,
+              text,
+              showCancelButton: true,
+              confirmButtonColor: 'pink',
+              cancelButtonColor: '#00CCFF',
+              confirmButtonText: '取消',
+              cancelButtonText: '确定'
+            }).then((result) => {
+              if (!result.value) {
+                if (isEdit) {
+                  this.changeMail(this.mails[idx], this.inputMail)
+                } else {
+                  this.changeMail(this.mails[idx], 'RANDOM')
+                }
+                this.inputMail = ''
+              }
+            })
+          }
         }
       }).catch((err) => {
         console.log(err)
@@ -125,12 +137,7 @@ export default {
     },
     doCopy (idx) {
       if (this.mails[idx] && !this.isEdits[idx]) {
-        this.$copyText(this.mails[idx] + '@pku.edu.cn').then((e) => {
-          // success
-          this.openCenter()
-        }, (e) => {
-          // fail
-        })
+        this.initMail(idx, true)
       }
     },
     randomMail (idx) {
