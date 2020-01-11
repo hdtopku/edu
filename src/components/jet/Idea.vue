@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <el-button type="plain" class="jrebrains" size="small" @click="getOneYear" round>IDEA</el-button>
-  </div>
+  <el-button type="plain" class="jrebrains" size="small" @click="getOneYear" round>IDEA</el-button>
 </template>
 
 <script>
@@ -24,5 +22,4 @@ export default {
 </script>
 
 <style scoped>
-
 </style>

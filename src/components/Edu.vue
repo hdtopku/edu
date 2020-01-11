@@ -1,20 +1,39 @@
 <template>
-  <el-tabs v-model="activeName" @tab-click="handleClick">
-    <el-tab-pane label="淘好货" name="first"><jrebel></jrebel></el-tab-pane>
-    <el-tab-pane label="其他" name="second"><apple-music></apple-music></el-tab-pane>
-    <!-- <el-tab-pane label="Itchat" name="third"><itchat></itchat></el-tab-pane> -->
-  </el-tabs>
+  <div>
+    <el-button
+      type="plain"
+      class="iconfont icon-rocket jrebel"
+      size="mini"
+      @click="copyJrebel"
+      round
+    ></el-button>
+    <el-link href="https://mail.pku.edu.cn/" type="primary" style="z-index:1;position:absolute;right:20px;top:20px;" target="_blank">打开邮箱</el-link>
+    <card></card>
+    <!-- <jet-brains class="jetbrain"></jet-brains> -->
+    <el-tabs v-model="activeName" @tab-click="handleClick">
+      <el-tab-pane label="Music" name="first">
+        <jrebel></jrebel>
+      </el-tab-pane>
+      <el-tab-pane label="IDEA" name="second">
+      </el-tab-pane>
+      <!-- <el-tab-pane label="Itchat" name="third"><itchat></itchat></el-tab-pane> -->
+    </el-tabs>
+    </div>
 </template>
 <script>
+import uuidv1 from 'uuid/v1'
+
 import AppleMusic from './applemusic/AppleMusic.vue'
 import Jrebel from './jrebel/Jrebel.vue'
 import Itchat from './itchat/Itchat.vue'
+import Card from './jrebel/Card'
 
 export default {
   components: {
     AppleMusic,
     Jrebel,
-    Itchat
+    Itchat,
+    Card
   },
   data () {
     return {
@@ -22,8 +41,45 @@ export default {
     }
   },
   methods: {
+    copyJrebel: function () {
+      this.$copyText(this.getJrebel()).then((e) => {
+        // success
+        this.openCenter(`<div style="color:red;">Jrebel</div>copied!`)
+      }, (e) => {
+        // fail
+      })
+    },
+    getJrebel: function () {
+      const uuid = uuidv1()
+      const jrebel =
+        `1、激活邮箱填入：active@jrebel.cn
+2、激活码填入：http://jrebel.taojingling.cn/${uuid}
+3、务必参考宝贝详情第三步，完成激活：https://item.taobao.com/item.htm?id=608435265542`
+      setTimeout(() => {
+        location.reload()
+      }, 800)
+      return jrebel
+    },
+    openCenter: function (Text = 'copied!') {
+      this.$toast.top(Text)
+    },
     handleClick (tab, event) {
     }
   }
 }
 </script>
+
+<style scoped>
+.jrebel {
+  margin-top: -50px;
+  z-index: 10;
+  left: 10px;
+  position: absolute;
+}
+.jetbrain {
+  margin-top: -30px;
+  z-index: 10;
+  left: 50px;
+  position: absolute;
+}
+</style>
