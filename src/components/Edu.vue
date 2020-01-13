@@ -7,8 +7,8 @@
       @click="copyJrebel"
       round
     ></el-button>
-    <el-link href="https://mail.pku.edu.cn/" type="primary" style="z-index:1;position:absolute;right:20px;top:20px;" target="_blank">打开邮箱</el-link>
     <card></card>
+    <el-link href="https://mail.pku.edu.cn/" type="primary" style="z-index:1;position:absolute;right:20px;" target="_blank">打开邮箱</el-link>
     <!-- <jet-brains class="jetbrain"></jet-brains> -->
     <el-tabs v-model="activeName" @tab-click="handleClick">
       <el-tab-pane label="Music" name="first">

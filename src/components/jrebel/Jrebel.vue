@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div style="display:flex; float:right;">
+    <div style="display:flex; float:left;">
       <!-- <el-link
         href="http://a.taojingling.cn"
         style="margin-right:20px; z-index:1;"
