@@ -1,9 +1,9 @@
 <template id="t">
-  <div>
-    <!-- <button v-clipboard="copyData">Copy</button> -->
-    <nums></nums>
-    <!-- <cube></cube> -->
-    <!-- <all-cube ></all-cube> -->
+  <div class="container">
+    <div class="text">直接点击下方按钮，前往软件粘贴即可。</div>
+    <el-row>
+      <el-button type="primary" class="button" @click="doCopy">{{msg}}</el-button>
+    </el-row>
   </div>
 </template>
 
@@ -19,18 +19,29 @@ export default {
   },
   data () {
     return {
-      copyData: 'copy data'
+      msg: '复制'
     }
   },
   methods: {
-    // handleSuccess (e) {
-    //   console.log(e)
-    // },
-    // handleError (e) {
-    //   console.log(e)
-    // }
+    doCopy () {
+      this.openCenter('已复制')
+    },
+    openCenter: function (text = 'copied!') {
+      this.$toast.top(text)
+    }
   }
 }
 </script>
 <style scoped>
+.container {
+  background: url('')
+}
+
+.text {
+  margin-bottom: 20px;
+}
+
+.button {
+  margin: auto;
+}
 </style>

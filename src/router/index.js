@@ -21,9 +21,14 @@ export default new Router({
       component: Test
     },
     {
-      path: '/',
+      path: '/num',
       name: 'num',
       component: Num
+    },
+    {
+      path: '/jet',
+      name: 'jet',
+      component: Test
     },
     {
       path: '/itchat',
