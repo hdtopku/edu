@@ -1,5 +1,6 @@
 <template>
   <div>
+    <el-link v-if="isEdits[0] || isEdits[1] || isEdits[2]" :href="repairHref" type="primary" style="z-index:1;position:absolute;margin-top:-25px;right:20px;" target="_blank">修复</el-link>
     <ul class="cards">
       <li class="item" v-for="(mail, idx) in mails" :key="idx">
         <div class="card">
@@ -45,6 +46,11 @@ export default {
   },
   mounted () {
     this.initMail()
+  },
+  computed: {
+    repairHref: function () {
+      return `http://api.mail.taojingling.cn/?words=${this.mails[0]},${this.mails[1]},${this.mails[2]}`
+    }
   },
   methods: {
     changeMail: function (oldMail, newMail) {
@@ -115,6 +121,7 @@ export default {
       this.isLoading = false
     },
     edit (idx) {
+      this.initMail()
       const isEdit = !this.isEdits[idx]
       if (!isEdit) {
         this.inputMail = ''
