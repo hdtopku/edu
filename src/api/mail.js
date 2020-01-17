@@ -9,3 +9,5 @@ export const toggleItChat = (params = {}) => http.fetchGet('/r?key=itchat', para
 export const getAMs = (params = {}) => http.fetchGet('/am', params)
 
 export const getRData = (params = {}) => http.fetchGet('/am/rdata', params)
+
+export const getJet = (params = {}) => http.fetchGet('/am/j', params)
