@@ -2,7 +2,7 @@
   <div v-if="!isLoading" class="container">
     <div v-if="isShow">
       <el-button type="primary" round size="large" plain class="button" @click="doCopy">{{msg}}</el-button>
-      <span style="position:relative;font-size:10px;top:12px;left:25px;" @click="help">遇到问题？</span>
+      <el-link class="help" @click="help">遇到问题？</el-link>
       <div class="text">打开软件，直接粘贴</div>
     </div>
     <div class="err" v-else>
@@ -70,12 +70,17 @@ export default {
 }
 </script>
 <style scoped>
-.container {
+.help {
+  font-size: 10px;
+  color: #007acc;
+  top: 12px;
+  position: relative;
+  left: 25px;
 }
 .button {
   margin-top: 150px;
   position: relative;
-  left: 0;
+  left: 25px;
   width: 200px;
   height: 50px;
   font-size: 25px;
