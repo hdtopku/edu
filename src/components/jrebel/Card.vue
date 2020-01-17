@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-link v-if="isEdits[0] || isEdits[1] || isEdits[2]" :href="repairHref" type="primary" style="z-index:1;position:absolute;margin-top:-25px;right:20px;" target="_blank">修复</el-link>
+    <el-link v-if="isEdits[0] || isEdits[1] || isEdits[2]" :href="repairHref" type="primary" style="z-index:1;position:absolute;margin-top:-25px;right:20px;" target="_blank">修复邮箱</el-link>
     <ul class="cards">
       <li class="item" v-for="(mail, idx) in mails" :key="idx">
         <div class="card">
