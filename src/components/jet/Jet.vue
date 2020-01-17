@@ -33,7 +33,6 @@ export default {
       window.open('https://i.loli.net/2020/01/16/7pgfsOyPvw6nWru.png', '_blank')
     },
     getK (params = {}, isCopy = false) {
-      this.k = this.getQueryString('k') || ''
       getJet(params).then((res) => {
         this.isLoading = false
         if (res.errno !== '0') {
@@ -68,6 +67,7 @@ export default {
     }
   },
   mounted () {
+    this.k = this.getQueryString('k') || ''
     this.getK({'q': this.k})
   }
 }
