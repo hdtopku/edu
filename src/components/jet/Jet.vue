@@ -3,9 +3,9 @@
     <div v-if="isShow">
       <el-button round size="large" plain class="button" @click="doCopy">{{msg}}</el-button>
       <!-- <span class="text">前往使用</span> -->
-      <el-link class="help" @click="help">遇到问题？</el-link>
+      <span class="help" @click="help">遇到问题？</span>
       <div v-if="showImg">
-        <img style="width:50%;" src="https://i.loli.net/2020/01/18/C3JksXGFuKWcTZr.png">
+        <img style="width:90%;" src="https://i.loli.net/2020/01/18/C3JksXGFuKWcTZr.png">
       </div>
     </div>
     <div class="err" v-if="!isShow">
@@ -82,6 +82,7 @@ export default {
   top: 12px;
   position: relative;
   left: 25px;
+  cursor: pointer;
 }
 .button {
   margin-top: 150px;
