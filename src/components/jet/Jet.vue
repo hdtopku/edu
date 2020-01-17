@@ -1,6 +1,6 @@
 <template>
-  <div v-if="!isLoading">
-    <div class="container" v-if="isShow">
+  <div v-if="!isLoading" class="container">
+    <div v-if="isShow">
       <el-button type="primary" round size="large" plain class="button" @click="doCopy">{{msg}}</el-button>
       <span style="position:relative;font-size:10px;top:12px;left:25px;" @click="help">遇到问题？</span>
       <div class="text">打开软件，直接粘贴</div>
@@ -41,7 +41,7 @@ export default {
           window.document.title = '404 Not Found'
         } else {
           this.isShow = true
-          window.document.title = '全家捅'
+          window.document.title = ''
           if (res.data && isCopy) {
             this.$copyText(res.data).then((e) => {
               this.msg = '完成'
@@ -70,11 +70,12 @@ export default {
 }
 </script>
 <style scoped>
-
+.container {
+}
 .button {
   margin-top: 150px;
   position: relative;
-  left: 25px;
+  left: 0;
   width: 200px;
   height: 50px;
   font-size: 25px;
