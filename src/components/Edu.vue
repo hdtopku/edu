@@ -1,5 +1,6 @@
 <template>
   <div>
+    <card></card>
     <el-button
       type="plain"
       class="iconfont icon-rocket jrebel"
@@ -7,7 +8,6 @@
       @click="copyJrebel"
       round
     ></el-button>
-    <card></card>
     <el-link href="https://mail.pku.edu.cn/" type="primary" style="z-index:1;position:absolute;right:20px;" target="_blank">打开邮箱</el-link>
     <!-- <jet-brains class="jetbrain"></jet-brains> -->
     <el-tabs v-model="activeName" @tab-click="handleClick">
@@ -71,7 +71,7 @@ export default {
 
 <style scoped>
 .jrebel {
-  margin-top: -50px;
+  margin-top: -25px;
   z-index: 10;
   left: 10px;
   position: absolute;

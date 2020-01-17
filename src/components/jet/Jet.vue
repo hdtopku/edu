@@ -36,7 +36,7 @@ export default {
       this.k = this.getQueryString('k') || ''
       getJet({ 'k': this.k }).then((res) => {
         this.isLoading = false
-        if (res.data + '' === 'undefined') {
+        if (res.errno !== '0') {
           this.isShow = false
           window.document.title = '404 Not Found'
         } else {
