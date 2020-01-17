@@ -43,14 +43,17 @@ export default {
           this.isShow = true
           window.document.title = ''
           if (res.data && isCopy) {
-            this.$copyText(res.data).then((e) => {
-              this.msg = '完成'
-              setTimeout(() => {
-                this.msg = '点击复制'
-              }, 200)
-            }, (e) => {
+            setTimeout(() => {
+              this.msg = '点击复制'
+              this.$copyText(res.data).then((e) => {
+                this.msg = '完成'
+                setTimeout(() => {
+                  this.msg = '点击复制'
+                }, 200)
+              }, (e) => {
               // fail
-            })
+              })
+            }, 20)
           }
         }
       })
@@ -71,7 +74,7 @@ export default {
 </script>
 <style scoped>
 .help {
-  font-size: 10px;
+  font-size: 12px;
   color: #007acc;
   top: 12px;
   position: relative;
@@ -80,7 +83,7 @@ export default {
 .button {
   margin-top: 150px;
   position: relative;
-  left: 25px;
+  left: 27px;
   width: 200px;
   height: 50px;
   font-size: 25px;
