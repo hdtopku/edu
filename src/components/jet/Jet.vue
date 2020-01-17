@@ -27,14 +27,14 @@ export default {
   },
   methods: {
     doCopy () {
-      this.getK(true)
+      this.getK({'k': this.k}, true)
     },
     help () {
       window.open('https://i.loli.net/2020/01/16/7pgfsOyPvw6nWru.png', '_blank')
     },
-    getK (isCopy = false) {
+    getK (params = {}, isCopy = false) {
       this.k = this.getQueryString('k') || ''
-      getJet({ 'k': this.k }).then((res) => {
+      getJet(params).then((res) => {
         this.isLoading = false
         if (res.errno !== '0') {
           this.isShow = false
@@ -68,7 +68,7 @@ export default {
     }
   },
   mounted () {
-    this.getK()
+    this.getK({'q': this.k})
   }
 }
 </script>
