@@ -6,7 +6,7 @@
       <div class="text">打开软件，直接粘贴</div>
     </div>
     <div class="err" v-else>
-      <h1>Not Found</h1>The requested URL was not found. If you entered the URL manually please check your spelling and try again.
+      <h1>404 Not Found</h1>The requested URL was not found. If you entered the URL manually please check your spelling and try again.
     </div>
   </div>
 </template>

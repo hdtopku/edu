@@ -15,6 +15,7 @@
         <jrebel></jrebel>
       </el-tab-pane>
       <el-tab-pane label="IDEA" name="second">
+        <idea></idea>
       </el-tab-pane>
       <!-- <el-tab-pane label="Itchat" name="third"><itchat></itchat></el-tab-pane> -->
     </el-tabs>
@@ -27,13 +28,15 @@ import AppleMusic from './applemusic/AppleMusic.vue'
 import Jrebel from './jrebel/Jrebel.vue'
 import Itchat from './itchat/Itchat.vue'
 import Card from './jrebel/Card'
+import Idea from './jet/Idea'
 
 export default {
   components: {
     AppleMusic,
     Jrebel,
     Itchat,
-    Card
+    Card,
+    Idea
   },
   data () {
     return {
