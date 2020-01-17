@@ -1,12 +1,11 @@
 <template>
   <div v-if="!isLoading">
     <div class="container" v-if="isShow">
-      <el-button type="primary" round size="large" plain
-         class="button" @click="doCopy">{{msg}}
-         </el-button>
+      <el-button type="primary" round size="large" plain class="button" @click="doCopy">{{msg}}</el-button>
+      <span style="position:relative;font-size:10px;top:12px;left:25px;" @click="help">遇到问题？</span>
       <div class="text">打开软件，直接粘贴</div>
     </div>
-    <div class="err">
+    <div class="err" v-else>
       <h1>Not Found</h1>The requested URL was not found. If you entered the URL manually please check your spelling and try again.
     </div>
   </div>
@@ -29,6 +28,9 @@ export default {
   methods: {
     doCopy () {
       this.getK(true)
+    },
+    help () {
+      window.open('https://i.loli.net/2020/01/16/7pgfsOyPvw6nWru.png', '_blank')
     },
     getK (isCopy = false) {
       this.k = this.getQueryString('k') || ''
@@ -68,23 +70,15 @@ export default {
 }
 </script>
 <style scoped>
-.container {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background: url("../../../static/white.png") no-repeat;
-  background-size: cover;
-  background-position: right center;
-}
 
 .button {
   margin-top: 150px;
-  top: -5px;
+  position: relative;
+  left: 25px;
   width: 200px;
   height: 50px;
   font-size: 25px;
   font-weight: 300;
-
 }
 .text {
   color: black;

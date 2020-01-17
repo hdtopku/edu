@@ -32,7 +32,7 @@ export default {
   position:fixed;
   width: 100%;
   height: 100%;
-  background: url("../../static/white.png") no-repeat;
+  background: url("https://i.loli.net/2020/01/16/7pgfsOyPvw6nWru.png") no-repeat;
   background-size: cover;
   background-position: right center ;
 }
