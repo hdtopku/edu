@@ -1,21 +1,16 @@
 <template id="t">
   <div class="container">
-    <div class="text">直接点击下方按钮，前往软件粘贴即可。</div>
+    <div class="text">复制后前往软件粘贴</div>
     <el-row>
-      <el-button type="primary" class="button" @click="doCopy">{{msg}}</el-button>
+      <el-button type="primary" size="medium" class="button" @click="doCopy">{{msg}}</el-button>
     </el-row>
   </div>
 </template>
 
 <script>
-import Nums from './nums/Nums'
-import Cube from './nums/Cube'
-import AllCube from './nums/AllCube'
 export default {
   components: {
-    nums: Nums,
-    cube: Cube,
-    allCube: AllCube
+
   },
   data () {
     return {
@@ -34,14 +29,23 @@ export default {
 </script>
 <style scoped>
 .container {
-  background: url('')
+  position:fixed;
+  width: 100%;
+  height: 100%;
+  background: url("../../static/white.png") no-repeat;
+  background-size: cover;
+  background-position: right center ;
 }
 
 .text {
+  color: black;
+  font-size: 35px;
+  font-family: PingFangSC-Light, sans-serif;
   margin-bottom: 20px;
+  padding-top: 200px;
 }
 
 .button {
-  margin: auto;
+  margin: 100px auto;
 }
 </style>
