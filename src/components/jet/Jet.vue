@@ -1,11 +1,14 @@
 <template>
   <div v-if="!isLoading" class="container">
     <div v-if="isShow">
-      <el-button type="primary" round size="large" plain class="button" @click="doCopy">{{msg}}</el-button>
+      <el-button round size="large" plain class="button" @click="doCopy">{{msg}}</el-button>
+      <!-- <span class="text">前往使用</span> -->
       <el-link class="help" @click="help">遇到问题？</el-link>
-      <div class="text">打开软件，直接粘贴</div>
+      <div v-if="showImg">
+        <img style="width:50%;" src="https://i.loli.net/2020/01/18/C3JksXGFuKWcTZr.png">
+      </div>
     </div>
-    <div class="err" v-else>
+    <div class="err" v-if="!isShow">
       <h1>404 Not Found</h1>The requested URL was not found. If you entered the URL manually please check your spelling and try again.
     </div>
   </div>
@@ -19,10 +22,11 @@ export default {
   },
   data () {
     return {
-      msg: '点击复制',
+      msg: 'CPY',
       k: '',
       isLoading: true,
-      isShow: false
+      isShow: false,
+      showImg: false
     }
   },
   methods: {
@@ -30,7 +34,7 @@ export default {
       this.getK({'k': this.k}, true)
     },
     help () {
-      window.open('https://i.loli.net/2020/01/16/7pgfsOyPvw6nWru.png', '_blank')
+      this.showImg = !this.showImg
     },
     getK (params = {}, isCopy = false) {
       getJet(params).then((res) => {
@@ -43,11 +47,10 @@ export default {
           window.document.title = ''
           if (res.data && isCopy) {
             setTimeout(() => {
-              this.msg = '点击复制'
               this.$copyText(res.data).then((e) => {
-                this.msg = '完成'
+                this.msg = 'GO!'
                 setTimeout(() => {
-                  this.msg = '点击复制'
+                  this.msg = 'CPY'
                 }, 200)
               }, (e) => {
               // fail
