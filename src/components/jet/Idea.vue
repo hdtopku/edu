@@ -20,10 +20,8 @@ export default {
     },
     getJ (count = 1) {
       getJet({'g': count}).then(res => {
-        console.log(res)
         if (res.errno === '0' && res.data.length > 0) {
           const links = res.data.join('\r\n')
-          console.log(links)
           setTimeout(() => {
             this.$copyText(links).then((e) => {
             // success

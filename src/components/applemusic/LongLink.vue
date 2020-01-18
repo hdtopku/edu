@@ -1,38 +1,51 @@
 <template>
-  <!-- <el-tabs v-model="activeName" @tab-click="handleClick">
-    <el-tab-pane v-for="(tab, i) in tabs" :key="i" :label="tab.label" :name="tab.name"> -->
-      <div>
-      <div>
-        <el-input v-model="input" :placeholder="placeholder" @keyup.enter.native="search" class="input-with-select" clearable>
-          <el-select v-model="select" slot="prepend" placeholder="请选择">
-            <el-option v-for="(opVal, opIdx) in operator" :key="opIdx" :label="opVal.chinese_name" :value="opVal.oid"></el-option>
-          </el-select>
-          <el-button slot="prepend" @click="use" :disabled="disabledStyle">
-            <span class="iconfont icon-weishiyong1 weishiyong" :style="disabledStyle ? '': 'color:red;'">{{unUsed.length}}</span>
-          </el-button>
-          <el-button slot="append" @click="search">新增/查询</el-button>
-        </el-input>
-      </div>
-      <el-card v-for="(item, idx) in all" :key="idx" shadow="always" :class="item.isItem ? 'highlight': ''">
-        <i class="iconfont icon-copy1 copy" @click="copy(item.short_link)"></i>
-        <el-row :gutter="20">
-          <tooltip
-            @clickRecycle="clickRecycle"
-            @clickShiyong="clickShiyong"
-            @clickUsed="clickUsed"
-            :item="item"
-            class="tooltip"
-          ></tooltip>
-          <div
-            class="mail"
-            @click="doCopy(item.short_link, item.link)"
-          >{{item.short_link || item.id}}</div>
-          <div class="time">{{item.update_time}} {{item.chinese_name}}</div>
-        </el-row>
-      </el-card>
-      </div>
-    <!-- </el-tab-pane>
-  </el-tabs> -->
+  <div>
+    <div>
+      <el-input
+        v-model="input"
+        :placeholder="placeholder"
+        @keyup.enter.native="search"
+        class="input-with-select"
+        clearable
+      >
+        <el-select v-model="select" slot="prepend" placeholder="请选择">
+          <el-option
+            v-for="(opVal, opIdx) in operator"
+            :key="opIdx"
+            :label="opVal.chinese_name"
+            :value="opVal.oid"
+          ></el-option>
+        </el-select>
+        <el-button slot="prepend" @click="use" :disabled="disabledStyle">
+          <span
+            class="iconfont icon-weishiyong1 weishiyong"
+            :style="disabledStyle ? '': 'color:red;'"
+          >{{unUsed.length}}</span>
+        </el-button>
+        <el-button slot="append" @click="search">新增/查询</el-button>
+      </el-input>
+    </div>
+    <el-card
+      v-for="(item, idx) in all"
+      :key="idx"
+      shadow="always"
+      :class="item.isItem ? 'highlight': ''"
+    >
+      <i class="iconfont icon-copy1 copy" @click="copy(item.short_link)"></i>
+      <el-row :gutter="20">
+        <tooltip
+          @clickRecycle="clickRecycle"
+          @clickShiyong="clickShiyong"
+          @clickUsed="clickUsed"
+          :item="item"
+          class="tooltip"
+        ></tooltip>
+        <div class="mail" @click="doCopy(item.short_link, item.link)">{{item.short_link || item.id}}</div>
+        <div class="time">{{item.update_time}} {{item.chinese_name}}</div>
+      </el-row>
+    </el-card>
+    <el-button :loading="isLoading" plain round class="batch-use" @click="clickBatchUse">使用20条</el-button>
+  </div>
 </template>
 
 <script>
@@ -58,7 +71,8 @@ export default {
       recycle: [],
       operator: [],
       placeholder: '',
-      input: ''
+      input: '',
+      isLoading: false
     }
   },
   methods: {
@@ -71,10 +85,10 @@ export default {
     doCopy (shortLink, link) {
       setTimeout(() => {
         this.$copyText(link).then((e) => {
-        // success
+          // success
           this.openCenter(`<div style='color:red;font-size:30px;'>${shortLink}</div>copied!`)
         }, (e) => {
-        // fail
+          // fail
           this.doCopy(shortLink, link)
         })
       }, 100)
@@ -112,6 +126,15 @@ export default {
     clickUsed (id) {
       this.updateAM({ id, status: 2 })
     },
+    clickBatchUse () {
+      this.isLoading = true
+      setTimeout(() => {
+        this.isLoading = false
+        let r = ['a', 'b', 'c'].join('\r\n')
+        console.log(r)
+      }, 1000)
+      this.openCenter('<div style="color:red;font-size:20px;">20条</div>复制成功')
+    },
     search () {
       if (this.input && this.input.startsWith('https://email.myunidays.com/system/clicked-ul')) {
         this.updateAM({ link: this.input })
@@ -133,7 +156,6 @@ export default {
   },
   mounted () {
     this.select = getStore('roleSelect') || ''
-    this.updateAM()
   },
   watch: {
     select: function () {
@@ -181,14 +203,14 @@ export default {
   top: 0;
 }
 .weishiyong {
-  color:#9fa7c2;
+  color: #9fa7c2;
   font-size: 25px;
   top: 2px;
   right: 0;
   position: absolute;
 }
 .enabled {
-  color:red;
+  color: red;
 }
 .highlight {
   border: 3px solid cornflowerblue;
@@ -196,5 +218,8 @@ export default {
 .highlight div {
   color: darkmagenta;
   font-weight: bolder;
+}
+.batch-use {
+  margin: 20px;
 }
 </style>
