@@ -4,8 +4,11 @@
       <el-button round size="large" plain class="button" @click="doCopy">{{msg}}</el-button>
       <!-- <span class="text">前往使用</span> -->
       <span class="help" @click="help">遇到问题？</span>
-      <div v-if="showImg">
-        <img style="width:90%;" src="https://i.loli.net/2020/01/18/C3JksXGFuKWcTZr.png">
+      <div class="service" >
+        售后V：<span style="cursor:pointer;color:#539BD8;" @click="doCopyV">hotline1024<i class="iconfont">&#xe643;</i></span>
+      </div>
+      <div v-show="showImg">
+        <img style="width:90%;" src="https://i.loli.net/2020/01/18/C3JksXGFuKWcTZr.png" />
       </div>
     </div>
     <div class="err" v-if="!isShow">
@@ -17,9 +20,7 @@
 <script>
 import { getJet } from '../../api/mail'
 export default {
-  components: {
-
-  },
+  components: {},
   data () {
     return {
       msg: 'CPY',
@@ -31,13 +32,17 @@ export default {
   },
   methods: {
     doCopy () {
-      this.getK({'k': this.k}, true)
+      this.getK({ k: this.k }, true)
+    },
+    doCopyV () {
+      this.$copyText('hotline1024').then()
+      this.openCenter(`<div style="color:red;font-size:20px;">hotline1024</div>`)
     },
     help () {
       this.showImg = !this.showImg
     },
     getK (params = {}, isCopy = false) {
-      getJet(params).then((res) => {
+      getJet(params).then(res => {
         this.isLoading = false
         if (res.errno !== '0') {
           this.isShow = false
@@ -47,14 +52,17 @@ export default {
           window.document.title = ''
           if (res.data && isCopy) {
             setTimeout(() => {
-              this.$copyText(res.data).then((e) => {
-                this.msg = 'GO!'
-                setTimeout(() => {
-                  this.msg = 'CPY'
-                }, 250)
-              }, (e) => {
-              // fail
-              })
+              this.$copyText(res.data).then(
+                e => {
+                  this.msg = 'GO!'
+                  setTimeout(() => {
+                    this.msg = 'CPY'
+                  }, 250)
+                },
+                e => {
+                  // fail
+                }
+              )
             }, 500)
           }
         }
@@ -66,12 +74,13 @@ export default {
     getQueryString (name) {
       let reg = `(^|&)${name}=([^&]*)(&|$)`
       let r = window.location.search.substr(1).match(reg)
-      if (r != null) return unescape(r[2]); return null
+      if (r != null) return unescape(r[2])
+      return null
     }
   },
   mounted () {
     this.k = this.getQueryString('k') || ''
-    this.getK({'q': this.k})
+    this.getK({ q: this.k })
   }
 }
 </script>
@@ -93,6 +102,12 @@ export default {
   font-size: 25px;
   font-weight: 300;
 }
+
+.service {
+  margin-top: 20px;
+  font-family: PingFangSC-Light, sans-serif;
+}
+
 .text {
   color: black;
   font-size: 35px;

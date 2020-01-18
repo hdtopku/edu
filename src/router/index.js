@@ -5,6 +5,7 @@ import Jet from '@/components/jet/Jet'
 import Test from '@/components/Test'
 import Num from '@/components/Num'
 import Itchat from '@/components/itchat/Itchat'
+import V from '@/components/jet/V'
 
 Vue.use(Router)
 
@@ -30,6 +31,11 @@ export default new Router({
       path: '/j',
       name: 'j',
       component: Jet
+    },
+    {
+      path: '/v',
+      name: 'v',
+      component: V
     },
     {
       path: '/itchat',
