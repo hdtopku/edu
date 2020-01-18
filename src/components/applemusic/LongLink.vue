@@ -155,6 +155,7 @@ export default {
     }
   },
   mounted () {
+    this.updateAM()
     this.select = getStore('roleSelect') || ''
   },
   watch: {

@@ -35,8 +35,13 @@ export default {
       this.getK({ k: this.k }, true)
     },
     doCopyV () {
-      this.$copyText('hotline1024').then()
-      this.openCenter(`<div style="color:red;font-size:20px;">hotline1024</div>`)
+      this.$copyText('hotline1024').then((e) => {
+        // success
+        this.openCenter(`<div style="color:red;font-size:20px;">hotline1024</div>`)
+      }, (e) => {
+        // fail
+        this.openCenter(e + '')
+      })
     },
     help () {
       this.showImg = !this.showImg
