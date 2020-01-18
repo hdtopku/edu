@@ -2,7 +2,8 @@
   <div>
     <div>
       <div class="service" >
-        售后V：<span style="cursor:pointer;color:#539BD8;" @click="doCopyV">hotline1024<i class="iconfont">&#xe643;</i></span>
+        <div>售后V：</div>
+        <span style="cursor:pointer;color:#539BD8;" @click="doCopyV">hotline1024<i class="iconfont">&#xe643;</i></span>
       </div>
     </div>
   </div>
