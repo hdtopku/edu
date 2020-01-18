@@ -51,11 +51,11 @@ export default {
                 this.msg = 'GO!'
                 setTimeout(() => {
                   this.msg = 'CPY'
-                }, 200)
+                }, 250)
               }, (e) => {
               // fail
               })
-            }, 20)
+            }, 500)
           }
         }
       })
