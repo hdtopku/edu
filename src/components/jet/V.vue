@@ -33,8 +33,13 @@ export default {
 </script>
 <style scoped>
 .service {
+  font-size: 38px;
   margin-top: 200px;
   font-family: PingFangSC-Light, sans-serif;
 }
 
+.iconfont {
+  font-size: 38px;
+  padding-left: 15px;
+}
 </style>
