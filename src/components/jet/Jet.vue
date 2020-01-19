@@ -4,11 +4,11 @@
       <el-button round size="large" plain class="button" @click="doCopy">{{msg}}</el-button>
       <!-- <span class="text">前往使用</span> -->
       <span class="help" @click="help">遇到问题？</span>
-      <div class="service" >
+      <!-- <div class="service" >
         售后V：<span style="cursor:pointer;color:#539BD8;" @click="doCopyV">hotline1024<i class="iconfont">&#xe643;</i></span>
-      </div>
+      </div> -->
       <div v-show="showImg">
-        <img style="width:90%;" src="https://i.loli.net/2020/01/18/C3JksXGFuKWcTZr.png" />
+        <img style="width:90%;" src="https://i.loli.net/2020/01/19/REqDgJmNSCKYT3x.png" />
       </div>
     </div>
     <div class="err" v-if="!isShow">
@@ -23,7 +23,7 @@ export default {
   components: {},
   data () {
     return {
-      msg: 'CPY',
+      msg: '请点击',
       k: '',
       isLoading: true,
       isShow: false,
@@ -59,16 +59,16 @@ export default {
             setTimeout(() => {
               this.$copyText(res.data).then(
                 e => {
-                  this.msg = 'GO!'
+                  this.msg = '以復制'
                   setTimeout(() => {
-                    this.msg = 'CPY'
-                  }, 250)
+                    this.msg = '请点击'
+                  }, 280)
                 },
                 e => {
                   // fail
                 }
               )
-            }, 500)
+            }, 20)
           }
         }
       })

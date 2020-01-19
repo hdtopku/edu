@@ -28,7 +28,7 @@ export default {
               this.openCenter(`<div style="color:red;font-size:20px;">${count}条激活链</div>coppied!`)
             }, (e) => {
             // fail
-              this.openCenter(e + '')
+              this.openCenter(e)
             })
           }, 20)
         }
