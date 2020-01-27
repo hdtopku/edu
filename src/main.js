@@ -52,5 +52,4 @@ new Vue({
   template: '<App/>'
 })
 
-Vue.use(VueClipboards)
 Vue.prototype.$http = axios
