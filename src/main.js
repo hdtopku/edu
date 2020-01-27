@@ -11,9 +11,10 @@ import './assets/iconfont.css'
 import ToggleButton from 'vue-js-toggle-button'
 import Element from 'element-ui'
 import VueTippy, { TippyComponent } from 'vue-tippy'
+import LongPress from 'vue-directive-long-press'
 
+Vue.directive('long-press', LongPress)
 Vue.use(Element, { size: 'small', zIndex: 3000 })
-
 Vue.use(ToggleButton)
 Vue.use(Toast, {
   type: 'center',
