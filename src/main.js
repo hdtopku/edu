@@ -39,7 +39,7 @@ Vue.use(VueTippy, {
 })
 
 Vue.component('tippy', TippyComponent)
-
+VueClipboard.config.autoSetContainer = true
 Vue.use(VueClipboard)
 
 Vue.config.productionTip = false
