@@ -3,7 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import VueClipboards from 'vue-clipboard2'
+import VueClipboard from 'vue-clipboard2'
 import axios from 'axios'
 import 'vue2-toast/lib/toast.css'
 import Toast from 'vue2-toast'
@@ -40,7 +40,7 @@ Vue.use(VueTippy, {
 
 Vue.component('tippy', TippyComponent)
 
-Vue.use(VueClipboards)
+Vue.use(VueClipboard)
 
 Vue.config.productionTip = false
 
