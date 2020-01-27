@@ -26,8 +26,8 @@
       @long-press-start="onLongPressStart"
       @long-press-stop="onLongPressStop"
     >
-      .
       <span v-if="isDisplay">{{res.update_time.substring(5)}},{{res.count}}</span>
+      <span v-else>.</span>
     </span>
   </div>
 </template>
