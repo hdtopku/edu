@@ -3,7 +3,6 @@
     v-if="!isLoading"
     class="container"
     onselectstart="return false;"
-    ontouchstart="return false"
   >
     <div v-if="isShow">
       <el-button round size="large" plain class="button" @click="doCopy">{{msg}}</el-button>
