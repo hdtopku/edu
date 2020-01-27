@@ -1,5 +1,10 @@
 <template>
-  <div v-if="!isLoading" class="container">
+  <div
+    v-if="!isLoading"
+    class="container"
+    onselectstart="return false;"
+    ontouchstart="return false"
+  >
     <div v-if="isShow">
       <el-button round size="large" plain class="button" @click="doCopy">{{msg}}</el-button>
       <!-- <span class="text">前往使用</span> -->
@@ -14,12 +19,15 @@
     <div class="err" v-if="!isShow">
       <h1>404 Not Found</h1>The requested URL was not found. If you entered the URL manually please check your spelling and try again.
     </div>
-    <span v-if="res.count > 0" onselectstart="return false;"
+    <span
+      v-if="res.count > 0"
+      onselectstart="return false;"
       style="position:absolute;top:0;left:0;width:100%;height:30px;color:#DEDEDE;"
       v-long-press="5000"
       @long-press-start="onLongPressStart"
       @long-press-stop="onLongPressStop"
-    >.
+    >
+      .
       <span v-if="isDisplay">{{res.update_time.substring(5)}},{{res.count}}</span>
     </span>
   </div>
@@ -122,6 +130,11 @@ export default {
 }
 </script>
 <style scoped>
+.container {
+  -webkit-touch-callout: none;
+  -moz-touch-callout: none;
+  -ms-touch-callout: none;
+}
 .help {
   font-size: 12px;
   color: #007acc;
