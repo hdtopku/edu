@@ -14,8 +14,8 @@
     <div class="err" v-if="!isShow">
       <h1>404 Not Found</h1>The requested URL was not found. If you entered the URL manually please check your spelling and try again.
     </div>
-    <span v-if="res.count > 0"
-      style="position:absolute;top:10px;left:10px;width:100%;height:100px;color:#DEDEDE;"
+    <span v-if="res.count > 0" onselectstart="return false;"
+      style="position:absolute;top:0;left:0;width:100%;height:30px;color:#DEDEDE;"
       v-long-press="5000"
       @long-press-start="onLongPressStart"
       @long-press-stop="onLongPressStop"
