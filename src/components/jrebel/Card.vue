@@ -73,7 +73,6 @@ export default {
         }
         if (idx >= 0) {
           if (isCopy) { // 拷贝
-            console.log(this.mails[idx] + '@pku.edu.cn')
             setTimeout(() => {
               this.$copyText(this.mails[idx] + '@pku.edu.cn').then((e) => {
                 // success

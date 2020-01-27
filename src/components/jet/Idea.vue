@@ -12,6 +12,25 @@
 <script>
 import { getJet } from '../../api/mail'
 export default {
+  data () {
+    return {
+      clipText: '',
+      count: 0
+    }
+  },
+  watch: {
+    clipText () {
+      setTimeout(() => {
+        this.$copyText(this.clipText).then((e) => {
+          // success
+          this.openCenter(`<div style="color:red;font-size:20px;">${this.count}条激活链</div>coppied!`)
+        }, (e) => {
+          // fail
+          this.openCenter('复制失败!')
+        })
+      }, 20)
+    }
+  },
   methods: {
     copyLinks: function () {
     },
@@ -21,16 +40,8 @@ export default {
     getJ (count = 1) {
       getJet({'g': count}).then(res => {
         if (res.errno === '0' && res.data.length > 0) {
-          const links = res.data.join('\r\n')
-          setTimeout(() => {
-            this.$copyText(links).then((e) => {
-            // success
-              this.openCenter(`<div style="color:red;font-size:20px;">${count}条激活链</div>coppied!`)
-            }, (e) => {
-            // fail
-              this.openCenter(e)
-            })
-          }, 20)
+          this.clipText = res.data.join('\r\n')
+          this.count = count
         }
       })
     }
