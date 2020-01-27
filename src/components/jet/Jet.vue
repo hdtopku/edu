@@ -129,7 +129,7 @@ export default {
 }
 </script>
 <style scoped>
-.container {
+.container, * {
   -webkit-touch-callout: none;
   -moz-touch-callout: none;
   -ms-touch-callout: none;
