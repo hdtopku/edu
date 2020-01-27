@@ -1,9 +1,5 @@
 <template>
-  <div
-    v-if="!isLoading"
-    class="container"
-    onselectstart="return false;"
-  >
+  <div v-if="!isLoading" class="container" onselectstart="return false;">
     <div v-if="isShow">
       <el-button round size="large" plain class="button" @click="doCopy">{{msg}}</el-button>
       <!-- <span class="text">前往使用</span> -->
@@ -129,10 +125,15 @@ export default {
 }
 </script>
 <style scoped>
-.container, * {
+.container,
+.container *,
+* {
   -webkit-touch-callout: none;
-  -moz-touch-callout: none;
-  -ms-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 .help {
   font-size: 12px;
