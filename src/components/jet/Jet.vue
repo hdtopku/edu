@@ -27,12 +27,31 @@ export default {
       k: '',
       isLoading: true,
       isShow: false,
-      showImg: false
+      showImg: false,
+      copyText: '',
+      toastText: ''
     }
   },
+
   methods: {
     doCopy () {
       this.getK({ k: this.k }, true)
+    },
+    watch: {
+      clipText () {
+        setTimeout(() => {
+          this.$copyText(this.clipText).then((e) => {
+          // success
+            if (this.toastText) {
+              this.openCenter(this.toastText)
+              this.toastText = ''
+            }
+          }, (e) => {
+          // fail
+            this.openCenter('复制失败!')
+          })
+        }, 20)
+      }
     },
     doCopyV () {
       this.$copyText('hotline1024').then((e) => {
@@ -40,7 +59,7 @@ export default {
         this.openCenter(`<div style="color:red;font-size:20px;">hotline1024</div>`)
       }, (e) => {
         // fail
-        this.openCenter(e + '')
+        this.openCenter('复制失败')
       })
     },
     help () {
@@ -56,19 +75,11 @@ export default {
           this.isShow = true
           window.document.title = ''
           if (res.data && isCopy) {
+            this.copyText = res.data
+            this.msg = '以復制'
             setTimeout(() => {
-              this.$copyText(res.data).then(
-                e => {
-                  this.msg = '以復制'
-                  setTimeout(() => {
-                    this.msg = '请点击'
-                  }, 280)
-                },
-                e => {
-                  // fail
-                }
-              )
-            }, 20)
+              this.msg = '请点击'
+            }, 280)
           }
         }
       })
