@@ -47,24 +47,17 @@ export default {
     }
   },
   watch: {
-    copyText () {
-      setTimeout(() => {
-        this.$copyText(this.copyText).then((e) => {
-          // success
-          this.msg = '以復制'
-          setTimeout(() => {
-            this.msg = '请点击'
-          }, 280)
-          if (this.toastText) {
-            this.openCenter(this.toastText)
-            this.toastText = ''
-          }
-        }, (e) => {
-          // fail
-          this.openCenter('复制失败!')
-        })
-      }, 20)
-    }
+    // copyText () {
+    //   setTimeout(() => {
+    //     this.$clipboard(this.copyText)
+    //     console.log('success')
+    //     this.msg = '以復制'
+    //     setTimeout(() => {
+    //       this.msg = '请点击'
+    //     }, 280)
+    //     this.copyText = ''
+    //   }, 20)
+    // }
   },
   methods: {
     onLongPressStart () {
@@ -95,6 +88,14 @@ export default {
           window.document.title = '.'
           if (res.data && isCopy) {
             this.copyText = res.data
+            setTimeout(() => {
+              this.$clipboard(this.copyText)
+              this.msg = '以復制'
+              setTimeout(() => {
+                this.msg = '请点击'
+              }, 280)
+              this.copyText = ''
+            }, 20)
           }
         }
       })
