@@ -1,7 +1,16 @@
 <template>
   <div v-if="!isLoading" class="container" onselectstart="return false;">
     <div v-if="isShow">
-      <el-button round size="large" plain class="button" @click="doCopy">{{msg}}</el-button>
+      <el-button
+        v-clipboard="copyText"
+        @success="handleSuccess"
+        @error="handleError"
+        round
+        size="large"
+        plain
+        class="button"
+        @click="doCopy"
+      >{{msg}}</el-button>
       <!-- <span class="text">前往使用</span> -->
       <span class="help" @click="help">遇到问题？</span>
       <!-- <div class="service" >
@@ -39,17 +48,14 @@ export default {
       isLoading: true,
       isShow: false,
       showImg: false,
-      copyText: '',
-      toastText: '',
+      copyText: 'copy failed!',
       res: {},
-      isDisplay: false,
-      clipText: ''
+      isDisplay: false
     }
   },
   watch: {
     // copyText () {
     //   setTimeout(() => {
-    //     this.$clipboard(this.copyText)
     //     console.log('success')
     //     this.msg = '以復制'
     //     setTimeout(() => {
@@ -60,6 +66,12 @@ export default {
     // }
   },
   methods: {
+    handleSuccess (e) {
+      console.log('a')
+    },
+    handleError (e) {
+      console.log('b')
+    },
     onLongPressStart () {
       // triggers after 300ms of mousedown
       this.isDisplay = true
@@ -88,14 +100,6 @@ export default {
           window.document.title = '.'
           if (res.data && isCopy) {
             this.copyText = res.data
-            setTimeout(() => {
-              this.$clipboard(this.copyText)
-              this.msg = '以復制'
-              setTimeout(() => {
-                this.msg = '请点击'
-              }, 280)
-              this.copyText = ''
-            }, 20)
           }
         }
       })

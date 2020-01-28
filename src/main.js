@@ -13,7 +13,9 @@ import Element from 'element-ui'
 import VueTippy, { TippyComponent } from 'vue-tippy'
 import LongPress from 'vue-directive-long-press'
 import Clipboard from 'v-clipboard'
+import VueClipboards from 'vue-clipboards'
 
+Vue.use(VueClipboards)
 Vue.use(Clipboard)
 Vue.directive('long-press', LongPress)
 Vue.use(Element, { size: 'small', zIndex: 3000 })
