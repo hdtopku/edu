@@ -13,9 +13,6 @@ import VueTippy, { TippyComponent } from 'vue-tippy'
 import LongPress from 'vue-directive-long-press'
 
 import VueClipboard from 'vue-clipboard2'
-import Clipboard from 'v-clipboard'
-Vue.use(Clipboard)
-VueClipboard.config.autoSetContainer = true
 Vue.use(VueClipboard)
 
 Vue.directive('long-press', LongPress)

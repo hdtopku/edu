@@ -2,7 +2,6 @@
   <div v-if="!isLoading" class="container" onselectstart="return false;">
     <div v-if="isShow">
       <el-button
-        v-clipboard="copyText"
         v-clipboard:copy="copyText"
         v-clipboard:success="handleSuccess"
         v-clipboard:error="handleError"
@@ -52,14 +51,14 @@ export default {
       copyText: 'Copy failed, try again!',
       tryAgain: '复制失败',
       res: {},
-      isDisplay: false
+      isDisplay: false,
+      self: this
     }
   },
   watch: {
   },
   methods: {
     handleSuccess (e = null) {
-      console.log('a')
       setTimeout(() => {
         this.msg = '以復制'
         setTimeout(() => {
@@ -77,9 +76,6 @@ export default {
     onLongPressStop () {
       // triggers on mouseup of document
     },
-    display () {
-      this.isDisplay = !this.isDisplay
-    },
     doCopy () {
       this.getK({ k: this.k }, true)
     },
@@ -88,6 +84,7 @@ export default {
     },
     getK (params = {}, isCopy = false) {
       const that = this
+      that.self = this
       getJet(params).then(res => {
         this.isLoading = false
         this.res = res
@@ -99,12 +96,7 @@ export default {
           window.document.title = '.'
           if (res.data && isCopy) {
             that.copyText = res.data
-            that.$clipboard(that.copyText)
-            that.$copyText(that.copyText, that.$refs.container)
-            setTimeout(() => {
-              that.$clipboard(that.copyText)
-              that.$copyText(that.copyText, that.$refs.container)
-            }, 1000)
+            that.self.$copyText(that.copyText, that.$refs.container)
           }
         }
       })
@@ -132,6 +124,7 @@ export default {
   mounted () {
     this.k = this.getQueryString('k') || ''
     this.getK({ q: this.k })
+    this.self = this
   }
 }
 </script>
