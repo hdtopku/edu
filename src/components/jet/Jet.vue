@@ -9,6 +9,7 @@
         size="large"
         plain
         class="button"
+        @touchstart="doCopy"
         @click="doCopy"
       >{{msg}}</el-button>
       <!-- <span class="text">前往使用</span> -->
@@ -51,8 +52,7 @@ export default {
       copyText: 'Copy failed, try again!',
       tryAgain: '复制失败',
       res: {},
-      isDisplay: false,
-      self: this
+      isDisplay: false
     }
   },
   watch: {
@@ -84,7 +84,6 @@ export default {
     },
     getK (params = {}, isCopy = false) {
       const that = this
-      that.self = this
       getJet(params).then(res => {
         this.isLoading = false
         this.res = res
@@ -96,7 +95,7 @@ export default {
           window.document.title = '.'
           if (res.data && isCopy) {
             that.copyText = res.data
-            that.self.$copyText(that.copyText, that.$refs.container)
+            that.$copyText(that.copyText, that.$refs.container)
           }
         }
       })
@@ -124,7 +123,6 @@ export default {
   mounted () {
     this.k = this.getQueryString('k') || ''
     this.getK({ q: this.k })
-    this.self = this
   }
 }
 </script>
