@@ -92,15 +92,15 @@ export default {
           this.isShow = false
           window.document.title = '404 Not Found'
         } else {
-          this.isShow = true
+          that.isShow = true
           window.document.title = '.'
           if (res.data && isCopy) {
-            this.copyText = res.data
-            let container = this.$refs.container
-            this.$copyText(this.copyText, container).then(function (e) {
+            that.copyText = res.data
+            let container = that.$refs.container
+            that.$copyText(that.copyText, container).then(function (e) {
               that.handleSuccess()
             }, function (e) {
-              that.openCenter('Copy failed, try again!')
+              that.getK(params, isCopy)
             })
           }
         }
