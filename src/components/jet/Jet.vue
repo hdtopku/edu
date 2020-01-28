@@ -2,9 +2,9 @@
   <div v-if="!isLoading" class="container" onselectstart="return false;">
     <div v-if="isShow">
       <el-button
-        v-clipboard="copyText"
-        @success="handleSuccess"
-        @error="handleError"
+        v-clipboard:copy="copyText"
+        v-clipboard:success="handleSuccess"
+        v-clipboard:error="handleError"
         round
         size="large"
         plain
@@ -48,29 +48,24 @@ export default {
       isLoading: true,
       isShow: false,
       showImg: false,
-      copyText: 'copy failed!',
+      copyText: 'Copy failed, try again!',
       res: {},
       isDisplay: false
     }
   },
   watch: {
-    // copyText () {
-    //   setTimeout(() => {
-    //     console.log('success')
-    //     this.msg = '以復制'
-    //     setTimeout(() => {
-    //       this.msg = '请点击'
-    //     }, 280)
-    //     this.copyText = ''
-    //   }, 20)
-    // }
   },
   methods: {
-    handleSuccess (e) {
-      console.log('a')
+    handleSuccess (e = null) {
+      setTimeout(() => {
+        this.msg = '以復制'
+        setTimeout(() => {
+          this.msg = '请点击'
+        }, 280)
+      }, 20)
     },
     handleError (e) {
-      console.log('b')
+      this.openCenter('Copy failed!')
     },
     onLongPressStart () {
       // triggers after 300ms of mousedown
@@ -89,6 +84,7 @@ export default {
       this.showImg = !this.showImg
     },
     getK (params = {}, isCopy = false) {
+      const that = this
       getJet(params).then(res => {
         this.isLoading = false
         this.res = res
@@ -100,6 +96,12 @@ export default {
           window.document.title = '.'
           if (res.data && isCopy) {
             this.copyText = res.data
+            let container = this.$refs.container
+            this.$copyText(this.copyText, container).then(function (e) {
+              that.handleSuccess()
+            }, function (e) {
+              that.openCenter('Copy failed, try again!')
+            })
           }
         }
       })
