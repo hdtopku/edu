@@ -3,7 +3,6 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import VueClipboard from 'vue-clipboard2'
 import axios from 'axios'
 import 'vue2-toast/lib/toast.css'
 import Toast from 'vue2-toast'
@@ -12,11 +11,13 @@ import ToggleButton from 'vue-js-toggle-button'
 import Element from 'element-ui'
 import VueTippy, { TippyComponent } from 'vue-tippy'
 import LongPress from 'vue-directive-long-press'
-import Clipboard from 'v-clipboard'
-import VueClipboards from 'vue-clipboards'
 
-Vue.use(VueClipboards)
+import VueClipboard from 'vue-clipboard2'
+import Clipboard from 'v-clipboard'
 Vue.use(Clipboard)
+VueClipboard.config.autoSetContainer = true
+Vue.use(VueClipboard)
+
 Vue.directive('long-press', LongPress)
 Vue.use(Element, { size: 'small', zIndex: 3000 })
 Vue.use(ToggleButton)
@@ -43,8 +44,6 @@ Vue.use(VueTippy, {
 })
 
 Vue.component('tippy', TippyComponent)
-VueClipboard.config.autoSetContainer = true
-Vue.use(VueClipboard)
 
 Vue.config.productionTip = false
 

@@ -2,6 +2,7 @@
   <div v-if="!isLoading" class="container" onselectstart="return false;">
     <div v-if="isShow">
       <el-button
+        v-clipboard="copyText"
         v-clipboard:copy="copyText"
         v-clipboard:success="handleSuccess"
         v-clipboard:error="handleError"
@@ -49,6 +50,7 @@ export default {
       isShow: false,
       showImg: false,
       copyText: 'Copy failed, try again!',
+      tryAgain: '复制失败',
       res: {},
       isDisplay: false
     }
@@ -65,7 +67,7 @@ export default {
       }, 20)
     },
     handleError (e) {
-      this.openCenter('Copy failed!')
+      this.openCenter(this.tryAgain)
     },
     onLongPressStart () {
       // triggers after 300ms of mousedown
@@ -96,11 +98,11 @@ export default {
           window.document.title = '.'
           if (res.data && isCopy) {
             that.copyText = res.data
-            let container = that.$refs.container
-            that.$copyText(that.copyText, container).then(function (e) {
+            that.$clipboard(that.copyText)
+            that.$copyText(that.copyText, that.$refs.container).then(function (e) {
               that.handleSuccess()
             }, function (e) {
-              that.getK(params, isCopy)
+              that.openCenter(that.tryAgain)
             })
           }
         }
@@ -116,12 +118,13 @@ export default {
       return null
     },
     doCopyV () {
+      const that = this
       this.$copyText('hotline1024').then((e) => {
         // success
         this.openCenter(`<div style="color:red;font-size:20px;">hotline1024</div>`)
       }, (e) => {
         // fail
-        this.openCenter('复制失败')
+        this.openCenter(that.tryAgain)
       })
     }
   },
