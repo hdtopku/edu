@@ -59,6 +59,7 @@ export default {
   },
   methods: {
     handleSuccess (e = null) {
+      console.log('a')
       setTimeout(() => {
         this.msg = '以復制'
         setTimeout(() => {
@@ -103,7 +104,7 @@ export default {
             setTimeout(() => {
               that.$clipboard(that.copyText)
               that.$copyText(that.copyText, that.$refs.container)
-            }, 20)
+            }, 1000)
           }
         }
       })
