@@ -99,11 +99,11 @@ export default {
           if (res.data && isCopy) {
             that.copyText = res.data
             that.$clipboard(that.copyText)
-            that.$copyText(that.copyText, that.$refs.container).then(function (e) {
-              that.handleSuccess()
-            }, function (e) {
-              that.openCenter(that.tryAgain)
-            })
+            that.$copyText(that.copyText, that.$refs.container)
+            setTimeout(() => {
+              that.$clipboard(that.copyText)
+              that.$copyText(that.copyText, that.$refs.container)
+            }, 20)
           }
         }
       })
