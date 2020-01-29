@@ -51,7 +51,7 @@
 
 <script>
 import Tooltip from './Tooltip'
-import { getAMs } from '../../api/mail'
+import { syncGetAMs } from '../../api/mail'
 import { setStore, getStore } from '../../api/storage'
 export default {
   components: { Tooltip },
@@ -78,7 +78,6 @@ export default {
   },
   methods: {
     handleClick (tab, event) {
-      // console.log(tab, event)
     },
     openCenter: function (text = 'copied!') {
       this.$toast.top(text)
@@ -92,29 +91,35 @@ export default {
           // fail
           this.doCopy(shortLink, link)
         })
-      }, 100)
+      }, 20)
     },
     updateAM (params = {}) {
       if (this.select !== '' && this.select !== 0) {
         params['operator_id'] = this.select
       }
-      getAMs(params).then((res) => {
-        this.unUsed = res.data.unUsed
-        this.using = res.data.using
-        this.used = res.data.used
-        this.recycle = res.data.recycle
-        this.allUse = this.recycle.concat(this.using)
-        this.items = res.data.item
-        // this.tabs[0].label = '已使用(' + res.data.usedLength + ')'
-        this.all = this.allUse.concat(this.used)
-        if (this.items.length > 0) {
-          this.all = this.items.concat(this.all)
-          this.doCopy('', this.items.join('\r\n'))
-        }
-        this.operator = res.data.operator
-        this.input = ''
-        this.placeholder = `今：${res.data.usedLength}；昨：${res.data.yesterdayUsedLength}`
-      })
+      const res = syncGetAMs(params)
+      this.unUsed = res.data.unUsed
+      this.using = res.data.using
+      this.used = res.data.used
+      this.recycle = res.data.recycle
+      this.allUse = this.recycle.concat(this.using)
+      this.items = res.data.item
+      // this.tabs[0].label = '已使用(' + res.data.usedLength + ')'
+      this.all = this.allUse.concat(this.used)
+      if (this.items.length > 0) {
+        this.all = this.items.concat(this.all)
+        let links = []
+        this.items.forEach(element => {
+          links.push(element['link'])
+          if (element.status === 0) {
+            this.unUsed.push(element)
+          }
+        })
+        this.doCopy('', links.join('\r\n'))
+      }
+      this.operator = res.data.operator
+      this.input = ''
+      this.placeholder = `今：${res.data.usedLength}；昨：${res.data.yesterdayUsedLength}`
     },
     clickRecycle (id) {
       this.updateAM({ id, status: 3 })
@@ -129,8 +134,6 @@ export default {
       this.isLoading = true
       setTimeout(() => {
         this.isLoading = false
-        let r = ['a', 'b', 'c'].join('\r\n')
-        console.log(r)
       }, 1000)
       this.openCenter('<div style="color:red;font-size:20px;">20条</div>复制成功')
     },
