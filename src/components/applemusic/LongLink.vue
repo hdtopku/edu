@@ -62,7 +62,7 @@ export default {
       disabledStyle: true,
       activeName: 'first',
       select: '',
-      item: {},
+      items: [],
       all: [],
       allUse: [],
       unUsed: [],
@@ -103,14 +103,12 @@ export default {
         this.used = res.data.used
         this.recycle = res.data.recycle
         this.allUse = this.recycle.concat(this.using)
-        this.item = res.data.item
+        this.items = res.data.item
         // this.tabs[0].label = '已使用(' + res.data.usedLength + ')'
         this.all = this.allUse.concat(this.used)
-        if (this.item.id && this.item.id > 0) {
-          this.all = this.all.filter((item, index, arr) => { return item.id !== this.item.id })
-          this.item.isItem = true
-          this.all = [this.item].concat(this.all)
-          this.doCopy(this.item.short_link, this.item.link)
+        if (this.items.length > 0) {
+          this.all = this.items.concat(this.all)
+          this.doCopy('', this.items.join('\r\n'))
         }
         this.operator = res.data.operator
         this.input = ''
