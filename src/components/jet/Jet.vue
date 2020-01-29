@@ -2,6 +2,9 @@
   <div v-if="!isLoading" class="container" onselectstart="return false;">
     <div v-if="isShow">
       <el-button
+        v-clipboard:copy="copyText"
+        v-clipboard:success="handleSuccess"
+        v-clipboard:error="handleError"
         round
         size="large"
         plain
@@ -82,7 +85,6 @@ export default {
       this.showImg = !this.showImg
     },
     getK (params = {}, isCopy = false) {
-      this.syncReq(params)
       const that = this
       getJet(params).then(res => {
         this.isLoading = false
