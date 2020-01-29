@@ -36,6 +36,8 @@ module.exports = {
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
       '@': resolve('src'),
+      'jquery': 'jquery',
+      'jquery': resolve('/node_modules/jquery/src/jquery.js')
     }
   },
   module: {

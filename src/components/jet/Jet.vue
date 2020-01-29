@@ -2,14 +2,10 @@
   <div v-if="!isLoading" class="container" onselectstart="return false;">
     <div v-if="isShow">
       <el-button
-        v-clipboard:copy="copyText"
-        v-clipboard:success="handleSuccess"
-        v-clipboard:error="handleError"
         round
         size="large"
         plain
         class="button"
-        @touchstart="doCopy"
         @click="doCopy"
       >{{msg}}</el-button>
       <!-- <span class="text">前往使用</span> -->
@@ -39,7 +35,9 @@
 </template>
 
 <script>
+import $ from 'jquery'
 import { getJet } from '../../api/mail'
+import baseUrl from '../../api/baseURL'
 export default {
   components: {},
   data () {
@@ -77,12 +75,14 @@ export default {
       // triggers on mouseup of document
     },
     doCopy () {
-      this.getK({ k: this.k }, true)
+      this.syncReq({ k: this.k })
+      // this.getK({ k: this.k }, true)
     },
     help () {
       this.showImg = !this.showImg
     },
     getK (params = {}, isCopy = false) {
+      this.syncReq(params)
       const that = this
       getJet(params).then(res => {
         this.isLoading = false
@@ -109,15 +109,33 @@ export default {
       if (r != null) return unescape(r[2])
       return null
     },
-    doCopyV () {
-      const that = this
-      this.$copyText('hotline1024').then((e) => {
-        // success
-        this.openCenter(`<div style="color:red;font-size:20px;">hotline1024</div>`)
-      }, (e) => {
-        // fail
-        this.openCenter(that.tryAgain)
+    syncReq (params = {}) {
+      let that = this
+      $.ajax({
+        url: baseUrl + '/am/j',
+        type: 'get',
+        async: false,
+        data: params,
+        success: function (res) {
+          res = JSON.parse(res)
+          console.log('a')
+          that.isLoading = false
+          that.res = res
+          console.log(typeof res)
+          if (res.errno !== '0') {
+            that.isShow = false
+            window.document.title = '404 Not Found'
+          } else {
+            that.isShow = true
+            window.document.title = '.'
+            if (res.data) {
+              that.copyText = res.data
+              that.$copyText(that.copyText, that.$refs.container)
+            }
+          }
+        }
       })
+      console.log('b')
     }
   },
   mounted () {
