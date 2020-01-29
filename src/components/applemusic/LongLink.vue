@@ -31,7 +31,7 @@
       shadow="always"
       :class="item.isItem ? 'highlight': ''"
     >
-    <span style="position:absolute;left:10px;margin-top:-10px;">{{idx+1}}</span>
+      <span style="position:absolute;left:10px;margin-top:-10px;">{{idx+1}}</span>
       <i class="iconfont icon-copy1 copy" @click="copy(item.short_link)"></i>
       <el-row :gutter="20">
         <tooltip
@@ -138,10 +138,14 @@ export default {
       this.updateAM({ id, status: 2 })
     },
     clickBatchUse () {
-      this.updateAM({'operator_id': this.select, 'status': 2, 'count': 20})
-      setTimeout(() => {
-        this.updateAM()
-      }, 3000)
+      if (this.select > 0) {
+        this.updateAM({ 'operator_id': this.select, 'status': 2, 'count': 20 })
+        setTimeout(() => {
+          this.updateAM()
+        }, 3000)
+      } else {
+        this.openCenter('请选择角色')
+      }
     },
     search () {
       if (this.input && this.input.startsWith('https://email.myunidays.com/system/clicked-ul')) {
