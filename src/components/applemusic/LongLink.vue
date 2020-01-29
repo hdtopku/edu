@@ -31,6 +31,7 @@
       shadow="always"
       :class="item.isItem ? 'highlight': ''"
     >
+    <span style="position:absolute;left:10px;margin-top:-10px;">{{idx+1}}</span>
       <i class="iconfont icon-copy1 copy" @click="copy(item.short_link)"></i>
       <el-row :gutter="20">
         <tooltip
