@@ -97,6 +97,7 @@ export default {
       if (this.select !== '' && this.select !== 0) {
         params['operator_id'] = this.select
       }
+      this.isLoading = true
       const res = syncGetAMs(params)
       this.unUsed = res.data.unUsed
       this.using = res.data.using
@@ -120,6 +121,7 @@ export default {
       this.operator = res.data.operator
       this.input = ''
       this.placeholder = `今：${res.data.usedLength}；昨：${res.data.yesterdayUsedLength}`
+      this.isLoading = false
     },
     clickRecycle (id) {
       this.updateAM({ id, status: 3 })
@@ -132,10 +134,10 @@ export default {
     },
     clickBatchUse () {
       this.isLoading = true
+      this.updateAM({'operator_id': this.select, 'status': 2, 'count': 20})
       setTimeout(() => {
-        this.isLoading = false
+        this.openCenter('<div style="color:red;font-size:20px;">20条</div>复制成功')
       }, 1000)
-      this.openCenter('<div style="color:red;font-size:20px;">20条</div>复制成功')
     },
     search () {
       if (this.input && this.input.startsWith('https://email.myunidays.com/system/clicked-ul')) {
