@@ -75,7 +75,7 @@ export default {
       // triggers on mouseup of document
     },
     doCopy () {
-      this.syncReq({ k: this.k })
+      this.syncReq('/am/j', { k: this.k })
       // this.getK({ k: this.k }, true)
     },
     help () {
@@ -109,19 +109,17 @@ export default {
       if (r != null) return unescape(r[2])
       return null
     },
-    syncReq (params = {}) {
+    syncReq (url, params = {}) {
       let that = this
       $.ajax({
-        url: baseUrl + '/am/j',
+        url: baseUrl + url,
         type: 'get',
         async: false,
         data: params,
         success: function (res) {
           res = JSON.parse(res)
-          console.log('a')
           that.isLoading = false
           that.res = res
-          console.log(typeof res)
           if (res.errno !== '0') {
             that.isShow = false
             window.document.title = '404 Not Found'
@@ -135,12 +133,12 @@ export default {
           }
         }
       })
-      console.log('b')
     }
   },
   mounted () {
     this.k = this.getQueryString('k') || ''
-    this.getK({ q: this.k })
+    this.syncReq('/am/j', { q: this.k })
+    // this.getK({ q: this.k })
   }
 }
 </script>
