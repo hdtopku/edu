@@ -11,3 +11,5 @@ export const getAMs = (params = {}) => http.fetchGet('/am', params)
 export const getRData = (params = {}) => http.fetchGet('/am/rdata', params)
 
 export const getJet = (params = {}) => http.fetchGet('/am/j', params)
+
+export const syncGetJet = (params = {}) => http.ajaxFetch('/am/j', params)

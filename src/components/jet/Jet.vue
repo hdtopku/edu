@@ -13,9 +13,6 @@
       >{{msg}}</el-button>
       <!-- <span class="text">前往使用</span> -->
       <span class="help" @click="help">遇到问题？</span>
-      <!-- <div class="service" >
-        售后V：<span style="cursor:pointer;color:#539BD8;" @click="doCopyV">hotline1024<i class="iconfont">&#xe643;</i></span>
-      </div>-->
       <div v-show="showImg">
         <img style="width:90%;" src="https://i.loli.net/2020/01/19/REqDgJmNSCKYT3x.png" />
       </div>
@@ -38,9 +35,7 @@
 </template>
 
 <script>
-import $ from 'jquery'
-import { getJet } from '../../api/mail'
-import baseUrl from '../../api/baseURL'
+import { getJet, syncGetJet } from '../../api/mail'
 export default {
   components: {},
   data () {
@@ -56,16 +51,12 @@ export default {
       isDisplay: false
     }
   },
-  watch: {
-  },
   methods: {
     handleSuccess (e = null) {
+      this.msg = '以復制'
       setTimeout(() => {
-        this.msg = '以復制'
-        setTimeout(() => {
-          this.msg = '请点击'
-        }, 280)
-      }, 20)
+        this.msg = '请点击'
+      }, 280)
     },
     handleError (e) {
       this.openCenter(this.tryAgain)
@@ -78,8 +69,25 @@ export default {
       // triggers on mouseup of document
     },
     doCopy () {
-      this.syncReq('/am/j', { k: this.k })
-      // this.getK({ k: this.k }, true)
+      var res = syncGetJet({ k: this.k })
+      if (res.errno !== '0') {
+        this.isShow = false
+        window.document.title = '404 Not Found'
+      } else {
+        this.isShow = true
+        window.document.title = '.'
+        if (res.data) {
+          this.copyText = res.data
+          this.$copyText(this.copyText, this.$refs.container).then((e) => {
+          // success
+            this.handleSuccess()
+          }, (e) => {
+          // fail
+            this.openCenter(this.tryAgain)
+          }
+          )
+        }
+      }
     },
     help () {
       this.showImg = !this.showImg
@@ -95,10 +103,6 @@ export default {
         } else {
           that.isShow = true
           window.document.title = '.'
-          if (res.data && isCopy) {
-            that.copyText = res.data
-            that.$copyText(that.copyText, that.$refs.container)
-          }
         }
       })
     },
@@ -110,37 +114,11 @@ export default {
       let r = window.location.search.substr(1).match(reg)
       if (r != null) return unescape(r[2])
       return null
-    },
-    syncReq (url, params = {}) {
-      let that = this
-      $.ajax({
-        url: baseUrl + url,
-        type: 'get',
-        async: false,
-        data: params,
-        success: function (res) {
-          res = JSON.parse(res)
-          that.isLoading = false
-          that.res = res
-          if (res.errno !== '0') {
-            that.isShow = false
-            window.document.title = '404 Not Found'
-          } else {
-            that.isShow = true
-            window.document.title = '.'
-            if (res.data) {
-              that.copyText = res.data
-              that.$copyText(that.copyText, that.$refs.container)
-            }
-          }
-        }
-      })
     }
   },
   mounted () {
     this.k = this.getQueryString('k') || ''
-    this.syncReq('/am/j', { q: this.k })
-    // this.getK({ q: this.k })
+    this.getK({ q: this.k })
   }
 }
 </script>
