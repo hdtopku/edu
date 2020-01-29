@@ -86,7 +86,11 @@ export default {
       setTimeout(() => {
         this.$copyText(link).then((e) => {
           // success
-          this.openCenter(`<div style='color:red;font-size:30px;'>${shortLink}</div>copied!`)
+          if (shortLink.length > 20) {
+            this.openCenter(shortLink)
+          } else {
+            this.openCenter(`<div style='color:red;font-size:30px;'>${shortLink}</div>copied!`)
+          }
         }, (e) => {
           // fail
           this.doCopy(shortLink, link)
@@ -94,6 +98,7 @@ export default {
       }, 20)
     },
     updateAM (params = {}) {
+      this.isLoading = true
       if (this.select !== '' && this.select !== 0) {
         params['operator_id'] = this.select
       }
@@ -116,7 +121,7 @@ export default {
             this.unUsed.push(element)
           }
         })
-        this.doCopy('', links.join('\r\n'))
+        this.doCopy(`<div style="color:red;font-size:25px;">${this.items.length}条长链</div>复制成功`, links.join('\r\n'))
       }
       this.operator = res.data.operator
       this.input = ''
@@ -133,11 +138,10 @@ export default {
       this.updateAM({ id, status: 2 })
     },
     clickBatchUse () {
-      this.isLoading = true
       this.updateAM({'operator_id': this.select, 'status': 2, 'count': 20})
       setTimeout(() => {
-        this.openCenter('<div style="color:red;font-size:20px;">20条</div>复制成功')
-      }, 1000)
+        this.updateAM()
+      }, 3000)
     },
     search () {
       if (this.input && this.input.startsWith('https://email.myunidays.com/system/clicked-ul')) {
