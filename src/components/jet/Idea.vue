@@ -1,6 +1,6 @@
 <template>
   <div>
-    <jet-code style="margin-left:-35px;"></jet-code>
+    <jet-code style="position:absolute;left:0;"></jet-code>
     <el-button
       v-clipboard:copy="copyText"
       v-clipboard:success="handleSuccess"
