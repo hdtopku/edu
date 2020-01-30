@@ -9,7 +9,7 @@ export default {
   fetchGet (url, params = {}) {
     const requestUrl = baseUrl + url
     return new Promise((resolve, reject) => {
-      axios.get(requestUrl, params).then((res) => {
+      axios.get(requestUrl, { params }).then((res) => {
         resolve(res.data)
       }).catch((error) => {
         reject(error)
