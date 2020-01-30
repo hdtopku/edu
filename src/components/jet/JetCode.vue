@@ -6,20 +6,20 @@
 
 <script>
 import Swal from 'sweetalert2'
-import {getJetCode} from '../../api/mail'
+import {syncGetJetCode} from '../../api/mail'
 export default {
   data () {
     return {
       activeCode: ''
     }
   },
-  mounted () {
-    getJetCode().then(res => {
-      this.activeCode = res.data
-    })
-  },
   methods: {
+    update () {
+      const res = syncGetJetCode()
+      this.activeCode = res.data
+    },
     open () {
+      this.update()
       const that = this
       Swal.fire({
         title: '更新激活码',
@@ -29,8 +29,9 @@ export default {
         confirmButtonText: '更新',
         cancelButtonText: '取消',
         showLoaderOnConfirm: true,
+        showCloseButton: true,
         preConfirm: function (newCode) {
-          return getJetCode({'code': newCode})
+          return syncGetJetCode({'code': newCode})
         },
         allowOutsideClick: false
       }).then(function (res) {

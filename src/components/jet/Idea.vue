@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="height: 71vh;">
     <el-button
       v-clipboard:copy="copyText"
       v-clipboard:success="handleSuccess"
@@ -20,7 +20,7 @@
       @click="getJ(50)"
       round
     >生产50条激活链</el-button>
-    <jet-code style="margin-top:100px;"></jet-code>
+    <jet-code style="position:absolute;left:0;bottom:0;"></jet-code>
   </div>
 </template>
 
