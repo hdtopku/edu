@@ -20,12 +20,15 @@
       @click="getJ(50)"
       round
     >生产50条激活链</el-button>
+    <jet-code style="margin-top:100px;"></jet-code>
   </div>
 </template>
 
 <script>
 import { syncGetJet } from '../../api/mail'
+import JetCode from './JetCode'
 export default {
+  components: { JetCode },
   data () {
     return {
       copyText: '',

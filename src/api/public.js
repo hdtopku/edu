@@ -9,16 +9,20 @@ export default {
   fetchGet (url, params = {}) {
     const requestUrl = baseUrl + url
     return new Promise((resolve, reject) => {
-      axios.get(requestUrl, { params }).then((res) => {
+      axios.get(requestUrl, params).then((res) => {
         resolve(res.data)
       }).catch((error) => {
         reject(error)
       })
     })
   },
-  fetchPost (url, params = {}) {
+  fetchPost (url, data = {}) {
     const requestUrl = baseUrl + url
     return new Promise((resolve, reject) => {
+      var params = new URLSearchParams()
+      Object.keys(data).forEach((key) => {
+        params.append(key, data[key])
+      })
       axios.post(requestUrl, params).then((res) => {
         resolve(res.data)
       }).catch((error) => {

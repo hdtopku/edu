@@ -1,16 +1,12 @@
 <template id="t">
-  <div class="container">
-    <div class="text">复制后前往软件粘贴</div>
-    <el-row>
-      <el-button type="primary" size="medium" class="button" @click="doCopy">{{msg}}</el-button>
-    </el-row>
-  </div>
+  <jet-code></jet-code>
 </template>
 
 <script>
+import JetCode from './jet/JetCode'
 export default {
   components: {
-
+    JetCode
   },
   data () {
     return {
