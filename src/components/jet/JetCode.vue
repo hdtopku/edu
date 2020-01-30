@@ -1,7 +1,6 @@
 <template>
-  <div>
-    <el-button @click="open" type="primary" plain round>更新激活码</el-button>
-  </div>
+    <el-button @click="open"
+      size="small" plain round>更新</el-button>
 </template>
 
 <script>
