@@ -26,9 +26,9 @@
                       <span class="usecount">{{item.use_count}}</span>
                     </div>
                     <span @click="doCopy(item.username)">{{item.username}}</span>
-                    <el-button class="right" @click="decrease(item.username)">—</el-button>
                     <el-button v-if="item.status===0" class="right" @click="delet(item.username)">删除</el-button>
-                    <el-button v-if="item.status===1" @click="recover(item.username)">恢复</el-button>
+                    <el-button v-if="item.status===1" class="right" @click="recover(item.username)">恢复</el-button>
+                    <el-button v-if="item.use_count > 0" class="right" @click="decrease(item.username)">—</el-button>
                   </div>
                 </el-card>
               </div>

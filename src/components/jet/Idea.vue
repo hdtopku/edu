@@ -19,15 +19,16 @@
       @click="getJ(50)"
       round
     >生产50条激活链</el-button>
-
+    <jet-account></jet-account>
   </div>
 </template>
 
 <script>
 import { syncGetJet } from '../../api/mail'
 import JetCode from './JetCode'
+import JetAccount from './JetAccount'
 export default {
-  components: { JetCode },
+  components: { JetCode, JetAccount },
   data () {
     return {
       copyText: '',
