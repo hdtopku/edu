@@ -19,7 +19,17 @@
       @click="getJ(50)"
       round
     >生产50条激活链</el-button>
-    <jet-account></jet-account>
+    <el-button
+    style="position:absolute;right:0;"
+      v-clipboard:copy="copyText"
+      v-clipboard:success="handleSuccess"
+      v-clipboard:error="handleError"
+      type="plain"
+      size="small"
+      @click="register"
+      round
+    >注册</el-button>
+    <jet-account style="margin-top:30px;"></jet-account>
   </div>
 </template>
 
@@ -62,6 +72,12 @@ export default {
         this.openCenter('复制失败')
       }
       )
+    },
+    register () {
+      window.open('https://account.jetbrains.com/logout', '_blank')
+      setTimeout(() => {
+        window.open('https://www.jetbrains.com/shop/eform/students', '_blank')
+      }, 1000)
     }
   },
   openCenter: function (Text = 'copied!') {
