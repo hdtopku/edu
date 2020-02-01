@@ -96,6 +96,7 @@ export default {
         password: 'Crack168'
       }
       this.setRes(params)
+      this.username = ''
     },
     delet (username) {
       var params = {
