@@ -67,7 +67,7 @@ export default {
   methods: {
     doCopy (username) {
       this.$copyText(
-        '账号：' + this.res.username + '\r\n密码：Crack168',
+        '帐号：' + username + '\r\n密码：Crack168',
         this.$refs.container
       ).then(
         e => {
@@ -85,8 +85,8 @@ export default {
       }
       this.setRes(params)
     },
-    shortCopy () {
-      this.$copyText(this.res.username, this.$refs.container).then(
+    shortCopy (username) {
+      this.$copyText(username, this.$refs.container).then(
         e => {
           // success
           this.openCenter('复制成功')
