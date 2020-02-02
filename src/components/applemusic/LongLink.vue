@@ -45,7 +45,7 @@
         <div class="time">{{item.update_time}} {{item.chinese_name}}</div>
       </el-row>
     </el-card>
-    <el-button :loading="isLoading" plain round class="batch-use" @click="clickBatchUse">使用20条</el-button>
+    <el-button :loading="isLoading" plain round class="batch-use" @click="clickBatchUse">使用10条</el-button>
   </div>
 </template>
 
