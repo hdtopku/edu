@@ -9,32 +9,42 @@
       <el-button slot="append" @click="add">新增/查询</el-button>
     </el-input>
     <el-tabs type="border-card" v-model="activeName">
-        <el-tab-pane :name="tabsNames[tabIdx]" v-for="(tabData, tabIdx) in allTabs" :key="tabIdx">
-          <span slot="label">{{labels[tabIdx]}}</span>
-          <el-row :gutter="20">
-            <el-col>
-              <div>
-                <el-card
-                  shadow="always"
-                  :class="item.isItem ? 'highlight' : ''"
-                  v-for="(item,index) in tabData"
-                  :key="index"
-                >
-                  <div class="card">
-                    <div class="left">
-                      <span @click="shortCopy">短复制</span>
-                      <span class="usecount">{{item.use_count}}</span>
-                    </div>
-                    <span @click="doCopy(item.username)">{{item.username}}</span>
-                    <el-button v-if="item.status===0" class="right" @click="delet(item.username)">删除</el-button>
-                    <el-button v-if="item.status===1" class="right" @click="recover(item.username)">恢复</el-button>
-                    <el-button v-if="item.use_count > 0" class="right" @click="decrease(item.username)">—</el-button>
+      <el-tab-pane :name="tabsNames[tabIdx]" v-for="(tabData, tabIdx) in allTabs" :key="tabIdx">
+        <span slot="label">
+          {{labels[tabIdx]}}
+          <span v-if="tabIdx===0">{{'（' + res.accounts.length + '）'}}</span>
+          <span v-if="tabIdx===1">{{'（' + res.accountsMore.length + '）'}}</span>
+          <span v-if="tabIdx===2">{{'（' + res.accountsDel.length + '）'}}</span>
+        </span>
+
+        <el-row :gutter="20">
+          <el-col>
+            <div>
+              <el-card
+                shadow="always"
+                :class="item.isItem ? 'highlight' : ''"
+                v-for="(item,index) in tabData"
+                :key="index"
+              >
+                <div class="card">
+                  <div class="left">
+                    <span @click="shortCopy">短复制</span>
+                    <span class="usecount">{{item.use_count}}</span>
                   </div>
-                </el-card>
-              </div>
-            </el-col>
-          </el-row>
-        </el-tab-pane>
+                  <span @click="doCopy(item.username)">{{item.username}}</span>
+                  <el-button v-if="item.status===0" class="right" @click="delet(item.username)">删除</el-button>
+                  <el-button v-if="item.status===1" class="right" @click="recover(item.username)">恢复</el-button>
+                  <el-button
+                    v-if="item.use_count > 0"
+                    class="right"
+                    @click="decrease(item.username)"
+                  >—</el-button>
+                </div>
+              </el-card>
+            </div>
+          </el-col>
+        </el-row>
+      </el-tab-pane>
     </el-tabs>
   </div>
 </template>

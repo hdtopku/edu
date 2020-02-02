@@ -74,6 +74,14 @@ export default {
       )
     },
     register () {
+      this.$copyText('Crack168', this.$refs.container).then((e) => {
+        // success
+        this.openCenter('Crack168')
+      }, (e) => {
+        // fail
+        this.openCenter('复制失败')
+      }
+      )
       window.open('https://account.jetbrains.com/logout', '_blank')
       setTimeout(() => {
         window.open('https://www.jetbrains.com/shop/eform/students', '_blank')
