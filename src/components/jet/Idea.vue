@@ -47,10 +47,10 @@ export default {
   },
   methods: {
     handleSuccess (e = null) {
-      this.msg = '以復制'
+      this.msg = '已复制'
       setTimeout(() => {
         this.msg = '请点击'
-      }, 280)
+      }, 500)
     },
     handleError (e) {
       this.openCenter(this.tryAgain)

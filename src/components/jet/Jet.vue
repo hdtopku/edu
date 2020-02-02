@@ -13,6 +13,9 @@
       >{{msg}}</el-button>
       <!-- <span class="text">前往使用</span> -->
       <span class="help" @click="help">遇到问题？</span>
+      <!-- <div>
+      <img style="width:30%;" v-show="!showImg" src="https://i.loli.net/2020/02/02/bGUBSPWalwXZ6po.jpg"></img>
+      </div> -->
       <div v-show="showImg">
         <img style="width:90%;" src="https://i.loli.net/2020/01/19/REqDgJmNSCKYT3x.png" />
       </div>
@@ -53,10 +56,10 @@ export default {
   },
   methods: {
     handleSuccess (e = null) {
-      this.msg = '以復制'
+      this.msg = '已复制'
       setTimeout(() => {
         this.msg = '请点击'
-      }, 280)
+      }, 500)
     },
     handleError (e) {
       this.openCenter(this.tryAgain)
