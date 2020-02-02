@@ -1,6 +1,7 @@
 <template>
   <div v-if="!isLoading" class="container" onselectstart="return false;">
     <div v-if="isShow">
+      <div>
       <el-button
         v-clipboard:copy="copyText"
         v-clipboard:success="handleSuccess"
@@ -11,23 +12,32 @@
         class="button"
         @click="doCopy"
       >{{msg}}</el-button>
+      </div>
       <!-- <span class="text">前往使用</span> -->
-      <span class="help" @click="help">遇到问题？</span>
+      <span class="help" v-if="showImg" @click="help">返回</span>
+      <span class="help" v-else @click="help">遇到问题？</span>
       <!-- <div>
-      <img style="width:30%;" v-show="!showImg" src="https://i.loli.net/2020/02/02/bGUBSPWalwXZ6po.jpg"></img>
+        售后问题，微信扫码：
+        <span style="cursor:pointer;color:#539BD8;" @click="doCopyV">hotline1024<i class="iconfont">&#xe643;</i></span>
       </div> -->
+      <div v-show="!showImg">
+        务必扫码，微信售后：
+        <div>
+          <img style="width:30%;" src="https://i.loli.net/2020/02/02/bGUBSPWalwXZ6po.jpg" />
+        </div>
+      </div>
       <div v-show="showImg">
         <img style="width:90%;" src="https://i.loli.net/2020/01/19/REqDgJmNSCKYT3x.png" />
       </div>
     </div>
-    <div class="err" v-if="!isShow">
+    <div class="err" v-show="!isShow">
       <h1>404 Not Found</h1>The requested URL was not found. If you entered the URL manually please check your spelling and try again.
     </div>
     <span
       v-if="res.count > 0"
       onselectstart="return false;"
       style="position:absolute;top:0;left:0;width:100%;height:30px;color:#DEDEDE;"
-      v-long-press="5000"
+      v-long-press="3000"
       @long-press-start="onLongPressStart"
       @long-press-stop="onLongPressStop"
     >
@@ -82,10 +92,10 @@ export default {
         if (res.data) {
           this.copyText = res.data
           this.$copyText(this.copyText, this.$refs.container).then((e) => {
-          // success
+            // success
             this.handleSuccess()
           }, (e) => {
-          // fail
+            // fail
             this.openCenter(this.tryAgain)
           }
           )
@@ -117,6 +127,10 @@ export default {
       let r = window.location.search.substr(1).match(reg)
       if (r != null) return unescape(r[2])
       return null
+    },
+    doCopyV () {
+      this.$copyText('hotline1024').then()
+      this.openCenter(`<div style="color:red;font-size:20px;">hotline1024</div>已复制`)
     }
   },
   mounted () {
@@ -139,15 +153,14 @@ export default {
 .help {
   font-size: 12px;
   color: #007acc;
-  top: 12px;
   position: relative;
-  left: 25px;
+  left: 140px;
+  bottom: 18px;
   cursor: pointer;
 }
 .button {
   margin-top: 150px;
   position: relative;
-  left: 27px;
   width: 200px;
   height: 50px;
   font-size: 25px;
