@@ -1,6 +1,5 @@
 <template>
-    <el-button @click="open"
-      size="small" plain round>更新</el-button>
+    <el-link type="primary" @click="open">更新</el-link>
 </template>
 
 <script>
