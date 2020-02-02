@@ -1,5 +1,5 @@
 <template>
-    <el-link type="primary" @click="open">更新</el-link>
+    <el-link type="info" icon="el-icon-edit" @click="open"></el-link>
 </template>
 
 <script>
