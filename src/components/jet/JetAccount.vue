@@ -28,7 +28,7 @@
               >
                 <div class="card">
                   <div class="left">
-                    <span @click="shortCopy">短复制</span>
+                    <span @click="shortCopy(item.username)">仅账号</span>
                     <span class="usecount">{{item.use_count}}</span>
                   </div>
                   <span @click="doCopy(item.username)">{{item.username}}</span>
@@ -72,11 +72,11 @@ export default {
       ).then(
         e => {
           // success
-          this.openCenter('复制成功')
+          this.openCenter('帐号+蜜码已复制')
         },
         e => {
           // fail
-          this.openCenter('复制失败')
+          this.openCenter('帐号蜜码复制失败')
         }
       )
       var params = {
@@ -89,11 +89,11 @@ export default {
       this.$copyText(username, this.$refs.container).then(
         e => {
           // success
-          this.openCenter('复制成功')
+          this.openCenter('仅账号已复制')
         },
         e => {
           // fail
-          this.openCenter('复制失败')
+          this.openCenter('仅帐号复制失败')
         }
       )
     },
