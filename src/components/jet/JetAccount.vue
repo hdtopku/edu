@@ -9,12 +9,13 @@
       <el-button slot="append" @click="add">新增/查询</el-button>
     </el-input>
     <el-tabs type="border-card" v-model="activeName">
-      <el-tab-pane :name="tabsNames[tabIdx]" v-for="(tabData, tabIdx) in allTabs" :key="tabIdx">
+      <el-tab-pane :name="tabsNames[tabIdx]" v-for="(tabData, tabIdx) in tabsNames" :key="tabIdx">
         <span slot="label">
           {{labels[tabIdx]}}
-          <span v-if="tabIdx===0">{{'（' + res.accounts.length + '）'}}</span>
-          <span v-if="tabIdx===1">{{'（' + res.accountsMore.length + '）'}}</span>
-          <span v-if="tabIdx===2">{{'（' + res.accountsDel.length + '）'}}</span>
+          <span v-if="tabIdx===0">{{'(' + res.accounts.length + ')'}}</span>
+          <span v-if="tabIdx===1">{{'(' + res.accountsMore.length + ')'}}</span>
+          <span v-if="tabIdx===2">{{'(' + res.accountsDel.length + ')'}}</span>
+          <span v-if="tabIdx===3">{{'(' + res.accounts.length + ')'}}</span>
         </span>
 
         <el-row :gutter="20">
@@ -23,22 +24,26 @@
               <el-card
                 shadow="always"
                 :class="item.isItem ? 'highlight' : ''"
-                v-for="(item,index) in tabData"
+                v-for="(item,index) in allTabs[tabIdx]"
                 :key="index"
               >
                 <div class="card">
                   <div class="left">
-                    <span @click="shortCopy(item.username)">复制卡密</span>
-                    <span class="usecount">{{item.use_count}}</span>
+                     <div>
+                      <i class="iconfont icon-copy1" @click="shortCopy(item.username)"></i>
+                      <span class="usecount">{{item.use_count}}</span>
+                    </div>
+                    <span>{{item.update_time.substr(5)}}</span>
                   </div>
                   <span @click="doCopy(item.username)">{{item.username}}</span>
-                  <el-button v-if="item.status===0" class="right" @click="delet(item.username)">删除</el-button>
-                  <el-button v-if="item.status===1" class="right" @click="recover(item.username)">恢复</el-button>
+                  <div class="right">
+                    <el-button v-if="item.status===0" class="right" @click="delet(item.username)">删除</el-button>
+                    <el-button v-if="item.status===1" class="right" @click="recover(item.username)">恢复</el-button>
                   <el-button
                     v-if="item.use_count > 0"
-                    class="right"
                     @click="decrease(item.username)"
                   >—</el-button>
+                  </div>
                 </div>
               </el-card>
             </div>
@@ -57,8 +62,8 @@ export default {
       username: '',
       res: {},
       allTabs: [],
-      tabsNames: ['first', 'second', 'third'],
-      labels: ['小于3次', '大于3次', '已删除']
+      tabsNames: ['first', 'second', 'third', 'fourth'],
+      labels: ['小于3次', '大于3次', '已删除', '生效中']
     }
   },
   mounted () {
@@ -140,6 +145,7 @@ export default {
         this.res.accounts,
         this.res.accountsMore,
         this.res.accountsDel
+
       ]
       if (this.res.item.username) {
         if (this.activeName === 'first') {
