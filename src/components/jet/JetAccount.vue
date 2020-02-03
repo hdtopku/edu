@@ -28,7 +28,7 @@
               >
                 <div class="card">
                   <div class="left">
-                    <span @click="shortCopy(item.username)">仅账号</span>
+                    <span @click="shortCopy(item.username)">复制卡密</span>
                     <span class="usecount">{{item.use_count}}</span>
                   </div>
                   <span @click="doCopy(item.username)">{{item.username}}</span>
@@ -67,7 +67,7 @@ export default {
   methods: {
     doCopy (username) {
       this.$copyText(
-        '帐号，' + username + '\r\n蜜码，Crack168',
+        '帐号：' + username + '\r\n蜜码：Crack168',
         this.$refs.container
       ).then(
         e => {
@@ -86,14 +86,19 @@ export default {
       this.setRes(params)
     },
     shortCopy (username) {
-      this.$copyText(username, this.$refs.container).then(
+      this.$copyText(username + '，Crack168', this.$refs.container).then(
         e => {
           // success
-          this.openCenter('仅账号已复制')
+          this.openCenter(`<div style='color:red;font-size:20px;'>${username}</div>卡密已复制`)
+          var params = {
+            username: username,
+            count: 1
+          }
+          this.setRes(params)
         },
         e => {
           // fail
-          this.openCenter('仅帐号复制失败')
+          this.openCenter('卡密复制失败')
         }
       )
     },
