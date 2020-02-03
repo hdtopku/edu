@@ -67,7 +67,7 @@ export default {
   methods: {
     doCopy (username) {
       this.$copyText(
-        '帐号：' + username + '\r\n蜜码：Crack168',
+        '帐号，' + username + '\r\n蜜码，Crack168',
         this.$refs.container
       ).then(
         e => {
