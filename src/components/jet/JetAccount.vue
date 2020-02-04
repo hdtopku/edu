@@ -64,7 +64,7 @@ export default {
       res: {},
       allTabs: [],
       tabsNames: ['first', 'second', 'third'],
-      labels: ['小于3次', '大于3次', '已删除']
+      labels: ['2次', '2次+', '仓库']
     }
   },
   mounted () {
