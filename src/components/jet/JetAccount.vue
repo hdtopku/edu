@@ -12,10 +12,9 @@
       <el-tab-pane :name="tabsNames[tabIdx]" v-for="(tabData, tabIdx) in tabsNames" :key="tabIdx">
         <span slot="label">
           {{labels[tabIdx]}}
-          <span v-if="tabIdx===0">{{'(' + res.accounts.length + ')'}}</span>
-          <span v-if="tabIdx===1">{{'(' + res.accountsMore.length + ')'}}</span>
-          <span v-if="tabIdx===2">{{'(' + res.accountsDel.length + ')'}}</span>
-          <span v-if="tabIdx===3">{{'(' + res.accounts.length + ')'}}</span>
+          <span v-if="tabIdx===0 && res.accounts">{{'(' + res.accounts.length + ')'}}</span>
+          <span v-if="tabIdx===1 && res.accountsMore">{{'(' + res.accountsMore.length + ')'}}</span>
+          <span v-if="tabIdx===2 && res.accountsDel">{{'(' + res.accountsDel.length + ')'}}</span>
         </span>
 
         <el-row :gutter="20">
@@ -35,10 +34,12 @@
                     </div>
                     <span>{{item.update_time.substr(5)}}</span>
                   </div>
-                  <span @click="doCopy(item.username)">{{item.username}}</span>
+                  <span v-if="item.status !== -1" @click="doCopy(item.username)">{{item.username}}</span>
+                  <span v-if="item.status === -1">{{item.username}}</span>
                   <div class="right">
-                    <el-button v-if="item.status===0" class="right" @click="delet(item.username)">删除</el-button>
+                    <el-button v-if="item.status===0 || item.status===-1" class="right" @click="delet(item.username)">删除</el-button>
                     <el-button v-if="item.status===1" class="right" @click="recover(item.username)">恢复</el-button>
+                    <el-button v-if="item.status===-1" class="right" @click="effect(item.username)">生效</el-button>
                   <el-button
                     v-if="item.use_count > 0"
                     @click="decrease(item.username)"
@@ -62,8 +63,8 @@ export default {
       username: '',
       res: {},
       allTabs: [],
-      tabsNames: ['first', 'second', 'third', 'fourth'],
-      labels: ['小于3次', '大于3次', '已删除', '生效中']
+      tabsNames: ['first', 'second', 'third'],
+      labels: ['小于3次', '大于3次', '已删除']
     }
   },
   mounted () {
@@ -139,22 +140,24 @@ export default {
       }
       this.setRes(params)
     },
+    effect (username) {
+      var params = {
+        username: username,
+        status: 0
+      }
+      this.setRes(params)
+    },
     setRes (params = {}) {
       this.res = syncGetJetAcount(params).data
       this.allTabs = [
         this.res.accounts,
         this.res.accountsMore,
         this.res.accountsDel
-
       ]
       if (this.res.item.username) {
-        if (this.activeName === 'first') {
-          this.res.accounts.unshift(this.res.item)
-        } else if (this.activeName === 'second') {
-          this.res.accountsMore.unshift(this.res.item)
-        } else if (this.activeName === 'third') {
-          this.res.accountsDel.unshift(this.res.item)
-        }
+        this.res.accounts.unshift(this.res.item)
+        this.res.accountsMore.unshift(this.res.item)
+        this.res.accountsDel.unshift(this.res.item)
       }
     }
   }
