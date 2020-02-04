@@ -14,7 +14,8 @@
           {{labels[tabIdx]}}
           <span v-if="tabIdx===0 && res.accounts">{{'(' + res.accounts.length + ')'}}</span>
           <span v-if="tabIdx===1 && res.accountsMore">{{'(' + res.accountsMore.length + ')'}}</span>
-          <span v-if="tabIdx===2 && res.accountsDel">{{'(' + res.accountsDel.length + ')'}}</span>
+          <span v-if="tabIdx===2 && res.accountsEffect">{{'(' + res.accountsEffect.length + ')'}}</span>
+          <span v-if="tabIdx===3 && res.accountsDel">{{'(' + res.accountsDel.length + ')'}}</span>
         </span>
 
         <el-row :gutter="20">
@@ -29,19 +30,18 @@
                 <div class="card">
                   <div class="left">
                      <div>
-                      <i class="iconfont icon-copy1" @click="shortCopy(item.username)"></i>
+                      <i class="iconfont icon-copy1" @click="shortCopy(item.username, item.status === 0)"></i>
                       <span class="usecount">{{item.use_count}}</span>
                     </div>
                     <span>{{item.update_time.substr(5)}}</span>
                   </div>
-                  <span v-if="item.status !== -1" @click="doCopy(item.username)">{{item.username}}</span>
-                  <span v-if="item.status === -1">{{item.username}}</span>
+                  <span @click="doCopy(item.username, item.status === 0)">{{item.username}}</span>
                   <div class="right">
                     <el-button v-if="item.status===0 || item.status===-1" class="right" @click="delet(item.username)">删除</el-button>
                     <el-button v-if="item.status===1" class="right" @click="recover(item.username)">恢复</el-button>
                     <el-button v-if="item.status===-1" class="right" @click="effect(item.username)">生效</el-button>
                   <el-button
-                    v-if="item.use_count > 0"
+                    v-if="item.use_count > 0 && item.status != -1"
                     @click="decrease(item.username)"
                   >—</el-button>
                   </div>
@@ -63,15 +63,15 @@ export default {
       username: '',
       res: {},
       allTabs: [],
-      tabsNames: ['first', 'second', 'third'],
-      labels: ['2次', '2次+', '仓库']
+      tabsNames: ['first', 'second', 'third', 'fourth'],
+      labels: ['2次', '2次+', '仓库', '已删']
     }
   },
   mounted () {
     this.setRes()
   },
   methods: {
-    doCopy (username) {
+    doCopy (username, needCopy = true) {
       this.$copyText(
         '帐号：' + username + '\r\n蜜码：Crack168',
         this.$refs.container
@@ -85,22 +85,26 @@ export default {
           this.openCenter('帐号蜜码复制失败')
         }
       )
-      var params = {
-        username: username,
-        count: 1
+      if (needCopy) {
+        var params = {
+          username: username,
+          count: 1
+        }
+        this.setRes(params)
       }
-      this.setRes(params)
     },
-    shortCopy (username) {
+    shortCopy (username, needCopy = true) {
       this.$copyText(username + '，Crack168', this.$refs.container).then(
         e => {
           // success
           this.openCenter(`<div style='color:red;font-size:20px;'>${username}</div>卡密已复制`)
-          var params = {
-            username: username,
-            count: 1
+          if (needCopy) {
+            var params = {
+              username: username,
+              count: 1
+            }
+            this.setRes(params)
           }
-          this.setRes(params)
         },
         e => {
           // fail
@@ -152,12 +156,21 @@ export default {
       this.allTabs = [
         this.res.accounts,
         this.res.accountsMore,
+        this.res.accountsEffect,
         this.res.accountsDel
       ]
       if (this.res.item.username) {
-        this.res.accounts.unshift(this.res.item)
-        this.res.accountsMore.unshift(this.res.item)
-        this.res.accountsDel.unshift(this.res.item)
+        if (this.res.item.status === -1) {
+          this.res.accountsDel.unshift(this.res.item)
+        } else if (this.res.item.status === 0) {
+          if (this.res.item.use_count > 1) {
+            this.res.accountsMore.unshift(this.res.item)
+          } else {
+            this.res.accounts.unshift(this.res.item)
+          }
+        } else if (this.res.item.status === 1) {
+          this.res.accountsDel.unshift(this.res.item)
+        }
       }
     }
   }
@@ -180,5 +193,8 @@ export default {
 }
 .right {
   float: right;
+}
+.icon-copy1 {
+  font-size: 25px;
 }
 </style>
