@@ -13,7 +13,7 @@ export default new Router({
   mode: 'history',
   routes: [
     {
-      path: '/edu',
+      path: '/edufamily',
       name: 'edu',
       component: Edu
     },

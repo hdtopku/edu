@@ -23,3 +23,5 @@ export const getJetCode = (params = {}) => http.fetchPost('/am/jc', params)
 export const syncGetJetCode = (params = {}) => http.ajaxFetch('/am/jc', params, 'post')
 
 export const syncGetJetAcount = (params = {}) => http.ajaxFetch('/am/ja', params)
+
+export const batchJetReg = (params = {}) => http.fetchGet('/am/jb', params)

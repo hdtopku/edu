@@ -1,5 +1,11 @@
 <template>
   <div>
+    <el-checkbox
+      v-model="needLogout"
+      style="position:absolute;left:0;top:35px;"
+      slot="append"
+      size="mini"
+    >登出</el-checkbox>
     <el-input
       placeholder="请输入内容"
       v-model="username"
@@ -12,7 +18,9 @@
       <el-tab-pane :name="tabsNames[tabIdx]" v-for="(tabData, tabIdx) in tabsNames" :key="tabIdx">
         <span slot="label">
           {{labels[tabIdx]}}
-          <span v-if="tabIdx===0 && res.accounts">{{'(' + res.accounts.length + ')'}}</span>
+          <span
+            v-if="tabIdx===0 && res.accounts"
+          >{{'(' + res.accounts.length + ')'}}</span>
           <span v-if="tabIdx===1 && res.accountsMore">{{'(' + res.accountsMore.length + ')'}}</span>
           <span v-if="tabIdx===2 && res.accountsEffect">{{'(' + res.accountsEffect.length + ')'}}</span>
           <span v-if="tabIdx===3 && res.accountsDel">{{'(' + res.accountsDel.length + ')'}}</span>
@@ -29,21 +37,36 @@
               >
                 <div class="card">
                   <div class="left">
-                     <div>
-                      <i class="iconfont icon-copy1" @click="shortCopy(item.username, item.status === 0)"></i>
+                    <div>
+                      <i
+                        class="iconfont icon-copy1"
+                        @click="shortCopy(item.username, item.status === 0)"
+                      ></i>
                       <span class="usecount">{{item.use_count}}</span>
                     </div>
                     <span>{{item.update_time.substr(5)}}</span>
                   </div>
                   <span @click="doCopy(item.username, item.status === 0)">{{item.username}}</span>
                   <div class="right">
-                    <el-button v-if="item.status===0 || item.status===-1" class="right" @click="delet(item.username)">删除</el-button>
-                    <el-button v-if="item.status===1" class="right" @click="recover(item.username)">恢复</el-button>
-                    <el-button v-if="item.status===-1" class="right" @click="effect(item.username)">生效</el-button>
-                  <el-button
-                    v-if="item.use_count > 0 && item.status != -1"
-                    @click="decrease(item.username)"
-                  >—</el-button>
+                    <el-button
+                      v-if="item.status===0 || item.status===-1"
+                      class="right"
+                      @click="delet(item.username)"
+                    >删除</el-button>
+                    <el-button
+                      v-if="item.status===1"
+                      class="right"
+                      @click="recover(item.username)"
+                    >恢复</el-button>
+                    <el-button
+                      v-if="item.status===-1"
+                      class="right"
+                      @click="effect(item.username)"
+                    >生效</el-button>
+                    <el-button
+                      v-if="item.use_count > 0 && item.status != -1"
+                      @click="decrease(item.username)"
+                    >—</el-button>
                   </div>
                 </div>
               </el-card>
@@ -60,6 +83,7 @@ export default {
   data () {
     return {
       activeName: 'first',
+      needLogout: false,
       username: '',
       res: {},
       allTabs: [],
@@ -116,12 +140,21 @@ export default {
       this.$toast.top(text)
     },
     add () {
+      if (this.needLogout) {
+        this.logout()
+      }
       var params = {
         username: this.username,
         password: 'Crack168'
       }
       this.setRes(params)
       this.username = ''
+    },
+    logout () {
+      var win = window.open('https://account.jetbrains.com/logout', '_blank')
+      setTimeout(() => {
+        win.close()
+      }, 2)
     },
     delet (username) {
       var params = {

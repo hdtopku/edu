@@ -1,40 +1,42 @@
 <template>
   <div>
-    <jet-code style="position:absolute;left:0px;"></jet-code>
-    <el-button
-      v-clipboard:copy="copyText"
-      v-clipboard:success="handleSuccess"
-      v-clipboard:error="handleError"
-      type="plain"
-      size="small"
-      @click="getJ(1)"
-      round
-    >生产1条激活链</el-button>
-    <el-button
-      v-clipboard:copy="copyText"
-      v-clipboard:success="handleSuccess"
-      v-clipboard:error="handleError"
-      type="plain"
-      size="small"
-      @click="getJ(50)"
-      round
-    >生产50条激活链</el-button>
-    <el-button
-    style="position:absolute;right:0;"
-      v-clipboard:copy="copyText"
-      v-clipboard:success="handleSuccess"
-      v-clipboard:error="handleError"
-      type="plain"
-      size="small"
-      @click="register"
-      round
-    >注册</el-button>
+    <div style="width:100%;height:25px;">
+      <jet-code style="position:absolute;left:0px;"></jet-code>
+      <el-button
+        v-clipboard:copy="copyText"
+        v-clipboard:success="handleSuccess"
+        v-clipboard:error="handleError"
+        type="plain"
+        size="small"
+        @click="getJ(1)"
+        round
+      >生产1条激活链</el-button>
+      <el-button
+        v-clipboard:copy="copyText"
+        v-clipboard:success="handleSuccess"
+        v-clipboard:error="handleError"
+        type="plain"
+        size="small"
+        @click="getJ(50)"
+        round
+      >生产50条激活链</el-button>
+      <el-button
+        style="position:absolute;right:0;"
+        v-clipboard:copy="copyText"
+        v-clipboard:success="handleSuccess"
+        v-clipboard:error="handleError"
+        type="plain"
+        size="small"
+        @click="register"
+        round
+      >批量注册</el-button>
+    </div>
     <jet-account style="margin-top:30px;"></jet-account>
   </div>
 </template>
 
 <script>
-import { syncGetJet } from '../../api/mail'
+import { syncGetJet, batchJetReg } from '../../api/mail'
 import JetCode from './JetCode'
 import JetAccount from './JetAccount'
 export default {
@@ -74,18 +76,22 @@ export default {
       )
     },
     register () {
-      this.$copyText('Crack168', this.$refs.container).then((e) => {
-        // success
-        this.openCenter('Crack168')
-      }, (e) => {
-        // fail
-        this.openCenter('复制失败')
-      }
-      )
-      window.open('https://account.jetbrains.com/logout', '_blank')
-      setTimeout(() => {
-        window.open('https://www.jetbrains.com/shop/eform/students', '_blank')
-      }, 1000)
+      // var features = 'height=50,width=80,top=10,left=10,toolbar=no,menubar=no,scrollbars=no,resizable=no,location=no,status=no'
+      // var win = window.open('https://account.jetbrains.com/logout', 'newW', features)
+      // this.$copyText('Crack168', this.$refs.container).then((e) => {
+      //   // success
+      //   this.openCenter('Crack168')
+      // }, (e) => {
+      //   // fail
+      //   this.openCenter('复制失败')
+      // }
+      // )
+      // window.open('https://account.jetbrains.com/logout', '_blank')
+      // setTimeout(() => {
+      //   window.open('https://www.jetbrains.com/shop/eform/students', '_blank')
+      // }, 1000)
+      batchJetReg()
+      this.openCenter(`<div style="color:red;font-size:20px;">预计45s内</div>完成`)
     }
   },
   openCenter: function (Text = 'copied!') {
