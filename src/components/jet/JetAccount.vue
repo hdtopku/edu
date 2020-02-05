@@ -141,7 +141,18 @@ export default {
     },
     add () {
       if (this.needLogout) {
-        this.logout()
+        this.$copyText('Crack168', this.$refs.container).then(
+          e => {
+          // success
+            this.logout()
+            setTimeout(() => {
+              this.openCenter('<div style="color:red;font-size:20px;">Crack168</div>已复制')
+            }, 20)
+          },
+          e => {
+          // fail
+            this.openCenter('复制失败')
+          })
       }
       var params = {
         username: this.username,
@@ -154,7 +165,7 @@ export default {
       var win = window.open('https://account.jetbrains.com/logout', '_blank')
       setTimeout(() => {
         win.close()
-      }, 2)
+      }, 200)
     },
     delet (username) {
       var params = {
