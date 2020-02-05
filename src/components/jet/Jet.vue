@@ -23,7 +23,7 @@
       <div v-show="!showImg">
         务必扫码，微信售后：
         <div>
-          <img style="width:50%;" src="https://i.loli.net/2020/02/02/bGUBSPWalwXZ6po.jpg" />
+          <img style="width:60%;max-width:300px;" src="https://i.loli.net/2020/02/02/bGUBSPWalwXZ6po.jpg" />
         </div>
       </div>
       <div v-show="showImg">
