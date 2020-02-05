@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import { syncGetJet, batchJetReg } from '../../api/mail'
+import { syncGetJet } from '../../api/mail'
 import JetCode from './JetCode'
 import JetAccount from './JetAccount'
 export default {
@@ -66,24 +66,6 @@ export default {
         this.openCenter('复制失败')
       }
       )
-    },
-    register () {
-      // var features = 'height=50,width=80,top=10,left=10,toolbar=no,menubar=no,scrollbars=no,resizable=no,location=no,status=no'
-      // var win = window.open('https://account.jetbrains.com/logout', 'newW', features)
-      // this.$copyText('Crack168', this.$refs.container).then((e) => {
-      //   // success
-      //   this.openCenter('Crack168')
-      // }, (e) => {
-      //   // fail
-      //   this.openCenter('复制失败')
-      // }
-      // )
-      // window.open('https://account.jetbrains.com/logout', '_blank')
-      // setTimeout(() => {
-      //   window.open('https://www.jetbrains.com/shop/eform/students', '_blank')
-      // }, 1000)
-      batchJetReg()
-      this.openCenter(`<div style="color:red;font-size:20px;">预计45s内</div>完成`)
     }
   },
   openCenter: function (Text = 'copied!') {

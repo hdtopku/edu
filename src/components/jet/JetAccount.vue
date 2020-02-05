@@ -89,7 +89,7 @@
   </div>
 </template>
 <script>
-import { syncGetJetAcount } from '../../api/mail'
+import { syncGetJetAcount, batchJetReg } from '../../api/mail'
 export default {
   data () {
     return {
@@ -127,6 +127,10 @@ export default {
         }
         this.setRes(params)
       }
+    },
+    register () {
+      batchJetReg()
+      this.openCenter(`<div style="color:red;font-size:20px;">约1分钟内</div>完成`)
     },
     shortCopy (username, needCopy = true) {
       this.$copyText(username + '，Crack168', this.$refs.container).then(
