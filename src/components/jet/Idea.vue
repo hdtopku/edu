@@ -10,7 +10,8 @@
         size="small"
         @click="getJ(1)"
         round
-      >生产1条激活链</el-button>
+        style="position:absolute;left:30px;"
+      >生产1条🔗</el-button>
       <el-button
         v-clipboard:copy="copyText"
         v-clipboard:success="handleSuccess"
@@ -19,7 +20,8 @@
         size="small"
         @click="getJ(50)"
         round
-      >生产50条激活链</el-button>
+        style="position:absolute;left:120px;"
+      >生产50条🔗</el-button>
       <el-button
         style="position:absolute;right:0;"
         v-clipboard:copy="copyText"
