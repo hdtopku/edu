@@ -1,7 +1,7 @@
 <template>
   <div>
     <div style="width:100%;height:25px;">
-      <jet-code style="position:absolute;left:0px;"></jet-code>
+      <jet-code style="position:absolute;left:2px;top:7px"></jet-code>
       <el-button
         v-clipboard:copy="copyText"
         v-clipboard:success="handleSuccess"

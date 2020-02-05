@@ -1,5 +1,5 @@
 <template>
-    <el-link type="info" icon="el-icon-edit" @click="open"></el-link>
+    <el-link type="info" icon="el-icon-edit" class="edit-icon" @click="open"></el-link>
 </template>
 
 <script>
@@ -45,3 +45,8 @@ export default {
   }
 }
 </script>
+<style scoped>
+.edit-icon {
+  font-size: 20px;
+}
+</style>

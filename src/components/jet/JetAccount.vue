@@ -1,14 +1,8 @@
 <template>
   <div>
-    <el-checkbox
-      v-model="needLogout"
-      style="position:absolute;left:0;top:35px;"
-      slot="append"
-      size="mini"
-    >登出</el-checkbox>
       <el-button
       v-show="needLogout"
-        style="position:absolute;right:0;top:0px;"
+        class="login"
         v-clipboard:copy="copyText"
         v-clipboard:success="handleSuccess"
         v-clipboard:error="handleError"
@@ -17,13 +11,19 @@
         @click="register"
         round
       >批量注册</el-button>
+      <el-checkbox
+        class="logout"
+        v-model="needLogout"
+        slot="append"
+        size="mini"
+    >登出</el-checkbox>
     <el-input
       placeholder="请输入内容"
       v-model="username"
       class="input-with-select"
       @keyup.enter.native="add"
     >
-      <el-button slot="append" @click="add">新增/查询</el-button>
+      <el-button slot="append" @click="add">查询/新增</el-button>
     </el-input>
     <el-tabs type="border-card" v-model="activeName">
       <el-tab-pane :name="tabsNames[tabIdx]" v-for="(tabData, tabIdx) in tabsNames" :key="tabIdx">
@@ -258,5 +258,15 @@ export default {
 }
 .icon-copy1 {
   font-size: 25px;
+}
+.logout {
+  position:absolute;
+  right:5px;
+  top:5px;
+}
+.login {
+  position:absolute;
+  right:75px;
+  top:0px;
 }
 </style>
