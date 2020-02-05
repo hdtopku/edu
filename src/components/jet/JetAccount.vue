@@ -1,5 +1,5 @@
 <template>
-  <div style="min-height:50vh;">
+  <div>
     <el-checkbox
       v-model="needLogout"
       style="position:absolute;left:0;top:35px;"
