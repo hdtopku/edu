@@ -7,7 +7,7 @@
       size="mini"
     >登出</el-checkbox>
       <el-button
-      v-if="needLogout"
+      v-show="needLogout"
         style="position:absolute;right:0;top:0px;"
         v-clipboard:copy="copyText"
         v-clipboard:success="handleSuccess"
