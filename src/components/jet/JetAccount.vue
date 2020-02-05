@@ -141,18 +141,7 @@ export default {
     },
     add () {
       if (this.needLogout) {
-        this.$copyText('Crack168', this.$refs.container).then(
-          e => {
-          // success
-            this.logout()
-            setTimeout(() => {
-              this.openCenter('<div style="color:red;font-size:20px;">Crack168</div>已复制')
-            }, 20)
-          },
-          e => {
-          // fail
-            this.openCenter('复制失败')
-          })
+        this.logout()
       }
       var params = {
         username: this.username,
@@ -162,10 +151,21 @@ export default {
       this.username = ''
     },
     logout () {
-      var win = window.open('https://account.jetbrains.com/logout', '_blank')
-      setTimeout(() => {
-        win.close()
-      }, 200)
+      this.$copyText('Crack168', this.$refs.container).then(
+        e => {
+          // success
+          var win = window.open('https://account.jetbrains.com/logout', '_blank')
+          setTimeout(() => {
+            win.close()
+          }, 120)
+          setTimeout(() => {
+            this.openCenter('<div style="color:red;font-size:20px;">Crack168</div>已复制')
+          }, 20)
+        },
+        e => {
+          // fail
+          this.openCenter('复制失败')
+        })
     },
     delet (username) {
       var params = {
@@ -189,6 +189,9 @@ export default {
       this.setRes(params)
     },
     effect (username) {
+      if (this.needLogout) {
+        this.logout()
+      }
       var params = {
         username: username,
         status: 0
