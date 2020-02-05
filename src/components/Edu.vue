@@ -1,5 +1,5 @@
 <template>
-  <div style="min-height:97vh;">
+  <div style="min-height:70vh;">
     <card></card>
     <el-button
       type="plain"
