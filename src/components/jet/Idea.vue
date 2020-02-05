@@ -22,16 +22,6 @@
         round
         style="position:absolute;left:120px;"
       >生产50条🔗</el-button>
-      <el-button
-        style="position:absolute;right:0;"
-        v-clipboard:copy="copyText"
-        v-clipboard:success="handleSuccess"
-        v-clipboard:error="handleError"
-        type="plain"
-        size="small"
-        @click="register"
-        round
-      >批量注册</el-button>
     </div>
     <jet-account style="margin-top:30px;"></jet-account>
   </div>

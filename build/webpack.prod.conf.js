@@ -12,7 +12,7 @@ const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 // 1、npm install --save-dev webpack-bundle-analyzer
-// 2、修改webpack.dev.conf.js
+// 2、webpack.dev.conf.js中，new BundleAnalyzerPlugin()
 // 3、npm run build --report
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const env = require('../config/prod.env')
@@ -34,20 +34,20 @@ const webpackConfig = merge(baseWebpackConfig, {
   },
   plugins: [
     // http://vuejs.github.io/vue-loader/en/workflow/production.html
-    new BundleAnalyzerPlugin(
-      {
-        analyzerMode: 'server',
-        analyzerHost: '127.0.0.1',
-        analyzerPort: 8889,
-        reportFilename: 'report.html',
-        defaultSizes: 'parsed',
-        openAnalyzer: true,
-        generateStatsFile: false,
-        statsFilename: 'stats.json',
-        statsOptions: null,
-        logLevel: 'info',
-      },
-    ),
+    // new BundleAnalyzerPlugin(
+    //   {
+    //     analyzerMode: 'server',
+    //     analyzerHost: '127.0.0.1',
+    //     analyzerPort: 8889,
+    //     reportFilename: 'report.html',
+    //     defaultSizes: 'parsed',
+    //     openAnalyzer: true,
+    //     generateStatsFile: false,
+    //     statsFilename: 'stats.json',
+    //     statsOptions: null,
+    //     logLevel: 'info',
+    //   },
+    // ),
     new webpack.DefinePlugin({
       'process.env': env
     }),

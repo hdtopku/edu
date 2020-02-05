@@ -6,6 +6,17 @@
       slot="append"
       size="mini"
     >登出</el-checkbox>
+      <el-button
+      v-if="needLogout"
+        style="position:absolute;right:0;top:0px;"
+        v-clipboard:copy="copyText"
+        v-clipboard:success="handleSuccess"
+        v-clipboard:error="handleError"
+        type="plain"
+        size="small"
+        @click="register"
+        round
+      >批量注册</el-button>
     <el-input
       placeholder="请输入内容"
       v-model="username"
