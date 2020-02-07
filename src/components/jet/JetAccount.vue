@@ -216,7 +216,7 @@ export default {
           var win = window.open('https://account.jetbrains.com/logout', '_blank')
           setTimeout(() => {
             win.close()
-          }, 120)
+          }, 7000)
           setTimeout(() => {
             this.openCenter('<div style="color:red;font-size:20px;">Crack168</div>已复制')
           }, 20)
