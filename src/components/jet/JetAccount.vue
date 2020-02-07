@@ -3,9 +3,6 @@
       <el-button
       v-show="needLogout"
         class="login"
-        v-clipboard:copy="copyText"
-        v-clipboard:success="handleSuccess"
-        v-clipboard:error="handleError"
         type="plain"
         size="small"
         @click="register"
@@ -40,6 +37,18 @@
         <el-row :gutter="20">
           <el-col>
             <div>
+              <!-- 选择框 -->
+              <div class="selector" v-if="activeName==='second'">
+                <el-select v-model="value" placeholder="请选择">
+                  <el-option
+                    v-for="item in options"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value">
+                  </el-option>
+                </el-select>
+                <el-button @click="batchCopy" :disabled="isDisabled" :loading="isLoading">复制10条</el-button>
+              </div>
               <el-card
                 shadow="always"
                 :class="item.isItem ? 'highlight' : ''"
@@ -99,11 +108,32 @@ export default {
       res: {},
       allTabs: [],
       tabsNames: ['first', 'second', 'third', 'fourth'],
-      labels: ['2次', '2次+', '仓库', '已删']
+      labels: ['2次', '2次+', '仓库', '已删'],
+      accountsCopy: ['1', '2', '3'],
+      options: [{
+        value: -1,
+        label: '请选择'
+      }, {
+        value: 0,
+        label: '已使用0次'
+      }, {
+        value: 1,
+        label: '已使用1次'
+      }, {
+        value: 2,
+        label: '已使用2次'
+      }],
+      value: -1,
+      isLoading: false
     }
   },
   mounted () {
     this.setRes()
+  },
+  computed: {
+    isDisabled () {
+      return this.value < 0
+    }
   },
   methods: {
     doCopy (username, needCopy = true) {
@@ -151,6 +181,20 @@ export default {
         }
       )
     },
+    batchCopy () {
+      this.isLoading = true
+      if (this.value >= 0) {
+        var params = {
+          use_count: this.value,
+          batch_count: 10
+        }
+        this.setRes(params)
+      }
+      setTimeout(() => {
+        this.isLoading = false
+        this.value = -1
+      }, 10)
+    },
     openCenter: function (text = 'copied!') {
       this.$toast.top(text)
     },
@@ -168,10 +212,10 @@ export default {
     logout () {
       this.$copyText('Crack168', this.$refs.container).then(
         e => {
+          // success
           setTimeout(() => {
             this.openCenter('<div style="color:red;font-size:20px;">Crack168</div>已复制')
           }, 20)
-          // success
           setTimeout(() => {
             var win = window.open('https://account.jetbrains.com/logout', '_blank')
             setTimeout(() => {
@@ -236,6 +280,27 @@ export default {
           this.res.accountsDel.unshift(this.res.item)
         }
       }
+      if (this.res.accountsCopy && this.res.accountsCopy.length > 0) {
+        var copyItems = []
+        this.res.accountsCopy.forEach(element => {
+          copyItems.push(element.username + '，' + element.password)
+        })
+        var copyText = copyItems.join('\r\n')
+        setTimeout(() => {
+          this.$copyText(copyText, this.$refs.container).then(
+            e => {
+              // success
+              this.openCenter(`<div style='color:red;font-size:20px;'>${copyItems.length}条</div>卡密已复制`)
+            },
+            e => {
+              // fail
+              this.openCenter('批量复制卡密失败')
+            }
+          )
+        }, 50)
+      } else if (this.res.accountsCopy && this.res.accountsCopy.length <= 0) {
+        this.openCenter('暂无合适的卡密')
+      }
     }
   }
 }
@@ -270,5 +335,8 @@ export default {
   position:absolute;
   right:75px;
   top:0px;
+}
+.selector {
+  margin: 3px 0 15px 0;
 }
 </style>
