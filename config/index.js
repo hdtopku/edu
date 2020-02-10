@@ -54,9 +54,11 @@ module.exports = {
 
     /**
      * Source Maps
+     * build不显示源码
+     * 参考：https://wangdaodao.com/20190724/webpack-sources-vue.html
      */
 
-    productionSourceMap: true,
+    productionSourceMap: false,
     // https://webpack.js.org/configuration/devtool/#production
     devtool: '#source-map',
 
