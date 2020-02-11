@@ -4,7 +4,7 @@ const utils = require('./utils')
 const config = require('../config')
 const vueLoaderConfig = require('./vue-loader.conf')
 
-function resolve (dir) {
+function resolve(dir) {
   return path.join(__dirname, '..', dir)
 }
 
@@ -23,6 +23,19 @@ module.exports = {
   context: path.resolve(__dirname, '../'),
   entry: {
     app: './src/main.js'
+  },
+  externals: {
+    'vue': 'Vue',
+    'vue-router': 'VueRouter',
+    'axios': 'axios',
+    'element-ui': 'ELEMENT',
+    // jquery cdn：https://segmentfault.com/q/1010000010033280
+    jquery: 'jQuery.noConflict()',
+    $: 'jQuery.noConflict()',
+    // sweetalert2 cdn：https://www.bootcdn.cn/limonte-sweetalert2/
+    'sweetalert2': 'Swal',
+    // vue-tippy cdn：https://kabbouchi.github.io/vue-tippy/4.0/getting-started.html
+    'vue-tippy': 'VueTippy'
   },
   output: {
     path: config.build.assetsRoot,
