@@ -1,3 +1,3 @@
 <template>
-<img style="margin-top:5%;width:95%;" src="https://i.loli.net/2020/02/27/9nGlqYy67v3cKub.png"/>
+<img style="margin-top:3%;width:98%;" src="https://i.loli.net/2020/02/27/EKrtuPWb8QLVis3.png"/>
 </template>
