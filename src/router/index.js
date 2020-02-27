@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Edu from '@/components/Edu'
+// import Edu from '@/components/Edu'
 
 Vue.use(Router)
 
@@ -14,7 +14,7 @@ export default new Router({
     {
       path: '/kfc',
       name: 'edu',
-      component: Edu
+      component: (resolve) => require(['@/components/Edu'], resolve)
     },
     {
       path: '/test',
