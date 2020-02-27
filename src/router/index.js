@@ -8,6 +8,10 @@ export default new Router({
   mode: 'history',
   routes: [
     {
+      path: '/1',
+      component: (resolve) => require(['@/components/applemusic/AM'], resolve)
+    },
+    {
       path: '/kfc',
       name: 'edu',
       component: Edu
