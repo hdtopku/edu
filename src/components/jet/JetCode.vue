@@ -20,7 +20,7 @@ export default {
       this.update()
       const that = this
       Swal.fire({
-        title: '<a href="http://idea.medeming.com/jet/images/jihuoma.txt" target="_blank">更新</a>激活码',
+        title: '<a href="http://idea.medeming.com/jets/images/jihuoma.txt" target="_blank">更新</a>激活码',
         input: 'textarea',
         inputValue: this.activeCode,
         showCancelButton: true,
