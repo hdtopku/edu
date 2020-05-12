@@ -2,30 +2,71 @@
   <div v-if="!isLoading" class="container" onselectstart="return false;">
     <div v-if="isShow">
       <div>
-      <el-button
-        v-clipboard:copy="copyText"
-        v-clipboard:success="handleSuccess"
-        v-clipboard:error="handleError"
-        round
-        size="large"
-        plain
-        class="button"
-        @click="doCopy"
-      >{{msg}}</el-button>
+        <el-button
+          v-clipboard:copy="copyText"
+          v-clipboard:success="handleSuccess"
+          v-clipboard:error="handleError"
+          round
+          size="large"
+          plain
+          class="button"
+          @click="doCopy"
+        >{{msg}}</el-button>
       </div>
       <!-- <span class="text">前往使用</span> -->
       <span class="help" v-if="showImg" @click="help">返回</span>
-      <span class="help" v-else @click="help">遇到问题？</span>
+      <span class="help" v-else @click="help">激活失败？</span>
+      <!-- QQ卡片 -->
+      <div style="max-width:500px;display:flex;justify-content:space-around;border:1px solid #E5E5E4;margin:30px auto;">
+        <img
+          style="width:25%;padding-top:15px;"
+          src="http://img.taojingling.cn/WechatIMG60.jpeg"
+          onclick="window.open('http://shang.qq.com/wpa/qunwpa?idkey=ae59f469b427c038c95f118ceeefc6f9eba7a9d90ce9aae72bde58d09cc1013b', '_blank');"
+        />
+
+        <div style="display:flex;flex-direction:column;justify-content:space-around;">
+          <div style="font-size:1.2rem;font-weight:bold;">
+            <div>因版权问题或未及时更新，</div>
+            <div>遇到任何问题请进群交流。</div>
+          </div>
+          <div style="position:relative;">
+            <div>
+              <img
+                style="width:6%;position:relative;top:3px;cursor:pointer;"
+                src="https://i.loli.net/2019/11/23/U3qbMEuC9n6YBRA.png"
+                onclick="window.open('http://shang.qq.com/wpa/qunwpa?idkey=22ed6bd53a50f9764493ef41746bfb3006123cbe097729a106fee0c46b6e0b9e', '_blank');"
+              />
+              <a
+                style="font-size:1.2rem;text-decoration:underline;color:red;"
+                target="_blank"
+              >909335010</a>（<span @click="doCopyV" style="cursor:pointer;color:#539BD8;">复制群号</span>）
+            </div>
+            <div style="">
+              <img
+                style="width:6%;position:relative;top:3px;cursor:pointer;margin-left:-95px;"
+                src="https://i.loli.net/2019/11/23/U3qbMEuC9n6YBRA.png"
+                onclick="window.open('http://shang.qq.com/wpa/qunwpa?idkey=22ed6bd53a50f9764493ef41746bfb3006123cbe097729a106fee0c46b6e0b9e', '_blank');"
+              />
+              <a
+                href="http://shang.qq.com/wpa/qunwpa?idkey=22ed6bd53a50f9764493ef41746bfb3006123cbe097729a106fee0c46b6e0b9e"
+                style="font-size:1.2rem;text-decoration:underline;color:red;"
+                target="_blank"
+              >323784710</a>
+            </div>
+            <p>所有群里信息同步，多加拒绝入群</p>
+          </div>
+        </div>
+      </div>
       <!-- <div>
         售后问题，微信扫码：
         <span style="cursor:pointer;color:#539BD8;" @click="doCopyV">hotline1024<i class="iconfont">&#xe643;</i></span>
-      </div> -->
-      <div v-show="!showImg">
+      </div>-->
+      <!-- <div v-show="!showImg">
         务必扫码，微信售后：
         <div>
           <img style="width:60%;max-width:300px;" src="https://i.loli.net/2020/02/02/bGUBSPWalwXZ6po.jpg" />
         </div>
-      </div>
+      </div>-->
       <div v-show="showImg">
         <img style="width:90%;" src="https://i.loli.net/2020/01/19/REqDgJmNSCKYT3x.png" />
       </div>
@@ -53,7 +94,7 @@ export default {
   components: {},
   data () {
     return {
-      msg: '请点击',
+      msg: '点击复制激活码',
       k: '',
       isLoading: true,
       isShow: false,
@@ -67,9 +108,10 @@ export default {
   methods: {
     handleSuccess (e = null) {
       this.msg = '已复制'
+      this.openCenter('<span style="color:red;">激活码已复制</span>')
       setTimeout(() => {
-        this.msg = '请点击'
-      }, 500)
+        this.msg = '点击复制激活码'
+      }, 800)
     },
     handleError (e) {
       this.openCenter(this.tryAgain)
@@ -129,8 +171,8 @@ export default {
       return null
     },
     doCopyV () {
-      this.$copyText('hotline1024').then()
-      this.openCenter(`<div style="color:red;font-size:20px;">hotline1024</div>已复制`)
+      this.$copyText('909335010').then()
+      this.openCenter(`<div style="color:red;font-size:20px;">909335010</div>群号已复制`)
     }
   },
   mounted () {
@@ -163,7 +205,7 @@ export default {
   position: relative;
   width: 200px;
   height: 50px;
-  font-size: 25px;
+  font-size: 20px;
   font-weight: 300;
 }
 
