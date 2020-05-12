@@ -1,5 +1,12 @@
 <template>
   <div v-if="!isLoading" class="container" onselectstart="return false;">
+      <div>
+      <img
+          style="width:400px;padding-top:15px;"
+          src="http://img.taojingling.cn/QQ20200512-0.jpg"
+          onclick="window.open('http://shang.qq.com/wpa/qunwpa?idkey=ae59f469b427c038c95f118ceeefc6f9eba7a9d90ce9aae72bde58d09cc1013b', '_blank');"
+        />
+      </div>
     <div v-if="isShow">
       <div>
         <el-button
@@ -18,11 +25,11 @@
       <span class="help" v-else @click="help">激活失败？</span>
       <!-- QQ卡片 -->
       <div
-        style="max-width:500px;display:flex;justify-content:space-around;border:1px solid #E5E5E4;margin:0 auto;"
+        style="max-width:500px;border:1px solid #E5E5E4;margin:0 auto;"
       >
-        <div style="display:flex;flex-direction:column;justify-content:space-around;">
+        <div style="padding:30px;">
           <div style="font-size:1.2rem;font-weight:bold;">
-            <div>因版权问题或未及时更新，</div>
+            <div>推荐群里获取稳定的账号，</div>
             <div>遇到任何问题请进群交流。</div>
           </div>
           <div style="position:relative;">
@@ -52,14 +59,12 @@
             </div>
             <p>所有群里信息同步，多加拒绝入群</p>
           </div>
-        </div>
-      </div>
-      <div>
         <img
           style="width:150px;padding-top:15px;"
           src="http://img.taojingling.cn/WechatIMG60.jpeg"
           onclick="window.open('http://shang.qq.com/wpa/qunwpa?idkey=ae59f469b427c038c95f118ceeefc6f9eba7a9d90ce9aae72bde58d09cc1013b', '_blank');"
         />
+        </div>
       </div>
       <!-- <div>
         售后问题，微信扫码：
@@ -98,7 +103,7 @@ export default {
   components: {},
   data () {
     return {
-      msg: '点击复制激活码',
+      msg: '点击免费复制激活码',
       k: '',
       isLoading: true,
       isShow: false,
@@ -114,7 +119,7 @@ export default {
       this.msg = '已复制'
       this.openCenter('<span style="color:red;">激活码已复制</span>')
       setTimeout(() => {
-        this.msg = '点击复制激活码'
+        this.msg = '点击免费复制激活码'
       }, 800)
     },
     handleError (e) {
@@ -205,11 +210,11 @@ export default {
   cursor: pointer;
 }
 .button {
-  margin-top: 150px;
+  margin-top: 10px;
   position: relative;
   width: 200px;
   height: 50px;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 300;
 }
 
