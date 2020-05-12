@@ -17,13 +17,9 @@
       <span class="help" v-if="showImg" @click="help">返回</span>
       <span class="help" v-else @click="help">激活失败？</span>
       <!-- QQ卡片 -->
-      <div style="max-width:500px;display:flex;justify-content:space-around;border:1px solid #E5E5E4;margin:30px auto;">
-        <img
-          style="width:25%;padding-top:15px;"
-          src="http://img.taojingling.cn/WechatIMG60.jpeg"
-          onclick="window.open('http://shang.qq.com/wpa/qunwpa?idkey=ae59f469b427c038c95f118ceeefc6f9eba7a9d90ce9aae72bde58d09cc1013b', '_blank');"
-        />
-
+      <div
+        style="max-width:500px;display:flex;justify-content:space-around;border:1px solid #E5E5E4;margin:0 auto;"
+      >
         <div style="display:flex;flex-direction:column;justify-content:space-around;">
           <div style="font-size:1.2rem;font-weight:bold;">
             <div>因版权问题或未及时更新，</div>
@@ -39,11 +35,12 @@
               <a
                 style="font-size:1.2rem;text-decoration:underline;color:red;"
                 target="_blank"
-              >909335010</a>（<span @click="doCopyV" style="cursor:pointer;color:#539BD8;">复制群号</span>）
+              >909335010</a>（
+              <span @click="doCopyV" style="cursor:pointer;color:#539BD8;">复制群号</span>）
             </div>
-            <div style="">
+            <div style>
               <img
-                style="width:6%;position:relative;top:3px;cursor:pointer;margin-left:-95px;"
+                style="width:6%;position:relative;top:3px;cursor:pointer;margin-left:-100px;"
                 src="https://i.loli.net/2019/11/23/U3qbMEuC9n6YBRA.png"
                 onclick="window.open('http://shang.qq.com/wpa/qunwpa?idkey=22ed6bd53a50f9764493ef41746bfb3006123cbe097729a106fee0c46b6e0b9e', '_blank');"
               />
@@ -56,6 +53,13 @@
             <p>所有群里信息同步，多加拒绝入群</p>
           </div>
         </div>
+      </div>
+      <div>
+        <img
+          style="width:150px;padding-top:15px;"
+          src="http://img.taojingling.cn/WechatIMG60.jpeg"
+          onclick="window.open('http://shang.qq.com/wpa/qunwpa?idkey=ae59f469b427c038c95f118ceeefc6f9eba7a9d90ce9aae72bde58d09cc1013b', '_blank');"
+        />
       </div>
       <!-- <div>
         售后问题，微信扫码：
