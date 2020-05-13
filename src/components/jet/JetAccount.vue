@@ -1,19 +1,22 @@
 <template>
   <div>
-      <el-button
+    <el-button
       v-show="needLogout"
-        class="login"
-        type="plain"
-        size="small"
-        @click="register"
-        round
-      >批量注册</el-button>
-      <el-checkbox
-        class="logout"
-        v-model="needLogout"
-        slot="append"
-        size="mini"
-    >登出</el-checkbox>
+      class="login"
+      type="plain"
+      size="small"
+      @click="register"
+      round
+    >批量注册</el-button>
+    <el-link
+      v-show="needLogout"
+      class="logout-jet"
+      type="primary"
+      size="small"
+      @click="logout"
+      round
+    >登出</el-link>
+    <el-checkbox class="logout" v-model="needLogout" slot="append" size="mini"></el-checkbox>
     <el-input
       placeholder="请输入内容"
       v-model="username"
@@ -44,8 +47,8 @@
                     v-for="item in options"
                     :key="item.value"
                     :label="item.label"
-                    :value="item.value">
-                  </el-option>
+                    :value="item.value"
+                  ></el-option>
                 </el-select>
                 <el-button @click="batchCopy" :disabled="isDisabled" :loading="isLoading">复制10条</el-button>
               </div>
@@ -210,23 +213,29 @@ export default {
       this.username = ''
     },
     logout () {
-      this.$copyText('Crack168', this.$refs.container).then(
-        e => {
-          // success
-          setTimeout(() => {
-            this.openCenter('<div style="color:red;font-size:20px;">Crack168</div>已复制')
-          }, 20)
-          setTimeout(() => {
-            var win = window.open('https://account.jetbrains.com/logout', '_blank')
-            setTimeout(() => {
-              win.close()
-            }, 120)
-          }, 7000)
-        },
-        e => {
-          // fail
-          this.openCenter('复制失败')
-        })
+      // this.$copyText('Crack168', this.$refs.container).then(
+      //   e => {
+      //     // success
+      //     setTimeout(() => {
+      //       this.openCenter('<div style="color:red;font-size:20px;">Crack168</div>已复制')
+      //     }, 20)
+      //     setTimeout(() => {
+      //       var win = window.open('https://account.jetbrains.com/logout', '_blank')
+      //       setTimeout(() => {
+      //         win.close()
+      //       }, 120)
+      //     }, 7000)
+      //   },
+      //   e => {
+      //     // fail
+      //     this.openCenter('复制失败')
+      //   })
+      setTimeout(() => {
+        var win = window.open('https://account.jetbrains.com/logout', '_blank')
+        setTimeout(() => {
+          win.close()
+        }, 120)
+      })
     },
     delet (username) {
       var params = {
@@ -327,14 +336,19 @@ export default {
   font-size: 25px;
 }
 .logout {
-  position:absolute;
-  right:5px;
-  top:5px;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+}
+.logout-jet {
+  position: absolute;
+  right: 0px;
+  top: 30px;
 }
 .login {
-  position:absolute;
-  right:75px;
-  top:0px;
+  position: absolute;
+  right: 35px;
+  top: 0px;
 }
 .selector {
   margin: 3px 0 15px 0;
