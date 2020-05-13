@@ -259,9 +259,6 @@ export default {
       this.setRes(params)
     },
     effect (username) {
-      if (this.needLogout) {
-        this.logout()
-      }
       var params = {
         username: username,
         status: 0
