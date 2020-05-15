@@ -203,7 +203,7 @@ export default {
     },
     add () {
       if (this.needLogout) {
-        this.logout()
+        // this.logout()
       }
       var params = {
         username: this.username,
