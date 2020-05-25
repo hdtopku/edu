@@ -63,13 +63,13 @@
                     <div>
                       <i
                         class="iconfont icon-copy1"
-                        @click="shortCopy(item.username, item.status === 0)"
+                        @click="shortCopy(item.username, item.password, item.status === 0)"
                       ></i>
                       <span class="usecount">{{item.use_count}}</span>
                     </div>
                     <span>{{item.update_time.substr(5)}}</span>
                   </div>
-                  <span @click="doCopy(item.username, item.status === 0)">{{item.username}}</span>
+                  <span @click="doCopy(item.username, item.password, item.status === 0)">{{item.username}}</span>
                   <div class="right">
                     <el-button
                       v-if="item.status===0 || item.status===-1"
@@ -108,6 +108,7 @@ export default {
       activeName: 'first',
       needLogout: false,
       username: '',
+      password: '',
       res: {},
       allTabs: [],
       tabsNames: ['first', 'second', 'third', 'fourth'],
@@ -139,9 +140,9 @@ export default {
     }
   },
   methods: {
-    doCopy (username, needCopy = true) {
+    doCopy (username, password, needCopy = true) {
       this.$copyText(
-        '帐号：' + username + '\r\n蜜码：Crack168',
+        '帐号：' + username + '\r\n蜜码：' + password,
         this.$refs.container
       ).then(
         e => {
@@ -165,8 +166,8 @@ export default {
       batchJetReg()
       this.openCenter(`<div style="color:red;font-size:20px;">约1分钟内</div>完成`)
     },
-    shortCopy (username, needCopy = true) {
-      this.$copyText(username + '，Crack168', this.$refs.container).then(
+    shortCopy (username, password, needCopy = true) {
+      this.$copyText(username + '，' + password, this.$refs.container).then(
         e => {
           // success
           this.openCenter(`<div style='color:red;font-size:20px;'>${username}</div>卡密已复制`)
@@ -207,7 +208,7 @@ export default {
       }
       var params = {
         username: this.username,
-        password: 'Crack168'
+        password: 'Nobug996'
       }
       this.setRes(params)
       this.username = ''
