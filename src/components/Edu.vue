@@ -57,7 +57,7 @@ export default {
       const jrebel =
         `1、激活码填入：http://jrebel.taojingling.cn/${uuid}
 2、激活邮箱填入：active@jrebel.cn
-3、务必参考宝贝详情第三步，完成激活：https://item.taobao.com/item.htm?id=614109968078`
+3、务必参考宝贝详情第三步，完成激活：https://item.taobao.com/item.htm?id=618776356415`
       setTimeout(() => {
         location.reload()
       }, 800)
