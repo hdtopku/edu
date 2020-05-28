@@ -67,7 +67,7 @@
                       ></i>
                       <span class="usecount">{{item.use_count}}</span>
                     </div>
-                    <span>{{item.update_time.substr(5)}}</span>
+                    <span>{{item.create_time.substr(5,5)}}，{{item.update_time.substr(5,5)}}</span>
                   </div>
                   <span @click="doCopy(item.username, item.password, item.status === 0)">{{item.username}}</span>
                   <div class="right">
