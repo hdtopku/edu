@@ -57,7 +57,9 @@ export default {
       const jrebel =
         `1、激活码填入：http://jrebel.taojingling.cn/${uuid}
 2、激活邮箱填入：active@jrebel.cn
-3、务必参考宝贝详情第三步，完成激活：https://item.taobao.com/item.htm?id=618776356415`
+3、教程：https://item.taobao.com/item.htm?id=618776356415
+
+【务必参考教程第三步】在jrebel设置里，点击Work offline，显示为Work online即可`
       setTimeout(() => {
         location.reload()
       }, 800)
