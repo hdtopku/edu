@@ -141,14 +141,14 @@ export default {
   },
   methods: {
     doCopy (username, password, needCopy = true) {
-      var accountText = `帐号：${username}
-蜜码：${password}
+      var accountText = `账号：${username}
+密码：${password}（复杂易错，务必复制）
 在【JB Account】输入账密后，需重启软件即可
 *****************************
 ****如果遇到激活失败？****
 情况一：需删除破解插件
 1、把安装包bin目录下jetbrains相关的破解插件删除
-2、help，Edit Custom VM Options...（如果存在jetbrains相关行，请删除）
+2、在软件菜单点击help，Edit Custom VM Options...（如果存在jetbrains相关行，请删除）
 
 情况二：删除hosts中所有jetbrains的行
 1、windows的hosts位于：
