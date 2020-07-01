@@ -141,7 +141,7 @@ export default {
   },
   methods: {
     doCopy (username, password, needCopy = true) {
-      var accountText = `账号：${username}
+      var accountText = `账号：${username}，
 密码：${password}（复杂易错，务必复制）
 在【JB Account】输入账密后，需重启软件即可
 *****************************
