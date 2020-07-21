@@ -141,22 +141,20 @@ export default {
   },
   methods: {
     doCopy (username, password, needCopy = true) {
-      var accountText = `账号：${username}，
+      var accountText = `账号：${username}（务必复制）
 密码：${password}（复杂易错，务必复制）
 在【JB Account】输入账密后，需重启软件即可
 *****************************
-****如果遇到激活失败？****
-情况一：需删除破解插件
-1、把安装包bin目录下jetbrains相关的破解插件删除
-2、在软件菜单点击help，Edit Custom VM Options...（如果存在jetbrains相关行，请删除）
-
-情况二：删除hosts中所有jetbrains的行
+****激活失败？解决办法****
+【步骤一】把安装包bin目录下jetbrains相关的破解插件删除
+【步骤二】在软件菜单点击help，Edit Custom VM Options...（如果存在jetbrains相关行，请删除；如无法打开菜单，请点试用30天）
+【步骤三】删除hosts中所有jetbrains的行
 1、windows的hosts位于：
 c:/Windows/System32/Drivers/etc/hosts
 2、linux或mac位于：
 /etc/hosts
 
-最后，重启软件，并重新输入后重启即可
+【步骤四】重启软件，并重新输入后重启软件即可
 `
       this.$copyText(
         accountText,
