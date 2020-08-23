@@ -59,7 +59,9 @@ export default {
 2、激活邮箱填入：active@jrebel.cn
 3、教程：https://item.taobao.com/item.htm?id=618776356415
 
-【务必参考教程第三步】在jrebel设置里，点击Work offline，显示为Work online即可`
+【务必参考教程第三步】在jrebel设置里，点击Work offline，显示为Work online即可
+
+另提供jetbrain全家桶账号激活，仅需25元，质保一年，随时补新，如有需要，请联系客服`
       setTimeout(() => {
         location.reload()
       }, 800)
