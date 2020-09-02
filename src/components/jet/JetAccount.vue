@@ -144,8 +144,8 @@ export default {
       var accountText = `账号：${username}（务必复制）
 密码：${password}（复杂易错，务必复制）
 在【JB Account】输入账密后，需重启软件即可
-*****************************
-****激活失败？解决办法****
+
+👉激活失败？解决办法
 【步骤一】把安装包bin目录下jetbrains相关的破解插件删除
 【步骤二】在软件菜单点击help，Edit Custom VM Options...（如果存在jetbrains相关行，请删除；如无法打开菜单，请点试用30天）
 【步骤三】删除hosts中所有jetbrains的行
@@ -153,11 +153,9 @@ export default {
 c:/Windows/System32/Drivers/etc/hosts
 2、linux或mac位于：
 /etc/hosts
-
 【步骤四】重启软件，并重新输入后重启软件即可
 
-=============================
-====加个好友，方便售后====
+👉加个好友，方便售后
 若后期使用失效：
 0、请优先【重启软件】看能否解决
 1、提供软件激活失败截图
