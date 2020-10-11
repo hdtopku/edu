@@ -1,30 +1,30 @@
 <template>
   <div v-if="!isLoading" class="container" onselectstart="return false;">
-      <div>
+      <!-- <div>
       <img
           style="width:400px;padding-top:15px;"
           src="http://img.taojingling.cn/QQ20200512-0.jpg"
           onclick="window.open('http://shang.qq.com/wpa/qunwpa?idkey=ae59f469b427c038c95f118ceeefc6f9eba7a9d90ce9aae72bde58d09cc1013b', '_blank');"
         />
-      </div>
+      </div> -->
     <div v-if="isShow">
-      <div>
+      <div style="margin-top:100px">
         <el-button
           v-clipboard:copy="copyText"
           v-clipboard:success="handleSuccess"
           v-clipboard:error="handleError"
           round
           size="large"
-          plain
+          type="primary"
           class="button"
           @click="doCopy"
         >{{msg}}</el-button>
       </div>
       <!-- <span class="text">前往使用</span> -->
-      <span class="help" v-if="showImg" @click="help">返回</span>
-      <span class="help" v-else @click="help">激活失败？</span>
+      <!-- <span class="help" v-if="showImg" @click="help">返回</span>
+      <span class="help" v-else @click="help">激活失败？</span> -->
       <!-- QQ卡片 -->
-      <div
+      <!-- <div
         style="max-width:500px;border:1px solid #E5E5E4;margin:0 auto;"
       >
         <div style="padding:30px;">
@@ -64,7 +64,7 @@
           src="http://img.taojingling.cn/WechatIMG60.jpeg"
           onclick="window.open('http://shang.qq.com/wpa/qunwpa?idkey=ae59f469b427c038c95f118ceeefc6f9eba7a9d90ce9aae72bde58d09cc1013b', '_blank');"
         />
-        </div>
+        </div> -->
       </div>
       <!-- <div>
         售后问题，微信扫码：
@@ -76,10 +76,10 @@
           <img style="width:60%;max-width:300px;" src="https://i.loli.net/2020/02/02/bGUBSPWalwXZ6po.jpg" />
         </div>
       </div>-->
-      <div v-show="showImg">
+      <!-- <div v-show="showImg">
         <img style="width:90%;" src="https://i.loli.net/2020/01/19/REqDgJmNSCKYT3x.png" />
-      </div>
-    </div>
+      </div> -->
+    <!-- </div>
     <div class="err" v-show="!isShow">
       <h1>404 Not Found</h1>The requested URL was not found. If you entered the URL manually please check your spelling and try again.
     </div>
@@ -93,7 +93,7 @@
     >
       <span v-if="isDisplay">{{res.update_time.substring(5)}},{{res.count}}</span>
       <span v-else>.</span>
-    </span>
+    </span> -->
   </div>
 </template>
 
@@ -103,7 +103,7 @@ export default {
   components: {},
   data () {
     return {
-      msg: '点击免费复制激活码',
+      msg: '点击复制补新账号',
       k: '',
       isLoading: true,
       isShow: false,
@@ -116,11 +116,11 @@ export default {
   },
   methods: {
     handleSuccess (e = null) {
-      this.msg = '已复制'
-      this.openCenter('<span style="color:red;">激活码已复制</span>')
+      this.msg = '已复制到剪贴板'
+      this.openCenter('<span style="color:red;">账号已复制</span>')
       setTimeout(() => {
-        this.msg = '点击免费复制激活码'
-      }, 800)
+        this.msg = '点击复制补新账号'
+      }, 1500)
     },
     handleError (e) {
       this.openCenter(this.tryAgain)
