@@ -103,7 +103,7 @@ export default {
   components: {},
   data () {
     return {
-      msg: '点击复制补新账号',
+      msg: '👉点我复制账号👈',
       k: '',
       isLoading: true,
       isShow: false,
@@ -116,11 +116,11 @@ export default {
   },
   methods: {
     handleSuccess (e = null) {
-      this.msg = '已复制到剪贴板'
-      this.openCenter('<span style="color:red;">账号已复制</span>')
+      this.msg = '🚀 已复制到剪贴板'
+      // this.openCenter('<span style="color:red;">账号已复制</span>')
       setTimeout(() => {
-        this.msg = '点击复制补新账号'
-      }, 1500)
+        this.msg = '👉点我复制账号👈'
+      }, 3500)
     },
     handleError (e) {
       this.openCenter(this.tryAgain)
