@@ -14,8 +14,9 @@
           v-clipboard:success="handleSuccess"
           v-clipboard:error="handleError"
           round
+          plain
           size="large"
-          type="primary"
+          :type="buttonType"
           class="button"
           @click="doCopy"
         >{{msg}}</el-button>
@@ -106,6 +107,7 @@ export default {
       msg: '👉点我复制账号👈',
       k: '',
       isLoading: true,
+      buttonType: 'primary',
       isShow: false,
       showImg: false,
       copyText: 'Copy failed, try again!',
@@ -118,8 +120,10 @@ export default {
     handleSuccess (e = null) {
       this.msg = '🚀 已复制到剪贴板'
       // this.openCenter('<span style="color:red;">账号已复制</span>')
+      this.buttonType = 'danger'
       setTimeout(() => {
         this.msg = '👉点我复制账号👈'
+        this.buttonType = 'primary'
       }, 3500)
     },
     handleError (e) {
