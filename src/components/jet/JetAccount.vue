@@ -160,6 +160,9 @@ c:/Windows/System32/Drivers/etc/hosts
 0、请优先👉重启软件👈看能否解决
 1、提供软件激活失败截图
 2、提供购买聊天或订单截图
+
+🚀 若身边朋友需要，请尽快推荐购买
+🚀 售后维护成本极大上升，未来将涨价
 `
       this.$copyText(
         accountText,
