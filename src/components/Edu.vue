@@ -11,11 +11,11 @@
     <el-link href="https://mail.pku.edu.cn/" type="primary" style="z-index:1;position:absolute;right:20px;" target="_blank">打开邮箱</el-link>
     <!-- <jet-brains class="jetbrain"></jet-brains> -->
     <el-tabs v-model="activeName" @tab-click="handleClick">
-      <el-tab-pane label="Music" name="first">
-        <jrebel></jrebel>
-      </el-tab-pane>
-      <el-tab-pane label="IDEA" name="second">
+      <el-tab-pane label="IDEA" name="first">
         <idea></idea>
+      </el-tab-pane>
+      <el-tab-pane label="Music" name="second">
+        <jrebel></jrebel>
       </el-tab-pane>
       <!-- <el-tab-pane label="Itchat" name="third"><itchat></itchat></el-tab-pane> -->
     </el-tabs>

@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div style="width:100%;height:25px;">
-      <jet-code style="position:absolute;left:2px;top:7px"></jet-code>
+    <div style="width: 100%; height: 25px">
+      <jet-code style="position: absolute; left: 2px; top: 7px"></jet-code>
       <el-button
         v-clipboard:copy="copyText"
         v-clipboard:success="handleSuccess"
@@ -10,8 +10,9 @@
         size="small"
         @click="getJ(1)"
         round
-        style="position:absolute;left:30px;"
-      >生产1条🔗</el-button>
+        style="position: absolute; left: 30px"
+        >生产1条🔗</el-button
+      >
       <el-button
         v-clipboard:copy="copyText"
         v-clipboard:success="handleSuccess"
@@ -20,15 +21,24 @@
         size="small"
         @click="getJ(50)"
         round
-        style="position:absolute;left:120px;"
-      >生产50条🔗</el-button>
+        style="position: absolute; left: 120px"
+        >生产50条🔗</el-button
+      >
+      <div style="position: absolute; left: 240px; top: 5px">
+        <el-switch
+          v-model="switchOn"
+          active-value="1"
+          inactive-value="0"
+          @change="getOrChangeSwitch"
+        ></el-switch>
+      </div>
     </div>
-    <jet-account style="margin-top:30px;"></jet-account>
+    <jet-account style="margin-top: 30px"></jet-account>
   </div>
 </template>
 
 <script>
-import { syncGetJet } from '../../api/mail'
+import { syncGetJet, getJet } from '../../api/mail'
 import JetCode from './JetCode'
 import JetAccount from './JetAccount'
 export default {
@@ -36,8 +46,12 @@ export default {
   data () {
     return {
       copyText: '',
-      count: 0
+      count: 0,
+      switchOn: '1'
     }
+  },
+  created () {
+    this.getOrChangeSwitch('')
   },
   methods: {
     handleSuccess (e = null) {
@@ -66,10 +80,19 @@ export default {
         this.openCenter('复制失败')
       }
       )
+    },
+    getOrChangeSwitch (switchOn) {
+      getJet({ switch: switchOn }).then(res => {
+        this.switchOn = res.data
+        if (switchOn !== '') {
+          if (res.data === '0') {
+            this.openCenter(`激活码复制<div style='color:red'>已关闭</div>`)
+          } else if (res.data === '1') {
+            this.openCenter(`激活码复制<div style='color:red'>已开启</div>`)
+          }
+        }
+      })
     }
-  },
-  openCenter: function (Text = 'copied!') {
-    this.$toast.top(Text)
   }
 }
 </script>

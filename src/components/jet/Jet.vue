@@ -112,7 +112,7 @@ export default {
       buttonType: 'primary',
       isShow: false,
       showImg: false,
-      copyText: 'Copy failed, try again!',
+      copyText: '1450948930👈售后q',
       tryAgain: '复制失败',
       res: {},
       isDisplay: false
