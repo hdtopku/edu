@@ -1,5 +1,5 @@
 <template>
-    <el-link type="info" icon="el-icon-edit" class="edit-icon" @click="open"></el-link>
+    <el-link type="info" icon="iconfont icon-edit" class="edit-icon" @click="open"></el-link>
 </template>
 
 <script>
