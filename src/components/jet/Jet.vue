@@ -1,6 +1,6 @@
 <template>
   <div v-if="!isLoading" class="container" onselectstart="return false;">
-      <!-- <div>
+    <!-- <div>
       <img
           style="width:400px;padding-top:15px;"
           src="http://img.taojingling.cn/QQ20200512-0.jpg"
@@ -8,9 +8,12 @@
         />
       </div> -->
     <div v-if="isShow">
-      <div style="margin-top:220px">
-        <p><i style="font-weight:bold;">suspended</i> 或 <i style="font-weight:bold;">canceled</i> ? </p>
-        <p>输入账号后， <span style="color:red">重启软件</span>即可</p>
+      <div style="margin-top: 220px">
+        <p>
+          <i style="font-weight: bold">suspended</i> 或
+          <i style="font-weight: bold">canceled</i> ?
+        </p>
+        <p>输入账号后， <span style="color: red">重启软件</span>即可</p>
         <el-button
           v-clipboard:copy="copyText"
           v-clipboard:success="handleSuccess"
@@ -21,12 +24,26 @@
           :type="buttonType"
           class="button"
           @click="doCopy"
-        >{{msg}}</el-button>
+          >{{ msg }}</el-button
+        >
 
-        <p  style="margin-top: 10px; margin: 0 auto;font-style: italic;color: gray;font-size:10px">
-        今后失效👆自行复制
+        <p
+          style="
+            margin: 3px auto;
+            font-style: italic;
+            color: gray;
+            font-size: 10px;
+          "
+        >
+          今后失效👆自行复制
         </p>
-
+        <p
+          style="
+            margin: 0 auto;
+            font-style: italic;
+            color: gray;
+            font-size: 10px;
+          ">（定期维护）</p>
       </div>
       <!-- <span class="text">前往使用</span> -->
       <!-- <span class="help" v-if="showImg" @click="help">返回</span>
@@ -73,18 +90,18 @@
           onclick="window.open('http://shang.qq.com/wpa/qunwpa?idkey=ae59f469b427c038c95f118ceeefc6f9eba7a9d90ce9aae72bde58d09cc1013b', '_blank');"
         />
         </div> -->
-      </div>
-      <!-- <div>
+    </div>
+    <!-- <div>
         售后问题，微信扫码：
         <span style="cursor:pointer;color:#539BD8;" @click="doCopyV">hotline1024<i class="iconfont">&#xe643;</i></span>
       </div>-->
-      <!-- <div v-show="!showImg">
+    <!-- <div v-show="!showImg">
         务必扫码，微信售后：
         <div>
           <img style="width:60%;max-width:300px;" src="https://i.loli.net/2020/02/02/bGUBSPWalwXZ6po.jpg" />
         </div>
       </div>-->
-      <!-- <div v-show="showImg">
+    <!-- <div v-show="showImg">
         <img style="width:90%;" src="https://i.loli.net/2020/01/19/REqDgJmNSCKYT3x.png" />
       </div> -->
     <!-- </div>
@@ -221,7 +238,7 @@ export default {
   cursor: pointer;
 }
 .button {
-  margin-top: 10px;
+  /* margin-top: 10px; */
   position: relative;
   width: 200px;
   height: 50px;
