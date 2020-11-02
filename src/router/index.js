@@ -16,11 +16,11 @@ export default new Router({
       name: 'edu',
       component: (resolve) => require(['@/components/Edu'], resolve)
     },
-    {
-      path: '/test',
-      name: 'test',
-      component: (resolve) => require(['@/components/Test'], resolve)
-    },
+    // {
+    //   path: '/test',
+    //   name: 'test',
+    //   component: (resolve) => require(['@/components/Test'], resolve)
+    // },
     {
       path: '/num',
       name: 'num',

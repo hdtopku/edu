@@ -8,7 +8,7 @@
         />
       </div> -->
     <div v-if="isShow">
-      <div style="margin-top:250px">
+      <div style="margin-top:220px">
         <p><i style="font-weight:bold;">suspended</i> 或 <i style="font-weight:bold;">canceled</i> ? </p>
         <p>输入账号后， <span style="color:red">重启软件</span>即可</p>
         <el-button
@@ -22,6 +22,11 @@
           class="button"
           @click="doCopy"
         >{{msg}}</el-button>
+
+        <p  style="margin-top: 10px; margin: 0 auto;font-style: italic;color: gray;font-size:10px">
+        今后失效👆自行复制
+        </p>
+
       </div>
       <!-- <span class="text">前往使用</span> -->
       <!-- <span class="help" v-if="showImg" @click="help">返回</span>
@@ -126,7 +131,7 @@ export default {
       setTimeout(() => {
         this.msg = '👉点我复制账号👈'
         this.buttonType = 'primary'
-      }, 3500)
+      }, 5000)
     },
     handleError (e) {
       this.openCenter(this.tryAgain)

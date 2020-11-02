@@ -8,15 +8,20 @@ import 'vue2-toast/lib/toast.css'
 import Toast from 'vue2-toast'
 import './assets/iconfont.css'
 import ToggleButton from 'vue-js-toggle-button'
-import Element from 'element-ui'
+
 import VueTippy, { TippyComponent } from 'vue-tippy'
 import LongPress from 'vue-directive-long-press'
-
+// import 'element-ui/lib/theme-chalk/index.css'
 import VueClipboard from 'vue-clipboard2'
-Vue.use(VueClipboard)
 
+import { Button, Select, TabPane, Link, Tabs, Timeline, TimelineItem, Input, Option, Row, Col, Popover, Card, Switch, Checkbox } from 'element-ui'
+Vue.use(Button).use(Select).use(TabPane).use(Link).use(Tabs).use(Timeline).use(TimelineItem).use(Input)
+  .use(Option).use(Row).use(Col).use(Popover).use(Card).use(Switch).use(Checkbox)
+Vue.prototype.$ELEMENT = { size: 'small', zIndex: 3000 }
+
+// Vue.use(Element, { size: 'small', zIndex: 3000 })
+Vue.use(VueClipboard)
 Vue.directive('long-press', LongPress)
-Vue.use(Element, { size: 'small', zIndex: 3000 })
 Vue.use(ToggleButton)
 Vue.use(Toast, {
   type: 'center',
