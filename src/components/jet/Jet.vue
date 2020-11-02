@@ -8,7 +8,9 @@
         />
       </div> -->
     <div v-if="isShow">
-      <div style="margin-top:300px">
+      <div style="margin-top:250px">
+        <p><i style="font-weight:bold;">suspended</i> 或 <i style="font-weight:bold;">canceled</i> ? </p>
+        <p>输入账号后， <span style="color:red">重启软件</span>即可</p>
         <el-button
           v-clipboard:copy="copyText"
           v-clipboard:success="handleSuccess"
