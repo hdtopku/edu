@@ -9,11 +9,14 @@
       </div> -->
     <div v-if="isShow">
       <div style="margin-top: 220px">
-        <p>
-          <i style="font-weight: bold">suspended</i> 或
-          <i style="font-weight: bold">canceled</i> ?
-        </p>
-        <p>输入账号后， <span style="color: red">重启软件</span>即可</p>
+        <div style="height: 50px">
+          <transition name="slide-fade">
+            <div v-if="showTip">
+              <i style="font-weight: bold;font-size: 10px;">若输入账号后，suspended 或 canceled ？</i>
+              <div> <span style="color: red">重启软件</span>即可</div>
+            </div>
+          </transition>
+        </div>
         <el-button
           v-clipboard:copy="copyText"
           v-clipboard:success="handleSuccess"
@@ -35,7 +38,9 @@
             font-size: 10px;
           "
         >
-          今后失效👆自行复制
+          <span style="color: red; font-weight: bold; font-size: 12px"
+            >今后</span
+          >失效👆自行复制
         </p>
         <p
           style="
@@ -43,7 +48,10 @@
             font-style: italic;
             color: gray;
             font-size: 10px;
-          ">（定期维护）</p>
+          "
+        >
+          （每天维护）
+        </p>
       </div>
       <!-- <span class="text">前往使用</span> -->
       <!-- <span class="help" v-if="showImg" @click="help">返回</span>
@@ -137,18 +145,22 @@ export default {
       copyText: '1450948930👈售后q',
       tryAgain: '复制失败',
       res: {},
-      isDisplay: false
+      isDisplay: false,
+      showTip: false
     }
   },
   methods: {
     handleSuccess (e = null) {
-      this.msg = '🚀 已复制到剪贴板'
+      this.msg = '🚀 账号已复制到剪贴板'
       // this.openCenter('<span style="color:red;">账号已复制</span>')
       this.buttonType = 'danger'
       setTimeout(() => {
+        this.showTip = true
+      }, 800)
+      setTimeout(() => {
         this.msg = '👉点我复制账号👈'
         this.buttonType = 'primary'
-      }, 5000)
+      }, 20000)
     },
     handleError (e) {
       this.openCenter(this.tryAgain)
@@ -240,7 +252,7 @@ export default {
 .button {
   /* margin-top: 10px; */
   position: relative;
-  width: 200px;
+  width: 250px;
   height: 50px;
   font-size: 18px;
   font-weight: 300;
@@ -260,5 +272,16 @@ export default {
 
 .err {
   text-align: left;
+}
+.slide-fade-enter-active {
+  transition: all 3s ease;
+}
+.slide-fade-leave-active {
+  transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.slide-fade-enter, .slide-fade-leave-to
+/* .slide-fade-leave-active for below version 2.1.8 */ {
+  transform: translateX(10px);
+  opacity: 0;
 }
 </style>
