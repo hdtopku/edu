@@ -81,6 +81,13 @@
                       class="right"
                       @click="recover(item.username)"
                     >恢复</el-button>
+                    <el-popconfirm title="确定清除？" @confirm="clear(item.username)">
+                      <el-button
+                        v-if="item.status===1"
+                        class="right"
+                        slot="reference"
+                      >清除</el-button>
+                    </el-popconfirm>
                     <el-button
                       v-if="item.status===-1"
                       class="right"
@@ -266,6 +273,13 @@ c:/Windows/System32/Drivers/etc/hosts
       var params = {
         username: username,
         status: 1
+      }
+      this.setRes(params)
+    },
+    clear (username) {
+      var params = {
+        username: username,
+        status: 2
       }
       this.setRes(params)
     },
