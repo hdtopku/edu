@@ -12,8 +12,8 @@
         <div style="height: 50px">
           <transition name="slide-fade">
             <div v-if="showTip">
-              <i style="font-weight: bold;font-size: 10px;">若输入账号后，suspended 或 canceled ？</i>
-              <div> <span style="color: red">重启软件</span>即可</div>
+              <i style="font-weight: bold;font-size: 12px;">若输入账号后，suspended 或 canceled ？</i>
+              <div> <span style="font-size: 15px;color: red">重启软件</span>即可</div>
             </div>
           </transition>
         </div>
@@ -23,22 +23,23 @@
           v-clipboard:error="handleError"
           round
           plain
-          size="large"
+          size="medium"
           :type="buttonType"
           class="button"
           @click="doCopy"
+          style="font-size: 25px; width: 300px; height: 70px"
           >{{ msg }}</el-button
         >
 
         <p
           style="
-            margin: 3px auto;
+            margin: 5px auto;
             font-style: italic;
             color: gray;
-            font-size: 10px;
+            font-size: 15px;
           "
         >
-          <span style="color: red; font-weight: bold; font-size: 12px"
+          <span style="color: red; font-weight: bold; font-size: 20px"
             >今后</span
           >失效👆自行复制
         </p>
@@ -47,10 +48,10 @@
             margin: 0 auto;
             font-style: italic;
             color: gray;
-            font-size: 10px;
+            font-size: 12px;
           "
         >
-          （每天维护）
+          （自行收藏链接，账号每天维护）
         </p>
       </div>
       <!-- <span class="text">前往使用</span> -->
@@ -156,11 +157,11 @@ export default {
       this.buttonType = 'danger'
       setTimeout(() => {
         this.showTip = true
-      }, 800)
+      }, 300)
       setTimeout(() => {
         this.msg = '👉点我复制账号👈'
         this.buttonType = 'primary'
-      }, 20000)
+      }, 60000)
     },
     handleError (e) {
       this.openCenter(this.tryAgain)
