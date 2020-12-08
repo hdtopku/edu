@@ -81,7 +81,7 @@
                       class="right"
                       @click="recover(item.username)"
                     >恢复</el-button>
-                    <el-popconfirm title="确定清除？" @confirm="clear(item.username)">
+                    <el-popconfirm title="确定清除？" @onConfirm="clear(item.username)">
                       <el-button
                         v-if="item.status===1"
                         class="right"
