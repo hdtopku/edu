@@ -8,12 +8,13 @@
         />
       </div> -->
     <div v-if="isShow">
-      <div style="margin-top: 220px">
-        <div style="height: 50px">
+      <div style="margin-top: 210px">
+        <div style="height: 80px">
           <transition name="slide-fade">
             <div v-if="showTip">
-              <i style="font-weight: bold;font-size: 12px;">若输入账号后，suspended 或 canceled ？</i>
+              <i style="font-weight: bold;font-size: 12px;">若输入账密后，suspended 或 canceled ？</i>
               <div> <span style="font-size: 15px;color: red">重启软件</span>即可</div>
+              <div>客服Q：<el-button type="text" style="cursor:pointer;color:#539BD8;font-size: 15px;color: red" @click="doCopyV">1450948930<i class="iconfont">&#xe643;</i></el-button></div>
             </div>
           </transition>
         </div>
@@ -51,7 +52,7 @@
             font-size: 12px;
           "
         >
-          （自行收藏链接，账号每天维护）
+          （自行收藏链接，账密每天维护）
         </p>
       </div>
       <!-- <span class="text">前往使用</span> -->
@@ -137,13 +138,13 @@ export default {
   components: {},
   data () {
     return {
-      msg: '👉点我复制账号👈',
+      msg: '👉点我复制账密👈',
       k: '',
       isLoading: true,
       buttonType: 'primary',
       isShow: false,
       showImg: false,
-      copyText: '1450948930👈售后q',
+      copyText: '1450948930👈客服q',
       tryAgain: '复制失败',
       res: {},
       isDisplay: false,
@@ -152,14 +153,14 @@ export default {
   },
   methods: {
     handleSuccess (e = null) {
-      this.msg = '🚀 账号已复制到剪贴板'
+      this.msg = '🚀 账密已复制到剪贴板'
       // this.openCenter('<span style="color:red;">账号已复制</span>')
       this.buttonType = 'danger'
       setTimeout(() => {
         this.showTip = true
       }, 300)
       setTimeout(() => {
-        this.msg = '👉点我复制账号👈'
+        this.msg = '👉点我复制账密👈'
         this.buttonType = 'primary'
       }, 60000)
     },
@@ -221,8 +222,8 @@ export default {
       return null
     },
     doCopyV () {
-      this.$copyText('909335010').then()
-      this.openCenter(`<div style="color:red;font-size:20px;">909335010</div>群号已复制`)
+      this.$copyText('1450948930').then()
+      this.openCenter(`<div style="color:red;font-size:20px;">1450948930</div>Q号已复制`)
     }
   },
   mounted () {
@@ -251,7 +252,6 @@ export default {
   cursor: pointer;
 }
 .button {
-  /* margin-top: 10px; */
   position: relative;
   width: 250px;
   height: 50px;

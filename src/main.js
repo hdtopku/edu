@@ -25,7 +25,7 @@ Vue.directive('long-press', LongPress)
 Vue.use(ToggleButton)
 Vue.use(Toast, {
   type: 'center',
-  duration: 800,
+  duration: 2000,
   wordWrap: true,
   width: '150px'
 })
