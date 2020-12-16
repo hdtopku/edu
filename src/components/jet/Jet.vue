@@ -9,7 +9,7 @@
       </div> -->
     <div v-if="isShow">
       <div style="margin-top: 210px">
-        <div style="height: 80px">
+        <div style="height: 90px">
           <transition name="slide-fade">
             <div v-if="showTip">
               <i style="font-weight: bold;font-size: 12px;">若输入账密后，suspended 或 canceled ？</i>
@@ -28,6 +28,7 @@
           :type="buttonType"
           class="button"
           @click="doCopy"
+          :disabled="copyDisable"
           style="font-size: 25px; width: 300px; height: 70px"
           >{{ msg }}</el-button
         >
@@ -148,7 +149,8 @@ export default {
       tryAgain: '复制失败',
       res: {},
       isDisplay: false,
-      showTip: false
+      showTip: false,
+      copyDisable: false
     }
   },
   methods: {
@@ -156,12 +158,14 @@ export default {
       this.msg = '🚀 账密已复制到剪贴板'
       // this.openCenter('<span style="color:red;">账号已复制</span>')
       this.buttonType = 'danger'
+      this.copyDisable = true
       setTimeout(() => {
         this.showTip = true
       }, 300)
       setTimeout(() => {
         this.msg = '👉点我复制账密👈'
         this.buttonType = 'primary'
+        this.copyDisable = false
       }, 60000)
     },
     handleError (e) {
