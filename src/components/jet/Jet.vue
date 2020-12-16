@@ -166,7 +166,7 @@ export default {
         this.msg = '👉点我复制账密👈'
         this.buttonType = 'primary'
         this.copyDisable = false
-      }, 120000)
+      }, 180000)
     },
     handleError (e) {
       this.openCenter(this.tryAgain)
