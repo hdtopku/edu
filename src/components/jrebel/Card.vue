@@ -55,7 +55,7 @@ export default {
   },
   computed: {
     repairHref: function () {
-      return `http://api.mail.taojingling.cn/?words=${this.mails[0]},${this.mails[1]},${this.mails[2]}`
+      return `https://api.mail.taojingling.cn/?words=${this.mails[0]},${this.mails[1]},${this.mails[2]}`
     }
   },
   methods: {
