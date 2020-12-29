@@ -18,7 +18,7 @@
     >登出</el-link>
     <el-checkbox class="logout" v-model="needLogout" slot="append" size="mini"></el-checkbox>
     <el-input
-      placeholder="账密英文逗号分开"
+      placeholder="请输入内容"
       v-model="username"
       class="input-with-select"
       @keyup.enter.native="add"
@@ -29,12 +29,12 @@
       <el-tab-pane :name="tabsNames[tabIdx]" v-for="(tabData, tabIdx) in tabsNames" :key="tabIdx">
         <span slot="label">
           {{labels[tabIdx]}}
-          <!--          <span-->
-          <!--            v-if="tabIdx===0 && res.accounts"-->
-          <!--          >{{'(' + res.accounts.length + ')'}}</span>-->
-          <span v-if="tabIdx===0 && res.accountsMore">{{'(' + res.accountsMore.length + ')'}}</span>
-          <!--          <span v-if="tabIdx===1 && res.accountsEffect">{{'(' + res.accountsEffect.length + ')'}}</span>-->
-          <span v-if="tabIdx===1 && res.accountsDel">{{'(' + res.accountsDel.length + ')'}}</span>
+          <span
+            v-if="tabIdx===0 && res.accounts"
+          >{{'(' + res.accounts.length + ')'}}</span>
+          <span v-if="tabIdx===1 && res.accountsMore">{{'(' + res.accountsMore.length + ')'}}</span>
+          <span v-if="tabIdx===2 && res.accountsEffect">{{'(' + res.accountsEffect.length + ')'}}</span>
+          <span v-if="tabIdx===3 && res.accountsDel">{{'(' + res.accountsDel.length + ')'}}</span>
         </span>
 
         <el-row :gutter="20">
@@ -81,7 +81,7 @@
                       class="right"
                       @click="recover(item.username)"
                     >恢复</el-button>
-                    <el-popconfirm title="确定清除？" @confirm="clear(item.username)">
+                    <el-popconfirm title="确定清除？" @onConfirm="clear(item.username)">
                       <el-button
                         v-if="item.status===1"
                         class="right"
@@ -112,14 +112,14 @@ import { syncGetJetAcount, batchJetReg } from '../../api/mail'
 export default {
   data () {
     return {
-      activeName: 'second',
+      activeName: 'first',
       needLogout: false,
       username: '',
       password: '',
       res: {},
       allTabs: [],
-      tabsNames: ['second', 'fourth'],
-      labels: ['2次+', '已删'],
+      tabsNames: ['first', 'second', 'third', 'fourth'],
+      labels: ['2次', '2次+', '仓库', '已删'],
       accountsCopy: ['1', '2', '3'],
       options: [{
         value: -1,
@@ -237,17 +237,9 @@ c:/Windows/System32/Drivers/etc/hosts
       if (this.needLogout) {
         // this.logout()
       }
-      let params = {}
-      if (this.username.includes(',')) {
-        params = {
-          username: this.username.split(',')[0],
-          password: this.username.split(',')[1]
-        }
-      } else {
-        params = {
-          username: this.username,
-          password: 'Nobug996'
-        }
+      var params = {
+        username: this.username,
+        password: 'Nobug996'
       }
       this.setRes(params)
       this.username = ''
@@ -314,23 +306,21 @@ c:/Windows/System32/Drivers/etc/hosts
     },
     setRes (params = {}) {
       this.res = syncGetJetAcount(params).data
-      this.res.accountsMore = this.res.accounts.concat(this.res.accountsMore)
       this.allTabs = [
-        // this.res.accounts,
+        this.res.accounts,
         this.res.accountsMore,
-        // this.res.accountsEffect,
+        this.res.accountsEffect,
         this.res.accountsDel
       ]
       if (this.res.item.username) {
         if (this.res.item.status === -1) {
           this.res.accountsDel.unshift(this.res.item)
         } else if (this.res.item.status === 0) {
-          this.res.accountsMore.unshift(this.res.item)
-          // if (this.res.item.use_count > 1) {
-          //   this.res.accountsMore.unshift(this.res.item)
-          // } else {
-          //   this.res.accounts.unshift(this.res.item)
-          // }
+          if (this.res.item.use_count > 1) {
+            this.res.accountsMore.unshift(this.res.item)
+          } else {
+            this.res.accounts.unshift(this.res.item)
+          }
         } else if (this.res.item.status === 1) {
           this.res.accountsDel.unshift(this.res.item)
         }
