@@ -42,7 +42,7 @@
           class="tooltip"
         ></tooltip>
         <div class="mail" @click="doCopy(item.short_link, item.link)">{{item.short_link || item.id}}</div>
-        <div class="time">{{item.update_time}} {{item.chinese_name}}</div>
+        <div class="time">{{item.update_time}} | {{item.create_time.substring(0, 10)}} | {{item.chinese_name}}</div>
       </el-row>
     </el-card>
     <el-button :loading="isLoading" plain round class="batch-use" @click="clickBatchUse">使用10条</el-button>
