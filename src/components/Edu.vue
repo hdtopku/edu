@@ -58,6 +58,7 @@ export default {
         `1、激活码填入：http://jrebel.taojingling.cn/${uuid}
 2、激活邮箱填入：active@jrebel.cn
 3、教程：https://cloud.video.taobao.com/play/u/2144650844/p/2/e/6/t/1/293114225328.mp4
+小店还提供jet账号激活，质保一年，需要可联系客服
 `
       // 3、教程：https://item.taobao.com/item.htm?id=618776356415
 
