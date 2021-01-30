@@ -148,8 +148,12 @@ export default {
       }
     },
     search () {
-      if (this.input && this.input.startsWith('https://email.myunidays.com/system/clicked-ul')) {
-        this.updateAM({ link: this.input })
+      if (this.input) {
+        let idx = this.input.indexOf('https://email.myunidays.com/system/clicked-ul')
+        if (idx >= 0) {
+          this.input = this.input.substring(idx)
+          this.updateAM({ link: this.input })
+        }
       } else {
         this.updateAM()
       }
