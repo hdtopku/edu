@@ -189,9 +189,9 @@ export default {
     }
   },
   mounted () {
-    getMails().then((res) => {
-      this.setMails(res.data)
-    })
+    // getMails().then((res) => {
+    //   this.setMails(res.data)
+    // })
   },
   methods: {
     onClick: function (oldMail, index) {

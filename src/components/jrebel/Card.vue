@@ -51,7 +51,7 @@ export default {
     }
   },
   mounted () {
-    this.initMail()
+    // this.initMail()
   },
   computed: {
     repairHref: function () {
