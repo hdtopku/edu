@@ -230,7 +230,7 @@ c:/Windows/System32/Drivers/etc/hosts
         this.value = -1
       }, 10)
     },
-    openCenter: function (text = 'copied!') {
+    openCenter: function (text = '已复制！') {
       this.$toast.top(text)
     },
     add () {

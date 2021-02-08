@@ -186,7 +186,7 @@ export default {
       // fail
       })
     },
-    openCenter: function (Text = 'copied!') {
+    openCenter: function (Text = '已复制！') {
       this.$toast.top(Text)
     },
     getQR: function () {

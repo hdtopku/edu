@@ -216,7 +216,7 @@ export default {
         }
       })
     },
-    openCenter: function (text = 'copied!') {
+    openCenter: function (text = '已复制！') {
       this.$toast.top(text)
     },
     getQueryString (name) {

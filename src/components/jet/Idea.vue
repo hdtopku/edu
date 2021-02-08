@@ -63,7 +63,7 @@ export default {
     handleError (e) {
       this.openCenter(this.tryAgain)
     },
-    openCenter: function (text = 'copied!') {
+    openCenter: function (text = '已复制！') {
       this.$toast.top(text)
     },
     getJ (count = 1) {

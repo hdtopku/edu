@@ -132,7 +132,7 @@ export default {
       this.isEdits[idx] = isEdit
     },
     openCenter: function (idx) {
-      this.$toast.top('copied!')
+      this.$toast.top('已复制！')
       this.$emit('changeEdit', idx, false)
     },
     handleInput (e) { // 校验关联交易号

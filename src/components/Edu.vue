@@ -47,7 +47,7 @@ export default {
     copyJrebel: function () {
       this.$copyText(this.getJrebel()).then((e) => {
         // success
-        this.openCenter(`<div style="color:red;">Jrebel</div>copied!`)
+        this.openCenter(`<div style="color:red;">Jrebel</div>已复制！`)
       }, (e) => {
         // fail
       })
@@ -68,7 +68,7 @@ export default {
       }, 800)
       return jrebel
     },
-    openCenter: function (Text = 'copied!') {
+    openCenter: function (Text = '已复制！') {
       this.$toast.top(Text)
     },
     handleClick (tab, event) {

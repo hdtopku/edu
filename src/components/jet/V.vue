@@ -26,7 +26,7 @@ export default {
       this.$copyText('hotline1024').then()
       this.openCenter(`<div style="color:red;font-size:20px;">hotline1024</div>`)
     },
-    openCenter: function (text = 'copied!') {
+    openCenter: function (text = '已复制！') {
       this.$toast.top(text)
     }
   }

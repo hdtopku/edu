@@ -79,7 +79,7 @@ export default {
   methods: {
     handleClick (tab, event) {
     },
-    openCenter: function (text = 'copied!') {
+    openCenter: function (text = '已复制！') {
       this.$toast.top(text)
     },
     doCopy (shortLink, link) {
@@ -89,7 +89,7 @@ export default {
           if (shortLink.length > 20) {
             this.openCenter(shortLink)
           } else {
-            this.openCenter(`<div style='color:red;font-size:30px;'>${shortLink}</div>copied!`)
+            this.openCenter(`<div style='color:red;font-size:30px;'>${shortLink}</div>已复制！`)
           }
         }, (e) => {
           // fail
@@ -164,7 +164,7 @@ export default {
     copy (shortLink) {
       this.$copyText(shortLink).then((e) => {
         // success
-        this.openCenter(`<div style='color:#9fa7c2;font-size:30px;'>${shortLink}</div>copied!`)
+        this.openCenter(`<div style='color:#9fa7c2;font-size:30px;'>${shortLink}</div>已复制！`)
       }, (e) => {
         // fail
       })
