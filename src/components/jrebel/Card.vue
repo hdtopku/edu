@@ -20,7 +20,7 @@
             <i v-if="isLoading" class="iconfont icon-loading loading"></i>
             <div v-if="!isEdits[idx] && mail" class="button">random</div>
             <div v-if="!isEdits[idx] && !mail && !inputMail" class="button">add</div>
-            <div v-if="isEdits[idx] && inputMail == ''" class="button">delete</div>
+            <div v-if="isEdits[idx] && inputMail === ''" class="button">delete</div>
             <div v-if="isEdits[idx] && mail && inputMail" class="button">replace</div>
           </div>
         </div>

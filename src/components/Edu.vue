@@ -1,6 +1,7 @@
 <template>
   <div style="min-height:68vh;">
-    <card></card>
+<!--    <card></card>-->
+    <sisu-card style="margin-bottom: 30px"></sisu-card>
     <el-button
       type="plain"
       class="iconfont icon-rocket jrebel"
@@ -29,6 +30,7 @@ import Jrebel from './jrebel/Jrebel.vue'
 import Itchat from './itchat/Itchat.vue'
 import Card from './jrebel/Card'
 import Idea from './jet/Idea'
+import SisuCard from './jrebel/SisuCard'
 
 export default {
   components: {
@@ -36,7 +38,8 @@ export default {
     Jrebel,
     Itchat,
     Card,
-    Idea
+    Idea,
+    SisuCard
   },
   data () {
     return {

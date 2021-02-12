@@ -25,3 +25,5 @@ export const syncGetJetCode = (params = {}) => http.ajaxFetch('/am/jc', params, 
 export const syncGetJetAcount = (params = {}) => http.ajaxFetch('/am/ja', params)
 
 export const batchJetReg = (params = {}) => http.fetchGet('/am/jb', params)
+
+export const changeSisuMail = (params = {}) => http.fetchGet('/smail', params)
