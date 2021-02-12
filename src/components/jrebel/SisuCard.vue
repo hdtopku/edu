@@ -4,7 +4,7 @@
       更换
     </el-button>
     <el-button v-for="(item,idx) in sisuMails" :key="idx" class="sisu-button" @click="openCenter(item)">
-      {{ item.substring(4, 12) }}
+      {{ item }}
     </el-button>
   </el-card>
 </template>
@@ -29,6 +29,7 @@ export default {
     changeSisuMail () {
       changeSisuMail({change: 1}).then(res => {
         this.sisuMails = res.split(',')
+        this.$toast.top('已更换！')
       })
     },
     openCenter: function (item) {
@@ -43,6 +44,6 @@ export default {
 <style>
 .sisu-button{
   text-align: center;
-  margin: 5px;
+  margin: 5px 0;
 }
 </style>
