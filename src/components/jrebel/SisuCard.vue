@@ -4,16 +4,25 @@
       <el-button class="sisu-change" size="mini" type="primary" @click="changeSisuMail">
         更换
       </el-button>
-      <el-switch
-        v-model="sisuType"
-        :active-value="2015"
-        :inactive-value="2020"
-        active-text="收费"
-        class="sisu-type"
-        inactive-color="#D8D8D8"
-        inactive-text="免费"
-        @change="changeType"
-      ></el-switch>
+<!--      <el-switch-->
+<!--        v-model="sisuType"-->
+<!--        :active-value="2015"-->
+<!--        :inactive-value="2020"-->
+<!--        active-text="收费"-->
+<!--        class="sisu-type"-->
+<!--        inactive-color="#D8D8D8"-->
+<!--        inactive-text="免费"-->
+<!--        @change="changeType"-->
+<!--      ></el-switch>-->
+      <el-select v-model="sisuType" placeholder="请选择" @change="changeType" clearable>
+        <el-option
+          v-for="item in eduOptions"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value"
+          >
+        </el-option>
+      </el-select>
     </div>
     <div class="mails-button">
       <el-button v-for="(item,idx) in sisuMails" :key="idx" class="mail-button" size="mini" @click="openCenter(item)">
@@ -31,14 +40,22 @@ export default {
   data () {
     return {
       sisuMails: [],
-      sisuType: ''
+      sisuType: 0,
+      eduOptions: [{
+        value: 1,
+        label: '1、川外免费'
+      }, {
+        value: 2,
+        label: '2、川外收费'
+      }, {
+        value: 3,
+        label: '3、湖中医求稳'
+      }]
     }
   },
   created () {
     this.sisuType = getStore('sisuType')
-    if (this.sisuType !== 2015) {
-      this.sisuType = 2020
-    }
+    console.log(this.sisuType)
     this.getSisuMail()
   },
   methods: {
@@ -59,6 +76,7 @@ export default {
       })
     },
     changeType () {
+      console.log(this.sisuType)
       setStore('sisuType', this.sisuType)
       this.getSisuMail()
     }
@@ -67,6 +85,10 @@ export default {
 </script>
 
 <style>
+.mail-card {
+  min-height: 100px;
+  height: auto;
+}
 .sisu-operate {
   display: flex;
   justify-content: space-between;
