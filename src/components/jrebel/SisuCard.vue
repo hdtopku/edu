@@ -43,13 +43,16 @@ export default {
       sisuType: 0,
       eduOptions: [{
         value: 1,
-        label: '1、窗外免费'
+        label: '1、窗外【免费】'
       }, {
         value: 2,
-        label: '2、窗外收费'
+        label: '2、窗外【晓飞】'
       }, {
-        value: 3,
-        label: '3、老中医求稳'
+        value: 10,
+        label: '2、窗外【收费】'
+      }, {
+        value: 30,
+        label: '3、老中医【求稳】'
       }]
     }
   },
