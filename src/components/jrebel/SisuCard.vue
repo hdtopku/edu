@@ -43,13 +43,13 @@ export default {
       sisuType: 0,
       eduOptions: [{
         value: 1,
-        label: '1、川外免费'
+        label: '1、窗外免费'
       }, {
         value: 2,
-        label: '2、川外收费'
+        label: '2、窗外收费'
       }, {
         value: 3,
-        label: '3、湖中医求稳'
+        label: '3、老中医求稳'
       }]
     }
   },
@@ -61,6 +61,7 @@ export default {
     getSisuMail () {
       changeSisuMail({type: this.sisuType}).then(res => {
         this.sisuMails = res.split(',')
+        this.$toast.top('已获取！')
       })
     },
     changeSisuMail () {
@@ -77,7 +78,6 @@ export default {
     changeType () {
       setStore('sisuType', this.sisuType)
       this.getSisuMail()
-      this.$toast.top('换校成功！')
     }
   }
 }
