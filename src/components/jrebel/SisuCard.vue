@@ -4,23 +4,23 @@
       <el-button class="sisu-change" size="mini" type="primary" @click="changeSisuMail">
         更换
       </el-button>
-<!--      <el-switch-->
-<!--        v-model="sisuType"-->
-<!--        :active-value="2015"-->
-<!--        :inactive-value="2020"-->
-<!--        active-text="收费"-->
-<!--        class="sisu-type"-->
-<!--        inactive-color="#D8D8D8"-->
-<!--        inactive-text="免费"-->
-<!--        @change="changeType"-->
-<!--      ></el-switch>-->
-      <el-select v-model="sisuType" placeholder="请选择" @change="changeType" clearable>
+      <!--      <el-switch-->
+      <!--        v-model="sisuType"-->
+      <!--        :active-value="2015"-->
+      <!--        :inactive-value="2020"-->
+      <!--        active-text="收费"-->
+      <!--        class="sisu-type"-->
+      <!--        inactive-color="#D8D8D8"-->
+      <!--        inactive-text="免费"-->
+      <!--        @change="changeType"-->
+      <!--      ></el-switch>-->
+      <el-select v-model="sisuType" clearable placeholder="请选择" @change="changeType">
         <el-option
           v-for="item in eduOptions"
           :key="item.value"
           :label="item.label"
           :value="item.value"
-          >
+        >
         </el-option>
       </el-select>
     </div>
@@ -55,7 +55,6 @@ export default {
   },
   created () {
     this.sisuType = getStore('sisuType')
-    console.log(this.sisuType)
     this.getSisuMail()
   },
   methods: {
@@ -67,7 +66,7 @@ export default {
     changeSisuMail () {
       changeSisuMail({change: 1, type: this.sisuType}).then(res => {
         this.sisuMails = res.split(',')
-        this.$toast.top('已更换！')
+        this.$toast.top('已更新！')
       })
     },
     openCenter: function (item) {
@@ -76,9 +75,9 @@ export default {
       })
     },
     changeType () {
-      console.log(this.sisuType)
       setStore('sisuType', this.sisuType)
       this.getSisuMail()
+      this.$toast.top('换校成功！')
     }
   }
 }
@@ -86,9 +85,10 @@ export default {
 
 <style>
 .mail-card {
-  min-height: 100px;
+  min-height: 110px;
   height: auto;
 }
+
 .sisu-operate {
   display: flex;
   justify-content: space-between;
