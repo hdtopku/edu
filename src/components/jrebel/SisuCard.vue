@@ -58,7 +58,9 @@ export default {
   },
   created () {
     this.sisuType = getStore('sisuType')
-    this.getSisuMail()
+    changeSisuMail({type: this.sisuType}).then(res => {
+      this.sisuMails = res.split(',')
+    })
   },
   methods: {
     getSisuMail () {
