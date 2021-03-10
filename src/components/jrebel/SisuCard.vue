@@ -58,15 +58,12 @@ export default {
   },
   created () {
     this.sisuType = getStore('sisuType')
-    changeSisuMail({type: this.sisuType}).then(res => {
-      this.sisuMails = res.split(',')
-    })
+    this.getSisuMail()
   },
   methods: {
     getSisuMail () {
       changeSisuMail({type: this.sisuType}).then(res => {
         this.sisuMails = res.split(',')
-        this.$toast.top('已获取！')
       })
     },
     changeSisuMail () {
