@@ -22,7 +22,7 @@
             :style="disabledStyle ? '': 'color:red;'"
           >{{unUsed.length}}</span>
         </el-button>
-        <el-button slot="append" @click="search">新增/查询</el-button>
+        <el-button slot="append" @click="search">新增</el-button>
       </el-input>
     </div>
     <el-card
@@ -202,8 +202,8 @@ export default {
   font-size: 40px;
 }
 .el-select {
-  width: 100px;
-  margin-right: 20px;
+  width: 85px;
+  margin-right: 25px;
 }
 .input-with-select .el-input-group__prepend {
   background-color: #fff;
