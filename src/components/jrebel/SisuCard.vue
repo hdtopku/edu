@@ -47,10 +47,12 @@ export default {
       }, {
         value: 2,
         label: '2、窗外【晓飞】'
-      }, {
-        value: 10,
-        label: '2、窗外【收费】'
-      }, {
+      },
+      //   {
+      //   value: 10,
+      //   label: '2、窗外【收费】'
+      // },
+      {
         value: 30,
         label: '3、老中医【求稳】'
       }]
