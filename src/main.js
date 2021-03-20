@@ -14,9 +14,9 @@ import LongPress from 'vue-directive-long-press'
 // import 'element-ui/lib/theme-chalk/index.css'
 import VueClipboard from 'vue-clipboard2'
 
-import { Button, Select, TabPane, Link, Tabs, Timeline, TimelineItem, Input, Option, Row, Col, Popover, Card, Switch, Checkbox, Popconfirm } from 'element-ui'
+import { Button, Select, TabPane, Link, Tabs, Timeline, TimelineItem, Input, Option, Row, Col, Popover, Card, Switch, Checkbox, Popconfirm, Tag } from 'element-ui'
 Vue.use(Button).use(Select).use(TabPane).use(Link).use(Tabs).use(Timeline).use(TimelineItem).use(Input)
-  .use(Option).use(Row).use(Col).use(Popover).use(Card).use(Switch).use(Checkbox).use(Popconfirm)
+  .use(Option).use(Row).use(Col).use(Popover).use(Card).use(Switch).use(Checkbox).use(Popconfirm).use(Tag)
 Vue.prototype.$ELEMENT = { size: 'small', zIndex: 3000 }
 
 // Vue.use(Element, { size: 'small', zIndex: 3000 })

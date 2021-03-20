@@ -4,17 +4,7 @@
       <el-button class="sisu-change" size="mini" type="primary" @click="changeSisuMail">
         更换
       </el-button>
-      <!--      <el-switch-->
-      <!--        v-model="sisuType"-->
-      <!--        :active-value="2015"-->
-      <!--        :inactive-value="2020"-->
-      <!--        active-text="收费"-->
-      <!--        class="sisu-type"-->
-      <!--        inactive-color="#D8D8D8"-->
-      <!--        inactive-text="免费"-->
-      <!--        @change="changeType"-->
-      <!--      ></el-switch>-->
-      <el-select v-model="sisuType" clearable placeholder="请选择" @change="changeType">
+      <el-select v-model="sisuType" clearable placeholder="请选择" @change="changeType" size="mini">
         <el-option
           v-for="item in eduOptions"
           :key="item.value"
@@ -25,9 +15,12 @@
       </el-select>
     </div>
     <div class="mails-button">
-      <el-button v-for="(item,idx) in sisuMails" :key="idx" class="mail-button" size="mini" @click="openCenter(item)">
-        {{ item.substring(4, item.indexOf('@')) }}
+      <el-button :type="item.count === 0 ? 'success' : ''" v-for="(item,idx) in sisuMails" :key="idx" class="mail-button" size="mini" @click="openCenter(item)" plain>
+        {{ item.mail.substring(4, item.mail.indexOf('@')) }}
       </el-button>
+      <el-popconfirm v-if="useCount > 0" confirm-button-text='清零' cancel-button-text='取消' title="是否清零？" @confirm="clearCount">
+        <el-tag slot="reference" class="tag" type="success">{{useCount}}</el-tag>
+      </el-popconfirm>
     </div>
   </el-card>
 </template>
@@ -41,6 +34,7 @@ export default {
     return {
       sisuMails: [],
       sisuType: 0,
+      useCount: 0,
       eduOptions: [{
         value: 1,
         label: '1、窗外【免费】'
@@ -60,28 +54,53 @@ export default {
   },
   created () {
     this.sisuType = getStore('sisuType')
+    this.useCount = getStore('useCount' + this.sisuType) || 0
     this.getSisuMail()
   },
   methods: {
     getSisuMail () {
       changeSisuMail({type: this.sisuType}).then(res => {
-        this.sisuMails = res.split(',')
+        this.sisuMails = []
+        this.useCount = getStore('useCount' + this.sisuType) || 0
+        res.split(',').forEach(mail => {
+          this.sisuMails.push({
+            mail,
+            count: 0
+          })
+        })
       })
     },
     changeSisuMail () {
       changeSisuMail({change: 1, type: this.sisuType}).then(res => {
-        this.sisuMails = res.split(',')
+        this.sisuMails = []
+        this.useCount = getStore('useCount' + this.sisuType) || 0
+        res.split(',').forEach(mail => {
+          this.sisuMails.push({
+            mail,
+            count: 0
+          })
+        })
         this.$toast.top('已更新！')
       })
     },
     openCenter: function (item) {
       this.$copyText(item).then((e) => {
-        this.$toast.top(item + '已复制！')
+        this.$toast.top(item.mail + '已复制！')
+        if (item.count === 0) {
+          item.count += 1
+          this.useCount += 1
+        }
+        setStore('useCount' + this.sisuType, this.useCount)
       })
     },
     changeType () {
       setStore('sisuType', this.sisuType)
       this.getSisuMail()
+    },
+    clearCount () {
+      this.useCount = 0
+      this.changeSisuMail()
+      setStore('useCount' + this.sisuType, this.useCount)
     }
   }
 }
@@ -107,5 +126,11 @@ export default {
 
 .mail-button {
   margin-top: 10px;
+}
+.tag {
+  position: absolute;
+  right: 15px;
+  top: 90px;
+  cursor: pointer;
 }
 </style>
