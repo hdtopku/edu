@@ -137,10 +137,10 @@ export default {
 .tag {
   position: absolute;
   right: 12px;
-  top: 60px;
+  top: 130px;
   cursor: pointer;
   font-weight: bolder;
-  font-size: 40px;
+  font-size: 50px;
   color: #67C23A;
   padding: 0 5px;
 }
