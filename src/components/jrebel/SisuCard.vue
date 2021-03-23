@@ -20,7 +20,7 @@
         {{ item.mail.substring(4, item.mail.indexOf('@')) }}
       </el-button>
       <el-popconfirm v-if="useCount > 0" confirm-button-text='清零' cancel-button-text='取消' title="是否清零？" @confirm="clearCount">
-        <el-tag slot="reference" class="tag" type="success">{{useCount}}</el-tag>
+        <span slot="reference" class="tag">{{useCount}}</span>
       </el-popconfirm>
     </div>
   </el-card>
@@ -136,8 +136,12 @@ export default {
 }
 .tag {
   position: absolute;
-  right: 15px;
-  top: 90px;
+  right: 12px;
+  top: 60px;
   cursor: pointer;
+  font-weight: bolder;
+  font-size: 40px;
+  color: #67C23A;
+  padding: 0 5px;
 }
 </style>
