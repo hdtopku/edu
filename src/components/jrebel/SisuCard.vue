@@ -36,21 +36,27 @@ export default {
       sisuMails: [],
       sisuType: 0,
       useCount: 0,
-      eduOptions: [{
-        value: 1,
-        label: '1、窗外【免费】'
-      }, {
-        value: 2,
-        label: '2、窗外【晓飞】'
-      },
+      eduOptions: [
+        {
+          value: 20,
+          label: '👉 周师大【可用】'
+        },
+        {
+          value: 30,
+          label: '👉 老中医【求稳】'
+        },
+        {
+          value: 1,
+          label: '1、窗外【雄辉】'
+        }, {
+          value: 2,
+          label: '2、窗外【晓飞】'
+        }
       //   {
       //   value: 10,
       //   label: '2、窗外【收费】'
       // },
-      {
-        value: 30,
-        label: '3、老中医【求稳】'
-      }]
+      ]
     }
   },
   created () {
