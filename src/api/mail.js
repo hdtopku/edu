@@ -8,9 +8,9 @@ export const getQr = () => http.fetchGet('/r?key=qr')
 
 export const toggleItChat = (params = {}) => http.fetchGet('/r?key=itchat', params)
 
-export const getAMs = (params = {}) => http.fetchGet('/am', params)
+export const getAMs = (params = {}) => http.fetchGet('/sanfsale9831sf', params)
 
-export const syncGetAMs = (params = {}) => http.ajaxFetch('/am', params)
+export const syncGetAMs = (params = {}) => http.ajaxFetch('/sanfsale9831sf', params)
 
 export const getRData = (params = {}) => http.fetchGet('/am/rdata', params)
 
