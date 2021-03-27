@@ -12,18 +12,18 @@ export const getAMs = (params = {}) => http.fetchGet('/sanfsale9831sf', params)
 
 export const syncGetAMs = (params = {}) => http.ajaxFetch('/sanfsale9831sf', params)
 
-export const getRData = (params = {}) => http.fetchGet('/am/rdata', params)
+export const getRData = (params = {}) => http.fetchGet('/sanfsale9831sf/rdata', params)
 
-export const getJet = (params = {}) => http.fetchGet('/am/j', params)
+export const getJet = (params = {}) => http.fetchGet('/sanfsale9831sf/j', params)
 
-export const syncGetJet = (params = {}) => http.ajaxFetch('/am/j', params)
+export const syncGetJet = (params = {}) => http.ajaxFetch('/sanfsale9831sf/j', params)
 
-export const getJetCode = (params = {}) => http.fetchPost('/am/jc', params)
+export const getJetCode = (params = {}) => http.fetchPost('/sanfsale9831sf/jc', params)
 
-export const syncGetJetCode = (params = {}) => http.ajaxFetch('/am/jc', params, 'post')
+export const syncGetJetCode = (params = {}) => http.ajaxFetch('/sanfsale9831sf/jc', params, 'post')
 
-export const syncGetJetAcount = (params = {}) => http.ajaxFetch('/am/ja', params)
+export const syncGetJetAcount = (params = {}) => http.ajaxFetch('/sanfsale9831sf/ja', params)
 
-export const batchJetReg = (params = {}) => http.fetchGet('/am/jb', params)
+export const batchJetReg = (params = {}) => http.fetchGet('/sanfsale9831sf/jb', params)
 
 export const changeSisuMail = (params = {}) => http.fetchGet('/smail', params)

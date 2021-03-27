@@ -12,7 +12,7 @@ export default new Router({
       component: (resolve) => require(['@/components/applemusic/AM'], resolve)
     },
     {
-      path: '/crack168',
+      path: '/crack168crack1688',
       name: 'edu',
       component: (resolve) => require(['@/components/Edu'], resolve)
     },
