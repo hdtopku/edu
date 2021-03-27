@@ -8,22 +8,22 @@ export const getQr = () => http.fetchGet('/r?key=qr')
 
 export const toggleItChat = (params = {}) => http.fetchGet('/r?key=itchat', params)
 
-export const getAMs = (params = {}) => http.fetchGet('/hdanewom', params)
+export const getAMs = (params = {}) => http.fetchGet('/am', params)
 
-export const syncGetAMs = (params = {}) => http.ajaxFetch('/hdanewom', params)
+export const syncGetAMs = (params = {}) => http.ajaxFetch('/am', params)
 
-export const getRData = (params = {}) => http.fetchGet('/hdanewom/rdata', params)
+export const getRData = (params = {}) => http.fetchGet('/am/rdata', params)
 
-export const getJet = (params = {}) => http.fetchGet('/hdanewom/j', params)
+export const getJet = (params = {}) => http.fetchGet('/am/j', params)
 
-export const syncGetJet = (params = {}) => http.ajaxFetch('/hdanewom/j', params)
+export const syncGetJet = (params = {}) => http.ajaxFetch('/am/j', params)
 
-export const getJetCode = (params = {}) => http.fetchPost('/hdanewom/jc', params)
+export const getJetCode = (params = {}) => http.fetchPost('/am/jc', params)
 
-export const syncGetJetCode = (params = {}) => http.ajaxFetch('/hdanewom/jc', params, 'post')
+export const syncGetJetCode = (params = {}) => http.ajaxFetch('/am/jc', params, 'post')
 
-export const syncGetJetAcount = (params = {}) => http.ajaxFetch('/hdanewom/ja', params)
+export const syncGetJetAcount = (params = {}) => http.ajaxFetch('/am/ja', params)
 
-export const batchJetReg = (params = {}) => http.fetchGet('/hdanewom/jb', params)
+export const batchJetReg = (params = {}) => http.fetchGet('/am/jb', params)
 
 export const changeSisuMail = (params = {}) => http.fetchGet('/smail', params)
