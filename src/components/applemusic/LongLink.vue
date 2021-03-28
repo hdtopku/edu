@@ -140,9 +140,9 @@ export default {
     clickBatchUse () {
       if (this.select > 0) {
         this.updateAM({ 'operator_id': this.select, 'status': 2, 'count': 10 })
-        // setTimeout(() => {
-        //   this.updateAM()
-        // }, 6000)
+        setTimeout(() => {
+          this.$router.go(0)
+        }, 4500)
       } else {
         this.openCenter('请选择角色')
       }
@@ -153,6 +153,9 @@ export default {
         if (idx >= 0) {
           this.input = this.input.substring(idx)
           this.updateAM({ link: this.input })
+          setTimeout(() => {
+            this.$router.go(0)
+          }, 2500)
         }
       } else {
         this.updateAM()
