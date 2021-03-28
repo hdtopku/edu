@@ -122,9 +122,6 @@ export default {
           }
         })
         this.doCopy(`<div style="color:red;font-size:25px;">${this.items.length}条长链</div>复制成功`, links.join('\r\n'))
-        setTimeout(() => {
-          this.$router.go(0)
-        }, 3500)
       }
       this.operator = res.data.operator
       this.input = ''
@@ -146,6 +143,9 @@ export default {
       } else {
         this.openCenter('请选择角色')
       }
+      setTimeout(() => {
+        this.$router.go(0)
+      }, 3500)
     },
     search () {
       if (this.input) {
@@ -155,7 +155,7 @@ export default {
           this.updateAM({ link: this.input })
           setTimeout(() => {
             this.$router.go(0)
-          }, 2500)
+          }, 5000)
         }
       } else {
         this.updateAM()
