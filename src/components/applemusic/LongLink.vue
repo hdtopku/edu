@@ -84,7 +84,7 @@ export default {
     },
     doCopy (shortLink, link) {
       setTimeout(() => {
-        this.$copyText(link).then((e) => {
+        this.$copyText(link + '\r\n').then((e) => {
           // success
           if (shortLink.length > 20) {
             this.openCenter(shortLink)
