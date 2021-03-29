@@ -142,6 +142,7 @@ export default {
   font-weight: bolder;
   font-size: 50px;
   color: #67C23A;
-  padding: 0 12px;
+  z-index: 9;
+  padding: 0 5px;
 }
 </style>
