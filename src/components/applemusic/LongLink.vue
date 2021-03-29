@@ -83,7 +83,7 @@ export default {
       this.$toast.top(text)
     },
     doCopy (shortLink, link) {
-      for (let i = 0; i < 10; i++) {
+      for (let i = 0; i < 3; i++) {
         setTimeout(() => {
           this.$copyText(link).then((e) => {
             // success
