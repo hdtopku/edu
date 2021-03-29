@@ -83,19 +83,21 @@ export default {
       this.$toast.top(text)
     },
     doCopy (shortLink, link) {
-      setTimeout(() => {
-        this.$copyText(link).then((e) => {
-          // success
-          if (shortLink.length > 20) {
-            this.openCenter(shortLink)
-          } else {
-            this.openCenter(`<div style='color:red;font-size:30px;'>${shortLink}</div>已复制！`)
-          }
-        }, (e) => {
-          // fail
-          this.doCopy(shortLink, link)
-        })
-      }, 20)
+      for (let i = 0; i < 10; i++) {
+        setTimeout(() => {
+          this.$copyText(link).then((e) => {
+            // success
+            if (shortLink.length > 20) {
+              this.openCenter(shortLink)
+            } else {
+              this.openCenter(`<div style='color:red;font-size:30px;'>${shortLink}</div>已复制！`)
+            }
+          }, (e) => {
+            // fail
+            this.doCopy(shortLink, link)
+          })
+        }, 20)
+      }
     },
     updateAM (params = {}) {
       this.isLoading = true
@@ -155,7 +157,7 @@ export default {
           this.updateAM({ link: this.input })
           setTimeout(() => {
             this.$router.go(0)
-          }, 5000)
+          }, 4500)
         }
       } else {
         this.updateAM()
