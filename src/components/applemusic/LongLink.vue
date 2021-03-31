@@ -102,6 +102,9 @@ export default {
     },
     updateAM (params = {}) {
       this.isShow = false
+      this.$nextTick(() => {
+        this.isShow = true
+      })
       this.isLoading = true
       if (this.select !== '' && this.select !== 0) {
         params['operator_id'] = this.select
@@ -131,7 +134,6 @@ export default {
       this.input = ''
       this.placeholder = `今：${res.data.usedLength}；昨：${res.data.yesterdayUsedLength}`
       this.isLoading = false
-      this.isShow = true
     },
     clickRecycle (id) {
       this.updateAM({ id, status: 3 })
