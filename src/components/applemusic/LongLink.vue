@@ -145,9 +145,6 @@ export default {
       } else {
         this.openCenter('请选择角色')
       }
-      setTimeout(() => {
-        this.$router.go(0)
-      }, 3500)
     },
     search () {
       if (this.input) {
@@ -155,9 +152,6 @@ export default {
         if (idx >= 0) {
           this.input = this.input.substring(idx)
           this.updateAM({ link: this.input })
-          setTimeout(() => {
-            this.$router.go(0)
-          }, 4500)
         }
       } else {
         this.updateAM()
