@@ -7,6 +7,7 @@
         @keyup.enter.native="search"
         class="input-with-select"
         clearable
+        v-if="showInput"
       >
         <el-select v-model="select" slot="prepend" placeholder="请选择">
           <el-option
@@ -51,7 +52,7 @@
 
 <script>
 import Tooltip from './Tooltip'
-import { syncGetAMs } from '../../api/mail'
+import { syncGetAMs, getAMs } from '../../api/mail'
 import { setStore, getStore } from '../../api/storage'
 export default {
   components: { Tooltip },
@@ -73,7 +74,8 @@ export default {
       operator: [],
       placeholder: '',
       input: '',
-      isLoading: false
+      isLoading: false,
+      showInput: true
     }
   },
   methods: {
@@ -100,35 +102,39 @@ export default {
       }
     },
     updateAM (params = {}) {
-      this.isLoading = true
-      if (this.select !== '' && this.select !== 0) {
-        params['operator_id'] = this.select
-      }
-      this.isLoading = true
-      const res = syncGetAMs(params)
-      this.unUsed = res.data.unUsed
-      this.using = res.data.using
-      this.used = res.data.used
-      this.recycle = res.data.recycle
-      this.allUse = this.recycle.concat(this.using)
-      this.items = res.data.item
-      // this.tabs[0].label = '已使用(' + res.data.usedLength + ')'
-      this.all = this.allUse.concat(this.used)
-      if (this.items.length > 0) {
-        this.all = this.items.concat(this.all)
-        let links = []
-        this.items.forEach(element => {
-          links.push(element['link'])
-          if (element.status === 0) {
-            this.unUsed.push(element)
-          }
-        })
-        this.doCopy(`<div style="color:red;font-size:25px;">${this.items.length}条长链</div>复制成功`, links.join('\r\n'))
-      }
-      this.operator = res.data.operator
-      this.input = ''
-      this.placeholder = `今：${res.data.usedLength}；昨：${res.data.yesterdayUsedLength}`
-      this.isLoading = false
+      getAMs().then(() => {
+        this.showInput = false
+        this.isLoading = true
+        if (this.select !== '' && this.select !== 0) {
+          params['operator_id'] = this.select
+        }
+        this.isLoading = true
+        const res = syncGetAMs(params)
+        this.unUsed = res.data.unUsed
+        this.using = res.data.using
+        this.used = res.data.used
+        this.recycle = res.data.recycle
+        this.allUse = this.recycle.concat(this.using)
+        this.items = res.data.item
+        // this.tabs[0].label = '已使用(' + res.data.usedLength + ')'
+        this.all = this.allUse.concat(this.used)
+        if (this.items.length > 0) {
+          this.all = this.items.concat(this.all)
+          let links = []
+          this.items.forEach(element => {
+            links.push(element['link'])
+            if (element.status === 0) {
+              this.unUsed.push(element)
+            }
+          })
+          this.doCopy(`<div style="color:red;font-size:25px;">${this.items.length}条长链</div>复制成功`, links.join('\r\n'))
+        }
+        this.operator = res.data.operator
+        this.input = ''
+        this.placeholder = `今：${res.data.usedLength}；昨：${res.data.yesterdayUsedLength}`
+        this.isLoading = false
+        this.showInput = true
+      })
     },
     clickRecycle (id) {
       this.updateAM({ id, status: 3 })
