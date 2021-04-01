@@ -1,27 +1,29 @@
 <template>
   <div style="min-height:68vh;">
-<!--    <card></card>-->
-    <sisu-card style="margin-bottom: 30px"></sisu-card>
-    <el-button
-      type="plain"
-      class="iconfont icon-rocket jrebel"
-      size="mini"
-      @click="copyJrebel"
-      round
-    ></el-button>
-<!--    <el-link href="https://mail.pku.edu.cn/" type="primary" style="z-index:1;position:absolute;right:20px;" target="_blank">打开邮箱</el-link>-->
-<!--    <el-link href="https://mail.qq.com/cgi-bin/frame_html?f=html&sid=LmwloxpRE2hPFkAg1dO9A52V" type="primary" style="z-index:1;position:absolute;right:20px;" target="_blank">打开邮箱</el-link>-->
-    <!-- <jet-brains class="jetbrain"></jet-brains> -->
-    <el-tabs v-model="activeName" @tab-click="handleClick">
-      <el-tab-pane label="Music" name="first">
-        <jrebel></jrebel>
+    <el-tabs v-model="operatePane" @tab-click="handleClick">
+      <el-tab-pane label="操作台" name="操作台">
+        <sisu-card style="margin-bottom: 30px"></sisu-card>
+        <el-button
+          class="iconfont icon-rocket jrebel"
+          round
+          size="mini"
+          type="plain"
+          @click="copyJrebel"
+        ></el-button>
+        <el-tabs v-model="activeName" @tab-click="handleClick">
+          <el-tab-pane label="Music" name="first">
+            <jrebel></jrebel>
+          </el-tab-pane>
+          <el-tab-pane label="IDEA" name="second">
+            <idea></idea>
+          </el-tab-pane>
+        </el-tabs>
       </el-tab-pane>
-      <el-tab-pane label="IDEA" name="second">
-        <idea></idea>
+      <el-tab-pane label="生产链接" name="生产链接">
+        <AppleGenerate/>
       </el-tab-pane>
-      <!-- <el-tab-pane label="Itchat" name="third"><itchat></itchat></el-tab-pane> -->
     </el-tabs>
-    </div>
+  </div>
 </template>
 <script>
 import uuidv1 from 'uuid/v1'
@@ -32,6 +34,8 @@ import Itchat from './itchat/Itchat.vue'
 import Card from './jrebel/Card'
 import Idea from './jet/Idea'
 import SisuCard from './jrebel/SisuCard'
+import AppleGenerate from './applemusic/AppleGenerate'
+import {setStore, getStore} from '../api/storage'
 
 export default {
   components: {
@@ -40,11 +44,23 @@ export default {
     Itchat,
     Card,
     Idea,
-    SisuCard
+    SisuCard,
+    AppleGenerate
   },
   data () {
     return {
-      activeName: 'first'
+      activeName: 'first',
+      operatePane: '操作台'
+    }
+  },
+  mounted () {
+    this.operatePane = getStore('operatePane') || '操作台'
+  },
+  watch: {
+    operatePane: {
+      handler (newVal) {
+        setStore('operatePane', newVal)
+      }
     }
   },
   methods: {
@@ -88,6 +104,7 @@ export default {
   left: 10px;
   position: absolute;
 }
+
 .jetbrain {
   margin-top: -30px;
   z-index: 10;

@@ -6,8 +6,8 @@
       </el-button>
       <el-select v-model="sisuType" clearable placeholder="请选择" @change="changeType" size="mini">
         <el-option
-          v-for="item in eduOptions"
-          :key="item.value"
+          v-for="(item,index) in eduOptions"
+          :key="index"
           :label="item.label"
           :value="item.value"
         >
@@ -38,19 +38,20 @@ export default {
       useCount: 0,
       eduOptions: [
         {
-          value: 20,
+          value: 'zknu',
           label: '👉 周师大【可用】'
         },
         {
-          value: 30,
+          value: 'hnucm',
           label: '👉 老中医【求稳】'
         },
         {
-          value: 1,
-          label: '1、窗外【雄辉】'
-        }, {
-          value: 2,
-          label: '2、窗外【晓飞】'
+          value: 'sisu_word',
+          label: '2、窗外【字母】'
+        },
+        {
+          value: 'sisu_num',
+          label: '1、窗外【数字】'
         }
       //   {
       //   value: 10,
@@ -102,6 +103,7 @@ export default {
     },
     changeType () {
       setStore('sisuType', this.sisuType)
+      console.log(getStore('sisuType'))
       this.getSisuMail()
     },
     clearCount () {
