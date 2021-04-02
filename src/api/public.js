@@ -30,7 +30,7 @@ export default {
       })
     })
   },
-  ajaxFetch (url, params = {}, type = 'get', async = false) {
+  ajaxGet (url, params = {}, type = 'get', async = false) {
     // axios不支持同步
     // vue-clipboard2不支持异步ajax复制
     // 为此新增这个方法(参考：https://www.jb51.net/article/124865.htm)
