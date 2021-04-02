@@ -11,7 +11,7 @@
     <el-button class="mail-tag" @click="copyMail" v-if="mails.length > 0">{{ mails[0] }}</el-button>
     <el-button class="mail-school" v-if="mails.length > 0" type="danger">{{school}}</el-button>
     <div>
-      <el-button class="mail-change" type="primary" @click="changeMail">更换</el-button>
+      <el-button class="mail-change" type="primary" @click="changeMail" :disabled="changeDisabled">{{changeText}}</el-button>
     </div>
   </div>
 </template>
@@ -23,7 +23,10 @@ export default {
   data () {
     return {
       mails: [],
-      school: ''
+      school: '',
+      changeText: '更换',
+      leftSeconds: 0,
+      changeDisabled: false
     }
   },
   mounted () {
@@ -36,7 +39,6 @@ export default {
       immediate: true,
       handler (newVal) {
         if (newVal != null && newVal.length > 0) {
-          console.log(newVal[0])
           if (newVal[0].indexOf('sisu') > 0) {
             this.school = '四川外国语大学'
           } else if (newVal[0].indexOf('zknu') > 0) {
@@ -50,11 +52,27 @@ export default {
   },
   methods: {
     changeMail () {
+      this.changeDisabled = true
       let res = changeRangeMail({change: 1})
       this.mails = JSON.parse(res)
       if (this.mails != null && this.mails.length > 0) {
         this.doCopy()
       }
+      this.countDown()
+    },
+    countDown () {
+      this.leftSeconds = Math.floor(Math.random() * 10) + 10
+      this.changeDisabled = true
+      this.changeText = this.leftSeconds + '秒后，更换'
+      let timer = setInterval(() => {
+        this.leftSeconds--
+        this.changeText = this.leftSeconds + '秒后，更换'
+        if (this.leftSeconds <= 0) {
+          this.changeDisabled = false
+          this.changeText = '更换'
+          clearInterval(timer)
+        }
+      }, 1000)
     },
     clearMail () {
       this.mails = []
