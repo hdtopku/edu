@@ -44,7 +44,7 @@ export default {
     copyMail () {
       this.doCopy()
     },
-    doCopy() {
+    doCopy () {
       this.$copyText(this.mails[0]).then((e) => {
         // success
         this.openCenter(this.mails[0] + '已复制！')
