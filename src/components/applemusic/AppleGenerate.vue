@@ -1,6 +1,6 @@
 <template>
   <div style="text-align: center;">
-    <div style="height: 100px">
+    <div style="height: 80px">
       <div v-if="mails.length > 0">
         <el-popconfirm cancel-button-text='取消' confirm-button-text='清零' title="是否清零？"
                        @confirm="clearMail">
@@ -9,8 +9,9 @@
       </div>
     </div>
     <el-button class="mail-tag" @click="copyMail" v-if="mails.length > 0">{{ mails[0] }}</el-button>
+    <el-button class="mail-school" v-if="mails.length > 0" type="danger">{{school}}</el-button>
     <div>
-      <el-button class="mail-change" round type="primary" @click="changeMail">更换</el-button>
+      <el-button class="mail-change" type="primary" @click="changeMail">更换</el-button>
     </div>
   </div>
 </template>
@@ -21,12 +22,31 @@ import {changeRangeMail} from '../../api/mail'
 export default {
   data () {
     return {
-      mails: []
+      mails: [],
+      school: ''
     }
   },
   mounted () {
     let res = changeRangeMail()
     this.mails = JSON.parse(res)
+  },
+  watch: {
+    mails: {
+      deep: true,
+      immediate: true,
+      handler (newVal) {
+        if (newVal != null && newVal.length > 0) {
+          console.log(newVal[0])
+          if (newVal[0].indexOf('sisu') > 0) {
+            this.school = '四川外国语大学'
+          } else if (newVal[0].indexOf('zknu') > 0) {
+            this.school = '周口师范学院'
+          } else if (newVal[0].indexOf('hnucm') > 0) {
+            this.school = '湖南中医药大学'
+          }
+        }
+      }
+    }
   },
   methods: {
     changeMail () {
@@ -61,24 +81,28 @@ export default {
 
 <style scoped>
 .mail-tag {
-  font-size: 25px;
+  font-size: 16px;
   font-weight: bold;
   word-break: break-all;
-  height: 100px;
+  height: 50px;
   position: absolute;
-  top: 150px;
+  top: 140px;
   display: block;
   width: 100%;
 }
 
 .mail-change {
-  font-size: 120px;
-  margin-top: 200px;
+  font-size: 50px;
+  width: 100%;
+  margin-top: 100px;
+}
+.mail-school {
+  font-size: 20px;
 }
 
 .mail-count {
   font-weight: bolder;
-  font-size: 100px;
+  font-size: 60px;
   cursor: pointer;
   margin: 20px auto;
   padding: 0 20px;
