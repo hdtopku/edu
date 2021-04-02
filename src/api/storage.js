@@ -16,10 +16,11 @@ export const getStore = key => {
   if (!key) return
   var val = localStorage.getItem(key) || '[]'
   if (localStorage.getItem(key) && localStorage.getItem(key) !== 'undefined') {
-    if (typeof content === 'string') {
+    try {
       return JSON.parse(val)
+    } catch (e) {
+      return val
     }
-    return val
   }
   return undefined
 }
