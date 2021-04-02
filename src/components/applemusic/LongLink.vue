@@ -1,5 +1,6 @@
 <template>
   <div v-if="isShow">
+    <el-link v-show="recentCopy" class="recent-copy" @click="doCopy('最近的', recentCopy)">最近复制</el-link>
     <div>
       <el-input
         v-model="input"
@@ -74,7 +75,8 @@ export default {
       placeholder: '',
       input: '',
       isLoading: false,
-      isShow: true
+      isShow: true,
+      recentCopy: null
     }
   },
   methods: {
@@ -86,6 +88,7 @@ export default {
     doCopy (shortLink, link) {
       for (let i = 0; i < 3; i++) {
         setTimeout(() => {
+          this.recentCopy = link
           this.$copyText(link).then((e) => {
             // success
             if (shortLink.length > 20) {
@@ -242,5 +245,9 @@ export default {
 }
 .batch-use {
   margin: 20px;
+}
+.recent-copy {
+  height: 30px;
+  float: left;
 }
 </style>

@@ -103,7 +103,6 @@ export default {
     },
     changeType () {
       setStore('sisuType', this.sisuType)
-      console.log(getStore('sisuType'))
       this.getSisuMail()
     },
     clearCount () {

@@ -1,14 +1,14 @@
 <template>
   <div style="text-align: center;">
     <div style="height: 100px">
-    <div class="mail-tag" @click="copyMail" v-if="mails.length > 0">{{ mails[0] }}</div>
-    <div v-if="mails.length > 0">
-      <el-popconfirm cancel-button-text='取消' confirm-button-text='清零' title="是否清零？"
-                     @confirm="clearMail">
-        <span slot="reference" class="mail-count">{{ mails.length }}</span>
-      </el-popconfirm>
+      <div v-if="mails.length > 0">
+        <el-popconfirm cancel-button-text='取消' confirm-button-text='清零' title="是否清零？"
+                       @confirm="clearMail">
+          <span slot="reference" class="mail-count">{{ mails.length }}</span>
+        </el-popconfirm>
+      </div>
     </div>
-    </div>
+    <el-button class="mail-tag" @click="copyMail" v-if="mails.length > 0">{{ mails[0] }}</el-button>
     <div>
       <el-button class="mail-change" round type="primary" @click="changeMail">更换</el-button>
     </div>
@@ -33,7 +33,7 @@ export default {
       let res = changeRangeMail({change: 1})
       this.mails = JSON.parse(res)
       if (this.mails != null && this.mails.length > 0) {
-        this.openCenter(this.mails[0] + '已更新并复制！')
+        this.doCopy()
       }
     },
     clearMail () {
@@ -42,7 +42,15 @@ export default {
       this.openCenter('已清空！')
     },
     copyMail () {
-      this.openCenter(this.mails[0] + '已复制！')
+      this.doCopy()
+    },
+    doCopy() {
+      this.$copyText(this.mails[0]).then((e) => {
+        // success
+        this.openCenter(this.mails[0] + '已复制！')
+      }, (e) => {
+        // fail
+      })
     },
     openCenter: function (Text = '已复制！') {
       this.$toast.top(Text)
@@ -53,9 +61,14 @@ export default {
 
 <style scoped>
 .mail-tag {
-  cursor: pointer;
-  font-size: 20px;
-  margin: 0 auto;
+  font-size: 25px;
+  font-weight: bold;
+  word-break: break-all;
+  height: 100px;
+  position: absolute;
+  top: 150px;
+  display: block;
+  width: 100%;
 }
 
 .mail-change {

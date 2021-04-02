@@ -1,19 +1,5 @@
 <template>
   <div>
-    <div style="display:flex; float:left;">
-      <!-- <el-link
-        href="http://a.taojingling.cn"
-        style="margin-right:20px; z-index:1;"
-        type="primary"
-        target="_blank"
-      >取号</el-link> -->
-<!--    <el-link-->
-<!--      href="https://www.myunidays.com/CN/zh-CN"-->
-<!--      style="margin-right:20px; z-index:1;margin-bottom:2px;"-->
-<!--      type="primary"-->
-<!--      target="_blank"-->
-<!--    >UNIDAYS</el-link>-->
-    </div>
     <long-link></long-link>
   </div>
 </template>
