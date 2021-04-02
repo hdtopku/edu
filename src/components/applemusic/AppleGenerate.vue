@@ -25,24 +25,21 @@ export default {
     }
   },
   mounted () {
-    changeRangeMail().then(res => {
-      this.mails = JSON.parse(res)
-    })
+    let res = changeRangeMail()
+    this.mails = JSON.parse(res)
   },
   methods: {
     changeMail () {
-      changeRangeMail({change: 1}).then(res => {
-        this.mails = JSON.parse(res)
-        if (this.mails != null && this.mails.length > 0) {
-          this.openCenter(this.mails[0] + '已更新并复制！')
-        }
-      })
+      let res = changeRangeMail({change: 1})
+      this.mails = JSON.parse(res)
+      if (this.mails != null && this.mails.length > 0) {
+        this.openCenter(this.mails[0] + '已更新并复制！')
+      }
     },
     clearMail () {
       this.mails = []
-      changeRangeMail({change: 1, clear: 1}).then(() => {
-        this.openCenter('已清空！')
-      })
+      changeRangeMail({change: 1, clear: 1})
+      this.openCenter('已清空！')
     },
     copyMail () {
       this.openCenter(this.mails[0] + '已复制！')

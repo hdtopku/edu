@@ -60,7 +60,7 @@ export default {
       ]
     }
   },
-  created () {
+  mounted () {
     this.sisuType = getStore('sisuType')
     this.useCount = getStore('useCount' + this.sisuType) || 0
     this.getSisuMail()
