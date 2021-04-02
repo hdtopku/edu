@@ -11,14 +11,14 @@
     <el-button class="mail-tag" @click="copyMail" v-if="mails.length > 0">{{ mails[0] }}</el-button>
     <el-button class="mail-school" v-if="mails.length > 0" type="danger">{{school}}</el-button>
     <div>
-      <el-button class="mail-change" type="primary" @click="changeMail" :disabled="changeDisabled">{{changeText}}</el-button>
+      <el-button class="mail-change" type="primary" @click="throttleChangeMail" :disabled="changeDisabled">{{changeText}}</el-button>
     </div>
   </div>
 </template>
 
 <script>
 import {changeRangeMail} from '../../api/mail'
-
+import _ from 'lodash'
 export default {
   data () {
     return {
@@ -58,22 +58,26 @@ export default {
       if (this.mails != null && this.mails.length > 0) {
         this.doCopy()
       }
-      this.countDown()
+      this.changeDisabled = false
+      // this.countDown()
     },
-    countDown () {
-      this.leftSeconds = Math.floor(Math.random() * 10) + 10
-      this.changeDisabled = true
-      this.changeText = this.leftSeconds + '秒后，更换'
-      let timer = setInterval(() => {
-        this.leftSeconds--
-        this.changeText = this.leftSeconds + '秒后，更换'
-        if (this.leftSeconds <= 0) {
-          this.changeDisabled = false
-          this.changeText = '更换'
-          clearInterval(timer)
-        }
-      }, 1000)
-    },
+    throttleChangeMail: _.throttle(function () {
+      this.changeMail()
+    }, 3000),
+    // countDown () {
+    //   this.leftSeconds = Math.floor(Math.random() * 10) + 10
+    //   this.changeDisabled = true
+    //   this.changeText = this.leftSeconds + '秒后，更换'
+    //   let timer = setInterval(() => {
+    //     this.leftSeconds--
+    //     this.changeText = this.leftSeconds + '秒后，更换'
+    //     if (this.leftSeconds <= 0) {
+    //       this.changeDisabled = false
+    //       this.changeText = '更换'
+    //       clearInterval(timer)
+    //     }
+    //   }, 1000)
+    // },
     clearMail () {
       this.mails = []
       changeRangeMail({change: 1, clear: 1})
