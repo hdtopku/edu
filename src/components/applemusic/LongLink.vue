@@ -1,16 +1,23 @@
 <template>
   <div v-if="isShow">
-    <el-link v-show="recentCopy" class="recent-copy" @click="doCopy('最近的', recentCopy)">最近复制</el-link>
+    <div style="height: 35px">
+      <el-link v-if="used != null && used.length > 0" class="recent-copy" @click="copyRecent">复制最近{{ batchCount }}条
+      </el-link>
+      <el-input-number v-model="batchCount" :max="20" :min="1" label="描述文字" @change="handleChange"></el-input-number>
+      <el-popconfirm :title="'是否使用' + batchCount + '条？'" @confirm="clickBatchUse" confirm-button-text="使用">
+        <el-button slot="reference" :loading="isLoading" class="batch-use" plain round>使用{{ batchCount }}条</el-button>
+      </el-popconfirm>
+    </div>
     <div>
       <el-input
         v-model="input"
         :placeholder="placeholder"
-        @keyup.enter.native="search"
         class="input-with-select"
         clearable
         @blur="blurSearch"
+        @keyup.enter.native="search"
       >
-        <el-select v-model="select" slot="prepend" placeholder="请选择">
+        <el-select slot="prepend" v-model="select" placeholder="请选择">
           <el-option
             v-for="(opVal, opIdx) in operator"
             :key="opIdx"
@@ -18,11 +25,11 @@
             :value="opVal.oid"
           ></el-option>
         </el-select>
-        <el-button slot="prepend" @click="use" :disabled="disabledStyle">
+        <el-button slot="prepend" :disabled="disabledStyle" @click="use">
           <span
-            class="iconfont icon-weishiyong1 weishiyong"
             :style="disabledStyle ? '': 'color:red;'"
-          >{{unUsed.length}}</span>
+            class="iconfont icon-weishiyong1 weishiyong"
+          >{{ unUsed.length }}</span>
         </el-button>
         <el-button slot="append" @click="search">新增</el-button>
       </el-input>
@@ -30,38 +37,39 @@
     <el-card
       v-for="(item, idx) in all"
       :key="idx"
-      shadow="always"
       :class="item.isItem ? 'highlight': ''"
+      shadow="always"
     >
-      <span style="position:absolute;left:10px;margin-top:-10px;">{{idx+1}}</span>
+      <span style="position:absolute;left:10px;margin-top:-10px;">{{ idx + 1 }}</span>
       <i class="iconfont icon-copy1 copy" @click="copy(item.short_link)"></i>
       <el-row :gutter="20">
         <tooltip
+          :item="item"
+          class="tooltip"
           @clickRecycle="clickRecycle"
           @clickShiyong="clickShiyong"
           @clickUsed="clickUsed"
-          :item="item"
-          class="tooltip"
         ></tooltip>
-        <div class="mail" @click="doCopy(item.short_link, item.link)">{{item.short_link || item.id}}</div>
-        <div class="time">{{item.update_time}} | {{item.create_time.substring(0, 10)}} | {{item.chinese_name}}</div>
+        <div class="mail" @click="doCopy(item.short_link, item.link)">{{ item.short_link || item.id }}</div>
+        <div class="time">{{ item.update_time }} | {{ item.create_time.substring(0, 10) }} | {{ item.chinese_name }}
+        </div>
       </el-row>
     </el-card>
-    <el-button :loading="isLoading" plain round class="batch-use" @click="clickBatchUse">使用10条</el-button>
   </div>
 </template>
 
 <script>
 import Tooltip from './Tooltip'
-import { syncGetAMs } from '../../api/mail'
-import { setStore, getStore } from '../../api/storage'
+import {syncGetAMs} from '../../api/mail'
+import {setStore, getStore} from '../../api/storage'
+
 export default {
-  components: { Tooltip },
+  components: {Tooltip},
   data () {
     return {
       hasItem: false,
-      tabs: [{ label: '使用中', name: 'first' },
-        { label: '已使用', name: 'second' }],
+      tabs: [{label: '使用中', name: 'first'},
+        {label: '已使用', name: 'second'}],
       disabledStyle: true,
       activeName: 'first',
       select: '',
@@ -77,11 +85,12 @@ export default {
       input: '',
       isLoading: false,
       isShow: true,
-      recentCopy: null
+      recentCopy: null,
+      batchCount: 9
     }
   },
   methods: {
-    handleClick (tab, event) {
+    handleChange () {
     },
     openCenter: function (text = '已复制！') {
       this.$toast.top(text)
@@ -140,17 +149,17 @@ export default {
       this.isLoading = false
     },
     clickRecycle (id) {
-      this.updateAM({ id, status: 3 })
+      this.updateAM({id, status: 3})
     },
     clickShiyong (id) {
-      this.updateAM({ id, status: 1 })
+      this.updateAM({id, status: 1})
     },
     clickUsed (id) {
-      this.updateAM({ id, status: 2 })
+      this.updateAM({id, status: 2})
     },
     clickBatchUse () {
       if (this.select > 0) {
-        this.updateAM({ 'operator_id': this.select, 'status': 2, 'count': 10 })
+        this.updateAM({'operator_id': this.select, 'status': 2, 'count': this.batchCount})
       } else {
         this.openCenter('请选择角色')
       }
@@ -160,7 +169,7 @@ export default {
         let idx = this.input.indexOf('https://email.myunidays.com/system/clicked-ul')
         if (idx >= 0) {
           this.input = this.input.substring(idx)
-          this.updateAM({ link: this.input })
+          this.updateAM({link: this.input})
         }
       } else {
         this.updateAM()
@@ -172,8 +181,17 @@ export default {
         this.updateAM()
       })
     },
+    copyRecent () {
+      let recentTen = []
+      if (this.used != null && this.used.length > 0) {
+        this.used.slice(0, this.batchCount).forEach((item) => {
+          recentTen.push(item.link)
+        })
+        this.doCopy('已复制', recentTen.join('\r\n'))
+      }
+    },
     use () {
-      this.updateAM({ status: 2 })
+      this.updateAM({status: 2})
     },
     copy (shortLink) {
       this.$copyText(shortLink).then((e) => {
@@ -187,6 +205,7 @@ export default {
   mounted () {
     this.updateAM()
     this.select = parseInt(getStore('roleSelect') || '0')
+    this.batchCount = getStore('batchCount')
   },
   watch: {
     select: function () {
@@ -197,6 +216,9 @@ export default {
         this.disabledStyle = true
       }
       setStore('roleSelect', this.select)
+    },
+    batchCount (newVal) {
+      setStore('batchCount', this.batchCount)
     }
   }
 }
@@ -211,28 +233,34 @@ export default {
   padding: 2px;
   z-index: 10;
 }
+
 .mail {
   color: #fb3159;
   font-size: 40px;
 }
+
 .el-select {
   width: 85px;
   margin-right: 25px;
 }
+
 .input-with-select .el-input-group__prepend {
   background-color: #fff;
 }
+
 .time {
   font-size: 12px;
   position: absolute;
   bottom: -20px;
 }
+
 .tooltip {
   position: absolute;
   margin-left: 2%;
   left: 0;
   top: 0;
 }
+
 .weishiyong {
   color: #9fa7c2;
   font-size: 25px;
@@ -240,21 +268,28 @@ export default {
   right: 0;
   position: absolute;
 }
+
 .enabled {
   color: red;
 }
+
 .highlight {
   border: 3px solid cornflowerblue;
 }
+
 .highlight div {
   color: darkmagenta;
   font-weight: bolder;
 }
+
 .batch-use {
-  margin: 20px;
+//margin: 20px; float: right;
 }
+
 .recent-copy {
   height: 30px;
   float: left;
+  position: absolute;
+  left: 10px;
 }
 </style>
