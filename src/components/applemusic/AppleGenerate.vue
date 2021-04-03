@@ -1,5 +1,5 @@
 <template>
-  <div style="text-align: center;">
+  <div style="text-align: center">
     <div style="height: 80px">
       <div v-if="mails.length > 0">
         <el-popconfirm cancel-button-text='取消' confirm-button-text='清零' title="是否清零？"
@@ -8,11 +8,13 @@
         </el-popconfirm>
       </div>
     </div>
-    <el-button class="mail-tag" @click="copyMail" v-if="mails.length > 0">{{ mails[0] }}</el-button>
-    <el-button class="mail-school" v-if="mails.length > 0" type="danger">{{school}}</el-button>
+    <el-button class="mail-tag" @click="copyMail" type="danger" plain v-if="mails.length > 0">
+      <div class="mail-school">{{school}}</div>
+      {{ mails[0] }}</el-button>
     <div>
       <el-button class="mail-change" type="primary" @click="throttleChangeMail" :disabled="changeDisabled">{{changeText}}</el-button>
     </div>
+    <el-link class="mail-link" type="success" href="https://applemusic-spotlight.myunidays.com/CN/zh-CN?urlset=null" target="_blank">再来一条</el-link>
   </div>
 </template>
 
@@ -102,31 +104,35 @@ export default {
 </script>
 
 <style scoped>
-.mail-tag {
-  font-size: 16px;
-  font-weight: bold;
-  word-break: break-all;
-  height: 50px;
-  position: absolute;
-  top: 140px;
-  display: block;
-  width: 100%;
-}
-
-.mail-change {
-  font-size: 50px;
-  width: 100%;
-  margin-top: 100px;
-}
-.mail-school {
-  font-size: 20px;
-}
-
 .mail-count {
   font-weight: bolder;
   font-size: 60px;
   cursor: pointer;
-  margin: 20px auto;
-  padding: 0 20px;
+  margin: 16px auto;
+  padding: 0 16px;
+}
+.mail-school {
+  font-size: 30px;
+  margin: 6px;
+  font-weight: bolder;
+}
+.mail-tag {
+  font-size: 16px;
+  font-weight: bold;
+  word-break: break-all;
+//height: 50px;
+  position: absolute;
+  top: 80px;
+  display: block;
+  width: 100%;
+}
+.mail-change {
+  font-size: 50px;
+  width: 100%;
+  margin-top: 120px;
+}
+.mail-link{
+  margin-top: 30px;
+  font-size: 30px;
 }
 </style>
