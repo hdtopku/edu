@@ -1,11 +1,12 @@
 <template>
   <div v-if="isShow">
-    <div style="height: 35px">
-      <el-link v-if="used != null && used.length > 0" class="recent-copy" @click="copyRecent">复制最近{{ batchCount }}条
+    <div style="height: 35px;display: flex;justify-content: space-between">
+      <el-link v-if="used != null && used.length > 0" @click="copyRecent">复制{{ batchCount }}条
       </el-link>
-      <el-input-number v-model="batchCount" :max="20" :min="1" label="描述文字" @change="handleChange"></el-input-number>
-      <el-popconfirm :title="'是否使用' + batchCount + '条？'" @confirm="clickBatchUse" confirm-button-text="使用">
-        <el-button slot="reference" :loading="isLoading" class="batch-use" plain round>使用{{ batchCount }}条</el-button>
+      <el-input-number v-model="batchCount" :max="20" :min="1" label="描述文字" size="mini"
+                       @change="handleChange"></el-input-number>
+      <el-popconfirm :title="'是否使用' + batchCount + '条？'" confirm-button-text="使用" @confirm="clickBatchUse">
+        <el-button slot="reference" :loading="isLoading" plain round size="mini">使用{{ batchCount }}条</el-button>
       </el-popconfirm>
     </div>
     <div>
@@ -40,7 +41,9 @@
       :class="item.isItem ? 'highlight': ''"
       shadow="always"
     >
-      <span style="position:absolute;left:10px;margin-top:-10px;">{{ (idx >= recycle.length ? idx - recycle.length : idx) + 1 }}</span>
+      <span style="position:absolute;left:10px;margin-top:-10px;">{{
+          (idx >= recycle.length ? idx - recycle.length : idx) + 1
+        }}</span>
       <i class="iconfont icon-copy1 copy" @click="copy(item.short_link)"></i>
       <el-row :gutter="20">
         <tooltip
@@ -291,5 +294,6 @@ export default {
   float: left;
   position: absolute;
   left: 10px;
+
 }
 </style>
