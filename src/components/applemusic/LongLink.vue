@@ -36,7 +36,7 @@
       </el-input>
     </div>
     <el-card
-      v-for="(item, idx) in all.slice(0, 20 + recycle.length)"
+      v-for="(item, idx) in all.slice(0, 12 + recycle.length)"
       :key="idx"
       :class="item.isItem ? 'highlight': ''"
       shadow="always"
