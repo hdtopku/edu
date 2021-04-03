@@ -1,7 +1,7 @@
 <template>
   <div v-if="isShow">
     <div style="height: 35px;display: flex;justify-content: space-between">
-      <el-link v-if="used != null && used.length > 0" @click="copyRecent">复制{{ batchCount }}条
+      <el-link v-if="used != null && used.length > 0" @click="copyRecent" style="margin-bottom: 5px">复制{{ batchCount }}条
       </el-link>
       <el-input-number v-model="batchCount" :max="20" :min="1" label="描述文字" size="mini"
                        @change="handleChange"></el-input-number>
