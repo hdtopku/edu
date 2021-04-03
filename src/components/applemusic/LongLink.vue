@@ -8,6 +8,7 @@
         @keyup.enter.native="search"
         class="input-with-select"
         clearable
+        @blur="search"
       >
         <el-select v-model="select" slot="prepend" placeholder="请选择">
           <el-option
