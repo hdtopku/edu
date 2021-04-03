@@ -168,9 +168,9 @@ export default {
     },
     blurSearch () {
       this.search()
-      setTimeout(() => {
-        this.$router.go(0)
-      }, 10)
+      this.$nextTick(() => {
+        this.updateAM()
+      })
     },
     use () {
       this.updateAM({ status: 2 })
