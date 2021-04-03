@@ -65,8 +65,7 @@ export default {
     }
   },
   mounted () {
-    let res = changeRandomMail()
-    this.used_mails = JSON.parse(res)
+    this.initMail()
   },
   watch: {
     used_mails: {
@@ -90,6 +89,10 @@ export default {
     }
   },
   methods: {
+    initMail () {
+      let res = changeRandomMail()
+      this.used_mails = JSON.parse(res)
+    },
     changeMail () {
       this.isLoading = true
       setTimeout(() => {

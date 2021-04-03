@@ -20,7 +20,7 @@
         </el-tabs>
       </el-tab-pane>
       <el-tab-pane label="生产链接" name="生产链接">
-        <AppleGenerate/>
+        <AppleGenerate ref="appleGenerate"/>
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -60,6 +60,9 @@ export default {
     operatePane: {
       handler (newVal) {
         setStore('operatePane', newVal)
+        if (newVal === '生产链接') {
+          this.$refs.appleGenerate.initMail()
+        }
       }
     }
   },
