@@ -1,6 +1,6 @@
 <template>
   <div style="text-align: center">
-    <div v-if="used_mails != null && used_mails.hist_mails != null">
+    <div v-if="used_mails != null && used_mails.hist_mails != null" style="position: absolute; width: 100%">
     <div class="badge-mails">
       <el-badge v-if="school !== 'zknu'" :type="school === 'zknu' ? 'danger' : 'info'" :value="used_mails.zknu.length"
                 class="item">
@@ -37,11 +37,11 @@
     <el-badge  class="selected" :value="used_mails[school].length">
       <el-button type="danger" @click="doCopy(used_mails[school][0])">{{schoolName}}</el-button>
     </el-badge>
+    </div>
     <div>
       <el-button :loading="isLoading" class="mail-change" type="primary" @click="throttleChangeMail">
         {{ changeText }}
       </el-button>
-    </div>
     </div>
     <!--        <el-link class="mail-link" type="success" href="https://applemusic-spotlight.myunidays.com/CN/zh-CN?urlset=null" target="_blank">再来一条</el-link>-->
   </div>
@@ -172,7 +172,7 @@ export default {
 .mail-change {
   font-size: 50px;
   width: 100%;
-  margin-top: 80px;
+  margin-top: 280px;
 }
 
 .item {
