@@ -35,12 +35,12 @@
       </el-input>
     </div>
     <el-card
-      v-for="(item, idx) in all"
+      v-for="(item, idx) in all.slice(0, 20 + recycle.length)"
       :key="idx"
       :class="item.isItem ? 'highlight': ''"
       shadow="always"
     >
-      <span style="position:absolute;left:10px;margin-top:-10px;">{{ idx + 1 }}</span>
+      <span style="position:absolute;left:10px;margin-top:-10px;">{{ (idx >= recycle.length ? idx - recycle.length : idx) + 1 }}</span>
       <i class="iconfont icon-copy1 copy" @click="copy(item.short_link)"></i>
       <el-row :gutter="20">
         <tooltip
