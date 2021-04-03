@@ -1,26 +1,44 @@
 <template>
   <div style="text-align: center">
-    <div style="height: 80px">
-      <div v-if="mails.length > 0">
-        <el-popconfirm cancel-button-text='取消' confirm-button-text='清零' title="是否清零？"
-                       @confirm="clearMail">
-          <span slot="reference" class="mail-count">{{ mails.length }}</span>
-        </el-popconfirm>
-      </div>
+    <div v-if="used_mails != null && used_mails.hist_mails != null" class="school-container">
+      <el-divider>
+        <div v-if="used_mails != null && used_mails.hist_mails != null && used_mails.hist_mails.length > 0">
+          <el-popconfirm :loading="clearLoading" cancel-button-text='取消' confirm-button-text='清零' title="是否清零？"
+                         @confirm="clearMail">
+            <span slot="reference" class="mail-count">{{ used_mails.hist_mails.length }}</span>
+          </el-popconfirm>
+        </div>
+      </el-divider>
+      <el-badge :type="school === 'zknu' ? 'danger' : 'info'" :value="used_mails.zknu.length" class="item">
+        <el-button :size="school === 'zknu' ? 'medium' : 'mini'" :type="school === 'zknu' ? 'danger' : ''"
+                   @click="doCopy(used_mails.zknu[0])">
+          周师范
+        </el-button>
+      </el-badge>
+      <el-badge :type="school === 'hnucm' ? 'danger' : 'info'" :value="used_mails.hnucm.length" class="item">
+        <el-button :size="school === 'hnucm' ? 'medium' : 'mini'" :type="school === 'hnucm' ? 'danger' : ''"
+                   @click="doCopy(used_mails.hnucm[0])">湖中医
+        </el-button>
+      </el-badge>
+      <el-badge :type="school === 'sisu' ? 'danger' : 'info'" :value="used_mails.sisu.length" class="item">
+        <el-button :size="school === 'sisu' ? 'medium' : 'mini'" :type="school === 'sisu' ? 'danger' : ''"
+                   @click="doCopy(used_mails.sisu[0])">川外语
+        </el-button>
+      </el-badge>
     </div>
-    <el-button class="mail-tag" @click="copyMail" type="danger" plain v-if="mails.length > 0">
-      <div class="mail-school">{{school}}</div>
-      {{ mails[0] }}</el-button>
     <div>
-      <el-button class="mail-change" type="primary" @click="throttleChangeMail" :disabled="changeDisabled">{{changeText}}</el-button>
+      <el-button :loading="isLoading" class="mail-change" type="primary" @click="throttleChangeMail">
+        {{ changeText }}
+      </el-button>
     </div>
-<!--    <el-link class="mail-link" type="success" href="https://applemusic-spotlight.myunidays.com/CN/zh-CN?urlset=null" target="_blank">再来一条</el-link>-->
+    <!--    <el-link class="mail-link" type="success" href="https://applemusic-spotlight.myunidays.com/CN/zh-CN?urlset=null" target="_blank">再来一条</el-link>-->
   </div>
 </template>
 
 <script>
-import {changeRangeMail} from '../../api/mail'
+import {changeRandomMail} from '../../api/mail'
 import _ from 'lodash'
+
 export default {
   data () {
     return {
@@ -28,25 +46,29 @@ export default {
       school: '',
       changeText: '更换',
       leftSeconds: 0,
-      changeDisabled: false
+      radio1: '湖南中医药大学',
+      isLoading: false,
+      clearLoading: false,
+      used_mails: {}
     }
   },
   mounted () {
-    let res = changeRangeMail()
-    this.mails = JSON.parse(res)
+    let res = changeRandomMail()
+    this.used_mails = JSON.parse(res)
   },
   watch: {
-    mails: {
+    used_mails: {
       deep: true,
       immediate: true,
       handler (newVal) {
-        if (newVal != null && newVal.length > 0) {
-          if (newVal[0].indexOf('sisu') > 0) {
-            this.school = '四川外国语大学'
-          } else if (newVal[0].indexOf('zknu') > 0) {
-            this.school = '周口师范学院'
-          } else if (newVal[0].indexOf('hnucm') > 0) {
-            this.school = '湖南中医药大学'
+        let histMails = newVal.hist_mails
+        if (histMails != null && histMails.length > 0) {
+          if (histMails[0].indexOf('sisu') > 0) {
+            this.school = 'sisu'
+          } else if (histMails[0].indexOf('zknu') > 0) {
+            this.school = 'zknu'
+          } else if (histMails[0].indexOf('hnucm') > 0) {
+            this.school = 'hnucm'
           }
         }
       }
@@ -54,51 +76,58 @@ export default {
   },
   methods: {
     changeMail () {
-      this.changeDisabled = true
-      let res = changeRangeMail({change: 1})
-      this.mails = JSON.parse(res)
-      if (this.mails != null && this.mails.length > 0) {
-        this.doCopy()
-      }
-      this.changeDisabled = false
+      this.isLoading = true
+      setTimeout(() => {
+        let res = changeRandomMail({change: 1})
+        this.used_mails = JSON.parse(res)
+        if (this.used_mails != null && this.used_mails.hist_mails != null && this.used_mails.hist_mails.length > 0) {
+          this.doCopy(this.used_mails.hist_mails[0])
+        }
+        // this.$forceUpdate()
+        this.isLoading = false
+      }, 10)
       // this.countDown()
     },
     throttleChangeMail: _.throttle(function () {
       this.changeMail()
-    }, 3000),
+    }, 3000, { 'leading': true, 'trailing': false }),
+    clearMail () {
+      this.clearLoading = true
+      changeRandomMail({clear: 1})
+      this.used_mails = {}
+      this.openCenter('已清空！')
+      this.clearLoading = false
+    },
+    copyMail () {
+      this.doCopy(this.used_mails.hist_mails[0])
+    },
+    doCopy (text) {
+      if (text != null && text.trim().length > 0) {
+        this.$copyText(text).then((e) => {
+          // success
+          this.openCenter(text + '已复制！')
+        }, (e) => {
+          // fail
+        })
+      }
+    },
+    openCenter: function (Text = '已复制！') {
+      this.$toast.top(Text)
+    }
     // countDown () {
     //   this.leftSeconds = Math.floor(Math.random() * 10) + 10
-    //   this.changeDisabled = true
+    //   this.isLoading = true
     //   this.changeText = this.leftSeconds + '秒后，更换'
     //   let timer = setInterval(() => {
     //     this.leftSeconds--
     //     this.changeText = this.leftSeconds + '秒后，更换'
     //     if (this.leftSeconds <= 0) {
-    //       this.changeDisabled = false
+    //       this.isLoading = false
     //       this.changeText = '更换'
     //       clearInterval(timer)
     //     }
     //   }, 1000)
     // },
-    clearMail () {
-      this.mails = []
-      changeRangeMail({change: 1, clear: 1})
-      this.openCenter('已清空！')
-    },
-    copyMail () {
-      this.doCopy()
-    },
-    doCopy () {
-      this.$copyText(this.mails[0]).then((e) => {
-        // success
-        this.openCenter(this.mails[0] + '已复制！')
-      }, (e) => {
-        // fail
-      })
-    },
-    openCenter: function (Text = '已复制！') {
-      this.$toast.top(Text)
-    }
   }
 }
 </script>
@@ -111,28 +140,21 @@ export default {
   margin: 16px auto;
   padding: 0 16px;
 }
-.mail-school {
-  font-size: 30px;
-  margin: 6px;
-  font-weight: bolder;
-}
-.mail-tag {
-  font-size: 16px;
-  font-weight: bold;
-  word-break: break-all;
-//height: 50px;
+
+.school-container {
+  height: 80px;
   position: absolute;
-  top: 80px;
-  display: block;
   width: 100%;
 }
+
 .mail-change {
   font-size: 50px;
   width: 100%;
-  margin-top: 120px;
+  margin-top: 200px;
 }
-.mail-link{
-  margin-top: 30px;
-  font-size: 30px;
+
+.item {
+  margin: 10px;
 }
+
 </style>
