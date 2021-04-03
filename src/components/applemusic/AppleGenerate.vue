@@ -14,7 +14,7 @@
     <div>
       <el-button class="mail-change" type="primary" @click="throttleChangeMail" :disabled="changeDisabled">{{changeText}}</el-button>
     </div>
-    <el-link class="mail-link" type="success" href="https://applemusic-spotlight.myunidays.com/CN/zh-CN?urlset=null" target="_blank">再来一条</el-link>
+<!--    <el-link class="mail-link" type="success" href="https://applemusic-spotlight.myunidays.com/CN/zh-CN?urlset=null" target="_blank">再来一条</el-link>-->
   </div>
 </template>
 
