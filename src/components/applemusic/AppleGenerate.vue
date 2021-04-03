@@ -48,7 +48,7 @@
 </template>
 
 <script>
-import {changeRandomMail} from '../../api/mail'
+import {changeRandomMail, clearRandomMail} from '../../api/mail'
 import _ from 'lodash'
 
 export default {
@@ -108,10 +108,10 @@ export default {
     }, 3000, {'leading': true, 'trailing': false}),
     clearMail () {
       this.clearLoading = true
-      changeRandomMail({clear: 1})
       this.used_mails = {}
       this.openCenter('已清空！')
       this.clearLoading = false
+      clearRandomMail({clear: 1})
     },
     copyMail () {
       this.doCopy(this.used_mails.hist_mails[0])
