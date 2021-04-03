@@ -8,7 +8,7 @@
         @keyup.enter.native="search"
         class="input-with-select"
         clearable
-        @blur="search"
+        @blur="blurSearch"
       >
         <el-select v-model="select" slot="prepend" placeholder="请选择">
           <el-option
@@ -165,6 +165,12 @@ export default {
       } else {
         this.updateAM()
       }
+    },
+    blurSearch () {
+      this.search()
+      setTimeout(() => {
+        this.$router.go(0)
+      }, 10)
     },
     use () {
       this.updateAM({ status: 2 })
