@@ -9,6 +9,7 @@
           </el-popconfirm>
         </div>
       </el-divider>
+      <div class="badge-mails">
       <el-badge :type="school === 'zknu' ? 'danger' : 'info'" :value="used_mails.zknu.length" class="item">
         <el-button :size="school === 'zknu' ? 'medium' : 'mini'" :type="school === 'zknu' ? 'danger' : ''"
                    @click="doCopy(used_mails.zknu[0])">
@@ -25,13 +26,14 @@
                    @click="doCopy(used_mails.sisu[0])">川外语
         </el-button>
       </el-badge>
+      </div>
     </div>
     <div>
       <el-button :loading="isLoading" class="mail-change" type="primary" @click="throttleChangeMail">
         {{ changeText }}
       </el-button>
     </div>
-    <!--    <el-link class="mail-link" type="success" href="https://applemusic-spotlight.myunidays.com/CN/zh-CN?urlset=null" target="_blank">再来一条</el-link>-->
+        <el-link class="mail-link" type="success" href="https://applemusic-spotlight.myunidays.com/CN/zh-CN?urlset=null" target="_blank">再来一条</el-link>
   </div>
 </template>
 
@@ -137,7 +139,7 @@ export default {
   font-weight: bolder;
   font-size: 60px;
   cursor: pointer;
-  margin: 16px auto;
+  margin: 20px auto;
   padding: 0 16px;
 }
 
@@ -145,16 +147,24 @@ export default {
   height: 80px;
   position: absolute;
   width: 100%;
+  margin-top: 20px;
+}
+.badge-mails {
+  margin-top: 50px;
 }
 
 .mail-change {
   font-size: 50px;
   width: 100%;
-  margin-top: 200px;
+  margin-top: 250px;
 }
 
 .item {
   margin: 10px;
 }
-
+.mail-link {
+  float: left;
+  margin-left: 20px;
+  margin-top: 100px;
+}
 </style>
