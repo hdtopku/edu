@@ -1,39 +1,51 @@
 <template>
   <div v-if="isShow">
     <div style="height: 35px;display: flex;justify-content: space-between">
-      <el-link v-if="used != null && used.length > 0" @click="copyRecent" style="margin-bottom: 5px">复制{{ batchCount }}条
+      <el-link v-if="used != null && used.length > 0" style="margin-bottom: 5px" @click="copyRecent">历史{{
+          batchCount
+        }}条
       </el-link>
       <el-input-number v-model="batchCount" :max="20" :min="1" label="描述文字" size="mini"
                        @change="handleChange"></el-input-number>
-      <el-popconfirm :title="'是否使用' + batchCount + '条？'" confirm-button-text="使用" @confirm="clickBatchUse">
-        <el-button slot="reference" :loading="isLoading" plain round size="mini">使用{{ batchCount }}条</el-button>
+      <el-popconfirm v-if="batchCount >= 1" :title="'是否使用' + batchCount + '条？'" confirm-button-text="使用"
+                     @confirm="clickBatchUse">
+        <el-button slot="reference" :loading="isLoading" plain round>使用{{ batchCount }}条</el-button>
       </el-popconfirm>
     </div>
-    <div>
-      <el-input
-        v-model="input"
-        :placeholder="placeholder"
-        class="input-with-select"
-        clearable
-        @keyup.enter.native="search"
-      >
-        <el-select slot="prepend" v-model="select" placeholder="请选择">
-          <el-option
-            v-for="(opVal, opIdx) in operator"
-            :key="opIdx"
-            :label="opVal.chinese_name"
-            :value="opVal.oid"
-          ></el-option>
-        </el-select>
-        <el-button slot="prepend" :disabled="disabledStyle" @click="use">
-          <span
-            :style="disabledStyle ? '': 'color:red;'"
+    <el-input
+      v-model="input"
+      :placeholder="placeholder"
+      :rows="3"
+      class="input-with-select"
+      type="textarea"
+      @keyup.enter.native="search"
+      clearable
+    >
+    </el-input>
+    <div style="display: flex; justify-content: space-between">
+      <el-select slot="prepend" v-model="select" placeholder="请选择">
+        <el-option
+          v-for="(opVal, opIdx) in operator"
+          :key="opIdx"
+          :label="opVal.chinese_name"
+          :value="opVal.oid"
+        ></el-option>
+      </el-select>
+      <!--        <el-button slot="prepend" :disabled="disabledStyle" @click="use">-->
+      <!--          <span-->
+      <!--            :style="disabledStyle ? '': 'color:red;'"-->
+      <!--            class="iconfont icon-weishiyong1 weishiyong"-->
+      <!--          >{{ unUsed.length }}</span>-->
+      <!--        </el-button>-->
+      <span :style="disabledStyle ? '': 'color:red;'"
             class="iconfont icon-weishiyong1 weishiyong"
-          >{{ unUsed.length }}</span>
-        </el-button>
-        <el-button slot="append" @click="search">新增</el-button>
-      </el-input>
+            @click="use"
+      >{{ unUsed.length }}</span>
+      <el-button slot="append" round type="primary" @click="search">
+        新增/查询
+      </el-button>
     </div>
+    <br/>
     <el-card
       v-for="(item, idx) in all.slice(0, 12 + recycle.length)"
       :key="idx"
@@ -200,7 +212,7 @@ export default {
   },
   mounted () {
     this.updateAM()
-    this.select = parseInt(getStore('roleSelect') || '0')
+    this.select = parseInt(getStore('roleSelect') || '1') || 1
     this.batchCount = getStore('batchCount')
   },
   watch: {
@@ -260,9 +272,7 @@ export default {
 .weishiyong {
   color: #9fa7c2;
   font-size: 25px;
-  top: 2px;
-  right: 0;
-  position: absolute;
+  cursor: pointer;
 }
 
 .enabled {
