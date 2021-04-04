@@ -15,7 +15,6 @@
         :placeholder="placeholder"
         class="input-with-select"
         clearable
-        @blur="blurSearch"
         @keyup.enter.native="search"
       >
         <el-select slot="prepend" v-model="select" placeholder="请选择">
@@ -177,12 +176,6 @@ export default {
       } else {
         this.updateAM()
       }
-    },
-    blurSearch () {
-      this.search()
-      this.$nextTick(() => {
-        this.updateAM()
-      })
     },
     copyRecent () {
       let recentTen = []
