@@ -211,7 +211,7 @@ export default {
   mounted () {
     this.updateAM()
     this.select = parseInt(getStore('roleSelect') || '1') || 1
-    if (this.select == null || this.select.trim() === '' || this.select < 1) {
+    if (this.select == null || this.select === '' || this.select < 1) {
       this.select = 1
     }
     this.batchCount = getStore('batchCount')
