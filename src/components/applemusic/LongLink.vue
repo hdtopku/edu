@@ -15,9 +15,7 @@
     <el-input
       v-model="input"
       :placeholder="placeholder"
-      :rows="3"
       class="input-with-select"
-      type="textarea"
       @keyup.enter.native="search"
       clearable
     >
