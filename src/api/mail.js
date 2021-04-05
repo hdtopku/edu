@@ -28,5 +28,5 @@ export const batchJetReg = (params = {}) => http.fetchGet('/am/jb', params)
 
 export const changeSisuMail = (params = {}) => http.fetchGet('/smail', params)
 
-export const changeRandomMail = (params = {}) => http.ajaxGet('/rmail', params)
+export const changeRandomMail = (params = {}) => http.fetchGet('/rmail', params)
 export const clearRandomMail = (params = {}) => http.fetchGet('/rmail', params)

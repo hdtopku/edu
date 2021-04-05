@@ -26,21 +26,21 @@
     </div>
     <div class="school-container">
       <el-divider>
-        <div v-if="used_mails != null && used_mails.hist_mails != null && used_mails.hist_mails.length > 0">
+        <div v-if="used_mails != null && used_mails.hist_mails != null && used_mails.hist_mails.length > 1">
           <el-popconfirm :loading="clearLoading" cancel-button-text='取消' confirm-button-text='清零' title="是否清零？"
                          @confirm="clearMail">
-            <span slot="reference" class="mail-count">{{ used_mails.hist_mails.length }}</span>
+            <span slot="reference" class="mail-count">{{ used_mails.hist_mails.length - 1 }}</span>
           </el-popconfirm>
         </div>
       </el-divider>
     </div>
-    <el-badge  class="selected" :value="used_mails[school].length">
+    <el-badge  class="selected" :value="used_mails[school].length - 1">
       <el-button type="danger" @click="doCopy(used_mails[school][0])">{{schoolName}}</el-button>
     </el-badge>
     </div>
     <div>
       <el-button :loading="isLoading" class="mail-change" type="primary" @click="throttleChangeMail">
-        {{ changeText }}
+        {{ changeText = (used_mails == null || used_mails.hist_mails == null || used_mails.hist_mails.length === 0) ? '开始' : '更换' }}
       </el-button>
     </div>
     <!--        <el-link class="mail-link" type="success" href="https://applemusic-spotlight.myunidays.com/CN/zh-CN?urlset=null" target="_blank">再来一条</el-link>-->
@@ -90,21 +90,19 @@ export default {
   },
   methods: {
     initMail () {
-      let res = changeRandomMail()
-      this.used_mails = JSON.parse(res)
+      changeRandomMail().then(res => {
+        this.used_mails = JSON.parse(res)
+      })
     },
     changeMail () {
+      if (this.used_mails != null && this.used_mails.hist_mails != null && this.used_mails.hist_mails.length > 0) {
+        this.doCopy(this.used_mails.hist_mails[0])
+      }
       this.isLoading = true
-      setTimeout(() => {
-        let res = changeRandomMail({change: 1})
+      changeRandomMail({change: 1}).then(res => {
         this.used_mails = JSON.parse(res)
-        if (this.used_mails != null && this.used_mails.hist_mails != null && this.used_mails.hist_mails.length > 0) {
-          this.doCopy(this.used_mails.hist_mails[0])
-        }
-        // this.$forceUpdate()
         this.isLoading = false
-      }, 10)
-      // this.countDown()
+      })
     },
     throttleChangeMail: _.throttle(function () {
       this.changeMail()
@@ -115,6 +113,7 @@ export default {
       this.openCenter('已清空！')
       this.clearLoading = false
       clearRandomMail({clear: 1})
+      changeRandomMail()
     },
     copyMail () {
       this.doCopy(this.used_mails.hist_mails[0])
