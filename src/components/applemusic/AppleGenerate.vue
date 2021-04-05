@@ -29,12 +29,12 @@
         <div v-if="used_mails != null && used_mails.hist_mails != null && used_mails.hist_mails.length > 1">
           <el-popconfirm :loading="clearLoading" cancel-button-text='取消' confirm-button-text='清零' title="是否清零？"
                          @confirm="clearMail">
-            <span slot="reference" class="mail-count">{{ used_mails.hist_mails.length - 1 }}</span>
+            <span slot="reference" class="mail-count">{{ used_mails.hist_mails.length - 1}}</span>
           </el-popconfirm>
         </div>
       </el-divider>
     </div>
-    <el-badge  class="selected" :value="used_mails[school].length - 1">
+    <el-badge v-if="school !== ''" class="selected" :value="used_mails[school].length">
       <el-button type="danger" @click="doCopy(used_mails[school][0])">{{schoolName}}</el-button>
     </el-badge>
     </div>
@@ -67,42 +67,38 @@ export default {
   mounted () {
     this.initMail()
   },
-  watch: {
-    used_mails: {
-      deep: true,
-      immediate: true,
-      handler (newVal) {
-        let histMails = newVal.hist_mails
-        if (histMails != null && histMails.length > 0) {
-          if (histMails[0].indexOf('sisu') > 0) {
-            this.school = 'sisu'
-            this.schoolName = '四川外国语大学'
-          } else if (histMails[0].indexOf('zknu') > 0) {
-            this.school = 'zknu'
-            this.schoolName = '周口师范学院'
-          } else if (histMails[0].indexOf('hnucm') > 0) {
-            this.school = 'hnucm'
-            this.schoolName = '湖南中医药大学'
-          }
-        }
-      }
-    }
-  },
   methods: {
     initMail () {
       changeRandomMail().then(res => {
         this.used_mails = JSON.parse(res)
+        this.changeSchool()
       })
     },
     changeMail () {
       if (this.used_mails != null && this.used_mails.hist_mails != null && this.used_mails.hist_mails.length > 0) {
         this.doCopy(this.used_mails.hist_mails[0])
+        this.changeSchool()
       }
       this.isLoading = true
       changeRandomMail({change: 1}).then(res => {
         this.used_mails = JSON.parse(res)
         this.isLoading = false
       })
+    },
+    changeSchool () {
+      let histMails = this.used_mails.hist_mails
+      if (histMails != null && histMails.length > 0) {
+        if (histMails[0].indexOf('sisu') > 0) {
+          this.school = 'sisu'
+          this.schoolName = '四川外国语大学'
+        } else if (histMails[0].indexOf('zknu') > 0) {
+          this.school = 'zknu'
+          this.schoolName = '周口师范学院'
+        } else if (histMails[0].indexOf('hnucm') > 0) {
+          this.school = 'hnucm'
+          this.schoolName = '湖南中医药大学'
+        }
+      }
     },
     throttleChangeMail: _.throttle(function () {
       this.changeMail()
@@ -114,6 +110,7 @@ export default {
       this.clearLoading = false
       clearRandomMail({clear: 1})
       changeRandomMail()
+      this.changeSchool()
     },
     copyMail () {
       this.doCopy(this.used_mails.hist_mails[0])
