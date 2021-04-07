@@ -72,7 +72,7 @@
 
 <script>
 import Tooltip from './Tooltip'
-import {syncGetAMs} from '../../api/mail'
+import {syncGetAMs, getAMs} from '../../api/mail'
 import {setStore, getStore} from '../../api/storage'
 
 export default {
@@ -125,7 +125,7 @@ export default {
         }, 20)
       }
     },
-    updateAM (params = {}) {
+    updateAM (params = {}, isAsync = false) {
       this.isShow = false
       this.$nextTick(() => {
         this.isShow = true
@@ -135,7 +135,16 @@ export default {
         params['operator_id'] = this.select
       }
       this.isLoading = true
-      const res = syncGetAMs(params)
+      if (isAsync) {
+        getAMs(params).then((res) => {
+          this.asyncUpdateAM(res)
+        })
+      } else {
+        const res = syncGetAMs(params)
+        this.asyncUpdateAM(res)
+      }
+    },
+    asyncUpdateAM (res) {
       this.unUsed = res.data.unUsed
       this.using = res.data.using
       this.used = res.data.used
@@ -181,10 +190,10 @@ export default {
         let idx = this.input.indexOf('https://email.myunidays.com/system/clicked-ul')
         if (idx >= 0) {
           this.input = this.input.substring(idx)
-          this.updateAM({link: this.input})
+          this.updateAM({link: this.input}, true)
         }
       } else {
-        this.updateAM()
+        this.updateAM({}, true)
       }
     },
     copyRecent () {
