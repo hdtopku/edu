@@ -137,14 +137,14 @@ export default {
       this.isLoading = true
       if (isAsync) {
         getAMs(params).then((res) => {
-          this.asyncUpdateAM(res)
+          this.asyncUpdateAM(res, false)
         })
       } else {
         const res = syncGetAMs(params)
         this.asyncUpdateAM(res)
       }
     },
-    asyncUpdateAM (res) {
+    asyncUpdateAM (res, needCopy = true) {
       this.unUsed = res.data.unUsed
       this.using = res.data.using
       this.used = res.data.used
@@ -162,7 +162,9 @@ export default {
             this.unUsed.push(element)
           }
         })
-        this.doCopy(`<div style="color:red;font-size:25px;">${this.items.length}条长链</div>复制成功`, links.join('\r\n'))
+        if (needCopy) {
+          this.doCopy(`<div style="color:red;font-size:25px;">${this.items.length}条长链</div>复制成功`, links.join('\r\n'))
+        }
       }
       this.operator = res.data.operator
       this.input = ''
