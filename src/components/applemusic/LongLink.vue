@@ -9,7 +9,7 @@
                        @change="handleChange"></el-input-number>
       <el-popconfirm v-if="batchCount >= 1" :title="'是否使用' + batchCount + '条？'" confirm-button-text="使用"
                      @confirm="clickBatchUse">
-        <el-button slot="reference" :loading="isLoading" plain round>使用{{ batchCount }}条</el-button>
+        <el-button slot="reference" plain round>使用{{ batchCount }}条</el-button>
       </el-popconfirm>
     </div>
     <el-input
@@ -95,7 +95,6 @@ export default {
       operator: [],
       placeholder: '',
       input: '',
-      isLoading: false,
       isShow: true,
       recentCopy: null,
       batchCount: 9
@@ -130,11 +129,9 @@ export default {
       this.$nextTick(() => {
         this.isShow = true
       })
-      this.isLoading = true
       if (this.select !== '' && this.select !== 0) {
         params['operator_id'] = this.select
       }
-      this.isLoading = true
       if (isAsync) {
         getAMs(params).then((res) => {
           this.asyncUpdateAM(res, false)
@@ -169,7 +166,6 @@ export default {
       this.operator = res.data.operator
       this.input = ''
       this.placeholder = `今：${res.data.usedLength}；昨：${res.data.yesterdayUsedLength}`
-      this.isLoading = false
     },
     clickRecycle (id) {
       this.updateAM({id, status: 3})
