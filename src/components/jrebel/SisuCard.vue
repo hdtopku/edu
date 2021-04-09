@@ -17,7 +17,7 @@
     <div class="mails-button">
       <el-button :type="item.count === 0 ? 'success' : ''" v-for="(item,idx) in sisuMails"
                  :key="idx" class="mail-button" size="mini" @click="openCenter(item)" plain>
-        {{ item.mail.substring(4, item.mail.indexOf('@')) }}
+        {{ item.mail.substring(8, item.mail.indexOf('@')) }}
       </el-button>
       <el-popconfirm v-if="useCount > 0" confirm-button-text='清零' cancel-button-text='取消' title="是否清零？" @confirm="clearCount">
         <span slot="reference" class="tag">{{useCount}}</span>
@@ -116,7 +116,7 @@ export default {
 
 <style>
 .mail-card {
-  min-height: 110px;
+  min-height: 145px;
   height: auto;
 }
 
