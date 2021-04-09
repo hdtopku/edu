@@ -17,7 +17,7 @@
     <div class="mails-button">
       <el-button :type="item.count === 0 ? 'success' : ''" v-for="(item,idx) in sisuMails"
                  :key="idx" class="mail-button" size="mini" @click="openCenter(item)" plain>
-        {{ item.mail.substring(8, item.mail.indexOf('@')) }}
+        {{ item.mail.substring(0, 6) }}
       </el-button>
       <el-popconfirm v-if="useCount > 0" confirm-button-text='清零' cancel-button-text='取消' title="是否清零？" @confirm="clearCount">
         <span slot="reference" class="tag">{{useCount}}</span>
@@ -43,7 +43,7 @@ export default {
         },
         {
           value: 'hnucm',
-          label: '👉 老中医【求稳】'
+          label: '👉 湖中医【求稳】'
         },
         {
           value: 'sisu_word',
