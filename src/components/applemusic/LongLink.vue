@@ -1,10 +1,13 @@
 <template>
   <div v-if="isShow">
     <div style="height: 35px;display: flex;justify-content: space-between">
-      <el-link v-if="used != null && used.length > 0" style="margin-bottom: 5px" @click="copyRecent">历史{{
+      <el-popconfirm v-if="batchCount >= 1" :title="'复制历史' + batchCount + '条？'"  confirm-button-text="复制"
+                     @confirm="copyRecent">
+      <el-link slot="reference"  v-if="used != null && used.length > 0" style="margin-bottom: 5px">历史{{
           batchCount
         }}条
       </el-link>
+      </el-popconfirm>
       <el-input-number v-model="batchCount" :max="20" :min="1" label="描述文字" size="mini"
                        @change="handleChange"></el-input-number>
       <el-popconfirm v-if="batchCount >= 1" :title="'是否使用' + batchCount + '条？'" confirm-button-text="使用"
