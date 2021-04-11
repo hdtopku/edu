@@ -119,14 +119,14 @@ export default {
       if (text != null && text.trim().length > 0) {
         this.$copyText(text).then((e) => {
           // success
-          this.openCenter(text + '已复制！')
+          this.openCenter(`<p style="font-size: 35px;color: red; margin: 10px">邮箱已更换</p>`)
         }, (e) => {
           // fail
         })
       }
     },
     openCenter: function (Text = '已复制！') {
-      this.$toast.top(Text)
+      this.$toast.center(Text)
     }
     // countDown () {
     //   this.leftSeconds = Math.floor(Math.random() * 10) + 10

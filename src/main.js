@@ -26,9 +26,10 @@ Vue.directive('long-press', LongPress)
 Vue.use(ToggleButton)
 Vue.use(Toast, {
   type: 'center',
-  duration: 2000,
+  duration: 3000,
   wordWrap: true,
-  width: '150px'
+  width: '350px',
+  height: '300px'
 })
 
 Vue.use(VueTippy, {
