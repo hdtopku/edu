@@ -45,7 +45,7 @@
     </div>
     <br/>
     <el-card
-      v-for="(item, idx) in all.slice(0, 12 + recycle.length)"
+      v-for="(item, idx) in (select === 0 ? all : all.slice(0, 12 + recycle.length))"
       :key="idx"
       :class="item.isItem ? 'highlight': ''"
       shadow="always"
@@ -204,6 +204,7 @@ export default {
       }
     },
     use () {
+      if (this.disabledStyle) { return }
       this.updateAM({status: 2})
     },
     copy (shortLink) {
