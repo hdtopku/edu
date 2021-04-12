@@ -8,8 +8,7 @@
         }}条
       </el-link>
       </el-popconfirm>
-      <el-input-number v-model="batchCount" :max="20" :min="1" label="描述文字" size="mini"
-                       @change="handleChange"></el-input-number>
+      <el-input-number v-model="batchCount" :max="20" :min="1" label="描述文字" size="mini"></el-input-number>
       <el-popconfirm v-if="batchCount >= 1" :title="'是否使用' + batchCount + '条？'" confirm-button-text="使用"
                      @confirm="clickBatchUse">
         <el-button slot="reference" plain round>使用{{ batchCount }}条</el-button>
@@ -104,8 +103,6 @@ export default {
     }
   },
   methods: {
-    handleChange () {
-    },
     openCenter: function (text = '已复制！') {
       this.$toast.top(text)
     },
@@ -228,6 +225,18 @@ export default {
     this.batchCount = getStore('batchCount')
   },
   watch: {
+    input: {
+      deep: true,
+      handler (newVal) {
+        if (newVal != null && newVal !== '') {
+          let idx = newVal.indexOf('https://email.myunidays.com/system/clicked-ul')
+          if (idx >= 0) {
+            this.input = this.input.substring(idx)
+            this.updateAM({link: this.input}, true)
+          }
+        }
+      }
+    },
     select: function () {
       this.updateAM()
       if (this.select !== '' && this.select !== 0) {
