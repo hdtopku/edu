@@ -179,6 +179,9 @@ export default {
     clickBatchUse () {
       if (this.select > 0) {
         this.updateAM({'operator_id': this.select, 'status': 2, 'count': this.batchCount})
+        setTimeout(() => {
+          this.$router.go(0)
+        }, 2000)
       } else {
         this.openCenter('请选择角色')
       }
