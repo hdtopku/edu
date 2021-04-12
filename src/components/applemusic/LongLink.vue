@@ -22,7 +22,7 @@
       clearable
     >
     </el-input>
-    <div style="display: flex; justify-content: space-between">
+    <div style="display: flex; justify-content: space-around">
       <el-select slot="prepend" v-model="select" placeholder="请选择">
         <el-option
           v-for="(opVal, opIdx) in operator"
@@ -41,9 +41,9 @@
             class="iconfont icon-weishiyong1 weishiyong"
             @click="use"
       >{{ unUsed.length }}</span>
-      <el-button slot="append" round type="primary" @click="search">
-        新增/查询
-      </el-button>
+<!--      <el-button slot="append" round type="primary" @click="search">-->
+<!--        新增/查询-->
+<!--      </el-button>-->
     </div>
     <br/>
     <el-card
