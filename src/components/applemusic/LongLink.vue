@@ -22,7 +22,7 @@
       clearable
     >
     </el-input>
-    <div style="display: flex; justify-content: space-around">
+    <div style="display: flex; justify-content: space-between;padding: 0 10px">
       <el-select slot="prepend" v-model="select" placeholder="请选择">
         <el-option
           v-for="(opVal, opIdx) in operator"
