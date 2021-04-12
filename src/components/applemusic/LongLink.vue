@@ -15,6 +15,8 @@
       </el-popconfirm>
     </div>
     <el-input
+      type="textarea"
+      :row="2"
       v-model="input"
       :placeholder="placeholder"
       class="input-with-select"
