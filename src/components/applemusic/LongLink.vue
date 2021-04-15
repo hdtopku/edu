@@ -8,7 +8,7 @@
         }}条
       </el-link>
       </el-popconfirm>
-      <el-input-number v-model="batchCount" :max="20" :min="1" label="描述文字" size="mini"></el-input-number>
+      <el-input-number v-model="batchCount" :max="25" :min="1" label="描述文字" size="mini"></el-input-number>
       <el-popconfirm v-if="batchCount >= 1" :title="'是否使用' + batchCount + '条？'" confirm-button-text="使用"
                      @confirm="clickBatchUse">
         <el-button slot="reference" plain round>使用{{ batchCount }}条</el-button>
