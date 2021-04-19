@@ -134,6 +134,7 @@ export default {
       if (this.select !== '' && this.select !== 0) {
         params['operator_id'] = this.select
       }
+      console.log(isAsync)
       if (isAsync) {
         getAMs(params).then((res) => {
           this.asyncUpdateAM(res, false)
@@ -141,9 +142,6 @@ export default {
       } else {
         const res = syncGetAMs(params)
         this.asyncUpdateAM(res)
-        setTimeout(() => {
-          this.$router.go(0)
-        }, 1000)
       }
     },
     asyncUpdateAM (res, needCopy = true) {
