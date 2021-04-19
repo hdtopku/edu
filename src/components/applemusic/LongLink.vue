@@ -225,7 +225,7 @@ export default {
     }
   },
   mounted () {
-    this.updateAM()
+    this.updateAM({}, true)
     this.select = parseInt(getStore('roleSelect') || '1') || 1
     if (this.select == null || this.select === '' || this.select < 1) {
       this.select = 1
