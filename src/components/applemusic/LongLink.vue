@@ -170,13 +170,13 @@ export default {
       this.placeholder = `今：${res.data.usedLength}；昨：${res.data.yesterdayUsedLength}`
     },
     clickRecycle (id) {
-      this.updateAM({id, status: 3})
+      this.updateAM({id, status: 3}, true)
     },
     clickShiyong (id) {
       this.updateAM({id, status: 1})
     },
     clickUsed (id) {
-      this.updateAM({id, status: 2})
+      this.updateAM({id, status: 2}, true)
     },
     clickBatchUse () {
       if (this.select > 0) {
