@@ -62,9 +62,9 @@
         <tooltip
           :item="item"
           class="tooltip"
-          @clickRecycle="clickRecycle"
+          @clickRecycle="clickRecycle(item.id, item.short_link, item.link)"
           @clickShiyong="clickShiyong"
-          @clickUsed="clickUsed"
+          @clickUsed="clickUsed(item.id, item.short_link, item.link)"
         ></tooltip>
         <div class="mail" @click="doCopy(item.short_link, item.link)">{{ item.short_link || item.id }}</div>
         <div class="time">{{ item.update_time }} | {{ item.create_time.substring(0, 10) }} | {{ item.chinese_name }}
@@ -134,7 +134,6 @@ export default {
       if (this.select !== '' && this.select !== 0) {
         params['operator_id'] = this.select
       }
-      console.log(isAsync)
       if (isAsync) {
         getAMs(params).then((res) => {
           this.asyncUpdateAM(res, false)
@@ -142,6 +141,9 @@ export default {
       } else {
         const res = syncGetAMs(params)
         this.asyncUpdateAM(res)
+        setTimeout(() => {
+          this.$router.go(0)
+        }, 2000)
       }
     },
     asyncUpdateAM (res, needCopy = true) {
@@ -170,18 +172,20 @@ export default {
       this.input = ''
       this.placeholder = `今：${res.data.usedLength}；昨：${res.data.yesterdayUsedLength}`
     },
-    clickRecycle (id) {
+    clickRecycle (id, shortLink, link) {
+      this.doCopy(shortLink, link)
       this.updateAM({id, status: 3}, true)
     },
     clickShiyong (id) {
       this.updateAM({id, status: 1})
     },
-    clickUsed (id) {
+    clickUsed (id, shortLink, link) {
+      this.doCopy(shortLink, link)
       this.updateAM({id, status: 2}, true)
     },
     clickBatchUse () {
       if (this.select > 0) {
-        this.updateAM({'operator_id': this.select, 'status': 2, 'count': this.batchCount}, true)
+        this.updateAM({'operator_id': this.select, 'status': 2, 'count': this.batchCount})
       } else {
         this.openCenter('请选择角色')
       }
@@ -244,12 +248,8 @@ export default {
       }
     },
     select: function () {
-      this.updateAM()
-      if (this.select !== '' && this.select !== 0) {
-        this.disabledStyle = false
-      } else {
-        this.disabledStyle = true
-      }
+      this.updateAM({}, true)
+      this.disabledStyle = !(this.select !== '' && this.select !== 0)
       setStore('roleSelect', this.select)
     },
     batchCount (newVal) {
