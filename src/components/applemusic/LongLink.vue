@@ -3,15 +3,15 @@
     <div style="height: 35px;display: flex;justify-content: space-between">
       <el-popconfirm v-if="batchCount >= 1" :title="'复制历史' + batchCount + '条？'"  confirm-button-text="复制"
                      @confirm="copyRecent">
-      <el-link slot="reference"  v-if="used != null && used.length > 0" style="margin-bottom: 5px">历史{{
-          batchCount
-        }}条
-      </el-link>
+        <el-link slot="reference"  v-if="used != null && used.length > 0" style="margin-bottom: 5px">历史{{
+            batchCount
+          }}条
+        </el-link>
       </el-popconfirm>
       <el-input-number v-model="batchCount" :max="25" :min="1" label="描述文字" size="mini"></el-input-number>
       <el-popconfirm v-if="batchCount >= 1" :title="'是否使用' + batchCount + '条？'" confirm-button-text="使用"
                      @confirm="clickBatchUse">
-        <el-button slot="reference" plain round>预定{{ batchCount }}条</el-button>
+        <el-button slot="reference" plain round>使用{{ batchCount }}条</el-button>
       </el-popconfirm>
     </div>
     <el-input
@@ -62,9 +62,9 @@
         <tooltip
           :item="item"
           class="tooltip"
-          @clickRecycle="clickRecycle(item.id, item.short_link, item.link)"
+          @clickRecycle="clickRecycle"
           @clickShiyong="clickShiyong"
-          @clickUsed="clickUsed(item.id, item.short_link, item.link)"
+          @clickUsed="clickUsed"
         ></tooltip>
         <div class="mail" @click="doCopy(item.short_link, item.link)">{{ item.short_link || item.id }}</div>
         <div class="time">{{ item.update_time }} | {{ item.create_time.substring(0, 10) }} | {{ item.chinese_name }}
@@ -110,6 +110,7 @@ export default {
     },
     doCopy (shortLink, link) {
       for (let i = 0; i < 3; i++) {
+        // setTimeout(() => {
         this.recentCopy = link
         this.$copyText(link).then((e) => {
           // success
@@ -122,6 +123,7 @@ export default {
           // fail
           this.doCopy(shortLink, link)
         })
+        // }, 20)
       }
     },
     updateAM (params = {}, isAsync = false) {
@@ -167,23 +169,21 @@ export default {
       this.input = ''
       this.placeholder = `今：${res.data.usedLength}；昨：${res.data.yesterdayUsedLength}`
     },
-    clickRecycle (id, shortLink, link) {
-      this.doCopy(shortLink, link)
+    clickRecycle (id) {
       this.updateAM({id, status: 3}, true)
     },
     clickShiyong (id) {
       this.updateAM({id, status: 1})
     },
-    clickUsed (id, shortLink, link) {
-      this.doCopy(shortLink, link)
+    clickUsed (id) {
       this.updateAM({id, status: 2}, true)
     },
     clickBatchUse () {
       if (this.select > 0) {
         this.updateAM({'operator_id': this.select, 'status': 2, 'count': this.batchCount}, true)
-        // setTimeout(() => {
-        //   this.$router.go(0)
-        // }, 2000)
+        setTimeout(() => {
+          this.$router.go(0)
+        }, 2000)
       } else {
         this.openCenter('请选择角色')
       }
