@@ -11,7 +11,7 @@
       <el-input-number v-model="batchCount" :max="25" :min="1" label="描述文字" size="mini"></el-input-number>
       <el-popconfirm v-if="batchCount >= 1" :title="'是否使用' + batchCount + '条？'" confirm-button-text="使用"
                      @confirm="clickBatchUse">
-        <el-button slot="reference" plain round>使用{{ batchCount }}条</el-button>
+        <el-button slot="reference" plain round>预定{{ batchCount }}条</el-button>
       </el-popconfirm>
     </div>
     <el-input
@@ -62,9 +62,9 @@
         <tooltip
           :item="item"
           class="tooltip"
-          @clickRecycle="clickRecycle"
+          @clickRecycle="clickRecycle(item.id, item.short_link, item.link)"
           @clickShiyong="clickShiyong"
-          @clickUsed="clickUsed"
+          @clickUsed="clickUsed(item.id, item.short_link, item.link)"
         ></tooltip>
         <div class="mail" @click="doCopy(item.short_link, item.link)">{{ item.short_link || item.id }}</div>
         <div class="time">{{ item.update_time }} | {{ item.create_time.substring(0, 10) }} | {{ item.chinese_name }}
@@ -110,20 +110,18 @@ export default {
     },
     doCopy (shortLink, link) {
       for (let i = 0; i < 3; i++) {
-        setTimeout(() => {
-          this.recentCopy = link
-          this.$copyText(link).then((e) => {
-            // success
-            if (shortLink.length > 20) {
-              this.openCenter(shortLink)
-            } else {
-              this.openCenter(`<div style='color:red;font-size:30px;'>${shortLink}</div>已复制！`)
-            }
-          }, (e) => {
-            // fail
-            this.doCopy(shortLink, link)
-          })
-        }, 20)
+        this.recentCopy = link
+        this.$copyText(link).then((e) => {
+          // success
+          if (shortLink.length > 20) {
+            this.openCenter(shortLink)
+          } else {
+            this.openCenter(`<div style='color:red;font-size:30px;'>${shortLink}</div>已复制！`)
+          }
+        }, (e) => {
+          // fail
+          this.doCopy(shortLink, link)
+        })
       }
     },
     updateAM (params = {}, isAsync = false) {
@@ -169,21 +167,23 @@ export default {
       this.input = ''
       this.placeholder = `今：${res.data.usedLength}；昨：${res.data.yesterdayUsedLength}`
     },
-    clickRecycle (id) {
+    clickRecycle (id, shortLink, link) {
+      this.doCopy(shortLink, link)
       this.updateAM({id, status: 3}, true)
     },
     clickShiyong (id) {
       this.updateAM({id, status: 1})
     },
-    clickUsed (id) {
+    clickUsed (id, shortLink, link) {
+      this.doCopy(shortLink, link)
       this.updateAM({id, status: 2}, true)
     },
     clickBatchUse () {
       if (this.select > 0) {
         this.updateAM({'operator_id': this.select, 'status': 2, 'count': this.batchCount}, true)
-        setTimeout(() => {
-          this.$router.go(0)
-        }, 2000)
+        // setTimeout(() => {
+        //   this.$router.go(0)
+        // }, 2000)
       } else {
         this.openCenter('请选择角色')
       }
@@ -211,6 +211,9 @@ export default {
     use () {
       if (this.disabledStyle) { return }
       this.updateAM({status: 2})
+      setTimeout(() => {
+        this.$router.go(0)
+      }, 2000)
     },
     copy (shortLink) {
       this.$copyText(shortLink).then((e) => {
