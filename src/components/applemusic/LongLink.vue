@@ -1,8 +1,8 @@
 <template>
   <div v-if="isShow">
     <div style="height: 35px;display: flex;justify-content: space-between">
-      <el-popover v-if="batchCount >= 1" :title="'是否复制历史' + batchCount + '条？'" confirm-button-text="使用" @show="copyRecent">
-        <el-input type="textarea" :row="5" v-model="recentLinks"></el-input>
+      <el-popover v-model="popVisible" v-if="batchCount >= 1" :title="'是否复制历史' + batchCount + '条？'" confirm-button-text="使用" @show="copyRecent">
+        <el-input type="textarea" :row="10" v-model="recentLinks"></el-input>
         <div style="text-align: right; margin: 0">
           <el-button size="mini" type="text" @click="popVisible = false">取消</el-button>
           <el-button type="primary" size="mini" @click="doCopy('已复制', recentLinks)">复制</el-button>
