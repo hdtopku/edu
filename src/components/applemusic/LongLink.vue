@@ -1,13 +1,14 @@
 <template>
   <div v-if="isShow">
     <div style="height: 35px;display: flex;justify-content: space-between">
-      <el-popconfirm v-if="batchCount >= 1" :title="'复制历史' + batchCount + '条？'"  confirm-button-text="复制"
-                     @confirm="copyRecent">
-        <el-link slot="reference"  v-if="used != null && used.length > 0" style="margin-bottom: 5px">历史{{
-            batchCount
-          }}条
-        </el-link>
-      </el-popconfirm>
+      <el-popover v-if="batchCount >= 1" :title="'是否复制历史' + batchCount + '条？'" confirm-button-text="使用" @show="copyRecent">
+        <el-input type="textarea" :row="5" v-model="recentLinks"></el-input>
+        <div style="text-align: right; margin: 0">
+          <el-button size="mini" type="text" @click="popVisible = false">取消</el-button>
+          <el-button type="primary" size="mini" @click="doCopy('已复制', recentLinks)">复制</el-button>
+        </div>
+        <el-button slot="reference" plain round>历史{{ batchCount }}条</el-button>
+      </el-popover>
       <el-input-number v-model="batchCount" :max="25" :min="1" label="描述文字" size="mini"></el-input-number>
       <el-popconfirm v-if="batchCount >= 1" :title="'是否使用' + batchCount + '条？'" confirm-button-text="使用"
                      @confirm="clickBatchUse">
@@ -33,12 +34,6 @@
           :value="opVal.oid"
         ></el-option>
       </el-select>
-      <!--        <el-button slot="prepend" :disabled="disabledStyle" @click="use">-->
-      <!--          <span-->
-      <!--            :style="disabledStyle ? '': 'color:red;'"-->
-      <!--            class="iconfont icon-weishiyong1 weishiyong"-->
-      <!--          >{{ unUsed.length }}</span>-->
-      <!--        </el-button>-->
       <span :style="disabledStyle ? '': 'color:red;'"
             class="iconfont icon-weishiyong1 weishiyong"
             @click="use"
@@ -83,6 +78,7 @@ export default {
   components: {Tooltip},
   data () {
     return {
+      popVisible: false,
       hasItem: false,
       tabs: [{label: '使用中', name: 'first'},
         {label: '已使用', name: 'second'}],
@@ -101,7 +97,8 @@ export default {
       input: '',
       isShow: true,
       recentCopy: null,
-      batchCount: 9
+      batchCount: 9,
+      recentLinks: ''
     }
   },
   methods: {
@@ -207,7 +204,8 @@ export default {
         this.used.slice(0, this.batchCount).forEach((item) => {
           recentTen.push(item.link)
         })
-        this.doCopy('已复制', recentTen.join('\r\n'))
+        this.recentLinks = recentTen.join('\r\n')
+        // this.doCopy('已复制', recentTen.join('\r\n'))
       }
     },
     use () {
@@ -315,15 +313,4 @@ export default {
   font-weight: bolder;
 }
 
-.batch-use {
-//margin: 20px; float: right;
-}
-
-.recent-copy {
-  height: 30px;
-  float: left;
-  position: absolute;
-  left: 10px;
-
-}
 </style>
