@@ -58,6 +58,15 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
 
+    proxyTable: {
+      '/itl': {
+        target: 'https://2021.ipchaxun.com',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/itl': ''
+        }
+      }
+    },
     /**
      * Source Maps
      * build不显示源码
