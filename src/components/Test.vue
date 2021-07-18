@@ -17,7 +17,7 @@ export default {
     }
   },
   created () {
-    getRequest('https://ip.tool.lu').then(res => {
+    getRequest('https://2021.ipchaxun.com').then(res => {
       if (!res) {
         return
       }
