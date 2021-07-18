@@ -17,7 +17,7 @@ export default {
     }
   },
   created () {
-    getRequest('https://2021.ipchaxun.com').then(res => {
+    getRequest('/itl').then(res => {
       if (!res) {
         return
       }
