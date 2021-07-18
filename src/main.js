@@ -13,7 +13,7 @@ import VueTippy, { TippyComponent } from 'vue-tippy'
 import LongPress from 'vue-directive-long-press'
 // import 'element-ui/lib/theme-chalk/index.css'
 import VueClipboard from 'vue-clipboard2'
-
+import {getRequest} from './api/request'
 import { Badge, Button, Select, TabPane, Link, Tabs, Timeline, TimelineItem, Input, Option, Row, Col, Popover, Card, Switch, Checkbox, Popconfirm, Tag, Divider, RadioGroup, RadioButton, InputNumber } from 'element-ui'
 Vue.use(Button).use(Select).use(TabPane).use(Link).use(Tabs).use(Timeline).use(TimelineItem).use(Input)
   .use(Option).use(Row).use(Col).use(Popover).use(Card).use(Switch).use(Checkbox).use(Popconfirm).use(Tag).use(Divider)
@@ -60,3 +60,4 @@ new Vue({
 })
 
 Vue.prototype.$http = axios
+Vue.prototype.getRequest = getRequest

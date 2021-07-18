@@ -35,6 +35,11 @@ export default new Router({
       path: '/v',
       name: 'v',
       component: (resolve) => require(['@/components/jet/V'], resolve)
+    },
+    {
+      path: '/test',
+      name: 'test',
+      component: (resolve) => require(['@/components/Test'], resolve)
     }
     // , {
     //   path: '/itchat',

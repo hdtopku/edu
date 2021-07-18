@@ -6,12 +6,18 @@ const path = require('path')
 
 module.exports = {
   dev: {
-
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
-
+    proxyTable: {
+      '/itl': {
+        target: 'https://2021.ipchaxun.com',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/itl': ''
+        }
+      }
+    },
     // Various Dev Server settings
     host: '0.0.0.0', // can be overwritten by process.env.HOST
     port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
