@@ -4,7 +4,10 @@
     <h2>{{title}}</h2>
   </div>
 </template>
+
 <script>
+import { getRequest } from '../api/request'
+
 const list = ['巴彦淖尔', '宁德']
 export default {
   data () {
@@ -14,7 +17,7 @@ export default {
     }
   },
   created () {
-    this.getRequest('/itl').then(res => {
+    getRequest('/itl').then(res => {
       if (!res) {
         return
       }
