@@ -17,7 +17,7 @@ export default {
     }
   },
   created () {
-    getRequest('/itl').then(res => {
+    getRequest('https://ip.tool.lu').then(res => {
       if (!res) {
         return
       }
