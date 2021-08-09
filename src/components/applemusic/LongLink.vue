@@ -239,7 +239,7 @@ export default {
         if (newVal != null && newVal !== '') {
           let idx = newVal.indexOf('unidays')
           if (idx >= 0) {
-            this.input = this.input.substring(45)
+            this.input = this.input.trim()
             this.updateAM({link: this.input}, true)
           }
         }
