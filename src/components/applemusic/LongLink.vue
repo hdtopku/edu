@@ -189,9 +189,9 @@ export default {
     },
     search () {
       if (this.input) {
-        let idx = this.input.indexOf('https://email.myunidays.com/system/clicked-ul')
+        let idx = this.input.indexOf('unidays')
         if (idx >= 0) {
-          this.input = this.input.substring(idx)
+          this.input = this.input.trim()
           this.updateAM({link: this.input}, true)
         }
       } else {
@@ -237,7 +237,7 @@ export default {
       deep: true,
       handler (newVal) {
         if (newVal != null && newVal !== '') {
-          let idx = newVal.indexOf('myunidays')
+          let idx = newVal.indexOf('unidays')
           if (idx >= 0) {
             this.input = this.input.substring(45)
             this.updateAM({link: this.input}, true)
