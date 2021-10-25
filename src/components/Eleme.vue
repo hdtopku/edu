@@ -1,7 +1,11 @@
 <template>
-<div>
-<el-button round style="margin-top: 450px;font-size: 30px;padding: 25px" type="primary" @click="clickButton" size="medium">打开饿了么app翻倍</el-button>
-</div>
+  <div>
+    <el-button round style="margin-top: 350px;font-size: 30px;padding: 20px" type="danger" @click="copy">第一步：点我复制口令</el-button>
+    <div></div>
+    <el-button round size="medium" style="margin-top: 50px;font-size: 25px;padding: 20px" type="primary"
+               @click="clickButton">第二步：打开饿了么app翻倍
+    </el-button>
+  </div>
 </template>
 
 <script>
