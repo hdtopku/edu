@@ -35,7 +35,7 @@ export default {
     },
     doCopy () {
       this.copy()
-      this.openCenter(`口令已复制！`)
+      this.$toast.center(`口令已复制！`)
     },
     copy () {
       this.$copyText('d:/＄XGEXEys＄').catch((err) => {
