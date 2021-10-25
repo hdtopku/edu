@@ -35,6 +35,11 @@ export default new Router({
       path: '/test',
       name: 'test',
       component: (resolve) => require(['@/components/Test'], resolve)
+    },
+    {
+      path: '/ele',
+      name: 'Eleme',
+      component: (resolve) => require(['@/components/Eleme'], resolve)
     }
     // , {
     //   path: '/itchat',
