@@ -1,6 +1,6 @@
 <template>
 <div>
-<el-button style="margin-top: 500px" type="primary" @click="clickButton">前往饿了么app领取</el-button>
+<el-button round style="margin-top: 450px;font-size: 30px;padding: 25px" type="primary" @click="clickButton" size="medium">打开饿了么app翻倍</el-button>
 </div>
 </template>
 
