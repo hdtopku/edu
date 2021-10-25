@@ -1,10 +1,17 @@
 <template>
   <div>
-    <el-button round style="margin-top: 350px;font-size: 30px;padding: 20px" type="danger" @click="doCopy">第一步：点我复制口令</el-button>
-    <div></div>
-    <el-button round size="medium" style="margin-top: 50px;font-size: 25px;padding: 20px" type="primary"
-               @click="clickButton">第二步：打开饿了么app翻倍
+    <el-button round style="margin-top: 300px;font-size: 30px;padding: 20px" type="danger" @click="doCopy">第一步：点我复制口令
     </el-button>
+    <div>
+      <el-button round size="medium" style="margin-top: 50px;font-size: 25px;padding: 20px" type="primary"
+                 @click="clickButton">第二步：打开饿了么app翻倍
+      </el-button>
+    </div>
+    <div
+      style="display: inline-block;margin-top:20px;font-size: 20px;border: 3px dashed #FB2A1C; border-radius: 10px;padding: 10px">
+      <div>❗❗❗提示：翻倍红包打开较慢</div>
+      <div>若打不开，请重复第一、二步</div>
+    </div>
   </div>
 </template>
 
@@ -15,15 +22,6 @@ export default {
     return {}
   },
   created () {
-    this.copy()
-  },
-  updated () {
-    this.copy()
-  },
-  beforeMount () {
-    this.copy()
-  },
-  beforeUpdate () {
     this.copy()
   },
   methods: {
