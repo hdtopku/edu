@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-button round style="margin-top: 300px;font-size: 30px;padding: 20px" type="danger" @click="doCopy">第一步：点我复制口令
+    <el-button round style="margin-top: 320px;font-size: 30px;padding: 20px" type="danger" @click="doCopy">第一步：点我复制口令
     </el-button>
     <div>
       <el-button round size="medium" style="margin-top: 50px;font-size: 25px;padding: 20px" type="primary"
@@ -8,7 +8,7 @@
       </el-button>
     </div>
     <div
-      style="display: inline-block;margin-top:20px;font-size: 20px;border: 3px dashed #FB2A1C; border-radius: 10px;padding: 10px">
+      style="display: inline-block;margin-top:30px;font-size: 20px;border: 3px dashed #FB2A1C; border-radius: 10px;padding: 10px">
       <div>❗❗❗提示：翻倍红包打开较慢</div>
       <div>若打不开，请重复第一、二步</div>
     </div>
