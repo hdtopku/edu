@@ -29,9 +29,9 @@ export default {
   methods: {
     clickButton () {
       this.copy()
-      this.$nextTick(() => {
+      setTimeout(() => {
         window.location.href = 'https://h5.ele.me/ant/qrcode3?open_type=miniapp&url_id=675&inviterId=e8da174e14&actId=1&_ltracker_f=hjb_app_grzx&chInfo=ch_app_chsub_Photo'
-      })
+      }, 300)
     },
     copy () {
       this.$copyText('d:/＄XGEXEys＄').catch((err) => {
