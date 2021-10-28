@@ -1,14 +1,16 @@
 <template>
   <div>
-    <el-button round style="margin-top: 320px;font-size: 30px;padding: 20px" type="danger" @click="doCopy">第一步：点我复制口令
+    <el-button round style="margin-top: 320px;font-size: 30px;padding: 20px;width:95vw" type="danger" @click="doCopy">
+      第一步：点我复制口令
     </el-button>
     <div>
-      <el-button round size="medium" style="margin-top: 50px;font-size: 25px;padding: 20px" type="primary"
+      <el-button round size="medium" style="animation: breath infinite 2s ease;
+margin-top: 50px;font-size: 25px;padding: 20px;width:95vw" type="primary"
                  @click="clickButton">第二步：打开饿了么app翻倍
       </el-button>
     </div>
     <div
-      style="display: inline-block;margin-top:30px;font-size: 20px;border: 3px dashed #FB2A1C; border-radius: 10px;padding: 10px">
+      style="display: inline-block;margin-top:30px;font-size: 20px;border: 3px dashed #FB2A1C; border-radius: 10px;padding: 1vw;width:80vw">
       <div>❗❗❗提示：翻倍红包打开较慢</div>
       <div>若打不开，请重复第一、二步</div>
     </div>
@@ -45,5 +47,10 @@ export default {
 </script>
 
 <style scoped>
-
+.ami {
+  animation-name: pulse;
+  animation-iteration-count: infinite;
+  animation-duration: 0.8s;
+  animation-timing-function: ease-in-out;
+}
 </style>
