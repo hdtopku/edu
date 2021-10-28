@@ -1,6 +1,9 @@
 <template>
   <div>
-    <el-button round style="margin-top: 50vh;font-size: 30px;padding: 20px;width:95vw;font-weight: bold" type="danger"
+    <img
+      style="width: 100%"
+      src="https://cdn.nlark.com/yuque/0/2021/jpeg/12454360/1635425274151-6634d749-c199-411a-9590-a6b9a7de1c05.jpeg" alt=""/>
+    <el-button round style="margin-top: 5vh;font-size: 30px;padding: 20px;width:95vw;font-weight: bold" type="danger"
                @click="doCopy">
       第一步：点我复制口令
     </el-button>
