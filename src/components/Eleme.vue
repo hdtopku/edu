@@ -1,16 +1,19 @@
 <template>
   <div>
-    <el-button round style="margin-top: 320px;font-size: 30px;padding: 20px;width:95vw" type="danger" @click="doCopy">
+    <el-button round style="margin-top: 50vh;font-size: 30px;padding: 20px;width:95vw;font-weight: bold" type="danger"
+               @click="doCopy">
       第一步：点我复制口令
     </el-button>
     <div>
-      <el-button round size="medium" style="animation: breath infinite 2s ease;
-margin-top: 50px;font-size: 25px;padding: 20px;width:95vw" type="primary"
-                 @click="clickButton">第二步：打开饿了么app翻倍
-      </el-button>
+      <transition name="ease-out-in">
+        <el-button round size="medium" style="animation: breath infinite 2s ease;
+margin-top: 5vh;font-size: 25px;padding: 20px;width:95vw;font-weight: bolder" type="primary"
+                   @click="clickButton">第二步：打开饿了么app翻倍
+        </el-button>
+      </transition>
     </div>
     <div
-      style="display: inline-block;margin-top:30px;font-size: 20px;border: 3px dashed #FB2A1C; border-radius: 10px;padding: 1vw;width:80vw">
+      style="display: inline-block;margin-top: 5vh;font-size: 20px;border: 3px dashed #FB2A1C; border-radius: 10px;padding: 1vw;width:80vw">
       <div>❗❗❗提示：翻倍红包打开较慢</div>
       <div>若打不开，请重复第一、二步</div>
     </div>
