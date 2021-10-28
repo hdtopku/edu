@@ -1,12 +1,12 @@
 <template>
   <div style="position: relative">
-    <div style="width: 100%; height: 42vh">
+    <div style="width: 100%; height: 42vh"
+         class="animate__animated animate__backInDown animate__rubberBand">
       <img
         alt=""
-        class="animate__animated animate__backInDown animate__rubberBand"
         src="https://cdn.nlark.com/yuque/0/2021/jpeg/12454360/1635425274151-6634d749-c199-411a-9590-a6b9a7de1c05.jpeg"
         style="width: 100%;float: left"/>
-      <div class="animate__animated animate__fadeInDown" style="float: right;font-size: 10px">
+      <div style="float: right;font-size: 10px">
         提示：实际大小以app页面为准
       </div>
     </div>
