@@ -28,6 +28,7 @@ margin-top: 5vh;font-size: 25px;padding: 20px;width:95vw;font-weight: bolder" ty
       style="display: inline-block;margin-top: 5vh;font-size: 20px;border: 3px dashed #FB2A1C; border-radius: 10px;padding: 1vw;width:80vw">
       <div>❗❗❗提示：翻倍红包打开较慢</div>
       <div>若打不开，请重复第一、二步</div>
+      <div>👉翻倍红包，每天都可以领取</div>
     </div>
   </div>
 </template>
