@@ -6,7 +6,7 @@
         alt=""
         src="https://cdn.nlark.com/yuque/0/2021/jpeg/12454360/1635425274151-6634d749-c199-411a-9590-a6b9a7de1c05.jpeg"
         style="width: 100%;float: left"/>
-      <div style="float: right;font-size: 3px;color: darkgray">
+      <div style="float: right;font-size: 2px;color: darkgray">
         以app领取为准
       </div>
     </div>
