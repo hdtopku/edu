@@ -25,14 +25,9 @@ margin-top: 5vh;font-size: 25px;padding: 20px;width:95vw;font-weight: bolder" ty
       </transition>
     </div>
     <div>
-      <el-button plain
-                 round
-                 @click="goPlay"
-                 style="font-size: 15px;margin-top: 3vh" type="success">
-        <i class="el-icon-video-play">
-          翻倍视频教程
-        </i>
-      </el-button>
+<!--      <el-button plain round @click="goPlay" style="font-size: 15px;margin-top: 3vh" type="success">-->
+<!--        <i class="el-icon-video-play">翻倍视频教程</i>-->
+<!--      </el-button>-->
     </div>
     <div
       style="display: inline-block;margin-top: 1vh;font-size: 20px;border: 3px dashed #FB2A1C; border-radius: 10px;padding: 1vw;width:80vw">
