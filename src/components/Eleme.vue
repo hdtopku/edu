@@ -1,7 +1,7 @@
 <template>
   <div style="position: relative">
-    <div style="width: 100%; height: 42vh"
-         class="animate__animated animate__backInDown animate__rubberBand">
+    <div class="animate__animated animate__backInDown animate__rubberBand"
+         style="width: 100%; height: 42vh">
       <img
         alt=""
         src="https://cdn.nlark.com/yuque/0/2021/jpeg/12454360/1635425274151-6634d749-c199-411a-9590-a6b9a7de1c05.jpeg"
@@ -24,8 +24,18 @@ margin-top: 5vh;font-size: 25px;padding: 20px;width:95vw;font-weight: bolder" ty
         </el-button>
       </transition>
     </div>
+    <div>
+      <el-button plain
+                 round
+                 @click="goPlay"
+                 style="font-size: 15px;margin-top: 3vh" type="success">
+        <i class="el-icon-video-play">
+          翻倍视频教程
+        </i>
+      </el-button>
+    </div>
     <div
-      style="display: inline-block;margin-top: 5vh;font-size: 20px;border: 3px dashed #FB2A1C; border-radius: 10px;padding: 1vw;width:80vw">
+      style="display: inline-block;margin-top: 1vh;font-size: 20px;border: 3px dashed #FB2A1C; border-radius: 10px;padding: 1vw;width:80vw">
       <div>❗❗❗提示：翻倍红包打开较慢</div>
       <div>若打不开，请重复第一、二步</div>
       <div>👉翻倍红包，每天都可以领取</div>
@@ -57,6 +67,9 @@ export default {
       this.$copyText('d:/＄XGEXEys＄').catch((err) => {
         console.log(err)
       })
+    },
+    goPlay () {
+      window.open('https://www.bilibili.com/blackboard/html5mobileplayer.html?aid=763689531', '_blank')
     }
   }
 }
