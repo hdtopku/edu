@@ -6,8 +6,8 @@
         alt=""
         src="https://cdn.nlark.com/yuque/0/2021/jpeg/12454360/1635425274151-6634d749-c199-411a-9590-a6b9a7de1c05.jpeg"
         style="width: 100%;float: left"/>
-      <div style="float: right;font-size: 5px;color: darkgray">
-        实际大小以app页面为准
+      <div style="float: right;font-size: 3px;color: darkgray">
+        实际以app页面为准
       </div>
     </div>
     <el-button
