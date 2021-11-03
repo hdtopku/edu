@@ -30,10 +30,12 @@ margin-top: 5vh;font-size: 25px;padding: 20px;width:95vw;font-weight: bolder" ty
 <!--      </el-button>-->
     </div>
     <div
-      style="display: inline-block;margin-top: 2vh;font-size: 20px;border: 3px dashed #FB2A1C; border-radius: 10px;padding: 1vw;width:80vw">
-      <div>👉翻倍红包，每天都可以领取</div>
-      <div>👉领到大额的一定要去app翻倍，</div>
-      <div>并在app使用，力度非常大</div>
+      style="display: inline-block;margin-top: 2vh;font-size: 16px;border: 3px dashed #FB2A1C; border-radius: 10px;padding: 1vw;width:80vw">
+      <div>👉翻倍红包，每天可领</div>
+      <div>最高翻3倍，5元变15元，力度大</div>
+      <br/>
+      <div>👉使用方法：在【饿了么】APP首页，</div>
+      <div>点【美食外卖】，选择【吃货联盟】</div>
       <br/>
       <div>❗❗❗提示：翻倍红包打开较慢</div>
       <div>若打不开，请重复第一、二步</div>
