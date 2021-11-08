@@ -64,9 +64,12 @@ export default {
       this.$toast.center(`口令已复制！`)
     },
     copy () {
-      this.$copyText('d:/＄XGEXEys＄').catch((err) => {
+      this.$copyText('＄XEkkUFB＄').catch((err) => {
         console.log(err)
       })
+      // this.$copyText('d:/＄XGEXEys＄').catch((err) => {
+      //   console.log(err)
+      // })
     },
     goPlay () {
       window.open('https://www.bilibili.com/blackboard/html5mobileplayer.html?aid=763689531', '_blank')
