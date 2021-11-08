@@ -25,17 +25,16 @@ margin-top: 5vh;font-size: 25px;padding: 20px;width:95vw;font-weight: bolder" ty
       </transition>
     </div>
     <div>
-<!--      <el-button plain round @click="goPlay" style="font-size: 15px;margin-top: 3vh" type="success">-->
-<!--        <i class="el-icon-video-play">翻倍视频教程</i>-->
-<!--      </el-button>-->
+      <!--      <el-button plain round @click="goPlay" style="font-size: 15px;margin-top: 3vh" type="success">-->
+      <!--        <i class="el-icon-video-play">翻倍视频教程</i>-->
+      <!--      </el-button>-->
     </div>
     <div
-      style="display: inline-block;margin-top: 2vh;font-size: 16px;border: 3px dashed #FB2A1C; border-radius: 10px;padding: 1vw;width:80vw">
-      <div>👉使用方法：在【饿了么】APP首页，</div>
-      <div>点【美食外卖】，选择【吃货联盟】</div>
+      style="display: inline-block;margin-top: 2vh;font-size: 16px;border: 3px dashed #FB2A1C; border-radius: 10px;padding: 1vw;width:85vw">
+      <a href="https://mp.weixin.qq.com/s/WN5JSpFYLQhnSVGydBOEKA">🔗 翻倍红包使用教程</a>
       <br/>
-      <div>👉翻倍红包，每天可领</div>
-      <div>最高翻3倍，5元变15元，力度大</div>
+      <div>✅ 领了翻倍红包①，❌ 别领外卖红包①</div>
+      <div>否则翻倍失效（最高3倍，5元变15元）</div>
       <br/>
       <div>❗❗❗提示：翻倍红包打开较慢</div>
       <div>若打不开，请重复第一、二步</div>
