@@ -40,7 +40,7 @@ export default new Router({
       path: '/ele',
       name: 'Eleme',
       meta: {
-        title: '饿了么翻倍红包'
+        title: '饿了么app翻倍红包'
       },
       component: (resolve) => require(['@/components/Eleme'], resolve)
     }

@@ -64,7 +64,7 @@ export default {
       this.$toast.center(`口令已复制！`)
     },
     copy () {
-      this.$copyText('＄XEkkUFB＄').catch((err) => {
+      this.$copyText('666:/＄XEkkUFB＄~.👉').catch((err) => {
         console.log(err)
       })
       // this.$copyText('d:/＄XGEXEys＄').catch((err) => {
