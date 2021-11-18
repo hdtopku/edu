@@ -10,9 +10,10 @@
         以app领取为准
       </div>
     </div>
+    <a style="margin-top: 3vh" href="https://mp.weixin.qq.com/s/WN5JSpFYLQhnSVGydBOEKA">🔗 使用教程（最高3倍，5元变15元）</a>
     <el-button
       class="animate__animated animate__pulse animate__infinite"
-      round style="margin-top: 5vh;font-size: 30px;padding: 20px;width:95vw;font-weight: bold" type="danger"
+      round style="margin-top: 2vh;font-size: 30px;padding: 20px;width:95vw;font-weight: bold" type="danger"
       @click="doCopy">
       第一步：点我复制口令
     </el-button>
@@ -31,9 +32,6 @@ margin-top: 5vh;font-size: 25px;padding: 20px;width:95vw;font-weight: bolder" ty
     </div>
     <div
       style="display: inline-block;margin-top: 2vh;font-size: 16px;border: 3px dashed #FB2A1C; border-radius: 10px;padding: 1vw;width:85vw">
-      <a href="https://mp.weixin.qq.com/s/WN5JSpFYLQhnSVGydBOEKA">🔗 使用教程（最高3倍，5元变15元）</a>
-      <div></div>
-      <br/>
       <div>✅ 领了翻倍红包①</div>
       <div>❌ 别领外卖红包①</div>
       <div>否则翻倍可能失效</div>
