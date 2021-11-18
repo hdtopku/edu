@@ -37,7 +37,6 @@ margin-top: 5vh;font-size: 25px;padding: 20px;width:95vw;font-weight: bolder" ty
       <div>✅ 领了翻倍红包①</div>
       <div>❌ 别领外卖红包①</div>
       <div>否则翻倍可能失效</div>
-      <br/>
       <div>❗❗❗提示：翻倍红包打开较慢</div>
       <div>若打不开，请重复第一、二步</div>
     </div>
