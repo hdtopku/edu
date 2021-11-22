@@ -43,6 +43,14 @@ export default new Router({
         title: '饿了么app每日翻倍红包'
       },
       component: (resolve) => require(['@/components/Eleme'], resolve)
+    },
+    {
+      path: '/didi',
+      name: 'Didi',
+      meta: {
+        title: '滴滴出行5折大红包'
+      },
+      component: (resolve) => require(['@/components/Didi'], resolve)
     }
     // , {
     //   path: '/itchat',

@@ -25,11 +25,6 @@ margin-top: 5vh;font-size: 25px;padding: 20px;width:95vw;font-weight: bolder" ty
         </el-button>
       </transition>
     </div>
-    <div>
-      <!--      <el-button plain round @click="goPlay" style="font-size: 15px;margin-top: 3vh" type="success">-->
-      <!--        <i class="el-icon-video-play">翻倍视频教程</i>-->
-      <!--      </el-button>-->
-    </div>
     <div
       style="display: inline-block;margin-top: 2vh;font-size: 16px;border: 3px dashed #FB2A1C; border-radius: 10px;padding: 1vw;width:85vw">
       <div>✅ 领了翻倍红包①</div>
