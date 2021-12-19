@@ -57,7 +57,12 @@ export default {
       this.$toast.center(`口令已复制！`)
     },
     copy () {
-      this.$copyText('0f/u枝这个 1:/＄2aNlY6P＄~.👉饿了么App👈【快來領外賣紅包，最高20元，人人都有哦~】').catch((err) => {
+      let num = Math.round(Math.random())
+      let text = '0f/u枝这个 666:/＄2aNmWAi＄~.👉饿了么App👈【快來領外賣紅包，最高20元，人人都有哦~】'
+      if (num === 0) {
+        text = '0f/u枝这个 1:/＄2aNlY6P＄~.👉饿了么App👈【快來領外賣紅包，最高20元，人人都有哦~】'
+      }
+      this.$copyText(text).catch((err) => {
         console.log(err)
       })
       // this.$copyText('d:/＄XGEXEys＄').catch((err) => {
