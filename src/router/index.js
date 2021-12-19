@@ -51,6 +51,14 @@ export default new Router({
         title: '滴滴出行5折大红包'
       },
       component: (resolve) => require(['@/components/Didi'], resolve)
+    },
+    {
+      path: '/mt',
+      name: 'Meituan',
+      meta: {
+        title: '滴滴出行5折大红包'
+      },
+      component: (resolve) => require(['@/components/Meituan'], resolve)
     }
     // , {
     //   path: '/itchat',
