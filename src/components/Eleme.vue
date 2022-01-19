@@ -37,6 +37,7 @@ margin-top: 5vh;font-size: 25px;padding: 20px;width:95vw;font-weight: bolder" ty
 </template>
 
 <script>
+
 export default {
   name: 'Eleme',
   data () {
