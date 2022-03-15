@@ -78,7 +78,7 @@ export default {
     getJrebel: function () {
       const uuid = uuidv1()
       const jrebel =
-        `1、激活码填入：http://jrebel.taojingling.cn/${uuid}
+        `1、激活码填入：http://jrebel38001.taojingling.cn/${uuid}
 2、激活邮箱填入：active@jrebel.cn
 3、教程：https://cloud.video.taobao.com/play/u/2144650844/p/2/e/6/t/1/293114225328.mp4
 小店还提供jet账号激活，质保一年，需要可联系客服
