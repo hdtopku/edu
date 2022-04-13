@@ -21,16 +21,16 @@
       <transition name="ease-out-in">
         <el-button round size="medium" style="animation: breath infinite 2s ease;
 margin-top: 5vh;font-size: 25px;padding: 20px;width:95vw;font-weight: bolder" type="primary"
-                   @click="clickButton">第二步：打开饿了么app翻倍
+                   >第二步：打开饿了么app翻倍
         </el-button>
       </transition>
     </div>
     <div
       style="display: inline-block;margin-top: 2vh;font-size: 16px;border: 3px dashed #FB2A1C; border-radius: 10px;padding: 1vw;width:85vw">
-      <div>✅ 领了翻倍红包①</div>
-      <div>❌ 别领外卖红包①</div>
-      <div>否则翻倍可能失效</div>
-      <div>❗❗❗提示：翻倍红包打开较慢</div>
+<!--      <div>✅ 领了翻倍红包①</div>-->
+<!--      <div>❌ 别领外卖红包①</div>-->
+<!--      <div>否则翻倍可能失效</div>-->
+      <div>❗❗❗提示：app中翻倍红包打开较慢</div>
       <div>若打不开，请重复第一、二步</div>
     </div>
   </div>
