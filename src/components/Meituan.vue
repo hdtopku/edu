@@ -57,7 +57,7 @@ export default {
         console.log(err)
       })
       setTimeout(() => {
-        location.reload()
+        window.location.reload()
       }, 3000)
       // this.$copyText('d:/＄XGEXEys＄').catch((err) => {
       //   console.log(err)
