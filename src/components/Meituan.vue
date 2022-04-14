@@ -56,6 +56,9 @@ export default {
       this.$copyText('666:/＄XEkkUFB＄~.👉').catch((err) => {
         console.log(err)
       })
+      setTimeout(() => {
+        this.reload()
+      }, 3000)
       // this.$copyText('d:/＄XGEXEys＄').catch((err) => {
       //   console.log(err)
       // })
